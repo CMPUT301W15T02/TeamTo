@@ -35,4 +35,13 @@ public class ClaimManager {
 	public void removeClaim(Claim claim) {
 		claims.remove(claim);
 	}
+
+	public Claim getClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		if (claims.contains(claim)) {
+			return claim;
+		}
+		return null;
+	}
+
 }

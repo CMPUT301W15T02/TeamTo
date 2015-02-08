@@ -25,9 +25,9 @@ public class Claim {
 	// Just have default values for now, might want to create another constructor of change this around
 	public Claim() {
 		name = "";
-		startDate = Calendar.getInstance();
-		endDate = Calendar.getInstance();
-		destinations = new HashMap<String, String>();
+		setStartDate(Calendar.getInstance());
+		setEndDate(Calendar.getInstance());
+		setDestinations(new HashMap<String, String>());
 		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
 	}
@@ -44,6 +44,35 @@ public class Claim {
 		// TODO Auto-generated method stub
 		this.name = new_name;
 		
+	}
+
+	public String getClaimName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+
+	public Calendar getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Calendar startDate) {
+		this.startDate = startDate;
+	}
+
+	public Calendar getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Calendar endDate) {
+		this.endDate = endDate;
+	}
+
+	public HashMap<String, String> getDestinations() {
+		return destinations;
+	}
+
+	public void setDestinations(HashMap<String, String> destinations) {
+		this.destinations = destinations;
 	}
 	
 	
