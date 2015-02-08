@@ -89,6 +89,17 @@ public class Claim {
 	public void setDestinations(HashMap<String, String> destinations) {
 		this.destinations = destinations;
 	}
+
+	public void addDestination(String destination, String reason) {
+		// Q: Should I worry about duplicate key  (i.e. destination) entries? 
+		this.destinations.put(destination, reason);
+		
+	}
+
+	public Boolean verifyDestination(String string) {
+		// TODO Auto-generated method stub
+		return destinations.containsKey(string);
+	}
 	
 	
 	

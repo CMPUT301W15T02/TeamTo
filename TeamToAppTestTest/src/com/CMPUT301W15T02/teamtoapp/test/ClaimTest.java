@@ -17,6 +17,7 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import junit.framework.TestCase;
 
@@ -55,6 +56,9 @@ public class ClaimTest extends TestCase {
 		   As a claimant, I want an expense claim to record one or more destinations of 
 		   travel and an associated reason for travel to each destination.
 		*/
+		
+		claim.addDestination("some destination", "some reason");
+		assertTrue("No destination and reason were added.", manager.getClaim(claim).verifyDestination("some destination"));
 		
 		/*US01.05.01
 		  As a claimant, I want to delete an expense claim while changes are allowed. (Haven't checked statuses here)
