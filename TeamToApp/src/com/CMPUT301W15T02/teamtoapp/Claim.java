@@ -39,6 +39,12 @@ public class Claim {
 	public void removeExpense(Expense expense) {
 		expenses.remove(expense);
 	}
+
+	public void addClaimName(String new_name) {
+		// TODO Auto-generated method stub
+		this.name = new_name;
+		
+	}
 	
 	
 	
