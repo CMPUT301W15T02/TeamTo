@@ -1,3 +1,5 @@
+package com.CMPUT301W15T02.teamtoapp;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
