@@ -58,7 +58,7 @@ public class ClaimTest extends TestCase {
 		*/
 		
 		claim.addDestination("some destination", "some reason");
-		assertTrue("No destination and reason were added.", manager.getClaim(claim).verifyDestination("some destination"));
+		assertTrue("No destination and reason were added.", manager.getClaim(claim).verifyDestination("some destination", "some reason"));
 		
 		/*US01.05.01
 		  As a claimant, I want to delete an expense claim while changes are allowed. (Haven't checked statuses here)

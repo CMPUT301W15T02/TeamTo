@@ -31,7 +31,7 @@ public class Claim {
 	private String name;
 	private Calendar startDate;
 	private Calendar endDate;
-	private HashMap<String, String> destinations;
+	private ArrayList<StringTuple> destinations;
 	private ArrayList<Expense> expenses;
 	private Status status;
 	// Debating adding a uniqueID to each claim so that you could simple pass in the unique ID
@@ -42,7 +42,7 @@ public class Claim {
 		name = "";
 		setStartDate(Calendar.getInstance());
 		setEndDate(Calendar.getInstance());
-		setDestinations(new HashMap<String, String>());
+		setDestinations(new ArrayList<Claim.StringTuple>());
 		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
 	}
@@ -56,13 +56,11 @@ public class Claim {
 	}
 
 	public void addClaimName(String new_name) {
-		// TODO Auto-generated method stub
 		this.name = new_name;
 		
 	}
 
 	public String getClaimName() {
-		// TODO Auto-generated method stub
 		return name;
 	}
 
@@ -82,23 +80,37 @@ public class Claim {
 		this.endDate = endDate;
 	}
 
-	public HashMap<String, String> getDestinations() {
+	public ArrayList<StringTuple> getDestinations() {
 		return destinations;
 	}
 
-	public void setDestinations(HashMap<String, String> destinations) {
+	public void setDestinations(ArrayList<StringTuple> destinations) {
 		this.destinations = destinations;
 	}
 
 	public void addDestination(String destination, String reason) {
 		// Q: Should I worry about duplicate key  (i.e. destination) entries? 
-		this.destinations.put(destination, reason);
+		// A: changed to an arrayList of tuples
+		this.destinations.add(new StringTuple(destination, reason));
 		
 	}
 
-	public Boolean verifyDestination(String string) {
+	public Boolean verifyDestination(String a, String b) {
 		// TODO Auto-generated method stub
-		return destinations.containsKey(string);
+		StringTuple temp = new StringTuple(a, b);
+		return destinations.contains(temp);
+	}
+	
+	
+	// Tuple class, not sure if we should put this in its own file...
+	public class StringTuple {
+		String destination;
+		String reason;
+		
+		public StringTuple(String a, String b) {
+			this.destination = a;
+			this.reason = b;
+		}
 	}
 	
 	
