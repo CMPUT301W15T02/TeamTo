@@ -51,6 +51,12 @@ public class ExpenseTest extends TestCase {
 				manager.getClaim(claim).getExpense(expense).getDescription());
 		
 		
+		/*US04.07.01
+		 * As a claimant, I want to delete an expense item while changes are allowed.
+		*/
+		manager.getClaim(claim).removeExpense(expense);
+		assertFalse("Expense is still there!", manager.getClaim(claim).isExpense(expense));
+		
 	}
 	
 
