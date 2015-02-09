@@ -21,6 +21,8 @@ import java.util.HashMap;
 
 /*
  * Stores all of the data related to a claim
+ * Note: for each method in this class, might need to check current claim status
+ * to check if changes are allowed to be made.
  */
 
 public class Claim {
@@ -48,11 +50,11 @@ public class Claim {
 	}
 	
 	public void addExpense(Expense expense) {
-		expenses.add(expense);
+		this.expenses.add(expense);
 	}
 	
 	public void removeExpense(Expense expense) {
-		expenses.remove(expense);
+		this.expenses.remove(expense);
 	}
 
 	public void addClaimName(String new_name) {
@@ -105,6 +107,18 @@ public class Claim {
 
 	public void setClaimName(String new_name) {
 		this.name = new_name;
+	}
+
+	public boolean isExpense(Expense expense) {
+		return this.expenses.contains(expense);
+	}
+
+	public Expense getExpense(Expense expense) throws IllegalStateException{
+		if (this.isExpense(expense)) {
+			return expense;
+		} else {
+			throw new IllegalStateException("This expense doesn't exist!");
+		}
 	}
 	
 	

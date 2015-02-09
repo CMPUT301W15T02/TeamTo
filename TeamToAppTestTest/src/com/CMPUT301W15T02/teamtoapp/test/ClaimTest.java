@@ -17,8 +17,6 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.Calendar;
-import java.util.HashMap;
-
 import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;

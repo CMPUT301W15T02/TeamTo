@@ -19,6 +19,8 @@ import java.util.Currency;
 
 /*
  * Stores all of the data related to an expense
+ * Note: for each method in this class, might need to check current status of its claim
+ * to check if changes are allowed to be made.
  */
 
 public class Expense {
@@ -33,10 +35,49 @@ public class Expense {
 	// Just default values for now
 	public Expense() {
 		date = Calendar.getInstance();
-		description = "";
-		currency = Currency.getInstance("CAD"); // Considering using Currency.getInstance(Locale.getDefault())...
-		category = "supplies";
-		amount = 0.0;
+		setDescription("");
+		setCurrency(Currency.getInstance("CAD")); // Considering using Currency.getInstance(Locale.getDefault())...
+		setCategory("supplies");
+		setAmount(0.0);
 		complete = false; // Not sure about whether to set this or have the app automatically set it depending on context
 	}
+
+	public void addDate(Calendar new_date) {
+		this.date = new_date;
+		
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
+
 }
