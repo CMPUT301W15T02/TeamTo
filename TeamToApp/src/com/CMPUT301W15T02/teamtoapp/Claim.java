@@ -42,7 +42,7 @@ public class Claim {
 		name = "";
 		setStartDate(Calendar.getInstance());
 		setEndDate(Calendar.getInstance());
-		setDestinations(new ArrayList<Claim.StringTuple>());
+		setDestinations(new ArrayList<StringTuple>());
 		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
 	}
@@ -88,29 +88,23 @@ public class Claim {
 		this.destinations = destinations;
 	}
 
-	public void addDestination(String destination, String reason) {
+	public void addDestination(StringTuple new_tuple) {
 		// Q: Should I worry about duplicate key  (i.e. destination) entries? 
 		// A: changed to an arrayList of tuples
-		this.destinations.add(new StringTuple(destination, reason));
+		this.destinations.add(new_tuple);
 		
 	}
 
-	public Boolean verifyDestination(String a, String b) {
-		// TODO Auto-generated method stub
-		StringTuple temp = new StringTuple(a, b);
-		return destinations.contains(temp);
+	public Boolean verifyDestination(StringTuple check_tuple) {
+		return destinations.contains(check_tuple);
 	}
 	
 	
-	// Tuple class, not sure if we should put this in its own file...
-	public class StringTuple {
-		String destination;
-		String reason;
-		
-		public StringTuple(String a, String b) {
-			this.destination = a;
-			this.reason = b;
-		}
+
+
+
+	public void setClaimName(String new_name) {
+		this.name = new_name;
 	}
 	
 	

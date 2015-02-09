@@ -23,6 +23,7 @@ import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.ClaimManager;
+import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
 
@@ -50,15 +51,30 @@ public class ClaimTest extends TestCase {
 		assertTrue("Start date is not equal", manager.getClaim(claim).getStartDate() == start_date);
 		assertTrue("End date is not equal", manager.getClaim(claim).getEndDate() == end_date);
 		
+		
 		/*
-		 * TODO:
 		 * US01.02.01
 		   As a claimant, I want an expense claim to record one or more destinations of 
 		   travel and an associated reason for travel to each destination.
 		*/
+		String dest = "some destination";
+		String reason = "some reason";
+		StringTuple record = new StringTuple(dest, reason);
+		claim.addDestination(record);
 		
-		claim.addDestination("some destination", "some reason");
-		assertTrue("No destination and reason were added.", manager.getClaim(claim).verifyDestination("some destination", "some reason"));
+		// Fixed test case error due to changing destinations from HashMap to StringTuple object.
+		assertTrue("No destination and reason were added.", manager.getClaim(claim).verifyDestination(record));
+		
+		
+		/*
+		 * US01.04.01
+		 * As a claimant, I want to edit an expense claim while changes are allowed
+		 * (Haven't checked status here)
+		*/
+		//manager.getClaim(claim).setClaimName("new claim name");
+		claim.setClaimName("new claim name");
+		assertTrue("Claim name has not changed.", manager.getClaim(claim).getClaimName() == "new claim name");
+		
 		
 		/*US01.05.01
 		  As a claimant, I want to delete an expense claim while changes are allowed. (Haven't checked statuses here)
