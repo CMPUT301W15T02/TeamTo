@@ -80,8 +80,35 @@ public class ClaimTest extends TestCase {
 		// Remove claim from manager - works
 		manager.removeClaim(claim);
 		assertNull("manager still this claim!", manager.getClaim(claim));
+		
+		/* US03.01.01
+		 * As a claimant, I want to give an expense claim zero or more alphanumeric tags, 
+		 * so that claims can be organized by me into groups.
+		 * 
+		 * US03.02.01
+		 * As a claimant, I want to manage my personal use of tags by listing the available tags, 
+         * adding a tag, renaming a tag, and deleting a tag.
+         * -Able to add, remove, and delete tag all work as of (Feb 10th 2015 11:54am)
+         *
+         * - work on renaming later
+		 */
+		String aTag = "default tag"; //Tag with just letters
+		String bTag = "def4ult t4g"; //Tag with numbers and letters
+		String cTag = "123456";      //Tag with just strictly numbers
+		assertTrue("Tags list is empty!",claim.getTagsListSize() == 0);
+		claim.setTags(aTag);
+		assertTrue("Tags list contains one tag!", claim.getTagsListSize()==1);
+		claim.removeTags(aTag);
+		assertTrue("The tag has been removed!", claim.getTagsListSize()==0);
+		assertTrue("Tags list is empty!",claim.getTagsListSize() == 0);
+		claim.setTags(aTag);
+		claim.setTags(bTag);
+		assertTrue("Tags list contains two tags!", claim.getTagsListSize()==2);
+		claim.setTags(cTag);
+		assertTrue("Tags list contains three tags!", claim.getTagsListSize()==3);
 
 	}
+	
 	
 	
 }

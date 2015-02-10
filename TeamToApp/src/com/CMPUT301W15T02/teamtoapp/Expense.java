@@ -24,7 +24,15 @@ import java.util.Currency;
  */
 
 public class Expense {
-
+	/*
+	 * String[] category = {"Air Fare","Ground Transport","Vehicle Rental","Private Automobile",
+			"Fuel","Parking","Registration","Accommodation","Meal", "Supplies"};
+	   
+	   String[] currency = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY","CNY"};
+	   
+	   not sure about this type of implementation change will an array list be
+	   better even though editing and removing are not necessary?
+	*/
 	private Calendar date;
 	private String description;
 	private Currency currency;
@@ -44,6 +52,11 @@ public class Expense {
 
 	public void addDate(Calendar new_date) {
 		this.date = new_date;
+		
+	}
+	//Added a get date to allow the ability to edit it later
+	public Calendar getDate() {
+		return this.date;
 		
 	}
 

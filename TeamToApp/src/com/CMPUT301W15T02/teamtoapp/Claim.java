@@ -17,7 +17,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
+import java.util.HashMap;	//Not sure what I should do with this? Irrelevant with new tuple?
 
 /*
  * Stores all of the data related to a claim
@@ -36,6 +36,7 @@ public class Claim {
 	private ArrayList<StringTuple> destinations;
 	private ArrayList<Expense> expenses;
 	private Status status;
+	private ArrayList<String> tags;
 	// Debating adding a uniqueID to each claim so that you could simple pass in the unique ID
 	
 	
@@ -47,49 +48,78 @@ public class Claim {
 		setDestinations(new ArrayList<StringTuple>());
 		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
+		tags = new ArrayList<String>();
 	}
+	
+	public int getTagsListSize(){
+		return tags.size();
+	}
+	
+	public ArrayList<String> getTags() {
+		return tags;
+	}
+	
+
+	public void setTags(String tags) {
+		this.tags.add(tags);
+	}
+	
+	public void removeTags(String tags){
+		this.tags.remove(tags);
+	}
+
 	
 	public void addExpense(Expense expense) {
 		this.expenses.add(expense);
 	}
 	
+	
 	public void removeExpense(Expense expense) {
 		this.expenses.remove(expense);
 	}
 
+	
 	public void addClaimName(String new_name) {
 		this.name = new_name;
 		
 	}
 
+	
 	public String getClaimName() {
 		return name;
 	}
 
+	
 	public Calendar getStartDate() {
 		return startDate;
 	}
 
+	
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
 
+	
 	public Calendar getEndDate() {
 		return endDate;
 	}
 
+	
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
 
+	
 	public ArrayList<StringTuple> getDestinations() {
 		return destinations;
 	}
 
+	
 	public void setDestinations(ArrayList<StringTuple> destinations) {
 		this.destinations = destinations;
 	}
 
+	
 	public void addDestination(StringTuple new_tuple) {
 		// Q: Should I worry about duplicate key  (i.e. destination) entries? 
 		// A: changed to an arrayList of tuples
@@ -102,17 +132,16 @@ public class Claim {
 	}
 	
 	
-
-
-
 	public void setClaimName(String new_name) {
 		this.name = new_name;
 	}
 
+	
 	public boolean isExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}
 
+	
 	public Expense getExpense(Expense expense) throws IllegalStateException{
 		if (this.isExpense(expense)) {
 			return expense;
