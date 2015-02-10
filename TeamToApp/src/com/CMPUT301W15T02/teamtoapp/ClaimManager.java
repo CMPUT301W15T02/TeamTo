@@ -25,7 +25,6 @@ import java.util.ArrayList;
 public class ClaimManager {
 	
 	// Will need context to implement saving/loading from file but can probably just pass that to each method
-	
 	private static ClaimManager instance = null;
 	private ArrayList<Claim> claims;
 	
@@ -51,7 +50,6 @@ public class ClaimManager {
 	}
 
 	public Claim getClaim(Claim claim) {
-		// TODO Auto-generated method stub
 		if (claims.contains(claim)) {
 			return claim;
 		}

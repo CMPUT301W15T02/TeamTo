@@ -32,6 +32,10 @@ public class Expense {
 	   
 	   not sure about this type of implementation change will an array list be
 	   better even though editing and removing are not necessary?
+	   
+	   US04.02.01 and US04.03.01 Possible solution: 
+	   Choices of category and currency can be a part of a spinner in an activity, and when the user selects a category
+	   and currency, these choices can be saved as corresponding strings in the expense object.
 	*/
 	private Calendar date;
 	private String description;
