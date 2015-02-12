@@ -30,11 +30,8 @@ import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 public class ClaimTest extends TestCase {
 
+	// UC 1.0
 	public void testAddClaim () {
-		/*US01.01.01
-		  As a claimant, I want make an expense claim that records my name, a starting date of travel, and an ending date of travel.
-		  
-		*/
 		User user = new User("John");
 		
 		// Add new claim to manager - works
@@ -54,31 +51,22 @@ public class ClaimTest extends TestCase {
 		assertTrue("End date is not equal", user.getClaim(claim).getEndDate() == end_date);
 		
 		
-		/*
-		 * US01.02.01
-		   As a claimant, I want an expense claim to record one or more destinations of 
-		   travel and an associated reason for travel to each destination.
-		*/
 		String dest = "some destination";
 		String reason = "some reason";
 		StringTuple record = new StringTuple(dest, reason);
 		claim.addDestination(record);
 		
-		// Fixed test case error due to changing destinations from HashMap to StringTuple object.
 		assertTrue("No destination and reason were added.", user.getClaim(claim).verifyDestination(record));
 	}
 	
+	// UC 1.1
 	public void testEditClaim() {
 		User user = new User("Sarah");
 		Claim claim = new Claim();
+		
 		claim.setStatus(Claim.Status.IN_PROGRESS);
 		user.addClaim(claim); // Has default values
-		/*
-		 * US01.04.01
-		 * As a claimant, I want to edit an expense claim while changes are allowed
-		 * (Haven't checked status here)
-		*/
-		//manager.getClaim(claim).setClaimName("new claim name");
+		
 		claim.setClaimName("in progress");
 		assertEquals("Name changed when in progress", "in progress", user.getClaim(claim).getClaimName());
 		
@@ -91,45 +79,47 @@ public class ClaimTest extends TestCase {
 		assertEquals("Claim name changed when returned", "returned name", user.getClaim(claim).getClaimName());
 	}
 		
+	// UC 1.2
 	public void testDeleteClaim() {
 		User user = new User("Peter");
 		Claim claim = new Claim();
 		user.addClaim(claim);
-		// Remove claim from manager - works
+		// Remove claim from manager
 		user.removeClaim(claim);
 		assertNull("user still has this claim!", user.getClaim(claim));
 		
-		/* US03.01.01
-		 * As a claimant, I want to give an expense claim zero or more alphanumeric tags, 
-		 * so that claims can be organized by me into groups.
-		 * 
-		 * US03.02.01
-		 * As a claimant, I want to manage my personal use of tags by listing the available tags, 
-         * adding a tag, renaming a tag, and deleting a tag.
-         * -Able to add, remove, and delete tag all work as of (Feb 10th 2015 11:54am)
-         *
-         * - work on renaming later
-		 */
 	}
 	
+	// UC 3.*
 	public void testAddTags() {
-		Claim claim = new Claim();
-		String aTag = "default tag"; //Tag with just letters
-		String bTag = "def4ult t4g"; //Tag with numbers and letters
-		String cTag = "123456";      //Tag with just strictly numbers
-		assertTrue("Tags list is empty!",claim.getTagsListSize() == 0);
-		claim.setTags(aTag);
-		assertTrue("Tags list contains one tag!", claim.getTagsListSize()==1);
-		claim.removeTags(aTag);
-		assertTrue("The tag has been removed!", claim.getTagsListSize()==0);
-		assertTrue("Tags list is empty!",claim.getTagsListSize() == 0);
-		claim.setTags(aTag);
-		claim.setTags(bTag);
-		assertTrue("Tags list contains two tags!", claim.getTagsListSize()==2);
-		claim.setTags(cTag);
-		assertTrue("Tags list contains three tags!", claim.getTagsListSize()==3);
+		User user = new User("Kent Brockman");
+		user.addTag("tag");
+		assertTrue("Contains tag", user.getTags().contains("tag"));
 	}
 	
+	public void testRemoveTags() {
+		User user = new User("Peter");
+		user.addTag("tag");
+		user.removeTag("tag");
+		assertEquals("Removed tag?", 0, user.getTags().size()==0);
+	}
+	
+	public void testEditTags() {
+		User user = new User("Sarah");
+		user.addTag("tag");
+		user.editTag("tag", "tage");
+		assertEquals("Edit tags?", "tage", user.getTags.contains("tage"));
+	}
+	
+	public void addTagToUser() {
+		User user = new User("Sarah");
+		Claim claim = new Claim();
+		user.addTag("tag");
+		claim.addTag(user.getTag("tag"));
+		assertEquals("Tag added to claims", claim.getTags().contains("tag"));
+	}
+	
+	// UC 7.0, 8.*
 	public void testClaimStatuses() {
 		User user = new User("Peter");
 		Claim claim = new Claim();
@@ -145,7 +135,6 @@ public class ClaimTest extends TestCase {
 		user.submitClaim(claim);
 		user.approveClaim(claim);
 		assertEquals("Claim approved?", Claim.Status.APPROVED, claim.getStatus());
-
 	}
 	
 	
