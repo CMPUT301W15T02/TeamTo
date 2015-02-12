@@ -33,4 +33,11 @@ public class User {
 		// Default implementation, will need to be fixed
 		return claim;
 	}
+
+	public void submitClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

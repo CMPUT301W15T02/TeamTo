@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.UUID;
 
+import com.CMPUT301W15T02.teamtoapp.Claim.Status;
+
 /*
  * Stores all of the data related to a claim
  * Note: for each method in this class, might need to check current claim status
@@ -148,6 +150,10 @@ public class Claim {
 		} else {
 			throw new IllegalStateException("This expense doesn't exist!");
 		}
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 	
 	
