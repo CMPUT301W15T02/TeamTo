@@ -90,6 +90,7 @@ public class ClaimTest extends TestCase {
 		
 	}
 	
+	
 	// UC 3.0
 	public void testAddTags() {
 		User user = new User("Kent Brockman");
@@ -108,6 +109,7 @@ public class ClaimTest extends TestCase {
 	// UC 3.2
 	public void testEditTags() {
 		User user = new User("Sarah");
+		Claim claim = new Claim();
 		user.addTag("tag");
 		user.editTag("tag", "tage");
 		assertEquals("Edit tags?", "tage", user.getTags.contains("tage"));
