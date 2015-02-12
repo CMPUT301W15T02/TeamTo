@@ -1,11 +1,14 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Currency;
 
 import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
+import com.CMPUT301W15T02.teamtoapp.User;
 import com.CMPUT301W15T02.teamtoapp.UserController;
 import com.CMPUT301W15T02.teamtoapp.Expense;
 
@@ -20,7 +23,9 @@ public class ExpenseTest extends TestCase {
 		 *  each of which has a date the expense was incurred, a category, a textual description,
 		 *  amount spent, and unit of currency.
 		*/
-		UserController manager = UserController.getInstance();
+		UserController.getInstance().addUser(new User("John"));
+		ArrayList<User> users = UserController.getInstance().getUsers();
+		User user = users.get(0);
 		Claim claim = new Claim();
 		
 		Expense expense = new Expense();
@@ -36,26 +41,37 @@ public class ExpenseTest extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
-		manager.addClaim(claim);
-		manager.getClaim(claim).addExpense(expense);
+		user.addClaim(claim);
+		user.getClaim(claim).addExpense(expense);
 		// Assert the expense does exist in the claim
-		assertTrue("Expense is not added.", manager.getClaim(claim).isExpense(expense));
+		assertTrue("Expense is not added.", user.getClaim(claim).isExpense(expense));
 		
 		
 		/*US04.06.01
 		 * As a claimant, I want to edit an expense item while changes are allowed. 
 		 * (Haven't checked for status)
 		*/
-		manager.getClaim(claim).getExpense(expense).setDescription("blehhh");
+		user.getClaim(claim).getExpense(expense).setDescription("blehhh");
 		assertEquals("blehhh",
-				manager.getClaim(claim).getExpense(expense).getDescription());
+				user.getClaim(claim).getExpense(expense).getDescription());
 		
 		
 		/*US04.07.01
 		 * As a claimant, I want to delete an expense item while changes are allowed.
 		*/
-		manager.getClaim(claim).removeExpense(expense);
-		assertFalse("Expense is still there!", manager.getClaim(claim).isExpense(expense));
+		user.getClaim(claim).removeExpense(expense);
+		assertFalse("Expense is still there!", user.getClaim(claim).isExpense(expense));
+		
+		/* UC 6.0 attach photo receipt
+		 *  As a claimant I want to attach a photo receipt	
+		 */
+		String photoPath = "sdcard/photos/cats.jpg";
+		expense.addPhoto(photoPath);
+		assertEquals("Photo added to expense?", photoPath, expense.getPhoto());
+		
+		// UC 6.2 delete photo receipt
+		expense.removePhoto();
+		assertNull("Photo deleted from expense?", expense.getPhoto());
 		
 	}
 	

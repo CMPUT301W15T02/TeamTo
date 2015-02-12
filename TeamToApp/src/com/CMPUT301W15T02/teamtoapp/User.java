@@ -28,4 +28,9 @@ public class User {
 	public void removeTag(String tag) {
 		tags.remove(tag);
 	}
+	
+	public Claim getClaim(Claim claim) {
+		// Default implementation, will need to be fixed
+		return claim;
+	}
 }

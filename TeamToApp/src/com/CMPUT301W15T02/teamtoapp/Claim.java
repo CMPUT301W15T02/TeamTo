@@ -28,7 +28,7 @@ import java.util.UUID;
 public class Claim {
 
 	// Using enumerated type since status can only take a small number of values and strings were ugly last time
-	enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
+	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
 	
 	private String name;
 	private Calendar startDate;
@@ -37,7 +37,7 @@ public class Claim {
 	private ArrayList<Expense> expenses;
 	private Status status;
 	private ArrayList<String> tags;
-	// Debating adding a uniqueID to each claim so that you could simple pass in the unique ID
+	// Debating adding a uniqueID to each claim so that you could simply pass in the unique ID
 	
 	
 	// Just have default values for now, might want to create another constructor of change this around

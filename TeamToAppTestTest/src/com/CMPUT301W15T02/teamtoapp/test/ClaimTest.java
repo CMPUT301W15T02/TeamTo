@@ -43,7 +43,7 @@ public class ClaimTest extends TestCase {
 		user.addClaim(claim);
 		assertNotNull("manager has no claim!", user);
 		
-		// Save new information for claim, check if saved in manager - works
+		// Save new information for claim, check if saved in user - works
 		String name = "new claim";
 		Calendar start_date = Calendar.getInstance();
 		Calendar end_date = Calendar.getInstance();
@@ -111,6 +111,19 @@ public class ClaimTest extends TestCase {
 		assertTrue("Tags list contains two tags!", claim.getTagsListSize()==2);
 		claim.setTags(cTag);
 		assertTrue("Tags list contains three tags!", claim.getTagsListSize()==3);
+		
+		// UC 7.0 submit claim
+		user.submitClaim(claim);
+		assertEquals("Claim status submitted?", Claim.Status.SUBMITTED, claim.getStatus());
+		
+		// UC 8.0 return claim
+		user.returnClaim(claim);
+		assertEquals("Claim returned?", Claim.Status.RETURNED, claim.getStatus());
+		
+		// UC 8.1 approve claim
+		user.submitClaim(claim);
+		user.approveClaim(claim);
+		assertEquals("Claim approved?", Claim.Status.APPROVED, claim.getStatus());
 
 	}
 	
