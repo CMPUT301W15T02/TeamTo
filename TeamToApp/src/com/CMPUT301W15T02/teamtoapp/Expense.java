@@ -96,5 +96,10 @@ public class Expense {
 		this.currency = currency;
 	}
 
+	public void checkExpenseComplete() {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }
