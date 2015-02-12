@@ -89,14 +89,15 @@ public class ClaimTest extends TestCase {
 		claim.setStatus(Claim.Status.RETURNED);
 		claim.setClaimName("returned name");
 		assertEquals("Claim name changed when returned", "returned name", user.getClaim(claim).getClaimName());
+	}
 		
-		
-		/*US01.05.01
-		  As a claimant, I want to delete an expense claim while changes are allowed. (Haven't checked statuses here)
-		*/
+	public void testDeleteClaim() {
+		User user = new User("Peter");
+		Claim claim = new Claim();
+		user.addClaim(claim);
 		// Remove claim from manager - works
 		user.removeClaim(claim);
-		assertNull("manager still this claim!", user.getClaim(claim));
+		assertNull("user still has this claim!", user.getClaim(claim));
 		
 		/* US03.01.01
 		 * As a claimant, I want to give an expense claim zero or more alphanumeric tags, 
@@ -109,6 +110,10 @@ public class ClaimTest extends TestCase {
          *
          * - work on renaming later
 		 */
+	}
+	
+	public void testAddTags() {
+		Claim claim = new Claim();
 		String aTag = "default tag"; //Tag with just letters
 		String bTag = "def4ult t4g"; //Tag with numbers and letters
 		String cTag = "123456";      //Tag with just strictly numbers
@@ -123,7 +128,11 @@ public class ClaimTest extends TestCase {
 		assertTrue("Tags list contains two tags!", claim.getTagsListSize()==2);
 		claim.setTags(cTag);
 		assertTrue("Tags list contains three tags!", claim.getTagsListSize()==3);
-		
+	}
+	
+	public void testClaimStatuses() {
+		User user = new User("Peter");
+		Claim claim = new Claim();
 		// UC 7.0 submit claim
 		user.submitClaim(claim);
 		assertEquals("Claim status submitted?", Claim.Status.SUBMITTED, claim.getStatus());
