@@ -30,20 +30,19 @@ import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 public class ClaimTest extends TestCase {
 
-	public void testClaimManager () {
+	public void testAddClaim () {
 		/*US01.01.01
 		  As a claimant, I want make an expense claim that records my name, a starting date of travel, and an ending date of travel.
+		  
 		*/
-		UserController.getInstance().addUser(new User("John"));
-		ArrayList<User> users = UserController.getInstance().getUsers();
-		User user = users.get(0);
+		User user = new User("John");
 		
 		// Add new claim to manager - works
 		Claim claim = new Claim();
 		user.addClaim(claim);
 		assertNotNull("manager has no claim!", user);
 		
-		// Save new information for claim, check if saved in user - works
+		// Save new information for claim, check if saved in user
 		String name = "new claim";
 		Calendar start_date = Calendar.getInstance();
 		Calendar end_date = Calendar.getInstance();
@@ -67,16 +66,29 @@ public class ClaimTest extends TestCase {
 		
 		// Fixed test case error due to changing destinations from HashMap to StringTuple object.
 		assertTrue("No destination and reason were added.", user.getClaim(claim).verifyDestination(record));
-		
-		
+	}
+	
+	public void testEditClaim() {
+		User user = new User("Sarah");
+		Claim claim = new Claim();
+		claim.setStatus(Claim.Status.IN_PROGRESS);
+		user.addClaim(claim); // Has default values
 		/*
 		 * US01.04.01
 		 * As a claimant, I want to edit an expense claim while changes are allowed
 		 * (Haven't checked status here)
 		*/
 		//manager.getClaim(claim).setClaimName("new claim name");
-		claim.setClaimName("new claim name");
-		assertTrue("Claim name has not changed.", user.getClaim(claim).getClaimName() == "new claim name");
+		claim.setClaimName("in progress");
+		assertEquals("Name changed when in progress", "in progress", user.getClaim(claim).getClaimName());
+		
+		claim.setStatus(Claim.Status.SUBMITTED);
+		claim.setClaimName("sumbitted name");
+		assertTrue("Claim name has not changed.", user.getClaim(claim).getClaimName().equals("in progress"));
+		
+		claim.setStatus(Claim.Status.RETURNED);
+		claim.setClaimName("returned name");
+		assertEquals("Claim name changed when returned", "returned name", user.getClaim(claim).getClaimName());
 		
 		
 		/*US01.05.01

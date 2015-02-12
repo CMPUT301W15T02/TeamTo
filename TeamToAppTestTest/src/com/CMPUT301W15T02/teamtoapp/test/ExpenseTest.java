@@ -23,9 +23,7 @@ public class ExpenseTest extends TestCase {
 		 *  each of which has a date the expense was incurred, a category, a textual description,
 		 *  amount spent, and unit of currency.
 		*/
-		UserController.getInstance().addUser(new User("John"));
-		ArrayList<User> users = UserController.getInstance().getUsers();
-		User user = users.get(0);
+		User user = new User("John");
 		Claim claim = new Claim();
 		
 		Expense expense = new Expense();
