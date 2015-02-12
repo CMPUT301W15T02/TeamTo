@@ -6,7 +6,7 @@ import java.util.Currency;
 import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.ClaimManager;
+import com.CMPUT301W15T02.teamtoapp.UserController;
 import com.CMPUT301W15T02.teamtoapp.Expense;
 
 public class ExpenseTest extends TestCase {
@@ -20,7 +20,7 @@ public class ExpenseTest extends TestCase {
 		 *  each of which has a date the expense was incurred, a category, a textual description,
 		 *  amount spent, and unit of currency.
 		*/
-		ClaimManager manager = ClaimManager.getInstance();
+		UserController manager = UserController.getInstance();
 		Claim claim = new Claim();
 		
 		Expense expense = new Expense();

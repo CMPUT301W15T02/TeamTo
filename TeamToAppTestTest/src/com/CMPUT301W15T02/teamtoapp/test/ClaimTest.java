@@ -16,11 +16,14 @@
 
 package com.CMPUT301W15T02.teamtoapp.test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+
 import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.ClaimManager;
+import com.CMPUT301W15T02.teamtoapp.User;
+import com.CMPUT301W15T02.teamtoapp.UserController;
 import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
@@ -31,12 +34,14 @@ public class ClaimTest extends TestCase {
 		/*US01.01.01
 		  As a claimant, I want make an expense claim that records my name, a starting date of travel, and an ending date of travel.
 		*/
-		ClaimManager manager = ClaimManager.getInstance();
+		UserController.getInstance().addUser(new User("John"));
+		ArrayList<User> users = UserController.getInstance().getUsers();
+		User user = users.get(0);
 		
 		// Add new claim to manager - works
 		Claim claim = new Claim();
-		manager.addClaim(claim);
-		assertNotNull("manager has no claim!", manager);
+		user.addClaim(claim);
+		assertNotNull("manager has no claim!", user);
 		
 		// Save new information for claim, check if saved in manager - works
 		String name = "new claim";
@@ -45,9 +50,9 @@ public class ClaimTest extends TestCase {
 		claim.addClaimName(name);
 		claim.setStartDate(start_date);
 		claim.setEndDate(end_date);
-		assertTrue("Name is not equal", manager.getClaim(claim).getClaimName() == name);
-		assertTrue("Start date is not equal", manager.getClaim(claim).getStartDate() == start_date);
-		assertTrue("End date is not equal", manager.getClaim(claim).getEndDate() == end_date);
+		assertTrue("Name is not equal", user.getClaim(claim).getClaimName() == name);
+		assertTrue("Start date is not equal", user.getClaim(claim).getStartDate() == start_date);
+		assertTrue("End date is not equal", user.getClaim(claim).getEndDate() == end_date);
 		
 		
 		/*
@@ -61,7 +66,7 @@ public class ClaimTest extends TestCase {
 		claim.addDestination(record);
 		
 		// Fixed test case error due to changing destinations from HashMap to StringTuple object.
-		assertTrue("No destination and reason were added.", manager.getClaim(claim).verifyDestination(record));
+		assertTrue("No destination and reason were added.", user.getClaim(claim).verifyDestination(record));
 		
 		
 		/*
@@ -71,15 +76,15 @@ public class ClaimTest extends TestCase {
 		*/
 		//manager.getClaim(claim).setClaimName("new claim name");
 		claim.setClaimName("new claim name");
-		assertTrue("Claim name has not changed.", manager.getClaim(claim).getClaimName() == "new claim name");
+		assertTrue("Claim name has not changed.", user.getClaim(claim).getClaimName() == "new claim name");
 		
 		
 		/*US01.05.01
 		  As a claimant, I want to delete an expense claim while changes are allowed. (Haven't checked statuses here)
 		*/
 		// Remove claim from manager - works
-		manager.removeClaim(claim);
-		assertNull("manager still this claim!", manager.getClaim(claim));
+		user.removeClaim(claim);
+		assertNull("manager still this claim!", user.getClaim(claim));
 		
 		/* US03.01.01
 		 * As a claimant, I want to give an expense claim zero or more alphanumeric tags, 
