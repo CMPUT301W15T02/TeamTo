@@ -90,13 +90,14 @@ public class ClaimTest extends TestCase {
 		
 	}
 	
-	// UC 3.*
+	// UC 3.0
 	public void testAddTags() {
 		User user = new User("Kent Brockman");
 		user.addTag("tag");
 		assertTrue("Contains tag", user.getTags().contains("tag"));
 	}
 	
+	// UC 3.1
 	public void testRemoveTags() {
 		User user = new User("Peter");
 		user.addTag("tag");
@@ -104,6 +105,7 @@ public class ClaimTest extends TestCase {
 		assertEquals("Removed tag?", 0, user.getTags().size()==0);
 	}
 	
+	// UC 3.2
 	public void testEditTags() {
 		User user = new User("Sarah");
 		user.addTag("tag");
@@ -111,6 +113,7 @@ public class ClaimTest extends TestCase {
 		assertEquals("Edit tags?", "tage", user.getTags.contains("tage"));
 	}
 	
+	// UC 3.0
 	public void addTagToUser() {
 		User user = new User("Sarah");
 		Claim claim = new Claim();
@@ -118,6 +121,7 @@ public class ClaimTest extends TestCase {
 		claim.addTag(user.getTag("tag"));
 		assertEquals("Tag added to claims", claim.getTags().contains("tag"));
 	}
+	
 	
 	// UC 7.0, 8.*
 	public void testClaimStatuses() {
