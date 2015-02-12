@@ -142,7 +142,5 @@ public class ClaimTest extends TestCase {
 		user.approveClaim(claim);
 		assertEquals("Claim approved?", Claim.Status.APPROVED, claim.getStatus());
 	}
-	
-	
-	
+		
 }
