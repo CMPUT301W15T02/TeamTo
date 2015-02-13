@@ -18,6 +18,7 @@ package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
@@ -90,8 +91,20 @@ public class ClaimTest extends TestCase {
 		
 	}
 	
+	// UC 1.*
+	public void testClaimsSorted() {
+		User user = new User("Peter");
+		Claim claim1 = new Claim();
+		Claim claim2 = new Claim();
+		user.addClaim(claim1);
+		user.addClaim(claim2);
+		Calendar cal = new GregorianCalendar(1999, 07, 28);
+		claim2.setStartDate(cal); // should now be first claim
+		assertEquals("Sorting by start date?", claim2, user.getClaims.get(0));
+	}
 	
-	// UC 3.0
+	
+	// UC 3.2, UC 3.3
 	public void testAddTags() {
 		User user = new User("Kent Brockman");
 		user.addTag("tag");
@@ -106,7 +119,7 @@ public class ClaimTest extends TestCase {
 		assertEquals("Removed tag?", 0, user.getTags().size()==0);
 	}
 	
-	// UC 3.2
+	// UC 3.0
 	public void testEditTags() {
 		User user = new User("Sarah");
 		Claim claim = new Claim();
@@ -115,8 +128,8 @@ public class ClaimTest extends TestCase {
 		assertEquals("Edit tags?", "tage", user.getTags.contains("tage"));
 	}
 	
-	// UC 3.0
-	public void addTagToUser() {
+	// UC 3.3
+	public void testAddTagToUser() {
 		User user = new User("Sarah");
 		Claim claim = new Claim();
 		user.addTag("tag");
@@ -124,8 +137,17 @@ public class ClaimTest extends TestCase {
 		assertEquals("Tag added to claims", claim.getTags().contains("tag"));
 	}
 	
+	// UC 3.4
+	public void testFilterByTag() {
+		User user = new User("default");
+		Claim claim1 = new Claim();
+		Claim claim2 = new Claim();
+		claim2.addTag("tag");
+		assertTrue("Filter working", user.getClaimsWithTags("tag").contains(claim2));
+		assertFalse("Tag filter working?", user.getClaimsWithTags("tag").contains(claim1));
+	}
 	
-	// UC 7.0, 8.*
+	// UC 7.0, UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)
 	public void testClaimStatuses() {
 		User user = new User("Peter");
 		Claim claim = new Claim();

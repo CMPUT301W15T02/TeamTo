@@ -14,15 +14,8 @@ import com.CMPUT301W15T02.teamtoapp.Expense;
 
 public class ExpenseTest extends TestCase {
 	
-	
+	// UC 4.0
 	public void testAddExpense() {
-	
-		/*
-		 * US04.01.01
-		 * As a claimant, I want to make one or more expense items for an expense claim,
-		 *  each of which has a date the expense was incurred, a category, a textual description,
-		 *  amount spent, and unit of currency.
-		*/
 		User user = new User("John");
 		Claim claim = new Claim();
 		
@@ -46,11 +39,20 @@ public class ExpenseTest extends TestCase {
 		
 	}
 	
+	// UC 4.0 - UC 4.2
+	public void testAddExpenseOrdering() {
+		Claim claim = new Claim();
+		Expense expense1 = new Expense();
+		Expense expense2 = new Expense();
+		expense2.setAmount(100.0);
+		claim.addExpense(expense1);
+		claim.addExpense(expense2);
+		assertEquals("Expenses in right order?", expense1, claim.getExpenses.get(0));
+		assertEquals("Expenses added in right order?", expense2, claim.getExpenses.get(1));
+	}
+	
+	// UC 4.2
 	public void testEditExpense() {
-		/*US04.06.01
-		 * As a claimant, I want to edit an expense item while changes are allowed. 
-		 * (Haven't checked for status)
-		*/
 		
 		User user = new User("John");
 		Claim claim = new Claim();
@@ -75,11 +77,9 @@ public class ExpenseTest extends TestCase {
 				user.getClaim(claim).getExpense(expense).getDescription());
 	}
 	
+	// UC 4.1
 	public void testDeleteExpense() {
 		
-		/*US04.07.01
-		 * As a claimant, I want to delete an expense item while changes are allowed.
-		*/
 		User user = new User("John");
 		Claim claim = new Claim();
 		Expense expense = new Expense();
@@ -102,11 +102,9 @@ public class ExpenseTest extends TestCase {
 		assertFalse("Expense is still there!", user.getClaim(claim).isExpense(expense));
 	}
 	
-	
+	// UC 6.0, UC 6.2 (UC 6.1 is simply viewing the screen)
 	public void testAddAndDeletePhoto() {
-		/* UC 6.0 attach photo receipt
-		 *  As a claimant I want to attach a photo receipt	
-		 */
+		
 		User user = new User("John");
 		Claim claim = new Claim();
 		Expense expense = new Expense();
@@ -134,11 +132,8 @@ public class ExpenseTest extends TestCase {
 		
 	}
 	
+	// UC 4.0, 4.2
 	public void testCheckCompleteFlag() {
-		/*
-		 * US04.04.01
-		 * As a claimant, I want to manually flag an expense item with an incompleteness indicator,
-		 * even if all item fields have values, so that I am reminded that the item needs further editing.*/
 		User user = new User("John");
 		Claim claim = new Claim();
 		Expense expense = new Expense();
