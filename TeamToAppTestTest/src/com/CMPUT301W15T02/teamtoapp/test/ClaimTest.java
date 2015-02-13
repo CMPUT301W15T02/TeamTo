@@ -164,5 +164,13 @@ public class ClaimTest extends TestCase {
 		user.approveClaim(claim);
 		assertEquals("Claim approved?", Claim.Status.APPROVED, claim.getStatus());
 	}
+	
+	// UC 9.0
+	public void testCloudStatus() {
+		User user = new User("Peter");
+		Claim claim = new Claim();
+		user.saveToCloud();
+		assertEquals("Cloud saving working", user, user.loadFromCloud());
+	}
 		
 }
