@@ -24,7 +24,7 @@ public class ExpenseTest extends TestCase {
 	private static final Currency JPY = Currency.getInstance("JPY");
 	private static final Currency CNY = Currency.getInstance("CNY");
 
-	// US 4.01
+	// US 4.01 (UC 4.0 & 4.2)
 	public void testMakeExpense() {	
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
@@ -46,7 +46,7 @@ public class ExpenseTest extends TestCase {
 		assertNotNull(expense.getCurrency());		
 	}
 	
-	// US 4.02
+	// US 4.02 (UC 4.0 & 4.2)
 	public void testCategory() {
 		Expense expense = new Expense();
 		// We can use spinners, but using List here for testing purposes.
@@ -59,7 +59,7 @@ public class ExpenseTest extends TestCase {
 		expense.setCategory(cat);
 		assertEquals(categories.get(0), expense.getCategory());
 	}
-	// US 4.03
+	// US 4.03 (UC 4.0 & 4.2)
 	public void testCurrency() {
 		Expense expense = new Expense();
 		List<Currency> currenciesList = Arrays.asList(CAD, USD, EUR, GBP, JPY, CNY);
@@ -68,7 +68,7 @@ public class ExpenseTest extends TestCase {
 		assertEquals(GBP, expense.getCurrency());
 	}
 	
-	// Test if expense can be added to a claim
+	// Test if expense can be added to a claim (UC 4.0)
 	public void addExpense() {
 		User user = new User("New guy");
 		Claim claim = new Claim();
@@ -104,7 +104,7 @@ public class ExpenseTest extends TestCase {
 		assertFalse("Not complete", user.getClaim(claim).checkExpenseComplete(expense));
 	}
 	
-	// US 4.06
+	// US 4.06 (UC 4.2)
 	public void testEditExpense() {
 		
 		User user = new User("John");
@@ -121,7 +121,7 @@ public class ExpenseTest extends TestCase {
 				user.getClaim(claim).getAExpense(expense).getDescription());
 	}
 	
-	// US 4.07
+	// US 4.07 (UC 4.1)
 	public void testDeleteExpense() {
 		
 		User user = new User("John");
