@@ -62,8 +62,8 @@ public class Claim {
 	}
 	
 
-	public void setTags(String tags) {
-		this.tags.add(tags);
+	public void addTag(String tag) {
+		this.tags.add(tag);
 	}
 	
 	public void removeTags(String tags){
@@ -143,8 +143,10 @@ public class Claim {
 		return this.expenses.contains(expense);
 	}
 
-	
-	public Expense getExpense(Expense expense) throws IllegalStateException{
+	public ArrayList<Expense> getExpenseList() {
+		return expenses;
+	}
+	public Expense getAExpense(Expense expense) throws IllegalStateException{
 		if (this.isExpense(expense)) {
 			return expense;
 		} else {
@@ -152,8 +154,13 @@ public class Claim {
 		}
 	}
 
+
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public Status getStatus() {
+		return status;
 	}
 	
 	

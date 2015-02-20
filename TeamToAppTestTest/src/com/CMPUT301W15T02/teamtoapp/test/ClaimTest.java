@@ -72,8 +72,8 @@ public class ClaimTest extends TestCase {
 		assertEquals("Name changed when in progress", "in progress", user.getClaim(claim).getClaimName());
 		
 		claim.setStatus(Claim.Status.SUBMITTED);
-		claim.setClaimName("sumbitted name");
-		assertTrue("Claim name has not changed.", user.getClaim(claim).getClaimName().equals("in progress"));
+		claim.setClaimName("submitted name");
+		assertTrue("Claim name has not changed.", user.getClaim(claim).getClaimName().equals("submitted name"));
 		
 		claim.setStatus(Claim.Status.RETURNED);
 		claim.setClaimName("returned name");
@@ -98,9 +98,12 @@ public class ClaimTest extends TestCase {
 		Claim claim2 = new Claim();
 		user.addClaim(claim1);
 		user.addClaim(claim2);
-		Calendar cal = new GregorianCalendar(1999, 07, 28);
-		claim2.setStartDate(cal); // should now be first claim
-		assertEquals("Sorting by start date?", claim2, user.getClaims.get(0));
+		Calendar cal1 = new GregorianCalendar(2005, 07, 28);
+		Calendar cal2 = new GregorianCalendar(1999, 07, 28);
+		claim1.setStartDate(cal1); // should be first claim
+		claim2.setStartDate(cal2); 
+		// Not really sure how to sort the claims by most recent dates 
+		assertEquals("Sorting by start date?", claim2, user.getClaimPos(0));
 	}
 	
 	
@@ -116,25 +119,28 @@ public class ClaimTest extends TestCase {
 		User user = new User("Peter");
 		user.addTag("tag");
 		user.removeTag("tag");
-		assertEquals("Removed tag?", 0, user.getTags().size()==0);
+		assertEquals("Removed tag?", true, user.getTags().size()==0);
 	}
 	
 	// UC 3.0
 	public void testEditTags() {
 		User user = new User("Sarah");
-		Claim claim = new Claim();
 		user.addTag("tag");
 		user.editTag("tag", "tage");
-		assertEquals("Edit tags?", "tage", user.getTags.contains("tage"));
+		assertEquals("Edit tags?", true, user.getTags().contains("tage"));
 	}
 	
 	// UC 3.3
+	//As a claimant, I want to filter the list of expense claims by tags, 
+	//to show only those claims that have at least one tag matching any of a given set of one or more filter tags.
 	public void testAddTagToUser() {
+		// User will add a new tag, then claim will be assigned the new tag 
 		User user = new User("Sarah");
 		Claim claim = new Claim();
 		user.addTag("tag");
-		claim.addTag(user.getTag("tag"));
-		assertEquals("Tag added to claims", claim.getTags().contains("tag"));
+		claim.addTag(user.getATag("tag"));
+		user.addClaim(claim);
+		assertTrue("Tag added to claims", user.getClaim(claim).getTags().contains("tag"));
 	}
 	
 	// UC 3.4
@@ -143,6 +149,8 @@ public class ClaimTest extends TestCase {
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
 		claim2.addTag("tag");
+		user.addClaim(claim1);
+		user.addClaim(claim2);
 		assertTrue("Filter working", user.getClaimsWithTags("tag").contains(claim2));
 		assertFalse("Tag filter working?", user.getClaimsWithTags("tag").contains(claim1));
 	}
@@ -151,9 +159,10 @@ public class ClaimTest extends TestCase {
 	public void testClaimStatuses() {
 		User user = new User("Peter");
 		Claim claim = new Claim();
+		user.addClaim(claim);
 		// UC 7.0 submit claim
 		user.submitClaim(claim);
-		assertEquals("Claim status submitted?", Claim.Status.SUBMITTED, claim.getStatus());
+		assertEquals("Claim status submitted?", Claim.Status.SUBMITTED, user.getClaim(claim).getStatus());
 		
 		// UC 8.0 return claim
 		user.returnClaim(claim);

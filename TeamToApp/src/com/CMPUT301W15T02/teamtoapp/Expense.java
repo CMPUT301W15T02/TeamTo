@@ -101,5 +101,20 @@ public class Expense {
 		
 	}
 
+	public void addPhoto(String photoPath) {
+		// Not sure how to add photos
+		
+	}
+
+	public String getPhoto() {
+		// TODO Incomplete.
+		return null;
+	}
+
+	public void removePhoto() {
+		// TODO Incomplete - make sure claim is editable before removing photo.
+		
+	}
+
 
 }

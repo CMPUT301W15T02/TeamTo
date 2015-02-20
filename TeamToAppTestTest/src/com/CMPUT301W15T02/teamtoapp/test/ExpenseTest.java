@@ -47,8 +47,8 @@ public class ExpenseTest extends TestCase {
 		expense2.setAmount(100.0);
 		claim.addExpense(expense1);
 		claim.addExpense(expense2);
-		assertEquals("Expenses in right order?", expense1, claim.getExpenses.get(0));
-		assertEquals("Expenses added in right order?", expense2, claim.getExpenses.get(1));
+		assertEquals("Expenses in right order?", expense1, claim.getExpenseList().get(0));
+		assertEquals("Expenses added in right order?", expense2, claim.getExpenseList().get(1));
 	}
 	
 	// UC 4.2
@@ -72,9 +72,9 @@ public class ExpenseTest extends TestCase {
 		
 		user.addClaim(claim);
 		user.getClaim(claim).addExpense(expense);
-		user.getClaim(claim).getExpense(expense).setDescription("blehhh");
+		user.getClaim(claim).getAExpense(expense).setDescription("blehhh");
 		assertEquals("blehhh",
-				user.getClaim(claim).getExpense(expense).getDescription());
+				user.getClaim(claim).getAExpense(expense).getDescription());
 	}
 	
 	// UC 4.1
