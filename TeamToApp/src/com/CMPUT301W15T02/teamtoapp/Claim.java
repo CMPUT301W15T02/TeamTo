@@ -163,6 +163,20 @@ public class Claim {
 		return status;
 	}
 	
+	public boolean checkExpenseComplete(Expense expense) {
+		// Even if everything is filled out, boolean must
+		// be set to false as a reminder for the user.
+		if (this.getExpenseList().contains(expense)) {
+			if (this.status == Claim.Status.APPROVED) {
+				expense.setComplete(true);
+			} else if (this.status == Claim.Status.SUBMITTED) {
+				expense.setComplete(false); // Or should it be true? ...
+			} 
+		}
+		// if the expense does not exist, return nullpointer execption?
+		return expense.isComplete();
+	}
+	
 	
 	
 }

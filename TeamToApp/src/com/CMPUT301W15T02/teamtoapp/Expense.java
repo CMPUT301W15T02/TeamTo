@@ -51,7 +51,7 @@ public class Expense {
 		setCurrency(Currency.getInstance("CAD")); // Considering using Currency.getInstance(Locale.getDefault())...
 		setCategory("supplies");
 		setAmount(0.0);
-		complete = false; // Not sure about whether to set this or have the app automatically set it depending on context
+		setComplete(false); // Not sure about whether to set this or have the app automatically set it depending on context
 	}
 
 	public void addDate(Calendar new_date) {
@@ -96,11 +96,6 @@ public class Expense {
 		this.currency = currency;
 	}
 
-	public void checkExpenseComplete() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public void addPhoto(String photoPath) {
 		// Not sure how to add photos
 		
@@ -114,6 +109,14 @@ public class Expense {
 	public void removePhoto() {
 		// TODO Incomplete - make sure claim is editable before removing photo.
 		
+	}
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
 	}
 
 

@@ -132,14 +132,16 @@ public class ExpenseTest extends TestCase {
 		
 	}
 	
-	// UC 4.0, 4.2
+	// UC 4.0, 4.2, 4.4
 	public void testCheckCompleteFlag() {
 		User user = new User("John");
 		Claim claim = new Claim();
 		Expense expense = new Expense();
 		
 		user.addClaim(claim);
-		expense.checkExpenseComplete(); // method in Expense checks if all information is filled in.
+		user.getClaim(claim).addExpense(expense);
+		// Checks if all information is filled in - should be false.
+		assertFalse("Not complete", user.getClaim(claim).checkExpenseComplete(expense));
 	}
 	
 
