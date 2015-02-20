@@ -2,8 +2,11 @@ package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Currency;
+import java.util.List;
 
 import junit.framework.TestCase;
 
@@ -14,11 +17,15 @@ import com.CMPUT301W15T02.teamtoapp.Expense;
 
 public class ExpenseTest extends TestCase {
 	
-	// UC 4.0
-	public void testAddExpense() {
-		User user = new User("John");
-		Claim claim = new Claim();
-		
+	private static final Currency CAD = Currency.getInstance("CAD");
+	private static final Currency USD = Currency.getInstance("USD");
+	private static final Currency EUR = Currency.getInstance("EUR");
+	private static final Currency GBP = Currency.getInstance("GBP");
+	private static final Currency JPY = Currency.getInstance("JPY");
+	private static final Currency CNY = Currency.getInstance("CNY");
+
+	// US 4.01
+	public void testMakeExpense() {	
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
 		String cat = "some category from a category spinner";
@@ -32,43 +39,80 @@ public class ExpenseTest extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
+		assertNotNull(expense.getDate());
+		assertNotNull(expense.getCategory());
+		assertNotNull(expense.getDescription());
+		assertNotNull(expense.getAmount());
+		assertNotNull(expense.getCurrency());		
+	}
+	
+	// US 4.02
+	public void testCategory() {
+		Expense expense = new Expense();
+		// We can use spinners, but using List here for testing purposes.
+		List<String> categories = Arrays.asList("air fare", "ground transport", "vehicle rental",
+				"private automobile", "fuel", "parking", "registration", "accomodation",
+				"meal", "supplies");
+
+		// Pretend user chose air fare.
+		String cat = categories.get(0);
+		expense.setCategory(cat);
+		assertEquals(categories.get(0), expense.getCategory());
+	}
+	// US 4.03
+	public void testCurrency() {
+		Expense expense = new Expense();
+		List<Currency> currenciesList = Arrays.asList(CAD, USD, EUR, GBP, JPY, CNY);
+		Currency currString = currenciesList.get(3);
+		expense.setCurrency(currString);
+		assertEquals(GBP, expense.getCurrency());
+	}
+	
+	// Test if expense can be added to a claim
+	public void addExpense() {
+		User user = new User("New guy");
+		Claim claim = new Claim();
+		Expense expense = new Expense();
+		Calendar date = Calendar.getInstance();
+		String cat = "some category from a category spinner";
+		String info = "textual description";
+		Double amt = 50.00;
+		Currency curr = Currency.getInstance("USD");
+		
+		expense.addDate(date);
+		expense.setCategory(cat);
+		expense.setDescription(info);
+		expense.setAmount(amt);
+		expense.setCurrency(curr);
+
 		user.addClaim(claim);
 		user.getClaim(claim).addExpense(expense);
-		// Assert the expense does exist in the claim
+		// Assert the expense exists in the claim
 		assertTrue("Expense is not added.", user.getClaim(claim).isExpense(expense));
-		
 	}
 	
-	// UC 4.0 - UC 4.2
-	public void testAddExpenseOrdering() {
+	// US 04.04
+	public void testCheckCompleteFlag() {
+		// Check if completeness of new expense is already set to false.
+		User user = new User("John");
 		Claim claim = new Claim();
-		Expense expense1 = new Expense();
-		Expense expense2 = new Expense();
-		expense2.setAmount(100.0);
-		claim.addExpense(expense1);
-		claim.addExpense(expense2);
-		assertEquals("Expenses in right order?", expense1, claim.getExpenseList().get(0));
-		assertEquals("Expenses added in right order?", expense2, claim.getExpenseList().get(1));
+		Expense expense = new Expense();
+		
+		user.addClaim(claim);
+		user.getClaim(claim).addExpense(expense);
+		// Checks if all information is filled in - should be false.
+		assertFalse("Not complete", user.getClaim(claim).checkExpenseComplete(expense));
 	}
 	
-	// UC 4.2
+	// US 4.06
 	public void testEditExpense() {
 		
 		User user = new User("John");
 		Claim claim = new Claim();
-		
 		Expense expense = new Expense();
-		Calendar date = Calendar.getInstance();
-		String cat = "some category from a category spinner";
-		String info = "textual description";
-		Double amt = 50.00;
-		Currency curr = Currency.getInstance("USD");
 		
-		expense.addDate(date);
-		expense.setCategory(cat);
+		String info = "textual description";
 		expense.setDescription(info);
-		expense.setAmount(amt);
-		expense.setCurrency(curr);
 		
 		user.addClaim(claim);
 		user.getClaim(claim).addExpense(expense);
@@ -77,7 +121,7 @@ public class ExpenseTest extends TestCase {
 				user.getClaim(claim).getAExpense(expense).getDescription());
 	}
 	
-	// UC 4.1
+	// US 4.07
 	public void testDeleteExpense() {
 		
 		User user = new User("John");
@@ -100,6 +144,18 @@ public class ExpenseTest extends TestCase {
 		// deleting expense
 		user.getClaim(claim).removeExpense(expense);
 		assertFalse("Expense is still there!", user.getClaim(claim).isExpense(expense));
+	}
+	
+	// UC 4.0 - UC 4.2
+	public void testAddExpenseOrdering() {
+		Claim claim = new Claim();
+		Expense expense1 = new Expense();
+		Expense expense2 = new Expense();
+		expense2.setAmount(100.0);
+		claim.addExpense(expense1);
+		claim.addExpense(expense2);
+		assertEquals("Expenses in right order?", expense1, claim.getExpenseList().get(0));
+		assertEquals("Expenses added in right order?", expense2, claim.getExpenseList().get(1));
 	}
 	
 	// UC 6.0, UC 6.2 (UC 6.1 is simply viewing the screen)
@@ -132,17 +188,7 @@ public class ExpenseTest extends TestCase {
 		
 	}
 	
-	// UC 4.0, 4.2, 4.4
-	public void testCheckCompleteFlag() {
-		User user = new User("John");
-		Claim claim = new Claim();
-		Expense expense = new Expense();
-		
-		user.addClaim(claim);
-		user.getClaim(claim).addExpense(expense);
-		// Checks if all information is filled in - should be false.
-		assertFalse("Not complete", user.getClaim(claim).checkExpenseComplete(expense));
-	}
+
 	
 
 }
