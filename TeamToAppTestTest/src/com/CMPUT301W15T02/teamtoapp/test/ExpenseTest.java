@@ -24,7 +24,7 @@ public class ExpenseTest extends TestCase {
 	private static final Currency JPY = Currency.getInstance("JPY");
 	private static final Currency CNY = Currency.getInstance("CNY");
 
-	// US 4.01 (UC 4.0 & 4.2)
+	// US 4.01 (UC 4.1 & 4.3)
 	public void testMakeExpense() {	
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
@@ -46,7 +46,7 @@ public class ExpenseTest extends TestCase {
 		assertNotNull(expense.getCurrency());		
 	}
 	
-	// US 4.02 (UC 4.0 & 4.2)
+	// US 4.02 (UC 4.1.1 & 4.3)
 	public void testCategory() {
 		Expense expense = new Expense();
 		// We can use spinners, but using List here for testing purposes.
@@ -59,7 +59,7 @@ public class ExpenseTest extends TestCase {
 		expense.setCategory(cat);
 		assertEquals(categories.get(0), expense.getCategory());
 	}
-	// US 4.03 (UC 4.0 & 4.2)
+	// US 4.03 (UC 4.1.1 & 4.3)
 	public void testCurrency() {
 		Expense expense = new Expense();
 		List<Currency> currenciesList = Arrays.asList(CAD, USD, EUR, GBP, JPY, CNY);
@@ -68,7 +68,7 @@ public class ExpenseTest extends TestCase {
 		assertEquals(GBP, expense.getCurrency());
 	}
 	
-	// Test if expense can be added to a claim (UC 4.0)
+	// Add Expense (UC 4.1)
 	public void addExpense() {
 		User user = new User("New guy");
 		Claim claim = new Claim();
@@ -91,7 +91,7 @@ public class ExpenseTest extends TestCase {
 		assertTrue("Expense is not added.", user.getClaim(claim).isExpense(expense));
 	}
 	
-	// US 04.04
+	// US 04.04 (UC 4.1.2)
 	public void testCheckCompleteFlag() {
 		// Check if completeness of new expense is already set to false.
 		User user = new User("John");
@@ -104,7 +104,7 @@ public class ExpenseTest extends TestCase {
 		assertFalse("Not complete", user.getClaim(claim).checkExpenseComplete(expense));
 	}
 	
-	// US 4.06 (UC 4.2)
+	// US 4.06 (UC 4.3)
 	public void testEditExpense() {
 		
 		User user = new User("John");
@@ -121,7 +121,7 @@ public class ExpenseTest extends TestCase {
 				user.getClaim(claim).getAExpense(expense).getDescription());
 	}
 	
-	// US 4.07 (UC 4.1)
+	// US 4.07 (UC 4.2)
 	public void testDeleteExpense() {
 		
 		User user = new User("John");
@@ -146,7 +146,7 @@ public class ExpenseTest extends TestCase {
 		assertFalse("Expense is still there!", user.getClaim(claim).isExpense(expense));
 	}
 	
-	// UC 4.0 - UC 4.2
+	// UC 4.1 - UC 4.3
 	public void testAddExpenseOrdering() {
 		Claim claim = new Claim();
 		Expense expense1 = new Expense();
