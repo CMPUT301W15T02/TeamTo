@@ -74,6 +74,7 @@
             android:layout_below="@+id/addClaimName"
             android:calendarViewShown="false"
             android:layout_marginLeft="-35dp"
+            android:layout_marginBottom="-35dp"
             android:scaleX="0.5"
             android:scaleY="0.5" />
 
@@ -84,6 +85,7 @@
             android:layout_above="@+id/addDestination"
 			android:layout_alignParentRight="true"
             android:calendarViewShown="false"
+            android:layout_marginBottom="-35dp"
             android:scaleX="0.5"
             android:scaleY="0.5" />
 
