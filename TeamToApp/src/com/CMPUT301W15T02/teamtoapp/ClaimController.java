@@ -12,8 +12,14 @@ public class ClaimController {
 		this.currentClaim = claim;
 	}
 	
+	public void setCurrentExpense(Expense expense) {
+		CurrentExpense.getInstance().setExpense(expense);
+	}
+	
+	
 	public void addExpense(Expense expense) {
 		currentClaim.addExpense(expense);
+		CurrentExpense.getInstance().setExpense(expense);
 	}
 	
 	public void removeExpense(Expense expense) {
