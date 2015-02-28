@@ -1,84 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClaimantClaimListActivity" >
-
-    <EditText
-        android:id="@+id/addClaimName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="26dp"
-        android:layout_marginTop="23dp"
-        android:ems="10"
-        android:hint="Claim Name"
-        android:inputType="text" />
-
-    <DatePicker
-        android:id="@+id/fromDatePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addClaimName"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/addClaimName"
-        android:scaleX="0.5"
-        android:scaleY="0.5" />
     
-    <DatePicker
-        android:id="@+id/toDatePicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/fromDatePicker"
-        android:scaleX="0.5"
-        android:scaleY="0.5" />
-    
-        
-    <EditText
-        android:id="@+id/addDestination"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/fromDatePicker"
-        android:layout_below="@+id/fromDatePicker"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:hint="Destination"
-        android:inputType="text" >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-        <requestFocus />
-    </EditText>
-
-    <EditText
-        android:id="@+id/addReason"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addDestination"
-        android:layout_below="@+id/addDestination"
-        android:ems="10"
-        android:hint="Reason For Travel"
-        android:inputType="textMultiLine" />
-
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/addReason"
-        android:layout_alignRight="@+id/addReason"
-        android:layout_below="@+id/addReason"
-        android:text="Add Another Destination &amp; Reason" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:text="show list/scrollview for dests and reasons?" />
+        <EditText
+            android:id="@+id/addClaimName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="23dp"
+            android:ems="10"
+            android:hint="Claim Name"
+            android:inputType="text" />
 
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/button1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/addReason"
+            android:layout_alignRight="@+id/addReason"
+            android:layout_below="@+id/addReason"
+            android:text="Add Another Destination &amp; Reason" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button1"
+            android:layout_below="@+id/button1"
+            android:text="show list/scrollview for dests and reasons?" />
+
+        <EditText
+            android:id="@+id/addDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/addClaimName"
+            android:layout_below="@+id/fromDatePicker"
+            android:layout_marginTop="0dp"
+            android:ems="10"
+            android:hint="Destination"
+            android:inputType="text" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/addReason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/addDestination"
+            android:layout_below="@+id/addDestination"
+            android:layout_marginTop="0dp"
+            android:ems="10"
+            android:hint="Reason For Travel"
+            android:inputType="textMultiLine" />
+
+        <DatePicker
+            android:id="@+id/fromDatePicker"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_alignRight="@+id/addClaimName"
+            android:layout_below="@+id/addClaimName"
+            android:calendarViewShown="false"
+            android:paddingLeft="0dp"
+            android:scaleX="0.5"
+            android:scaleY="0.5" />
+
+        <DatePicker
+            android:id="@+id/toDatePicker"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_above="@+id/addDestination"
+            android:layout_alignLeft="@+id/addDestination"
+            android:layout_marginLeft="100dp"
+            android:paddingLeft="5dp"
+            android:calendarViewShown="false"
+            android:scaleX="0.5"
+            android:scaleY="0.5" />
+
+    </RelativeLayout>
+
+</ScrollView>
