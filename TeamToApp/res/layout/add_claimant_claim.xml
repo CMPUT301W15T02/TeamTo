@@ -22,23 +22,12 @@
             android:hint="Claim Name"
             android:inputType="text" />
 
-
-        <Button
-            android:id="@+id/button1"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/addReason"
-            android:layout_alignRight="@+id/addReason"
-            android:layout_below="@+id/addReason"
-            android:text="Add Another Destination &amp; Reason" />
-
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button1"
-            android:layout_below="@+id/button1"
+            android:layout_alignLeft="@+id/addReason"
+            android:layout_below="@+id/addReason"
             android:text="show list/scrollview for dests and reasons?" />
 
         <EditText

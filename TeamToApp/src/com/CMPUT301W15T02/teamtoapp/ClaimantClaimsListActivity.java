@@ -17,13 +17,20 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 public class ClaimantClaimsListActivity extends Activity {
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +58,7 @@ public class ClaimantClaimsListActivity extends Activity {
 		Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantAddClaimActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void filterByClaimOption(MenuItem menu) {
 		
 	}
