@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 
 public class ClaimantAddClaimActivity extends Activity {
-	final Context context = this;
+	private final Context context = this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -21,13 +21,16 @@ public class ClaimantAddClaimActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.claimant_add_claim_menu, menu);
 		return true;
 	}
+	
+	public void onSaveNewClaimClick(MenuItem menu) {
+		// Perform actions once claimant saves new claim
+	}
 
 	public void addDestinationOption(MenuItem menu){
-		// pop up dialog to add another destination + reason.
+		// Pop up dialog to add another destination + reason.
 		addDestination();
 	}
 	
@@ -46,19 +49,16 @@ public class ClaimantAddClaimActivity extends Activity {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				// TODO Save destination + reason
-				
 			}
-			
 		})
 		
 		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				//Do nothing
+				// Do nothing
 			}
 		});
 		
-		// Show AlertDialog to user
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}

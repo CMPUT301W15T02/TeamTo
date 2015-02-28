@@ -3,6 +3,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class ApproverClaimsListActivity extends Activity {
 
@@ -19,4 +20,17 @@ public class ApproverClaimsListActivity extends Activity {
 		return true;
 	}
 
+	public void filterByDate(MenuItem menu) {
+		
+	}
+	
+	public void onClaimClick() {
+		
+	}
+	
+	public void switchToClaimantOption(MenuItem menu) {
+		// Not really sure if this is the correct way to do it.
+		// Changes by approver should be saved before going back.
+		super.onBackPressed();
+	}
 }
