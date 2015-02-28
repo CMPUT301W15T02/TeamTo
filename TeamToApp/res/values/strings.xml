@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">TeamTo App</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Claims</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
