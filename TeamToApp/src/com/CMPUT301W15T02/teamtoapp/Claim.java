@@ -51,6 +51,22 @@ public class Claim {
 		this.comment = "";
 	}
 	
+	public void setUser(String name) {
+		user_id = name;
+	}
+	
+	public String getUser() {
+		return user_id;
+	}
+	
+	public void addComment(String comment) {
+		this.comment = comment;
+	}
+	
+	public String getComment() {
+		return this.comment;
+	}
+	
 	public int getTagsListSize(){
 		return tags.size();
 	}
@@ -64,8 +80,8 @@ public class Claim {
 		this.tags.add(tag);
 	}
 	
-	public void removeTags(Tag tags){
-		this.tags.remove(tags);
+	public void removeTag(Tag tag){
+		this.tags.remove(tag);
 	}
 
 	
