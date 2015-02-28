@@ -6,7 +6,8 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="@string/action_settings" android:enabled="false" android:visible="false"/>
     <item android:id="@+id/addClaimOp" android:title="+" android:onClick="addClaimOption" android:showAsAction="always"></item>
+    <item android:id="@+id/switchToApprover" android:title="Switch To Approver Mode" android:onClick="switchToApproverOption" android:visible="true" android:showAsAction="withText|collapseActionView"></item>
 
 </menu>

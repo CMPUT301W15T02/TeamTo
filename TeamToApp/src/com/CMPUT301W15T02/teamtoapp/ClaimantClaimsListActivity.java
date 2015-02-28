@@ -22,12 +22,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class ClaimantClaimListActivity extends Activity {
+public class ClaimantClaimsListActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.claimant_claim_list);
+		setContentView(R.layout.claimant_claims_list);
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class ClaimantClaimListActivity extends Activity {
 	public void addClaimOption (MenuItem menu) {
 		// Claimant clicks "+" from action bar to add new claim (Need to add to UML).
 		// UI: create_claimant_claim.xml
-		Intent intent = new Intent(ClaimantClaimListActivity.this, ClaimantAddClaimActivity.class);
+		Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantAddClaimActivity.class);
 		startActivity(intent);
 	}
 	
@@ -66,7 +66,9 @@ public class ClaimantClaimListActivity extends Activity {
 		// UI: edit_delete_claimant_claim.xml
 	}
 	
-	public void switchToUser() {
+	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class.
+		Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
+		startActivity(intent);
 	}
 }
