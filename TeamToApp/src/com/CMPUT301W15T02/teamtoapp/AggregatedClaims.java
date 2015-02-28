@@ -27,4 +27,12 @@ public class AggregatedClaims {
 
 	}
 	
+	public Claim getClaim(Claim claim) {
+		if (claims.contains(claim)) {
+			return claim;
+		} else {
+			return null;
+		}
+	}
+	
 }

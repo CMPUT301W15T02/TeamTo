@@ -22,7 +22,9 @@ import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
+import com.CMPUT301W15T02.teamtoapp.AggregatedClaims;
 import com.CMPUT301W15T02.teamtoapp.Claim;
+import com.CMPUT301W15T02.teamtoapp.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.User;
 import com.CMPUT301W15T02.teamtoapp.UserController;
 import com.CMPUT301W15T02.teamtoapp.StringTuple;
@@ -33,23 +35,22 @@ public class ClaimTest extends TestCase {
 
 	// UC 1.0
 	public void testAddClaim () {
-		User user = new User("John");
-		
+		AggregatedClaims claims = new AggregatedClaims();
 		// Add new claim to manager - works
 		Claim claim = new Claim();
-		user.addClaim(claim);
-		assertNotNull("manager has no claim!", user);
+		claims.addClaim(claim);
+		assertNotNull("manager has no claim!", claims);
 		
-		// Save new information for claim, check if saved in user
+		// Save new information for claim, check if saved in claims
+		ClaimController controller = new ClaimController(claim);
 		String name = "new claim";
 		Calendar start_date = Calendar.getInstance();
 		Calendar end_date = Calendar.getInstance();
-		claim.addClaimName(name);
-		claim.setStartDate(start_date);
+		controller.setStartDate(start_date);
 		claim.setEndDate(end_date);
-		assertTrue("Name is not equal", user.getClaim(claim).getClaimName() == name);
-		assertTrue("Start date is not equal", user.getClaim(claim).getStartDate() == start_date);
-		assertTrue("End date is not equal", user.getClaim(claim).getEndDate() == end_date);
+		assertTrue("Name is not equal", claims.getClaim(claim).getClaimName() == name);
+		assertTrue("Start date is not equal", claims.getClaim(claim).getStartDate() == start_date);
+		assertTrue("End date is not equal", claims.getClaim(claim).getEndDate() == end_date);
 		
 		
 		String dest = "some destination";
@@ -57,37 +58,37 @@ public class ClaimTest extends TestCase {
 		StringTuple record = new StringTuple(dest, reason);
 		claim.addDestination(record);
 		
-		assertTrue("No destination and reason were added.", user.getClaim(claim).verifyDestination(record));
+		assertTrue("No destination and reason were added.", claims.getClaim(claim).verifyDestination(record));
 	}
 	
 	// UC 1.1
 	public void testEditClaim() {
-		User user = new User("Sarah");
+		AggregatedClaims claims = new AggregatedClaims();
 		Claim claim = new Claim();
 		
 		claim.setStatus(Claim.Status.IN_PROGRESS);
-		user.addClaim(claim); // Has default values
+		claims.addClaim(claim); // Has default values
 		
 		claim.setClaimName("in progress");
-		assertEquals("Name changed when in progress", "in progress", user.getClaim(claim).getClaimName());
+		assertEquals("Name changed when in progress", "in progress", claims.getClaim(claim).getClaimName());
 		
 		claim.setStatus(Claim.Status.SUBMITTED);
 		claim.setClaimName("submitted name");
-		assertTrue("Claim name has not changed.", user.getClaim(claim).getClaimName().equals("submitted name"));
+		assertTrue("Claim name has not changed.", claims.getClaim(claim).getClaimName().equals("submitted name"));
 		
 		claim.setStatus(Claim.Status.RETURNED);
 		claim.setClaimName("returned name");
-		assertEquals("Claim name changed when returned", "returned name", user.getClaim(claim).getClaimName());
+		assertEquals("Claim name changed when returned", "returned name", claims.getClaim(claim).getClaimName());
 	}
 		
 	// UC 1.2
 	public void testDeleteClaim() {
-		User user = new User("Peter");
+		AggregatedClaims claims = new AggregatedClaims();
 		Claim claim = new Claim();
-		user.addClaim(claim);
+		claims.addClaim(claim);
 		// Remove claim from manager
-		user.removeClaim(claim);
-		assertNull("user still has this claim!", user.getClaim(claim));
+		claims.removeClaim(claim);
+		assertNull("user still has this claim!", claims.getClaim(claim));
 		
 	}
 	
