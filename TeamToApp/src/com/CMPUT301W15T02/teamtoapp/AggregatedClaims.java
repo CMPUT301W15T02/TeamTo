@@ -18,4 +18,13 @@ public class AggregatedClaims {
 		this.claims = claims;
 	}
 	
+	public void addClaim(Claim claim) {
+		claims.add(claim);
+	}
+	
+	public void removeClaim(Claim claim) {
+		claims.remove(claim);
+
+	}
+	
 }

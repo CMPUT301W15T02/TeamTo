@@ -39,7 +39,7 @@ public class User {
 
 
 
-	public boolean isType() {
+	public boolean getType() {
 		return type;
 	}
 
