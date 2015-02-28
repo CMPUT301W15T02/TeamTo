@@ -17,9 +17,6 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.UUID;
-
-import com.CMPUT301W15T02.teamtoapp.Claim.Status;
 
 /*
  * Stores all of the data related to a claim
@@ -29,7 +26,6 @@ import com.CMPUT301W15T02.teamtoapp.Claim.Status;
 
 public class Claim {
 
-	// Using enumerated type since status can only take a small number of values and strings were ugly last time
 	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
 	
 	private String name;
@@ -38,35 +34,37 @@ public class Claim {
 	private ArrayList<StringTuple> destinations;
 	private ArrayList<Expense> expenses;
 	private Status status;
-	private ArrayList<String> tags;
+	private String comment;
+	private ArrayList<Tag> tags;
+	private String user_id;
 	// Debating adding a uniqueID to each claim so that you could simply pass in the unique ID
 	
 	
-	// Just have default values for now, might want to create another constructor of change this around
 	public Claim() {
 		name = "";
-		setStartDate(Calendar.getInstance());
-		setEndDate(Calendar.getInstance());
-		setDestinations(new ArrayList<StringTuple>());
-		expenses = new ArrayList<Expense>();
+		this.startDate = Calendar.getInstance();
+		this.endDate = Calendar.getInstance();
+		this.destinations = new ArrayList<StringTuple>();
+		this.expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
-		tags = new ArrayList<String>();
+		this.tags = new ArrayList<Tag>();
+		this.comment = "";
 	}
 	
 	public int getTagsListSize(){
 		return tags.size();
 	}
 	
-	public ArrayList<String> getTags() {
+	public ArrayList<Tag> getTags() {
 		return tags;
 	}
 	
 
-	public void addTag(String tag) {
+	public void addTag(Tag tag) {
 		this.tags.add(tag);
 	}
 	
-	public void removeTags(String tags){
+	public void removeTags(Tag tags){
 		this.tags.remove(tags);
 	}
 
@@ -78,12 +76,6 @@ public class Claim {
 	
 	public void removeExpense(Expense expense) {
 		this.expenses.remove(expense);
-	}
-
-	
-	public void addClaimName(String new_name) {
-		this.name = new_name;
-		
 	}
 
 	
@@ -123,8 +115,6 @@ public class Claim {
 
 	
 	public void addDestination(StringTuple new_tuple) {
-		// Q: Should I worry about duplicate key  (i.e. destination) entries? 
-		// A: changed to an arrayList of tuples
 		this.destinations.add(new_tuple);
 		
 	}

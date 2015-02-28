@@ -24,77 +24,98 @@ import java.util.Currency;
  */
 
 public class Expense {
-	/*
-	 * String[] category = {"Air Fare","Ground Transport","Vehicle Rental","Private Automobile",
-			"Fuel","Parking","Registration","Accommodation","Meal", "Supplies"};
-	   
-	   String[] currency = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY","CNY"};
-	   
-	   not sure about this type of implementation change will an array list be
-	   better even though editing and removing are not necessary?
-	   
-	   US04.02.01 and US04.03.01 Possible solution: 
-	   Choices of category and currency can be a part of a spinner in an activity, and when the user selects a category
-	   and currency, these choices can be saved as corresponding strings in the expense object.
-	*/
+
 	private Calendar date;
 	private String description;
 	private Currency currency;
 	private String category;
-	private Double amount; // Might want to use something like BigDecimal... not sure
+	private Double amount;
 	private boolean complete;
+	public String photo_uri;
 	
-	// Just default values for now
+	
 	public Expense() {
 		date = Calendar.getInstance();
 		setDescription("");
-		setCurrency(Currency.getInstance("CAD")); // Considering using Currency.getInstance(Locale.getDefault())...
+		setCurrency(Currency.getInstance("CAD"));
 		setCategory("supplies");
 		setAmount(0.0);
-		setComplete(false); // Not sure about whether to set this or have the app automatically set it depending on context
+		setComplete(false);
 	}
 
-	public void addDate(Calendar new_date) {
-		this.date = new_date;
-		
-	}
-	//Added a get date to allow the ability to edit it later
+	
+
 	public Calendar getDate() {
-		return this.date;
-		
+		return date;
 	}
 
-	public String getCategory() {
-		return category;
+
+
+	public void setDate(Calendar date) {
+		this.date = date;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+
 
 	public String getDescription() {
 		return description;
 	}
 
+
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public Double getAmount() {
-		return amount;
-	}
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
 
 	public Currency getCurrency() {
 		return currency;
 	}
 
+
+
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
 	}
+
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+
+
+	public Double getAmount() {
+		return amount;
+	}
+
+
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+
+
+	public boolean isComplete() {
+		return complete;
+	}
+
+
+
+	public void setComplete(boolean complete) {
+		this.complete = complete;
+	}
+
+
 
 	public void addPhoto(String photoPath) {
 		// Not sure how to add photos
@@ -111,13 +132,6 @@ public class Expense {
 		
 	}
 
-	public boolean isComplete() {
-		return complete;
-	}
-
-	public void setComplete(boolean complete) {
-		this.complete = complete;
-	}
 
 
 }

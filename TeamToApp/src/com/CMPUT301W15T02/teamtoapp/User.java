@@ -16,115 +16,71 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 
-import android.R.integer;
-
 public class User {
-	private String username;
-	private ArrayList<Claim> claims;
-	private ArrayList<String> tags;
+	private String name;
+	private boolean type; // true for claimant, false for approver?
+	private ArrayList<Tag> tags;
 	
-	public User(String username) {
-		this.setUsername(username);
-		claims = new ArrayList<Claim>();
-		tags = new ArrayList<String>();
+	public User() {
+		this.name = "";
+		tags = new ArrayList<Tag>();
 	}
 	
-	public String getUsername() {
-		return username;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void addClaim(Claim claim) {
-		claims.add(claim);
+
+
+	public boolean isType() {
+		return type;
 	}
-	
-	public void removeClaim(Claim claim) {
-		if (claims.contains(claim)) {
-			claims.remove(claim);
-		}
+
+
+
+	public void setType(boolean type) {
+		this.type = type;
 	}
-	
-	public void returnClaim(Claim claim) {
-		claim.setStatus(Claim.Status.RETURNED);
-	}
-	
-	public void submitClaim(Claim claim) {
-		
-		claim.setStatus(Claim.Status.SUBMITTED);
-	}
-	
-	public void approveClaim(Claim claim) {
-		claim.setStatus(Claim.Status.APPROVED);
-	}
-	
-	public String getATag(String tag) {
-		// Return an existing tag
-		if (tags.contains(tag)) {
-			return tag;
-		} else {
-			return null;
-		}
-	}
-	public ArrayList<String> getTags() {
-		// Return the array list of tags
+
+
+
+	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+
+
+
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+	}
 	
-	public void addTag(String tag) {
-		// Add new tag created by the user
+	
+	
+	public void addTag(Tag tag) {
 		tags.add(tag);
 	}
 
-	public void removeTag(String tag) {
+
+	
+	public void removeTag(Tag tag) {
 		tags.remove(tag);
 	}
 	
-	public void editTag(String prev_str, String new_str) {
-		if (tags.contains(prev_str)) {
-			int index = tags.indexOf(prev_str);
+	
+
+	public void editTag(Tag prev_tag, Tag new_tag) {
+		if (tags.contains(prev_tag)) {
+			int index = tags.indexOf(prev_tag);
 			// Replace tag with new tag at original index
-			tags.set(index, new_str);
+			tags.set(index, new_tag);
 		}
 	}
-	
-	public Claim getClaimPos(int position) {
-		// Return claim from a specific position of the users' claim list
-		return claims.get(position);
-	}
-	
-	public Claim getClaim(Claim claim){
-		// Return a claim requested, not specifying position
-		if (claims.contains(claim)) {
-			return claim;
-		} else {
-			return null;
-		}
-	}
-
-	public ArrayList<Claim> getClaimsWithTags(String string) {
-		ArrayList<Claim> claimsWithTags = new ArrayList<Claim>(); 
-		for (int i = 0; i < claims.size(); i++) {
-			// If claim has matching tag, add to list, then return the list.
-			if (claims.get(i).getTags().contains(string)) {
-				claimsWithTags.add(claims.get(i));
-			}
-		}
-		return claimsWithTags;
-	}
-	
-	// Not really sure how exactly we will save/load a users' claims at the moment.
-	public void saveToCloud() {
-		// TODO Incomplete.
-		
-	}
-
-	public User loadFromCloud() {
-		// TODO Incomplete. 
-		return null;
-	}
-
 
 }
