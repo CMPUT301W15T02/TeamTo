@@ -5,5 +5,6 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings" android:enabled="false" android:visible="false"/>
+    <item android:id="@+id/switch_to_claimant" android:enabled="true" android:title="Switch To Claimant Mode" android:visible="true" android:onClick="switchToClaimantOption"></item>
 
 </menu>
