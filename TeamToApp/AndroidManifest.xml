@@ -14,13 +14,17 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ClaimantClaimListActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ClaimantClaimListActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.CMPUT301W15T02.teamtoapp.ClaimantAddClaimActivity"
+            android:label="@string/title_activity_claimant_add_claim" >
         </activity>
     </application>
 

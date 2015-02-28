@@ -13,9 +13,11 @@
  * limitations under the License.
 */
 
+
 package com.CMPUT301W15T02.teamtoapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +32,6 @@ public class ClaimantClaimListActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.claimant_claim_list_menu, menu);
 		return true;
 	}
@@ -44,7 +45,28 @@ public class ClaimantClaimListActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void addClaim (MenuItem menu) {
-		// Can go to an create/edit claim UI -> maybe a pop-up or part of a new activity.
+	public void addClaimOption (MenuItem menu) {
+		// Claimant clicks "+" from action bar to add new claim (Need to add to UML).
+		// UI: create_claimant_claim.xml
+		Intent intent = new Intent(ClaimantClaimListActivity.this, ClaimantAddClaimActivity.class);
+		startActivity(intent);
+	}
+	
+	public void filterByClaimOption(MenuItem menu) {
+		
+	}
+	
+	public void onClaimClick() {
+		// Claimant clicks on existing claim to go to claim overview.
+		// UI: claimant_claim_overview.xml
+	}
+	
+	public void onClaimLongClick() {
+		// Claimant clicks on existing claim to edit/delete it.
+		// UI: edit_delete_claimant_claim.xml
+	}
+	
+	public void switchToUser() {
+		// Switch to ApproverClaimListActivity.class.
 	}
 }
