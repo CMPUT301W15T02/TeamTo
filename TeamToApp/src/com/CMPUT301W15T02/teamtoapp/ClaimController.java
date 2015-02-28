@@ -62,6 +62,10 @@ public class ClaimController {
 		currentClaim.addComment(comment);
 	}
 	
+	public void addDestination(String destination, String reason) {
+		StringTuple newDestination = new StringTuple(destination, reason);
+		currentClaim.addDestination(newDestination);
+	}
 	
 
 }
