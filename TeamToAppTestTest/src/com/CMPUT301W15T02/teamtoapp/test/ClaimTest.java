@@ -127,7 +127,7 @@ public class ClaimTest extends TestCase {
 	public void testEditTags() {
 		User user = new User("Sarah");
 		user.addTag(null);
-		user.editTag("tag", "tage");
+		user.editTag(null, null);
 		assertEquals("Edit tags?", true, user.getTags().contains("tage"));
 	}
 	

@@ -114,6 +114,27 @@ public class User {
 
 
 
+	public void submitClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void returnClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void approveClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 
 }
