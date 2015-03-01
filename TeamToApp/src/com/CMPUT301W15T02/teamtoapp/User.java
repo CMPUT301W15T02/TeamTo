@@ -100,6 +100,20 @@ public class User {
 
 
 
+	public Tag getATag(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public String getClaimsWithTags(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 
 }
