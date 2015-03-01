@@ -78,7 +78,7 @@ public class ClaimEditActivity extends Activity {
 		// Perform actions once claimant saves new claim
 	}
 
-	public void addDestinationOption(MenuItem menu){
+	public void addDestinationOption(View view){
 		// Pop up dialog to add another destination + reason.
 		addDestination();
 	}

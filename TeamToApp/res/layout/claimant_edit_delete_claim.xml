@@ -66,20 +66,30 @@
         	    android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
         </LinearLayout>
-        
-        <ListView
-            android:id="@+id/destListView"
-            android:layout_width="match_parent"
-            android:layout_height="149dp" >
-        </ListView>
 
-        <Button
-            android:id="@+id/addDestBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Destination"
-            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+        	<TextView
+        	    android:id="@+id/destTextView"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="Destinations:"
+        	    android:textColor="@android:color/darker_gray" >
 
-    </LinearLayout>
+        	</TextView>
+
+            <ListView
+                android:id="@+id/destListView"
+                android:layout_width="match_parent"
+                android:layout_height="149dp" >
+            </ListView>
+
+            <Button
+                android:id="@+id/addDestBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="addDestinationOption"
+                android:text="Add Destination"
+                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+</LinearLayout>
 
 </ScrollView>
