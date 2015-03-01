@@ -29,7 +29,7 @@ public class Claim extends Observable {
 
 	
 	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
-	
+	private String c_name;
 	private Calendar startDate;
 	private Calendar endDate;
 	private ArrayList<StringTuple> destinations;
@@ -39,8 +39,9 @@ public class Claim extends Observable {
 	private ArrayList<Tag> tags;
 	private String user_id;
 	
-	
+
 	public Claim() {
+		this.setClaimName("New Claim");
 		this.startDate = Calendar.getInstance();
 		this.endDate = Calendar.getInstance();
 		this.destinations = new ArrayList<StringTuple>();
@@ -49,14 +50,24 @@ public class Claim extends Observable {
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
 	}
+	// Need to display claim name for custom claim list view (claimant, not for approver)
+	public String getClaimName() {
+		return c_name;
+	}
 
+
+	public void setClaimName(String c_name) {
+		this.c_name = c_name;
+		setChanged();
+		notifyObservers();
+	}
 
 
 	public Calendar getStartDate() {
 		return startDate;
 	}
 
-
+	
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 		setChanged();

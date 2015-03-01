@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <!-- Claimant List version: the starting date of travel, the destination(s) -->
+    <!-- of travel, the claim status, tags, and total currency amounts. -->
+    
+    <!-- Have not added rows for tags and total currency amounts yet. Starting with basics -->
+    
+    <TextView
+        android:id="@+id/claimantClaimNameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:textSize="16sp" />
+ 
+    <TextView
+        android:id="@+id/claimantStartDateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:textSize="14sp" />
+    
+    <TextView
+        android:id="@+id/claimantDestsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/claimantStatusView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:textSize="14sp" />  
+        
+
+</LinearLayout>
