@@ -16,11 +16,6 @@
         <activity
             android:name="com.CMPUT301W15T02.teamtoapp.ClaimantClaimsListActivity"
             android:label="@string/title_activity_claimant_claims_list" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.CMPUT301W15T02.teamtoapp.ClaimEditActivity"
@@ -29,6 +24,14 @@
         <activity
             android:name="com.CMPUT301W15T02.teamtoapp.ApproverClaimsListActivity"
             android:label="@string/title_activity_approver_claims_list" >
+        </activity>
+        <activity
+            android:name="com.CMPUT301W15T02.teamtoapp.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

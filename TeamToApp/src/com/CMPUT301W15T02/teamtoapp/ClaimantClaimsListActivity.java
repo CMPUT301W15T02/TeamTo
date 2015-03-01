@@ -29,6 +29,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
+		//SessionController s_control = new SessionController();
 	}
 
 	@Override
@@ -49,6 +50,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	public void addClaimOption (MenuItem menu) {
 		// Claimant clicks "+" from action bar to add new claim 
 		// Automatically save new blank claim in claim list view.
+
 
 	}
 

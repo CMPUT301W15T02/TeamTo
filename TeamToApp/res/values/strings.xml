@@ -7,5 +7,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_claimant_create_edit_claim">Create/Edit Claim</string>
     <string name="title_activity_approver_claims_list">Submitted Claims</string>
+    <string name="title_activity_login">TeamTo App!</string>
 
 </resources>
