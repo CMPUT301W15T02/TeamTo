@@ -21,12 +21,13 @@ public class User {
 	private boolean type; // true for claimant, false for approver?
 	private ArrayList<Tag> tags;
 	
-	public User() {
-		this.name = "";
+	public User(String string) {
+		this.name = string;
 		tags = new ArrayList<Tag>();
 	}
-	
-	
+
+
+
 	public String getName() {
 		return name;
 	}
@@ -82,5 +83,9 @@ public class User {
 			tags.set(index, new_tag);
 		}
 	}
+
+
+
+
 
 }
