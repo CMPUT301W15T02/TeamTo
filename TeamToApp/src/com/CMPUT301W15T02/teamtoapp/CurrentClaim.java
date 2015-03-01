@@ -6,7 +6,6 @@ public class CurrentClaim {
 	private Claim claim;
 	
 	private CurrentClaim() {
-		claim = new Claim();
 	}
 	
 	public static CurrentClaim getInstance() {

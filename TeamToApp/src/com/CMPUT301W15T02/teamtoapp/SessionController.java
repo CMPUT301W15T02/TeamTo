@@ -31,4 +31,8 @@ public class SessionController {
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
 	}
+	
+	public void selectClaim(Claim claim) {
+		CurrentClaim.getInstance().setClaim(claim);
+	}
 }
