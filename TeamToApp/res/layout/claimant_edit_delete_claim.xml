@@ -6,83 +6,80 @@
     android:layout_height="match_parent"
     tools:context=".ClaimantClaimsListActivity" >
     
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp" >
 
         <EditText
-            android:id="@+id/addClaimName"
-            android:layout_width="wrap_content"
+            	android:id="@+id/addClaimName"
+            	android:layout_width="wrap_content"
+            	android:layout_height="wrap_content"
+            	android:ems="10"
+           	 	android:hint="Claim Name"
+            	android:inputType="text" />
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="23dp"
-            android:ems="10"
-            android:hint="Claim Name"
-            android:inputType="text" />
+            android:orientation="horizontal"  >
+            
+        	<TextView
+        	    android:id="@+id/startDateTitle"
+        	    android:layout_width="0dp"
+        	    android:layout_height="wrap_content"
+        	    android:layout_weight="1"
+        	    android:text=" Start Date"
+        	    android:textAppearance="?android:attr/textAppearanceMedium"
+        	    android:textColor="@android:color/darker_gray" />
 
-        <EditText
-            android:id="@+id/addDestination"
+        	<TextView
+        	    android:id="@+id/endDateTitle"
+        	    android:layout_width="0dp"
+        	    android:layout_height="wrap_content"
+        	    android:layout_weight="0.83"
+        	    android:text="End Date"
+        	    android:textAppearance="?android:attr/textAppearanceMedium"
+        	    android:textColor="@android:color/darker_gray" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/addClaimName"
-            android:layout_below="@+id/startDateBtn"
-            android:layout_marginTop="0dp"
-            android:ems="10"
-            android:hint="Destination"
-            android:inputType="text" >
+            android:layout_height="match_parent"
+            android:orientation="horizontal"  >
 
-            <requestFocus />
-        </EditText>
+        	<Button
+        	    android:id="@+id/startDateBtn"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="Pick Start Date"
+        	    android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+        	<Button
+        	    android:id="@+id/endDateBtn"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:layout_marginLeft="16dp"
+        	    android:text="Pick End Date"
+        	    android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+        </LinearLayout>
+        
+        <ListView
+            android:id="@+id/destListView"
+            android:layout_width="match_parent"
+            android:layout_height="149dp" >
+        </ListView>
 
         <Button
-            android:id="@+id/endDateBtn"
-            android:layout_width="wrap_content"
+            android:id="@+id/addDestBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/addDestination"
-            android:layout_alignLeft="@+id/endDateTitle"
-            android:text="Pick End Date" />
+            android:text="Add Destination"
+            android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
-        <EditText
-            android:id="@+id/addReason"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/addDestination"
-            android:layout_below="@+id/addDestination"
-            android:ems="10"
-            android:hint="Reason For Travel"
-            android:inputType="textMultiLine" />
-
-        <TextView
-            android:id="@+id/endDateTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/endDateBtn"
-            android:layout_toRightOf="@+id/startDateBtn"
-            android:text="   End Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/darker_gray" />
-
-        <Button
-            android:id="@+id/startDateBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/addDestination"
-            android:layout_below="@+id/startDateTitle"
-            android:text="Pick Start Date" />
-
-        <TextView
-            android:id="@+id/startDateTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/addClaimName"
-            android:layout_below="@+id/addClaimName"
-            android:layout_marginLeft="16dp"
-            android:text=" Start Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/darker_gray" />
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </ScrollView>
