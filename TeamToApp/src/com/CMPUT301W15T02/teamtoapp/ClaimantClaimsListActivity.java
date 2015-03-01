@@ -42,7 +42,7 @@ public class ClaimantClaimsListActivity extends Activity {
 		// For now, pretend new session controller when user reached this activity for the first time every time. (no saving yet)
 		// Don't have a listener yet for the adapter, so cannot view claimant's claim list yet.
 		s_control = new SessionController();
-		final ArrayList<Claim> clist = new ArrayList<Claim>(s_control.claims.getClaims());
+		final ArrayList<Claim> clist = new ArrayList<Claim>(s_control.getClaims());
 		final ClaimantClaimLVAdapter adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, clist);
 		lv = (ListView) findViewById(R.id.claimantClaimListView);
 		lv.setAdapter(adapter);
@@ -67,16 +67,10 @@ public class ClaimantClaimsListActivity extends Activity {
 		// Claimant clicks "+" from action bar to add new claim 
 		// Automatically save new blank claim in claim list view.
 		// In progress ...
-		
-		// Shows username is saved!
-		Toast.makeText(getBaseContext(), s_control.user.getName(), Toast.LENGTH_SHORT).show();
 		Claim new_claim = new Claim();
 		// Instead of doing this, call the SessionController.addClaim(method)
 		// We want the controller to do most of the heavy lifting
-		s_control.claims.addClaim(new_claim);
-		// Shows claim name == "New Claim"!
-		Toast.makeText(getBaseContext(), s_control.claims.getClaim(new_claim).getClaimName(), Toast.LENGTH_SHORT).show();
-
+		s_control.addClaim(new_claim);
 	}
 
 	public void filterByDate(MenuItem menu) {

@@ -28,8 +28,7 @@ public class LoginActivity extends Activity {
 		
 		// if new user:
 		SessionController s_control = new SessionController();
-		s_control.user.setName(usernameString);
-		s_control.user.setType(true); // assume claimant type = true
+
 		startActivity(intent);
 		// Still need to consider saved user, search entered name, etc.
 	}

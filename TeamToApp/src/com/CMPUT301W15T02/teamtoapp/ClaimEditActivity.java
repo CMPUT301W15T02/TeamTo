@@ -10,9 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ClaimEditActivity extends Activity {
 	private final Context context = this;
+	private TextView startDate;
+	private TextView endDate;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,4 +66,6 @@ public class ClaimEditActivity extends Activity {
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
+	
+	
 }
