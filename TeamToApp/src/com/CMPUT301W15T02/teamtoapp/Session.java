@@ -8,7 +8,7 @@ public class Session {
 	private static Session instance = null;
 
 	private Session(){
-		currentUser = new User();
+		currentUser = new User(null);
 		currentClaims = new AggregatedClaims();
 	};
 

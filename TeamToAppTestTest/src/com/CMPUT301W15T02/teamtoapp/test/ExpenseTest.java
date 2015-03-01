@@ -33,7 +33,7 @@ public class ExpenseTest extends TestCase {
 		Double amt = 50.00;
 		Currency curr = Currency.getInstance("USD");
 		
-		expense.addDate(date);
+		expense.setDate(date);
 		expense.setCategory(cat);
 		expense.setDescription(info);
 		expense.setAmount(amt);
@@ -79,7 +79,7 @@ public class ExpenseTest extends TestCase {
 		Double amt = 50.00;
 		Currency curr = Currency.getInstance("USD");
 		
-		expense.addDate(date);
+		expense.setDate(date);
 		expense.setCategory(cat);
 		expense.setDescription(info);
 		expense.setAmount(amt);
@@ -133,7 +133,7 @@ public class ExpenseTest extends TestCase {
 		Double amt = 50.00;
 		Currency curr = Currency.getInstance("USD");
 		
-		expense.addDate(date);
+		expense.setDate(date);
 		expense.setCategory(cat);
 		expense.setDescription(info);
 		expense.setAmount(amt);
@@ -170,7 +170,7 @@ public class ExpenseTest extends TestCase {
 		Double amt = 50.00;
 		Currency curr = Currency.getInstance("USD");
 		
-		expense.addDate(date);
+		expense.setDate(date);
 		expense.setCategory(cat);
 		expense.setDescription(info);
 		expense.setAmount(amt);

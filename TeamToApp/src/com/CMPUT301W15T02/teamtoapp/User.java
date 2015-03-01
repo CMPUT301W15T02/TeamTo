@@ -86,6 +86,20 @@ public class User {
 
 
 
+	public Claim getClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public void addClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 
 
 }
