@@ -38,7 +38,7 @@
         	    android:id="@+id/endDateTitle"
         	    android:layout_width="0dp"
         	    android:layout_height="wrap_content"
-        	    android:layout_weight="0.83"
+        	    android:layout_weight="1.18"
         	    android:text="End Date"
         	    android:textAppearance="?android:attr/textAppearanceMedium"
         	    android:textColor="@android:color/darker_gray" />
