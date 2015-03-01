@@ -12,7 +12,7 @@ import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.User;
-import com.CMPUT301W15T02.teamtoapp.UserController;
+import com.CMPUT301W15T02.teamtoapp.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Expense;
 
 public class ExpenseTest extends TestCase {
@@ -154,8 +154,8 @@ public class ExpenseTest extends TestCase {
 		expense2.setAmount(100.0);
 		claim.addExpense(expense1);
 		claim.addExpense(expense2);
-		assertEquals("Expenses in right order?", expense1, claim.getExpenseList().get(0));
-		assertEquals("Expenses added in right order?", expense2, claim.getExpenseList().get(1));
+		assertEquals("Expenses in right order?", expense1, claim.getExpenses().get(0));
+		assertEquals("Expenses added in right order?", expense2, claim.getExpenses().get(1));
 	}
 	
 	// UC 6.0, UC 6.2 (UC 6.1 is simply viewing the screen)
