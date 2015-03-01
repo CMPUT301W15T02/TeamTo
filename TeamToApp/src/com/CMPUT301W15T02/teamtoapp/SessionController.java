@@ -25,6 +25,7 @@ public class SessionController {
 	
 	public void addClaim(Claim claim) {
 		claims.addClaim(claim);
+		CurrentClaim.getInstance().setClaim(claim);
 	}
 	
 	public void removeClaim(Claim claim) {
