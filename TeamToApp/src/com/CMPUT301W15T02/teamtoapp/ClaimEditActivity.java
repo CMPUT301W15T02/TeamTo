@@ -32,7 +32,8 @@ public class ClaimEditActivity extends Activity {
 	private Button pickStartBtn;
 	private Button pickEndBtn;
 	
-	static final int DATE_DIALOG_ID = 0;
+	static final int DATE_DIALOG_ID_0 = 0;
+	static final int DATE_DIALOG_ID_1 = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,14 @@ public class ClaimEditActivity extends Activity {
 
         pickStartBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID);
+                showDialog(DATE_DIALOG_ID_0);
             }
         });
         
 
         pickEndBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID);
+                showDialog(DATE_DIALOG_ID_1);
             }
         });
  
@@ -163,7 +164,7 @@ public class ClaimEditActivity extends Activity {
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-        case DATE_DIALOG_ID:
+        case DATE_DIALOG_ID_0:
             return new DatePickerDialog(this,
                         startDateSetListener,
                         _year, _month, _day);
