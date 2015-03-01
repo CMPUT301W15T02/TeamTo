@@ -26,7 +26,6 @@ import com.CMPUT301W15T02.teamtoapp.AggregatedClaims;
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.User;
-import com.CMPUT301W15T02.teamtoapp.UserController;
 import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
@@ -42,7 +41,7 @@ public class ClaimTest extends TestCase {
 		assertNotNull("manager has no claim!", claims);
 		
 		// Save new information for claim, check if saved in claims
-		ClaimController controller = new ClaimController(claim);
+		ClaimController controller = new ClaimController();
 		String name = "new claim";
 		Calendar start_date = Calendar.getInstance();
 		Calendar end_date = Calendar.getInstance();
@@ -152,8 +151,8 @@ public class ClaimTest extends TestCase {
 		claim2.addTag(null);
 		user.addClaim(claim1);
 		user.addClaim(claim2);
-		assertTrue("Filter working", user.getClaimsWithTags("tag").contains(claim2));
-		assertFalse("Tag filter working?", user.getClaimsWithTags("tag").contains(claim1));
+		assertTrue("Filter working", user.getClaimsWithTags("tag").contains((CharSequence) claim2));
+		assertFalse("Tag filter working?", user.getClaimsWithTags("tag").contains((CharSequence) claim1));
 	}
 	
 	// UC 7.0, UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)

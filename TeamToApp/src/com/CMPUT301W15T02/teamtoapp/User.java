@@ -135,6 +135,27 @@ public class User {
 
 
 
+	public Object getClaimPos(int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public void saveToCloud() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public Object loadFromCloud() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
 
 
 }
