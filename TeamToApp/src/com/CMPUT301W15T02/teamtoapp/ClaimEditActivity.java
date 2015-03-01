@@ -6,7 +6,6 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.util.Calendar;
 
 import android.os.Bundle;
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;

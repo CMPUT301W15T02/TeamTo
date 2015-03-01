@@ -2,6 +2,8 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 
+import android.R.integer;
+
 public class SessionController {
 	
 	private User user = Session.getInstance().getCurrentUser();
@@ -30,8 +32,9 @@ public class SessionController {
 		CurrentClaim.getInstance().setClaim(claim);
 	}
 	
-	public void removeClaim(Claim claim) {
-		claims.removeClaim(claim);
+	public void removeClaim(int position) {
+		// Needs fixing, should just pass in position
+		claims.getClaims().remove(position);
 	}
 	
 	public void setClaim(Claim claim) {

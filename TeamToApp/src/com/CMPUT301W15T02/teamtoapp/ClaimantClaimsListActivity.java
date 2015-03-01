@@ -17,6 +17,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -25,12 +26,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class ClaimantClaimsListActivity extends Activity {
-	// For now, pretend new session controller when user reached this activity for the first time.
-	private SessionController s_control;
+	
+	private SessionController sessionController;
 	final Context context = this;
 	private ListView lv;
 	
@@ -39,12 +42,23 @@ public class ClaimantClaimsListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
 		
-		// For now, pretend new session controller when user reached this activity for the first time every time. (no saving yet)
-		// Don't have a listener yet for the adapter, so cannot view claimant's claim list yet.
-		s_control = new SessionController();
-		final ArrayList<Claim> clist = new ArrayList<Claim>(s_control.getClaims());
-		final ClaimantClaimLVAdapter adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, clist);
+		sessionController = new SessionController();
+		final ArrayList<Claim> claimsList = new ArrayList<Claim>(sessionController.getClaims());
+		final ClaimantClaimLVAdapter adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, claimsList);
 		lv = (ListView) findViewById(R.id.claimantClaimListView);
+		
+		// Item in the list is clicked, user taken to expenseListActivity
+		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Claim claim = sessionController.getClaims().get(position);
+				sessionController.setClaim(claim);
+				Intent intent = new Intent(getBaseContext(), ClaimantExpenseListActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		
 		lv.setAdapter(adapter);
 	}
 
@@ -64,22 +78,14 @@ public class ClaimantClaimsListActivity extends Activity {
 	}
 	
 	public void addClaimOption (MenuItem menu) {
-		// Claimant clicks "+" from action bar to add new claim 
-		// Automatically save new blank claim in claim list view.
-		// In progress ...
 		Claim new_claim = new Claim();
-		// Instead of doing this, call the SessionController.addClaim(method)
-		// We want the controller to do most of the heavy lifting
-		s_control.addClaim(new_claim);
+		sessionController.addClaim(new_claim);
+		Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
+		startActivity(intent);
 	}
 
 	public void filterByDate(MenuItem menu) {
 		
-	}
-	
-	public void onClaimClick() {
-		// Claimant clicks on existing claim to go to claim overview.
-		// UI: claimant_claim_overview.xml (not created yet)
 	}
 	
 	public void onClaimLongClick() {
