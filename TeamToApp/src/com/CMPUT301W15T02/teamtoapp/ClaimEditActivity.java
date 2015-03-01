@@ -11,21 +11,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-public class ClaimantAddClaimActivity extends Activity {
+public class ClaimEditActivity extends Activity {
 	private final Context context = this;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.add_claimant_claim);
+		setContentView(R.layout.claimant_edit_delete_claim);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.claimant_add_claim_menu, menu);
+		getMenuInflater().inflate(R.menu.claimant_edit_delete_claim_menu, menu);
 		return true;
 	}
 	
-	public void onSaveNewClaimClick(MenuItem menu) {
+	public void onSaveButtonClick(MenuItem menu) {
 		// Perform actions once claimant saves new claim
 	}
 

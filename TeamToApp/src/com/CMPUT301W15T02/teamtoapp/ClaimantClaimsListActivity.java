@@ -17,6 +17,8 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -31,7 +33,7 @@ public class ClaimantClaimsListActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.claimant_claim_list_menu, menu);
+		getMenuInflater().inflate(R.menu.claimant_claims_list_menu, menu);
 		return true;
 	}
 
@@ -45,10 +47,9 @@ public class ClaimantClaimsListActivity extends Activity {
 	}
 	
 	public void addClaimOption (MenuItem menu) {
-		// Claimant clicks "+" from action bar to add new claim (Need to add to UML).
-		// UI: create_claimant_claim.xml
-		Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantAddClaimActivity.class);
-		startActivity(intent);
+		// Claimant clicks "+" from action bar to add new claim 
+		// Automatically save new blank claim in claim list view.
+
 	}
 
 	public void filterByDate(MenuItem menu) {
@@ -63,6 +64,31 @@ public class ClaimantClaimsListActivity extends Activity {
 	public void onClaimLongClick() {
 		// Claimant clicks on existing claim to edit/delete it.
 		// UI: edit_delete_claimant_claim.xml
+		// Pop up dialog to see if user wants to edit/delete a claim.
+		
+		// Need to grab selected claim first before dialog pop up.
+		AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
+		builder.setMessage("Edit or Delete Claim?");
+				builder.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
+
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				// TODO Go to ClaimEditActivity.java
+				Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
+				startActivity(intent);
+			}
+		})
+		
+		.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				// Delete selected claim
+			}
+		});
+		
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+
 	}
 	
 	public void switchToApproverOption(MenuItem menu) {

@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.ClaimantAddClaimActivity"
-            android:label="@string/title_activity_claimant_add_claim" >
+            android:name="com.CMPUT301W15T02.teamtoapp.ClaimEditActivity"
+            android:label="@string/title_activity_claimant_create_edit_claim" >
         </activity>
         <activity
             android:name="com.CMPUT301W15T02.teamtoapp.ApproverClaimsListActivity"
