@@ -1,5 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.util.ArrayList;
+
 public class SessionController {
 	
 	private User user = Session.getInstance().getCurrentUser();
@@ -32,7 +34,12 @@ public class SessionController {
 		claims.removeClaim(claim);
 	}
 	
-	public void selectClaim(Claim claim) {
+	public void setClaim(Claim claim) {
 		CurrentClaim.getInstance().setClaim(claim);
 	}
+	
+	public ArrayList<Claim> getClaims() {
+		return claims.getClaims();
+	}
+	
 }
