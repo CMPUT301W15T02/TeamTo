@@ -1,5 +1,6 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import com.CMPUT301W15T02.teamtoapp.Claim.Status;
@@ -8,8 +9,8 @@ public class ClaimController {
 	
 	private Claim currentClaim;
 	
-	public ClaimController(Claim claim) {
-		this.currentClaim = claim;
+	public ClaimController() {
+		this.currentClaim = CurrentClaim.getInstance().getClaim();
 	}
 	
 	public void setCurrentExpense(Expense expense) {
@@ -65,6 +66,10 @@ public class ClaimController {
 	public void addDestination(String destination, String reason) {
 		StringTuple newDestination = new StringTuple(destination, reason);
 		currentClaim.addDestination(newDestination);
+	}
+	
+	public ArrayList<Expense> getExpenses() {
+		return currentClaim.getExpenses();
 	}
 	
 

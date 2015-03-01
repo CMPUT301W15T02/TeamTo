@@ -8,5 +8,6 @@
     <string name="title_activity_claimant_create_edit_claim">Create/Edit Claim</string>
     <string name="title_activity_approver_claims_list">Submitted Claims</string>
     <string name="title_activity_login">TeamTo App!</string>
+    <string name="title_activity_claim_expense_list">ClaimExpenseListActivity</string>
 
 </resources>

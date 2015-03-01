@@ -14,24 +14,29 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.ClaimantClaimsListActivity"
+            android:name=".ClaimantClaimsListActivity"
             android:label="@string/title_activity_claimant_claims_list" >
         </activity>
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.ClaimEditActivity"
+            android:name=".ClaimEditActivity"
             android:label="@string/title_activity_claimant_create_edit_claim" >
         </activity>
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.ApproverClaimsListActivity"
+            android:name=".ApproverClaimsListActivity"
             android:label="@string/title_activity_approver_claims_list" >
         </activity>
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.LoginActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ClaimantExpenseListActivity"
+            android:label="@string/title_activity_claim_expense_list" >
         </activity>
     </application>
 
