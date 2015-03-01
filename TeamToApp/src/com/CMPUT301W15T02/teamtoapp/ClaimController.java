@@ -59,7 +59,7 @@ public class ClaimController {
 	}
 	
 	public void addComment(String comment) {
-		currentClaim.addComment(comment);
+		currentClaim.setComment(comment);
 	}
 	
 	public void addDestination(String destination, String reason) {

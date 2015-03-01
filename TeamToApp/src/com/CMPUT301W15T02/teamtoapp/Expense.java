@@ -16,6 +16,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.Calendar;
 import java.util.Currency;
+import java.util.Observable;
 
 /*
  * Stores all of the data related to an expense
@@ -23,7 +24,7 @@ import java.util.Currency;
  * to check if changes are allowed to be made.
  */
 
-public class Expense {
+public class Expense extends Observable {
 
 	private Calendar date;
 	private String description;
@@ -53,6 +54,8 @@ public class Expense {
 
 	public void setDate(Calendar date) {
 		this.date = date;
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -65,6 +68,8 @@ public class Expense {
 
 	public void setDescription(String description) {
 		this.description = description;
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -77,6 +82,8 @@ public class Expense {
 
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -89,6 +96,8 @@ public class Expense {
 
 	public void setCategory(String category) {
 		this.category = category;
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -101,6 +110,8 @@ public class Expense {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -113,6 +124,8 @@ public class Expense {
 
 	public void setComplete(boolean complete) {
 		this.complete = complete;
+		setChanged();
+		notifyObservers();
 	}
 
 

@@ -17,6 +17,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Observable;
 
 /*
  * Stores all of the data related to a claim
@@ -24,11 +25,11 @@ import java.util.Calendar;
  * to check if changes are allowed to be made.
  */
 
-public class Claim {
+public class Claim extends Observable {
 
+	
 	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
 	
-	private String name;
 	private Calendar startDate;
 	private Calendar endDate;
 	private ArrayList<StringTuple> destinations;
@@ -37,11 +38,9 @@ public class Claim {
 	private String comment;
 	private ArrayList<Tag> tags;
 	private String user_id;
-	// Debating adding a uniqueID to each claim so that you could simply pass in the unique ID
 	
 	
 	public Claim() {
-		name = "";
 		this.startDate = Calendar.getInstance();
 		this.endDate = Calendar.getInstance();
 		this.destinations = new ArrayList<StringTuple>();
@@ -50,88 +49,137 @@ public class Claim {
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
 	}
-	
-	public void setUser(String name) {
-		user_id = name;
+
+
+
+	public Calendar getStartDate() {
+		return startDate;
 	}
-	
-	public String getUser() {
-		return user_id;
+
+
+	public void setStartDate(Calendar startDate) {
+		this.startDate = startDate;
+		setChanged();
+		notifyObservers();
 	}
-	
-	public void addComment(String comment) {
-		this.comment = comment;
+
+
+	public Calendar getEndDate() {
+		return endDate;
 	}
-	
+
+
+	public void setEndDate(Calendar endDate) {
+		this.endDate = endDate;
+		setChanged();
+		notifyObservers();
+	}
+
+
+	public ArrayList<StringTuple> getDestinations() {
+		return destinations;
+	}
+
+
+	public void setDestinations(ArrayList<StringTuple> destinations) {
+		this.destinations = destinations;
+		setChanged();
+		notifyObservers();
+	}
+
+
+	public ArrayList<Expense> getExpenses() {
+		return expenses;
+	}
+
+
+	public void setExpenses(ArrayList<Expense> expenses) {
+		this.expenses = expenses;
+		setChanged();
+		notifyObservers();
+	}
+
+
+	public Status getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(Status status) {
+		this.status = status;
+		setChanged();
+		notifyObservers();
+	}
+
+
 	public String getComment() {
-		return this.comment;
+		return comment;
 	}
-	
-	public int getTagsListSize(){
-		return tags.size();
+
+
+	public void setComment(String comment) {
+		this.comment = comment;
+		setChanged();
+		notifyObservers();
 	}
-	
+
+
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+
+
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+		setChanged();
+		notifyObservers();
+	}
+
+
+	public String getUser() {
+		return user_id;
+	}
+
+
+	public void setUser(String user_id) {
+		this.user_id = user_id;
+		setChanged();
+		notifyObservers();
+	}
+	
 	
 
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removeTag(Tag tag){
 		this.tags.remove(tag);
+		setChanged();
+		notifyObservers();
 	}
 
 	
 	public void addExpense(Expense expense) {
 		this.expenses.add(expense);
+		setChanged();
+		notifyObservers();
 	}
 	
 	
 	public void removeExpense(Expense expense) {
 		this.expenses.remove(expense);
-	}
-
-	
-	public String getClaimName() {
-		return name;
-	}
-
-	
-	public Calendar getStartDate() {
-		return startDate;
-	}
-
-	
-	public void setStartDate(Calendar startDate) {
-		this.startDate = startDate;
-	}
-
-	
-	public Calendar getEndDate() {
-		return endDate;
-	}
-
-	
-	public void setEndDate(Calendar endDate) {
-		this.endDate = endDate;
-	}
-
-	
-	public ArrayList<StringTuple> getDestinations() {
-		return destinations;
-	}
-
-	
-	public void setDestinations(ArrayList<StringTuple> destinations) {
-		this.destinations = destinations;
-	}
+		setChanged();
+		notifyObservers();
+	}	
 
 	
 	public void addDestination(StringTuple new_tuple) {
 		this.destinations.add(new_tuple);
+		setChanged();
+		notifyObservers();
 		
 	}
 
@@ -139,40 +187,17 @@ public class Claim {
 		return destinations.contains(check_tuple);
 	}
 	
-	
-	public void setClaimName(String new_name) {
-		this.name = new_name;
-	}
 
 	
 	public boolean isExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}
-
-	public ArrayList<Expense> getExpenseList() {
-		return expenses;
-	}
-	public Expense getAExpense(Expense expense) throws IllegalStateException{
-		if (this.isExpense(expense)) {
-			return expense;
-		} else {
-			throw new IllegalStateException("This expense doesn't exist!");
-		}
-	}
-
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
+	
 	
 	public boolean checkExpenseComplete(Expense expense) {
 		// Even if everything is filled out, boolean must
 		// be set to false as a reminder for the user.
-		if (this.getExpenseList().contains(expense)) {
+		if (this.getExpenses().contains(expense)) {
 			if (this.status == Claim.Status.APPROVED) {
 				expense.setComplete(true);
 			} else if (this.status == Claim.Status.SUBMITTED) {
@@ -182,6 +207,8 @@ public class Claim {
 		// if the expense does not exist, return nullpointer execption?
 		return expense.isComplete();
 	}
+	
+	
 	
 	
 	
