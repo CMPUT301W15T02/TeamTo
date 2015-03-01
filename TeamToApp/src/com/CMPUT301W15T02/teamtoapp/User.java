@@ -21,12 +21,13 @@ public class User {
 	private boolean type; // true for claimant, false for approver?
 	private ArrayList<Tag> tags;
 	
-	public User() {
-		this.name = "";
+	public User(String string) {
+		this.name = string;
 		tags = new ArrayList<Tag>();
 	}
-	
-	
+
+
+
 	public String getName() {
 		return name;
 	}
@@ -82,5 +83,58 @@ public class User {
 			tags.set(index, new_tag);
 		}
 	}
+
+
+
+	public Claim getClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public void addClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public Tag getATag(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public String getClaimsWithTags(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public void submitClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void returnClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public void approveClaim(Claim claim) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 
 }

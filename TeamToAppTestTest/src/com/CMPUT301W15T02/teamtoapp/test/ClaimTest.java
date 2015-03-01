@@ -111,23 +111,23 @@ public class ClaimTest extends TestCase {
 	// UC 3.2, UC 3.3
 	public void testAddTags() {
 		User user = new User("Kent Brockman");
-		user.addTag("tag");
+		user.addTag(null);
 		assertTrue("Contains tag", user.getTags().contains("tag"));
 	}
 	
 	// UC 3.1
 	public void testRemoveTags() {
 		User user = new User("Peter");
-		user.addTag("tag");
-		user.removeTag("tag");
+		user.addTag(null);
+		user.removeTag(null);
 		assertEquals("Removed tag?", true, user.getTags().size()==0);
 	}
 	
 	// UC 3.0
 	public void testEditTags() {
 		User user = new User("Sarah");
-		user.addTag("tag");
-		user.editTag("tag", "tage");
+		user.addTag(null);
+		user.editTag(null, null);
 		assertEquals("Edit tags?", true, user.getTags().contains("tage"));
 	}
 	
@@ -138,8 +138,8 @@ public class ClaimTest extends TestCase {
 		// User will add a new tag, then claim will be assigned the new tag 
 		User user = new User("Sarah");
 		Claim claim = new Claim();
-		user.addTag("tag");
-		claim.addTag(user.getATag("tag"));
+		user.addTag(null);
+		claim.addTag(user.getATag(null));
 		user.addClaim(claim);
 		assertTrue("Tag added to claims", user.getClaim(claim).getTags().contains("tag"));
 	}
@@ -149,7 +149,7 @@ public class ClaimTest extends TestCase {
 		User user = new User("default");
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
-		claim2.addTag("tag");
+		claim2.addTag(null);
 		user.addClaim(claim1);
 		user.addClaim(claim2);
 		assertTrue("Filter working", user.getClaimsWithTags("tag").contains(claim2));

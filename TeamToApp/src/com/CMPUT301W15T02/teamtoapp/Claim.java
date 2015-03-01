@@ -218,9 +218,7 @@ public class Claim extends Observable {
 		// if the expense does not exist, return nullpointer execption?
 		return expense.isComplete();
 	}
-	
-	
-	
-	
-	
+
+
+
 }
