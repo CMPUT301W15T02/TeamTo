@@ -77,7 +77,6 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 		holder.txtDests.setText(allDest);
 		holder.txtStatus.setText(claim.getStatus().toString());
 		
-		//holder.txtTitle.setText(expense.getExpenseName());
 		return row;
 	}
 }
