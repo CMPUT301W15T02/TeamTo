@@ -2,8 +2,8 @@ package com.CMPUT301W15T02.teamtoapp;
 
 public class SessionController {
 	
-	User user = Session.getInstance().getCurrentUser();
-	AggregatedClaims claims = Session.getInstance().getCurrentClaims();
+	private User user = Session.getInstance().getCurrentUser();
+	private AggregatedClaims claims = Session.getInstance().getCurrentClaims();
 	
 	public SessionController() {}
 	

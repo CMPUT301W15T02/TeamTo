@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class AggregatedClaims {
 
-	ArrayList<Claim> claims;
+	private ArrayList<Claim> claims;
 	
 	public AggregatedClaims() {
 		claims = new ArrayList<Claim>();
