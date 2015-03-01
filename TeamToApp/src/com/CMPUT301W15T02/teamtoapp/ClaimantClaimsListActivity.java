@@ -71,6 +71,8 @@ public class ClaimantClaimsListActivity extends Activity {
 		// Shows username is saved!
 		Toast.makeText(getBaseContext(), s_control.user.getName(), Toast.LENGTH_SHORT).show();
 		Claim new_claim = new Claim();
+		// Instead of doing this, call the SessionController.addClaim(method)
+		// We want the controller to do most of the heavy lifting
 		s_control.claims.addClaim(new_claim);
 		// Shows claim name == "New Claim"!
 		Toast.makeText(getBaseContext(), s_control.claims.getClaim(new_claim).getClaimName(), Toast.LENGTH_SHORT).show();
