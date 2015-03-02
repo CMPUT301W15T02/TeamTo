@@ -51,8 +51,16 @@ public class ClaimController {
 		currentClaim.setStartDate(date);
 	}
 	
+	public Calendar getStartDate() {
+		return currentClaim.getStartDate();
+	}
+	
 	public void setEndDate(Calendar date) {
 		currentClaim.setEndDate(date);
+	}
+	
+	public Calendar getEndDate() {
+		return currentClaim.getEndDate();
 	}
 	
 	public void setUser(String name) {

@@ -4,6 +4,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,49 +25,30 @@ import android.widget.Toast;
 
 public class ClaimEditActivity extends Activity {
 	private final Context context = this;
-	private TextView startDate;
-	private TextView endDate;
-	private int _day;
-	private int _month;
-	private int _year;
+	private TextView startDateTextView;
+	private TextView endDateTextView;
+	
+	private DatePickerDialog startDatePickerDialog;
+	private DatePickerDialog endDatePickerDialog;
+	
 	private Button pickStartBtn;
 	private Button pickEndBtn;
 	
-	static final int DATE_DIALOG_ID_0 = 0;
-	static final int DATE_DIALOG_ID_1 = 1;
+	private ClaimController claimController = new ClaimController();
+	
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
 		 
-        startDate = (TextView) findViewById(R.id.startDateTitle);
-        endDate = (TextView) findViewById(R.id.endDateTitle);
+        startDateTextView = (TextView) findViewById(R.id.startDateTitle);
+        endDateTextView = (TextView) findViewById(R.id.endDateTitle);
         pickStartBtn = (Button) findViewById(R.id.startDateBtn);
-        pickEndBtn = (Button)findViewById(R.id.endDateBtn); 
+        pickEndBtn = (Button) findViewById(R.id.endDateBtn); 
  
-
-        pickStartBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID_0);
-            }
-        });
-        
-
-        pickEndBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                showDialog(DATE_DIALOG_ID_1);
-            }
-        });
- 
-        /** Current Date as default for start and end dates */
-        final Calendar cal = Calendar.getInstance();
-        _year = cal.get(Calendar.YEAR);
-        _month = cal.get(Calendar.MONTH);
-        _day = cal.get(Calendar.DAY_OF_MONTH);
- 
-        updateStartDateDisplay();
-        updateEndDateDisplay();
+        setListeners();
 	}
 
 	@Override
@@ -114,64 +96,60 @@ public class ClaimEditActivity extends Activity {
 	}
 	
 	
-    /** Callback received when the user "picks" a date in the dialog */
-    private DatePickerDialog.OnDateSetListener startDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
- 
-                public void onDateSet(DatePicker view, int year,
-                                      int monthOfYear, int dayOfMonth) {
-                    _year = year;
-                    _month = monthOfYear;
-                    _day = dayOfMonth;
-                    updateStartDateDisplay();
-                }
-            };
-    
-    private DatePickerDialog.OnDateSetListener endDateSetListener =
-            new DatePickerDialog.OnDateSetListener() {
-         
-                 public void onDateSet(DatePicker view, int year,
-                                       int monthOfYear, int dayOfMonth) {
-                	 _year = year;
-                	 _month = monthOfYear;
-                	 _day = dayOfMonth;
-                	 updateEndDateDisplay();
-                 }
-            };
-            
-    /** Update Start Date View */
-    private void updateStartDateDisplay() {
-    	startDate.setText(
-            new StringBuilder()
-                    // Month is 0 based so add 1
-                    .append(_month + 1).append("/")
-                    .append(_day).append("/")
-                    .append(_year).append(" "));
-    }
-    
-    /** Update End Date View */
-    private void updateEndDateDisplay() {
-    	endDate.setText(
-            new StringBuilder()
-                    // Month is 0 based so add 1
-                    .append(_month + 1).append("/")
-                    .append(_day).append("/")
-                    .append(_year).append(" "));
-    }
-     
- 
-    /** Create a new dialog for date picker depending on start or end date */
-    @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-        case DATE_DIALOG_ID_0:
-            return new DatePickerDialog(this,
-                        startDateSetListener,
-                        _year, _month, _day);
-        }
-        return new DatePickerDialog(this,
-                endDateSetListener,
-                _year, _month, _day);
-    }
+	private void setListeners() {
+		
+		pickStartBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startDatePickerDialog.show();
+            }
+        });
+        
+
+        pickEndBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                endDatePickerDialog.show();
+            }
+        });
+		
+		Calendar startDate = claimController.getStartDate();
+		
+		startDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+				claimController.setStartDate(calendar);
+				// Probably won't need this once mvc is working
+				startDateTextView.setText(
+			            new StringBuilder()
+	                    // Month is 0 based so add 1
+	                    .append(monthOfYear + 1).append("/")
+	                    .append(dayOfMonth).append("/")
+	                    .append(year).append(" "));
+			}
+			
+		}, startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH));
+		
+		Calendar endDate = claimController.getEndDate();
+		
+		endDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+				claimController.setEndDate(calendar);
+				endDateTextView.setText(
+			            new StringBuilder()
+	                    // Month is 0 based so add 1
+	                    .append(monthOfYear + 1).append("/")
+	                    .append(dayOfMonth).append("/")
+	                    .append(year).append(" "));
+				
+			}
+			
+		}, endDate.get(Calendar.YEAR), endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
+		
+	}
+
 	
 }
