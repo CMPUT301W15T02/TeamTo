@@ -54,7 +54,7 @@ public class ClaimantClaimsListActivity extends Activity {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Claim claim = sessionController.getClaims().get(position);
 				sessionController.setClaim(claim);
-				Intent intent = new Intent(getBaseContext(), ClaimantExpenseListActivity.class);
+				Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantExpenseListActivity.class);
 				startActivity(intent);
 			}
 		});
