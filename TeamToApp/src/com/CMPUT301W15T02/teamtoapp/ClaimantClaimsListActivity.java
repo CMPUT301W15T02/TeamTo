@@ -58,6 +58,34 @@ public class ClaimantClaimsListActivity extends Activity {
 			}
 		});
 		
+		lv.setLongClickable(true);
+		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
+				builder.setMessage("Edit or Delete Claim?");
+				builder
+				.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						// TODO Go to ClaimEditActivity.java
+						Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
+						startActivity(intent);
+					}
+				})
+				.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						// Delete selected claim
+					}
+				});
+		
+				AlertDialog alertDialog = builder.create();
+				alertDialog.show();
+				return false;
+			}
+		});
 		
 		lv.setAdapter(adapter);
 	}
@@ -88,35 +116,6 @@ public class ClaimantClaimsListActivity extends Activity {
 		
 	}
 	
-	public void onClaimLongClick() {
-		// Claimant clicks on existing claim to edit/delete it.
-		// UI: edit_delete_claimant_claim.xml
-		// Pop up dialog to see if user wants to edit/delete a claim.
-		
-		// Need to grab selected claim first before dialog pop up.
-		AlertDialog.Builder builder = new AlertDialog.Builder(getBaseContext());
-		builder.setMessage("Edit or Delete Claim?");
-				builder.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
-
-			@Override
-			public void onClick(DialogInterface dialog, int id) {
-				// TODO Go to ClaimEditActivity.java
-				Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
-				startActivity(intent);
-			}
-		})
-		
-		.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int id) {
-				// Delete selected claim
-			}
-		});
-		
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
-
-	}
 	
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class.
