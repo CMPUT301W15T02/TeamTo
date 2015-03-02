@@ -13,6 +13,10 @@ public class ClaimController {
 		this.currentClaim = ClaimSingleton.getInstance().getClaim();
 	}
 	
+	public void setClaimName(String name) {
+		currentClaim.setClaimName(name);
+	}
+	
 	public void setCurrentExpense(Expense expense) {
 		ExpenseSingleton.getInstance().setExpense(expense);
 	}

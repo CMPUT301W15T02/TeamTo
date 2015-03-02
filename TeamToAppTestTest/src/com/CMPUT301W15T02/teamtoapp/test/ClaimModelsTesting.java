@@ -16,14 +16,14 @@ public class ClaimModelsTesting extends TestCase {
 		assertEquals("Added to aggregated claims", 1, sessionController.getClaims().size());
 		assertNotNull(ClaimSingleton.getInstance().getClaim());
 		assertEquals("Added to CurrentClaim singleton", claim, ClaimSingleton.getInstance().getClaim());
+		sessionController.removeClaim(claim);
+		assertEquals("Check if no claims saved", 0, sessionController.getClaims().size());
 	}
 	
 	public void testDeleteClaim() {
 		SessionController sessionController = new SessionController();
 		Claim claim = new Claim();
-		//sessionController.addClaim(claim);
-		//sessionController.removeClaim(claim);
-		assertEquals("Check if no claims saved", 1, sessionController.getClaims().size());
+		assertEquals("Check if no claims saved", 0, sessionController.getClaims().size());
 	}
 	
 	public void testSortClaimsByDate() {

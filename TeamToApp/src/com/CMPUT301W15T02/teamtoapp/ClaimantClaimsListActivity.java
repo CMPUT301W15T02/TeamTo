@@ -36,6 +36,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	private SessionController sessionController;
 	final Context context = this;
 	private ListView lv;
+	private ClaimantClaimLVAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,8 @@ public class ClaimantClaimsListActivity extends Activity {
 		setContentView(R.layout.claimant_claims_list);
 		
 		sessionController = new SessionController();
-		final ArrayList<Claim> claimsList = new ArrayList<Claim>(sessionController.getClaims());
-		final ClaimantClaimLVAdapter adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, claimsList);
+		ArrayList<Claim> claimsList = new ArrayList<Claim>(sessionController.getClaims());
+		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, claimsList);
 		lv = (ListView) findViewById(R.id.claimantClaimListView);
 		
 		// Item in the list is clicked, user taken to expenseListActivity
@@ -105,11 +106,21 @@ public class ClaimantClaimsListActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		adapter.notifyDataSetChanged();
+		
+	}
+
 	public void addClaimOption (MenuItem menu) {
 		Claim new_claim = new Claim();
 		sessionController.addClaim(new_claim);
 		Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
 		startActivity(intent);
+		
 	}
 
 	public void filterByDate(MenuItem menu) {

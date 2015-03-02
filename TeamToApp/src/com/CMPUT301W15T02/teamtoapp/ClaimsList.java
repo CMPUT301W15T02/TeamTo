@@ -2,11 +2,11 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 
-public class AggregatedClaims {
+public class ClaimsList {
 
 	private ArrayList<Claim> claims;
 	
-	public AggregatedClaims() {
+	public ClaimsList() {
 		claims = new ArrayList<Claim>();
 	}
 

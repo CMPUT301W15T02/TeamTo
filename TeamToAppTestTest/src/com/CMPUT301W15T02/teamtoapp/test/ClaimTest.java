@@ -22,7 +22,7 @@ import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
-import com.CMPUT301W15T02.teamtoapp.AggregatedClaims;
+import com.CMPUT301W15T02.teamtoapp.ClaimsList;
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.User;
@@ -34,7 +34,7 @@ public class ClaimTest extends TestCase {
 
 	// UC 1.0
 	public void testAddClaim () {
-		AggregatedClaims claims = new AggregatedClaims();
+		ClaimsList claims = new ClaimsList();
 		// Add new claim to manager - works
 		Claim claim = new Claim();
 		claims.addClaim(claim);
@@ -62,7 +62,7 @@ public class ClaimTest extends TestCase {
 	
 	// UC 1.1
 	public void testEditClaim() {
-		AggregatedClaims claims = new AggregatedClaims();
+		ClaimsList claims = new ClaimsList();
 		Claim claim = new Claim();
 		
 		claim.setStatus(Claim.Status.IN_PROGRESS);
@@ -82,7 +82,7 @@ public class ClaimTest extends TestCase {
 		
 	// UC 1.2
 	public void testDeleteClaim() {
-		AggregatedClaims claims = new AggregatedClaims();
+		ClaimsList claims = new ClaimsList();
 		Claim claim = new Claim();
 		claims.addClaim(claim);
 		// Remove claim from manager

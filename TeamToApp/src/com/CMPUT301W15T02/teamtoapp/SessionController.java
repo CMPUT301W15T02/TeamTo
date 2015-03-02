@@ -7,7 +7,7 @@ import android.R.integer;
 public class SessionController {
 	
 	private User user = Session.getInstance().getCurrentUser();
-	private AggregatedClaims claims = Session.getInstance().getCurrentClaims();
+	private ClaimsList claims = Session.getInstance().getCurrentClaims();
 	
 	public SessionController() {}
 	

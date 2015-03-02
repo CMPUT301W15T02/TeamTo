@@ -18,10 +18,9 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;
 	private int loID;
-	private ArrayList<Claim> list = null;
+	private ArrayList<Claim> list;
 
-	public ClaimantClaimLVAdapter(Context context,
-			int textViewResourceId, ArrayList<Claim> items) {
+	public ClaimantClaimLVAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
 
 		super(context, textViewResourceId, items);
 		this.context = context;
