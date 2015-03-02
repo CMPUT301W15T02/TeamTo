@@ -134,7 +134,6 @@ public class ClaimEditActivity extends Activity {
 		}, startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH));
 		
 		Calendar endDate = claimController.getEndDate();
-		
 		endDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
 			@Override
