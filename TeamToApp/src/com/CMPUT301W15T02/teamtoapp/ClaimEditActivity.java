@@ -42,12 +42,8 @@ public class ClaimEditActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
-		 
-        startDateTextView = (TextView) findViewById(R.id.startDateTitle);
-        endDateTextView = (TextView) findViewById(R.id.endDateTitle);
-        pickStartBtn = (Button) findViewById(R.id.startDateBtn);
-        pickEndBtn = (Button) findViewById(R.id.endDateBtn); 
- 
+		  
+		findViewsByIds();
         setListeners();
 	}
 
@@ -93,6 +89,13 @@ public class ClaimEditActivity extends Activity {
 		
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
+	}
+	
+	private void findViewsByIds() {
+		startDateTextView = (TextView) findViewById(R.id.startDateTitle);
+        endDateTextView = (TextView) findViewById(R.id.endDateTitle);
+        pickStartBtn = (Button) findViewById(R.id.startDateBtn);
+        pickEndBtn = (Button) findViewById(R.id.endDateBtn);
 	}
 	
 	
