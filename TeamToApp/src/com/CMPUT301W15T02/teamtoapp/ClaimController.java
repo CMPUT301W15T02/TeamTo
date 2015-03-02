@@ -10,17 +10,17 @@ public class ClaimController {
 	private Claim currentClaim;
 	
 	public ClaimController() {
-		this.currentClaim = CurrentClaim.getInstance().getClaim();
+		this.currentClaim = ClaimSingleton.getInstance().getClaim();
 	}
 	
 	public void setCurrentExpense(Expense expense) {
-		CurrentExpense.getInstance().setExpense(expense);
+		ExpenseSingleton.getInstance().setExpense(expense);
 	}
 	
 	
 	public void addExpense(Expense expense) {
 		currentClaim.addExpense(expense);
-		CurrentExpense.getInstance().setExpense(expense);
+		ExpenseSingleton.getInstance().setExpense(expense);
 	}
 	
 	public void removeExpense(Expense expense) {

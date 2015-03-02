@@ -29,7 +29,11 @@ public class SessionController {
 	
 	public void addClaim(Claim claim) {
 		claims.addClaim(claim);
-		CurrentClaim.getInstance().setClaim(claim);
+		ClaimSingleton.getInstance().setClaim(claim);
+	}
+	
+	public void removeClaim(Claim claim) {
+		claims.getClaims().remove(claim);
 	}
 	
 	public void removeClaim(int position) {
@@ -38,7 +42,7 @@ public class SessionController {
 	}
 	
 	public void setClaim(Claim claim) {
-		CurrentClaim.getInstance().setClaim(claim);
+		ClaimSingleton.getInstance().setClaim(claim);
 	}
 	
 	public ArrayList<Claim> getClaims() {

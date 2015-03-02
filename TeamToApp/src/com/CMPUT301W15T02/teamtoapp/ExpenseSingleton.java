@@ -1,15 +1,15 @@
 package com.CMPUT301W15T02.teamtoapp;
 
-public class CurrentExpense {
+public class ExpenseSingleton {
 
-	private static CurrentExpense instance = null;
+	private static ExpenseSingleton instance = null;
 	private Expense expense;
 	
-	private CurrentExpense() {}
+	private ExpenseSingleton() {}
 	
-	public static CurrentExpense getInstance() {
+	public static ExpenseSingleton getInstance() {
 		if (instance == null) {
-			instance = new CurrentExpense();
+			instance = new ExpenseSingleton();
 		}
 		return instance;
 	}

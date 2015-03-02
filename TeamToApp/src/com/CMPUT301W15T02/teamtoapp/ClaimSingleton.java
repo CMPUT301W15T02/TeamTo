@@ -1,16 +1,16 @@
 package com.CMPUT301W15T02.teamtoapp;
 
-public class CurrentClaim {
+public class ClaimSingleton {
 	
-	private static CurrentClaim instance = null;
+	private static ClaimSingleton instance = null;
 	private Claim claim;
 	
-	private CurrentClaim() {
+	private ClaimSingleton() {
 	}
 	
-	public static CurrentClaim getInstance() {
+	public static ClaimSingleton getInstance() {
 		if (instance == null) {
-			instance = new CurrentClaim();
+			instance = new ClaimSingleton();
 		}
 		return instance;
 	}
