@@ -44,8 +44,8 @@ public class ClaimantClaimsListActivity extends Activity {
 		setContentView(R.layout.claimant_claims_list);
 		
 		sessionController = new SessionController();
-		ArrayList<Claim> claimsList = new ArrayList<Claim>(sessionController.getClaims());
-		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, claimsList);
+		
+		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
 		lv = (ListView) findViewById(R.id.claimantClaimListView);
 		
 		// Item in the list is clicked, user taken to expenseListActivity
