@@ -26,11 +26,10 @@ public class ClaimantExpenseListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_expense_list);
-		expenses = claimController.getExpenses();
-		expenseListView = (ListView) findViewById(R.id.claimantExpenseListView);
+		getModelObjects();
+		findViewsByIds();
 		setListeners();
-		adapter = new ClaimantExpenseListAdapter(this, R.layout.claimant_expense_list_rows, expenses);
-		expenseListView.setAdapter(adapter);
+		setUpAdapter();
 		
 	}
 
@@ -58,6 +57,15 @@ public class ClaimantExpenseListActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	
+	private void getModelObjects() {
+		expenses = claimController.getExpenses();
+	}
+	
+	private void findViewsByIds() {
+		expenseListView = (ListView) findViewById(R.id.claimantExpenseListView);
+	}
+	
 	private void setListeners() {
 		expenseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -69,6 +77,11 @@ public class ClaimantExpenseListActivity extends Activity {
 			}
 			
 		});
+	}
+	
+	private void setUpAdapter() {
+		adapter = new ClaimantExpenseListAdapter(this, R.layout.claimant_expense_list_rows, expenses);
+		expenseListView.setAdapter(adapter);
 	}
 	
 	
