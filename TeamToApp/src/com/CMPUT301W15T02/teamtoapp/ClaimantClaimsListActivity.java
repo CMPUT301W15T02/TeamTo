@@ -16,7 +16,6 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -35,7 +34,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	private SessionController sessionController;
 	final Context context = this;
-	private ListView lv;
+	private ListView listView;
 	private ClaimantClaimLVAdapter adapter;
 	
 	@Override
@@ -44,12 +43,20 @@ public class ClaimantClaimsListActivity extends Activity {
 		setContentView(R.layout.claimant_claims_list);
 		
 		sessionController = new SessionController();
-		
 		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
-		lv = (ListView) findViewById(R.id.claimantClaimListView);
 		
+		findViewsByIds();
+		setListeners();
+		listView.setAdapter(adapter);
+	}
+	
+	private void findViewsByIds() {
+		listView = (ListView) findViewById(R.id.claimantClaimListView);
+	}
+	
+	private void setListeners() {
 		// Item in the list is clicked, user taken to expenseListActivity
-		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Claim claim = sessionController.getClaims().get(position);
@@ -58,10 +65,9 @@ public class ClaimantClaimsListActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
-		lv.setLongClickable(true);
-		lv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
+				
+		listView.setLongClickable(true);
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
@@ -70,7 +76,6 @@ public class ClaimantClaimsListActivity extends Activity {
 				.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// TODO Go to ClaimEditActivity.java
 						Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
 						startActivity(intent);
 					}
@@ -81,14 +86,12 @@ public class ClaimantClaimsListActivity extends Activity {
 						// Delete selected claim
 					}
 				});
-		
+				
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
-				return false;
+				return true;
 			}
 		});
-		
-		lv.setAdapter(adapter);
 	}
 
 	@Override
