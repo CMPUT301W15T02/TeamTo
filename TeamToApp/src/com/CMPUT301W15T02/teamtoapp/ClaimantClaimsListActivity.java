@@ -65,7 +65,7 @@ public class ClaimantClaimsListActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-				
+		// Brings up Edit or Delete dialog on long click		
 		listView.setLongClickable(true);
 		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
@@ -112,7 +112,6 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		adapter.notifyDataSetChanged();
 		
@@ -133,6 +132,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class.
+		// Need way of checking if there is access to the internet
 		Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 		startActivity(intent);
 	}

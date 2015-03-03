@@ -26,7 +26,7 @@ public class ClaimantExpenseListActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claim_expense_list, menu);
+		getMenuInflater().inflate(R.menu.claimant_expense_list_menu, menu);
 		return true;
 	}
 
