@@ -1,3 +1,7 @@
+// LoginActivity
+
+//Parses entered username to get specific claims and approvals
+
 package com.CMPUT301W15T02.teamtoapp;
 
 import android.os.Bundle;
@@ -26,11 +30,24 @@ public class LoginActivity extends Activity {
 		EditText name = (EditText) findViewById(R.id.username);
 		String usernameString = name.getText().toString();
 		
-		// if new user:
-		SessionController s_control = new SessionController();
-
+//TODO: Fix if/else block for username checking
+		
+		//if username blank
+		if (usernameString == "") {
+			//default action for blank username?  Possibly nothing?  Error message?
+	
+		}
+		//if username exists
+		else if (usernameString == "" ){
+			//placeholder
+		}
+		//else create new username
+		//Requirements?  Length, content etc?
+		else {
+			//need some way to add username to session
+			SessionController s_control = new SessionController();
+		}
 		startActivity(intent);
-		// Still need to consider saved user, search entered name, etc.
 	}
 
 }
