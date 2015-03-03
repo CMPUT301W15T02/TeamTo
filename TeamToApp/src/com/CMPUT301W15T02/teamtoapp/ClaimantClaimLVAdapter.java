@@ -29,12 +29,13 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 
 	}
 	
+	// Should this class be static?
 	private class ViewHolder {
 		//Expense expense;
-		TextView txtClaimName;
-		TextView txtStartDate;
-		TextView txtDests;
-		TextView txtStatus;
+		TextView claimNameTextView;
+		TextView startDateTextView;
+		TextView destinationsTextView;
+		TextView statusTextView;
 		
 		//The following will be used later (need to add them in claimant_claims_list_rows.xml):
 		//TextView txtTags;
@@ -51,10 +52,10 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 			row = inflater.inflate(loID, parent, false);
 			holder = new ViewHolder();
 			
-			holder.txtClaimName = (TextView) row.findViewById(R.id.claimantClaimNameView);
-			holder.txtStartDate = (TextView) row.findViewById(R.id.claimantStartDateView);
-			holder.txtDests = (TextView) row.findViewById(R.id.claimantDestsView);
-			holder.txtStatus = (TextView) row.findViewById(R.id.claimantStatusView);
+			holder.claimNameTextView = (TextView) row.findViewById(R.id.claimantClaimNameView);
+			holder.startDateTextView = (TextView) row.findViewById(R.id.claimantStartDateView);
+			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantDestsView);
+			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
 			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
 		} else {
@@ -62,8 +63,8 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 		}
 		
 		Claim claim = list.get(position);
-		holder.txtClaimName.setText(claim.getClaimName());
-		holder.txtStartDate.setText(claim.getStartDate().toString());
+		holder.claimNameTextView.setText(claim.getClaimName());
+		holder.startDateTextView.setText(claim.getStartDate().toString());
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "Destinations: \n";
@@ -73,8 +74,8 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 	        allDest += "\n";
 	    }
 		
-		holder.txtDests.setText(allDest);
-		holder.txtStatus.setText(claim.getStatus().toString());
+		holder.destinationsTextView.setText(allDest);
+		holder.statusTextView.setText(claim.getStatus().toString());
 		
 		return row;
 	}
