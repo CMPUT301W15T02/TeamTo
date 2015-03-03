@@ -117,12 +117,12 @@ public class ClaimantClaimsListActivity extends Activity {
 		
 	}
 
+	// Should this be handled in onOptionsItemSelected instead?
 	public void addClaimOption (MenuItem menu) {
 		Claim new_claim = new Claim();
 		sessionController.addClaim(new_claim);
 		Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
-		startActivity(intent);
-		
+		startActivity(intent);	
 	}
 
 	public void filterByDate(MenuItem menu) {
