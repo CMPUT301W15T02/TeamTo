@@ -38,6 +38,10 @@
             android:name=".ClaimantExpenseListActivity"
             android:label="@string/title_activity_claim_expense_list" >
         </activity>
+        <activity
+            android:name=".AddExpenseActivity"
+            android:label="@string/title_activity_add_expense" >
+        </activity>
     </application>
 
 </manifest>
