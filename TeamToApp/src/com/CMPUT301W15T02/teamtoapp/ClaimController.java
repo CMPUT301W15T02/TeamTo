@@ -1,5 +1,6 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -8,6 +9,7 @@ import com.CMPUT301W15T02.teamtoapp.Claim.Status;
 public class ClaimController {
 	
 	private Claim currentClaim;
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public ClaimController() {
 		this.currentClaim = ClaimSingleton.getInstance().getClaim();
@@ -59,12 +61,20 @@ public class ClaimController {
 		return currentClaim.getStartDate();
 	}
 	
+	public String getStartDateFormatted() {
+		return formatter.format(getStartDate().getTime());
+	}
+	
 	public void setEndDate(Calendar date) {
 		currentClaim.setEndDate(date);
 	}
 	
 	public Calendar getEndDate() {
 		return currentClaim.getEndDate();
+	}
+	
+	public String getEndDateFormatted() {
+		return formatter.format(getEndDate().getTime());
 	}
 	
 	public void setUser(String name) {
