@@ -17,15 +17,15 @@ import android.widget.TextView;
 public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;
-	private int loID;
-	private ArrayList<Claim> list;
+	private int layoutId;
+	private ArrayList<Claim> claimsList;
 
 	public ClaimantClaimLVAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
 
 		super(context, textViewResourceId, items);
 		this.context = context;
-		this.loID = textViewResourceId;
-		this.list  = items;
+		this.layoutId = textViewResourceId;
+		this.claimsList  = items;
 
 	}
 	
@@ -49,7 +49,7 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 		ViewHolder holder;
 		if (row == null) {
 			LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-			row = inflater.inflate(loID, parent, false);
+			row = inflater.inflate(layoutId, parent, false);
 			holder = new ViewHolder();
 			
 			holder.claimNameTextView = (TextView) row.findViewById(R.id.claimantClaimNameView);
@@ -62,7 +62,7 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 			holder = (ViewHolder) row.getTag();
 		}
 		
-		Claim claim = list.get(position);
+		Claim claim = claimsList.get(position);
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(claim.getStartDate().toString());
 		
