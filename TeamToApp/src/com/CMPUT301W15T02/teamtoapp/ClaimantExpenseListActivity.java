@@ -3,17 +3,21 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class ClaimantExpenseListActivity extends Activity {
 
-	private ListView claimaintExpenseListView;
+	private Context context = this;
+	private ListView expenseListView;
 	private ClaimController claimController = new ClaimController();
 	private ArrayList<Expense> expenses;
 	private ClaimantExpenseListAdapter adapter;
@@ -23,9 +27,10 @@ public class ClaimantExpenseListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_expense_list);
 		expenses = claimController.getExpenses();
-		claimaintExpenseListView = (ListView) findViewById(R.id.claimantExpenseListView);
+		expenseListView = (ListView) findViewById(R.id.claimantExpenseListView);
+		setListeners();
 		adapter = new ClaimantExpenseListAdapter(this, R.layout.claimant_expense_list_rows, expenses);
-		claimaintExpenseListView.setAdapter(adapter);
+		expenseListView.setAdapter(adapter);
 		
 	}
 
@@ -52,11 +57,27 @@ public class ClaimantExpenseListActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	private void setListeners() {
+		expenseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Expense expense = claimController.getExpenses().get(position);
+				claimController.setExpense(expense);
+				Intent intent = new Intent(context, ExpenseEditActivity.class);
+				startActivity(intent);
+			}
+			
+		});
+	}
+	
+	
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		adapter.notifyDataSetChanged();
 	}
 	
 	
