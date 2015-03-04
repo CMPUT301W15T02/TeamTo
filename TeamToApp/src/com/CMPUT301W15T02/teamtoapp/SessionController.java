@@ -28,6 +28,7 @@ public class SessionController {
 	}
 	
 	public void addClaim(Claim claim) {
+		// TODO Need to set the current user name in the claim field, will do once we figure out login
 		claims.addClaim(claim);
 		ClaimSingleton.getInstance().setClaim(claim);
 	}
@@ -37,7 +38,6 @@ public class SessionController {
 	}
 	
 	public void removeClaim(int position) {
-		// Needs fixing, should just pass in position
 		claims.getClaims().remove(position);
 	}
 	
