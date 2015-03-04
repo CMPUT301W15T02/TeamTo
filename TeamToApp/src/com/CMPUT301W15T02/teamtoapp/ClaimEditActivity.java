@@ -3,10 +3,12 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import android.os.Bundle;
+import android.R.anim;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -19,9 +21,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,11 +35,14 @@ public class ClaimEditActivity extends Activity {
 	private TextView startDateTextView;
 	private TextView endDateTextView;
 	private EditText claimNameEditText;
+	private ListView destinationsListView;
 	
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	
 	private ClaimController claimController = new ClaimController();
+	private ArrayList<StringTuple> destinations;
+	ArrayAdapter<StringTuple> adapter;
 	
 
 	
@@ -43,9 +50,13 @@ public class ClaimEditActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
+		destinations = claimController.getDestinations();
+		adapter = new ArrayAdapter<StringTuple>(context, android.R.layout.simple_list_item_1, destinations);
+		
 		  
 		findViewsByIds();
         setListeners();
+        destinationsListView.setAdapter(adapter);
 	}
 
 	@Override
@@ -62,6 +73,7 @@ public class ClaimEditActivity extends Activity {
 		// Pop up dialog to add another destination + reason.
 		addDestination();
 	}
+	
 	
 	private void addDestination() {
 		LayoutInflater inflater = LayoutInflater.from(getBaseContext());
@@ -80,7 +92,8 @@ public class ClaimEditActivity extends Activity {
 				String destination = destinationEditText.getText().toString();
 				String reason = reasonEditText.getText().toString();
 				claimController.addDestination(destination, reason);
-				// TODO hook this in to the list view
+				adapter.notifyDataSetChanged(); // TODO Have this call automatically when model changes
+				// TODO make this display string representation, probably need custom array adapter
 			}
 		})
 		
@@ -99,6 +112,8 @@ public class ClaimEditActivity extends Activity {
 		startDateTextView = (TextView) findViewById(R.id.startDateTextView);
         endDateTextView = (TextView) findViewById(R.id.endDateTextView);
         claimNameEditText = (EditText) findViewById(R.id.claimNameEditText);
+        destinationsListView = (ListView) findViewById(R.id.destinationListView);
+        
 	}
 	
 	

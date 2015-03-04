@@ -94,5 +94,9 @@ public class ClaimController {
 		return currentClaim.getExpenses();
 	}
 	
+	public ArrayList<StringTuple> getDestinations() {
+		return currentClaim.getDestinations();
+	}
+	
 
 }
