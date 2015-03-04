@@ -83,7 +83,7 @@ public class ClaimantClaimsListActivity extends Activity {
 				.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// Delete selected claim
+						// TODO Need to actually delete selected claim
 					}
 				});
 				
@@ -132,7 +132,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class.
-		// Need way of checking if there is access to the internet
+		// TODO: Need way of checking if there is access to the internet
 		Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 		startActivity(intent);
 	}

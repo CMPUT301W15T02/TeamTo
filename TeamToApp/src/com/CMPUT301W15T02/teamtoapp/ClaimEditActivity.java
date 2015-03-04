@@ -31,9 +31,6 @@ public class ClaimEditActivity extends Activity {
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	
-	private Button pickStartBtn;
-	private Button pickEndBtn;
-	
 	private ClaimController claimController = new ClaimController();
 	
 
@@ -54,7 +51,7 @@ public class ClaimEditActivity extends Activity {
 	}
 	
 	public void onSaveButtonClick(MenuItem menu) {
-		// Perform actions once claimant saves new claim
+		// TODO Save all input once claimant saves new/existing editable claim
 	}
 
 	public void addDestinationOption(View view){
@@ -76,7 +73,7 @@ public class ClaimEditActivity extends Activity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				// TODO Save destination + reason
+				// TODO Need to save destination + reason input
 			}
 		})
 		
@@ -94,21 +91,19 @@ public class ClaimEditActivity extends Activity {
 	private void findViewsByIds() {
 		startDateTextView = (TextView) findViewById(R.id.startDateTitle);
         endDateTextView = (TextView) findViewById(R.id.endDateTitle);
-        pickStartBtn = (Button) findViewById(R.id.startDateBtn);
-        pickEndBtn = (Button) findViewById(R.id.endDateBtn);
 	}
 	
 	
 	private void setListeners() {
 		
-		pickStartBtn.setOnClickListener(new View.OnClickListener() {
+		startDateTextView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startDatePickerDialog.show();
             }
         });
         
 
-        pickEndBtn.setOnClickListener(new View.OnClickListener() {
+        endDateTextView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 endDatePickerDialog.show();
             }
@@ -123,6 +118,7 @@ public class ClaimEditActivity extends Activity {
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setStartDate(calendar);
 				// Probably won't need this once mvc is working
+				// TODO Save Start Date
 				startDateTextView.setText(
 			            new StringBuilder()
 	                    // Month is 0 based so add 1
@@ -140,6 +136,7 @@ public class ClaimEditActivity extends Activity {
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setEndDate(calendar);
+				// TODO Save End Date
 				endDateTextView.setText(
 			            new StringBuilder()
 	                    // Month is 0 based so add 1
