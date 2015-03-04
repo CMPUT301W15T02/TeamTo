@@ -13,6 +13,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,8 +27,10 @@ import android.widget.Toast;
 
 public class ClaimEditActivity extends Activity {
 	private final Context context = this;
+	
 	private TextView startDateTextView;
 	private TextView endDateTextView;
+	private EditText claimNameEditText;
 	
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
@@ -60,11 +64,11 @@ public class ClaimEditActivity extends Activity {
 	}
 	
 	private void addDestination() {
-		LayoutInflater add_dest = LayoutInflater.from(getBaseContext());
-		View addDestView = add_dest.inflate(R.layout.add_destination_dialog, null);
-		final EditText dest = (EditText) addDestView
+		LayoutInflater inflater = LayoutInflater.from(getBaseContext());
+		View addDestView = inflater.inflate(R.layout.add_destination_dialog, null);
+		final EditText destinationEditText = (EditText) addDestView
 				.findViewById(R.id.destinationEditText);
-		final EditText reason = (EditText) addDestView
+		final EditText reasonEditText = (EditText) addDestView
 				.findViewById(R.id.reasonEditText);
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -73,7 +77,10 @@ public class ClaimEditActivity extends Activity {
 
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
-				// TODO Need to save destination + reason input
+				String destination = destinationEditText.getText().toString();
+				String reason = reasonEditText.getText().toString();
+				claimController.addDestination(destination, reason);
+				// TODO hook this in to the list view
 			}
 		})
 		
@@ -89,8 +96,9 @@ public class ClaimEditActivity extends Activity {
 	}
 	
 	private void findViewsByIds() {
-		startDateTextView = (TextView) findViewById(R.id.startDateTitle);
-        endDateTextView = (TextView) findViewById(R.id.endDateTitle);
+		startDateTextView = (TextView) findViewById(R.id.startDateTextView);
+        endDateTextView = (TextView) findViewById(R.id.endDateTextView);
+        claimNameEditText = (EditText) findViewById(R.id.claimNameEditText);
 	}
 	
 	
@@ -147,6 +155,27 @@ public class ClaimEditActivity extends Activity {
 			}
 			
 		}, endDate.get(Calendar.YEAR), endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
+		
+		claimNameEditText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				claimController.setClaimName(s.toString());
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// Intentionally blank
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// Intentionally blank
+				
+			}
+		});
 		
 	}
 

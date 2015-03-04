@@ -14,7 +14,7 @@
         android:layout_marginRight="8dp" >
 
         <EditText
-            	android:id="@+id/addClaimName"
+            	android:id="@+id/claimNameEditText"
             	android:layout_width="wrap_content"
             	android:layout_height="wrap_content"
             	android:ems="10"
@@ -26,7 +26,7 @@
             android:orientation="horizontal"  >
             
         	<TextView
-        	    android:id="@+id/startDateTitle"
+        	    android:id="@+id/startDateTextView"
         	    android:layout_width="0dp"
         	    android:layout_height="wrap_content"
         	    android:layout_weight="1"
@@ -35,7 +35,7 @@
         	    android:textColor="@android:color/darker_gray" />
 
         	<TextView
-        	    android:id="@+id/endDateTitle"
+        	    android:id="@+id/endDateTextView"
         	    android:layout_width="0dp"
         	    android:layout_height="wrap_content"
         	    android:layout_weight="1.18"
@@ -48,7 +48,7 @@
 
 
         	<TextView
-        	    android:id="@+id/destTextView"
+        	    android:id="@+id/destinationTextView"
         	    android:layout_width="wrap_content"
         	    android:layout_height="wrap_content"
         	    android:text="Destinations:"
@@ -57,13 +57,13 @@
         	</TextView>
 
             <ListView
-                android:id="@+id/destListView"
+                android:id="@+id/destinationListView"
                 android:layout_width="match_parent"
                 android:layout_height="149dp" >
             </ListView>
 
             <Button
-                android:id="@+id/addDestBtn"
+                android:id="@+id/addDestinationButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="addDestinationOption"

@@ -43,11 +43,10 @@ public class ClaimantClaimsListActivity extends Activity {
 		setContentView(R.layout.claimant_claims_list);
 		
 		sessionController = new SessionController();
-		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
 		
 		findViewsByIds();
 		setListeners();
-		listView.setAdapter(adapter);
+		setUpAdapter();
 	}
 	
 	private void findViewsByIds() {
@@ -93,6 +92,14 @@ public class ClaimantClaimsListActivity extends Activity {
 			}
 		});
 	}
+	
+	
+	private void setUpAdapter() {
+		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
+		listView.setAdapter(adapter);
+	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,8 +126,7 @@ public class ClaimantClaimsListActivity extends Activity {
 
 	// Should this be handled in onOptionsItemSelected instead?
 	public void addClaimOption (MenuItem menu) {
-		Claim new_claim = new Claim();
-		sessionController.addClaim(new_claim);
+		sessionController.addClaim(new Claim());
 		Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
 		startActivity(intent);	
 	}
