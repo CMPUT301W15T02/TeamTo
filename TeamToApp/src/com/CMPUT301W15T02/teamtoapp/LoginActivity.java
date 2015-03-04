@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
 		//if username blank
 		if (usernameString == "") {
 			//default action for blank username?  Possibly nothing?  Error message?
-	
+			//Toast 
 		}
 		//if username exists
 		else if (usernameString == "" ){

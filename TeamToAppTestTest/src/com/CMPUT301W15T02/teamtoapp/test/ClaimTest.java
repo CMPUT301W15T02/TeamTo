@@ -25,6 +25,7 @@ import junit.framework.TestCase;
 import com.CMPUT301W15T02.teamtoapp.ClaimsList;
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Expense;
 import com.CMPUT301W15T02.teamtoapp.User;
 import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
@@ -180,6 +181,13 @@ public class ClaimTest extends TestCase {
 		Claim claim = new Claim();
 		user.saveToCloud();
 		assertEquals("Cloud saving working", user, user.loadFromCloud());
+	}
+	
+	// TODO: Must finish still
+	public void testGetExpense() {
+		Claim claim = new Claim();
+		Expense expense = new Expense();
+		assertTrue("Returning something when claim is empty", claim.getExpense(expense).equals(null));
 	}
 		
 }

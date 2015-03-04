@@ -218,11 +218,22 @@ public class Claim extends Observable {
 		// if the expense does not exist, return nullpointer execption?
 		return expense.isComplete();
 	}
-	public Expense getAExpense(Expense expense) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	// Could return NullPointerException
+	public Expense getExpense(Expense expense) {
+		if( this.expenses.size() == 0 ) {
+			// Do we want to return an empty Expense?
+			return null;
+		} else {
+			for(int i = 0; i < expenses.size(); i++) {
+				Expense currentExpense = expenses.get(i);
+				if( currentExpense.equals(expense) ) {
+					return currentExpense;
+				}
+			}
+			// Expense we're looking for not in Claim, do we want to return an empty Expense?
+			return null;
+		}
 	}
-
-
 
 }
