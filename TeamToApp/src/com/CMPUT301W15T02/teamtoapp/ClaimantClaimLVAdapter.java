@@ -4,6 +4,7 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -19,6 +20,7 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 	private Context context;
 	private int layoutId;
 	private ArrayList<Claim> claimsList;
+	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	public ClaimantClaimLVAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
 
@@ -64,7 +66,7 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 		
 		Claim claim = claimsList.get(position);
 		holder.claimNameTextView.setText(claim.getClaimName());
-		holder.startDateTextView.setText(claim.getStartDate().toString());
+		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "Destinations: \n";
