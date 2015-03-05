@@ -116,9 +116,9 @@ public class ExpenseTest extends TestCase {
 		
 		user.addClaim(claim);
 		user.getClaim(claim).addExpense(expense);
-		user.getClaim(claim).getAExpense(expense).setDescription("blehhh");
+		user.getClaim(claim).getExpense(expense).setDescription("blehhh");
 		assertEquals("blehhh",
-				user.getClaim(claim).getAExpense(expense).getDescription());
+				user.getClaim(claim).getExpense(expense).getDescription());
 	}
 	
 	// US 4.07 (UC 4.2)
