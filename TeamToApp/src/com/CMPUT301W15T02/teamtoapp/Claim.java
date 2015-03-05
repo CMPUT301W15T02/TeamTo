@@ -238,5 +238,18 @@ public class Claim extends Observable {
 			return null;
 		}
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getClaimId() {
+		return ClaimId;
+	}
+	
+	
+	
+	
 
 }
