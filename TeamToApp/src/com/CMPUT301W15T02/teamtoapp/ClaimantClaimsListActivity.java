@@ -35,7 +35,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	private SessionController sessionController;
 	final Context context = this;
 	private ListView listView;
-	private ClaimantClaimLVAdapter adapter;
+	private ClaimantClaimListAdapter adapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +68,7 @@ public class ClaimantClaimsListActivity extends Activity {
 		listView.setLongClickable(true);
 		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 				builder.setMessage("Edit or Delete Claim?");
 				builder
@@ -82,7 +82,11 @@ public class ClaimantClaimsListActivity extends Activity {
 				.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// TODO Need to actually delete selected claim
+						// Finished - can now delete claim
+						// TODO: Need to do a test for deleting claim in TeamToAppTest
+						Claim claim = sessionController.getClaims().get(position);
+						sessionController.removeClaim(claim);
+						adapter.notifyDataSetChanged();
 					}
 				});
 				
@@ -95,7 +99,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	
 	private void setUpAdapter() {
-		adapter = new ClaimantClaimLVAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
+		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
 		listView.setAdapter(adapter);
 	}
 	

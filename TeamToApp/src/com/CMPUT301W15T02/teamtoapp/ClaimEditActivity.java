@@ -51,7 +51,7 @@ public class ClaimEditActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
 		destinations = claimController.getDestinations();
-		adapter = new ArrayAdapter<StringTuple>(context, android.R.layout.simple_list_item_1, destinations);
+		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_claims_list_rows, destinations);
 		
 		  
 		findViewsByIds();
@@ -67,6 +67,7 @@ public class ClaimEditActivity extends Activity {
 	
 	public void onSaveButtonClick(MenuItem menu) {
 		// TODO Save all input once claimant saves new/existing editable claim
+		super.onBackPressed();
 	}
 
 	public void addDestinationOption(View view){
@@ -91,9 +92,18 @@ public class ClaimEditActivity extends Activity {
 			public void onClick(DialogInterface dialog, int id) {
 				String destination = destinationEditText.getText().toString();
 				String reason = reasonEditText.getText().toString();
-				claimController.addDestination(destination, reason);
-				adapter.notifyDataSetChanged(); // TODO Have this call automatically when model changes
-				// TODO make this display string representation, probably need custom array adapter
+				destination.trim();
+				reason.trim();
+				
+				// Assumption: Destination must be filled in before adding, adding reason is optional for now...
+				if (destination.length() != 0) {
+					claimController.addDestination(destination, reason);
+					adapter.notifyDataSetChanged(); // TODO Have this call automatically when model changes
+					// DONE: made string representation display with custom list view adapter.
+					
+				} else {
+					Toast.makeText(context, "Must enter destination!", Toast.LENGTH_SHORT).show();
+				}
 			}
 		})
 		
@@ -171,6 +181,7 @@ public class ClaimEditActivity extends Activity {
 			
 		}, endDate.get(Calendar.YEAR), endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
 		
+		// TODO: What if user edited existing claim and saved a blank claim name? Save "Existing Claim" as default.
 		claimNameEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override

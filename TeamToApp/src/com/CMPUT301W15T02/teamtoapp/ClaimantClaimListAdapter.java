@@ -15,14 +15,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
+public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;
 	private int layoutId;
 	private ArrayList<Claim> claimsList;
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-	public ClaimantClaimLVAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
+	public ClaimantClaimListAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
 
 		super(context, textViewResourceId, items);
 		this.context = context;
@@ -31,15 +31,14 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 
 	}
 	
-	// Should this class be static?
 	private class ViewHolder {
-		//Expense expense;
+		
 		TextView claimNameTextView;
 		TextView startDateTextView;
 		TextView destinationsTextView;
 		TextView statusTextView;
 		
-		//The following will be used later (need to add them in claimant_claims_list_rows.xml):
+		// TODO: The following will be used later (need to add them in claimant_claims_list_rows.xml):
 		//TextView txtTags;
 		//TextView txtTotalCurr;
 	}
@@ -58,7 +57,7 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 			holder.startDateTextView = (TextView) row.findViewById(R.id.claimantStartDateView);
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantDestsView);
 			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
-			// holder.txtTags..., holder.txtTotalCurr..., etc.
+			//TODO: holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
 		} else {
 			holder = (ViewHolder) row.getTag();
@@ -77,7 +76,7 @@ public class ClaimantClaimLVAdapter extends ArrayAdapter<Claim>{
 	    }
 		
 		holder.destinationsTextView.setText(allDest);
-		holder.statusTextView.setText(claim.getStatus().toString());
+		holder.statusTextView.setText("Status: "+claim.getStatus().toString());
 		
 		return row;
 	}
