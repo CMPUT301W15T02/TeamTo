@@ -1,19 +1,27 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.util.UUID;
+
 public class Tag {
 
-	private String tag;
+	private String tagText;
+	private String tagId;
 	
 	public Tag(String tag) {
-		this.tag = tag;
+		this.tagText = tag;
+		this.tagId = UUID.randomUUID().toString();
 	}
 
-	public String getTag() {
-		return tag;
+	public String getTagText() {
+		return tagText;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setTagText(String tag) {
+		this.tagText = tag;
+	}
+
+	public String getTagId() {
+		return tagId;
 	}
 	
 }

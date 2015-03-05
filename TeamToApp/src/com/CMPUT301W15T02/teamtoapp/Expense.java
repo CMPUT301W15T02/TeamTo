@@ -17,6 +17,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Observable;
+import java.util.UUID;
 
 /*
  * Stores all of the data related to an expense
@@ -33,6 +34,7 @@ public class Expense extends Observable {
 	private Double amount;
 	private boolean complete;
 	public String photo_uri;
+	private String expenseId;
 	
 	
 	public Expense() {
@@ -42,6 +44,7 @@ public class Expense extends Observable {
 		setCategory("supplies");
 		setAmount(0.0);
 		setComplete(false);
+		expenseId = UUID.randomUUID().toString();
 	}
 
 	

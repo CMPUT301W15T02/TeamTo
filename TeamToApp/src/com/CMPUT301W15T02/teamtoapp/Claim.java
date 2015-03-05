@@ -18,6 +18,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Observable;
+import java.util.UUID;
 
 /*
  * Stores all of the data related to a claim
@@ -37,7 +38,8 @@ public class Claim extends Observable {
 	private Status status;
 	private String comment;
 	private ArrayList<Tag> tags;
-	private String user_id;
+	private String userId;
+	private String ClaimId;
 	
 
 	public Claim() {
@@ -49,6 +51,7 @@ public class Claim extends Observable {
 		status = Status.IN_PROGRESS;
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
+		this.ClaimId = UUID.randomUUID().toString();
 	}
 	// Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
@@ -148,12 +151,12 @@ public class Claim extends Observable {
 
 
 	public String getUser() {
-		return user_id;
+		return userId;
 	}
 
 
 	public void setUser(String user_id) {
-		this.user_id = user_id;
+		this.userId = user_id;
 		setChanged();
 		notifyObservers();
 	}
