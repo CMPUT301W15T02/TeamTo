@@ -53,6 +53,7 @@ public class Claim extends Observable {
 		this.comment = "";
 		this.ClaimId = UUID.randomUUID().toString();
 	}
+	
 	// Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
 		return c_name;
@@ -222,10 +223,9 @@ public class Claim extends Observable {
 		return expense.isComplete();
 	}
 	
-	// Could return NullPointerException
+	// Up to caller to be sure not null
 	public Expense getExpense(Expense expense) {
 		if( this.expenses.size() == 0 ) {
-			// Do we want to return an empty Expense?
 			return null;
 		} else {
 			for(int i = 0; i < expenses.size(); i++) {
@@ -234,22 +234,20 @@ public class Claim extends Observable {
 					return currentExpense;
 				}
 			}
-			// Expense we're looking for not in Claim, do we want to return an empty Expense?
 			return null;
 		}
 	}
+	
 	public String getUserId() {
 		return userId;
 	}
+	
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
 	public String getClaimId() {
 		return ClaimId;
 	}
 	
-	
-	
-	
-
 }

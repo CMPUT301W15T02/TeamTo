@@ -183,11 +183,16 @@ public class ClaimTest extends TestCase {
 		assertEquals("Cloud saving working", user, user.loadFromCloud());
 	}
 	
-	// TODO: Must finish still
 	public void testGetExpense() {
-		Claim claim = new Claim();
+		Claim emptyClaim = new Claim();
 		Expense expense = new Expense();
-		assertTrue("Returning something when claim is empty", claim.getExpense(expense).equals(null));
+		assertTrue("Not returning null if expense not in claim", emptyClaim.getExpense(expense).equals(null));
+		
+		Claim nonEmptyClaim = new Claim();
+		ArrayList<Expense> expenseList = new ArrayList<Expense>();
+		expenseList.add(expense);
+		nonEmptyClaim.addExpense(expense);
+		assertTrue("Not returning correct expense", nonEmptyClaim.getExpense(expense).equals(expense));
 	}
 		
 }
