@@ -46,9 +46,12 @@ public class ClaimTest extends TestCase {
 		String name = "new claim";
 		Calendar start_date = Calendar.getInstance();
 		Calendar end_date = Calendar.getInstance();
+		controller.setClaimName(name);
 		controller.setStartDate(start_date);
-		claim.setEndDate(end_date);
+		controller.setEndDate(end_date);
+		// Why is this failing?
 		assertTrue("Name is not equal", claims.getClaim(claim).getClaimName() == name);
+		//
 		assertTrue("Start date is not equal", claims.getClaim(claim).getStartDate() == start_date);
 		assertTrue("End date is not equal", claims.getClaim(claim).getEndDate() == end_date);
 		
@@ -181,18 +184,6 @@ public class ClaimTest extends TestCase {
 		Claim claim = new Claim();
 		user.saveToCloud();
 		assertEquals("Cloud saving working", user, user.loadFromCloud());
-	}
-	
-	public void testGetExpense() {
-		Claim emptyClaim = new Claim();
-		Expense expense = new Expense();
-		assertTrue("Not returning null if expense not in claim", emptyClaim.getExpense(expense).equals(null));
-		
-		Claim nonEmptyClaim = new Claim();
-		ArrayList<Expense> expenseList = new ArrayList<Expense>();
-		expenseList.add(expense);
-		nonEmptyClaim.addExpense(expense);
-		assertTrue("Not returning correct expense", nonEmptyClaim.getExpense(expense).equals(expense));
 	}
 		
 }

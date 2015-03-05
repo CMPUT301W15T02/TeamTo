@@ -1,13 +1,15 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
+import java.util.ArrayList;
+
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.ClaimSingleton;
+import com.CMPUT301W15T02.teamtoapp.Expense;
 import com.CMPUT301W15T02.teamtoapp.SessionController;
 
 import junit.framework.TestCase;
 
 public class ClaimModelsTesting extends TestCase {
-	
 	
 	public void testAddClaim() {
 		SessionController sessionController = new SessionController();
@@ -29,4 +31,17 @@ public class ClaimModelsTesting extends TestCase {
 	public void testSortClaimsByDate() {
 		//SessionController sessionController = new SessionController();
 	}
+	
+	public void testGetExpense() {
+		Claim emptyClaim = new Claim();
+		Expense expense = new Expense();
+		assertNull("Not returning null if expense not in claim", emptyClaim.getExpense(expense));
+		
+		Claim nonEmptyClaim = new Claim();
+		ArrayList<Expense> expenseList = new ArrayList<Expense>();
+		expenseList.add(expense);
+		nonEmptyClaim.addExpense(expense);
+		assertTrue("Not returning correct expense", nonEmptyClaim.getExpense(expense).equals(expense));
+	}
+	
 }
