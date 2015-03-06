@@ -59,8 +59,8 @@ public class ClaimantClaimsListActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Claim claim = sessionController.getClaims().get(position);
-				sessionController.setClaim(claim);
 				Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantExpenseListActivity.class);
+				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
 			}
 		});
@@ -75,7 +75,9 @@ public class ClaimantClaimsListActivity extends Activity {
 				.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
+						Claim claim = sessionController.getClaims().get(position);
 						Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
+						intent.putExtra("claimID", claim.getClaimId());
 						startActivity(intent);
 					}
 				})
@@ -130,8 +132,10 @@ public class ClaimantClaimsListActivity extends Activity {
 
 	// Should this be handled in onOptionsItemSelected instead?
 	public void addClaimOption (MenuItem menu) {
-		sessionController.addClaim(new Claim());
+		Claim newClaim = new Claim();
+		sessionController.addClaim(newClaim);
 		Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
+		intent.putExtra("claimID", newClaim.getClaimId());
 		startActivity(intent);	
 	}
 

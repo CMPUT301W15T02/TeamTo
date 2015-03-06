@@ -15,6 +15,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -39,8 +40,8 @@ public class ClaimEditActivity extends Activity {
 	
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
-	
-	private ClaimController claimController = new ClaimController();
+	private String claimID;
+	private ClaimController claimController;
 	private ArrayList<StringTuple> destinations;
 	ArrayAdapter<StringTuple> adapter;
 	
@@ -50,6 +51,10 @@ public class ClaimEditActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
+		
+		Intent intent = getIntent();
+		claimID = (String) intent.getSerializableExtra("claimID");
+		claimController = new ClaimController(claimID);
 		destinations = claimController.getDestinations();
 		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_claims_list_rows, destinations);
 		

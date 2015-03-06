@@ -35,4 +35,15 @@ public class ClaimsList {
 		}
 	}
 	
+	// TODO: Need to test this in ClaimModelsTesting
+	public Claim findClaimByID(String claimID) {
+		for (Claim claim : claims) {
+			if (claim.getClaimId().equals(claimID)) {
+				return claim;
+			}
+		}
+		// if doesn't exist, return new claim.
+		return new Claim();	
+	}
+	
 }

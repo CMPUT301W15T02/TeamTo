@@ -3,7 +3,6 @@ package com.CMPUT301W15T02.teamtoapp.test;
 import java.util.ArrayList;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.ClaimSingleton;
 import com.CMPUT301W15T02.teamtoapp.Expense;
 import com.CMPUT301W15T02.teamtoapp.SessionController;
 
@@ -16,8 +15,7 @@ public class ClaimModelsTesting extends TestCase {
 		Claim claim = new Claim();
 		sessionController.addClaim(claim);
 		assertEquals("Added to aggregated claims", 1, sessionController.getClaims().size());
-		assertNotNull(ClaimSingleton.getInstance().getClaim());
-		assertEquals("Added to CurrentClaim singleton", claim, ClaimSingleton.getInstance().getClaim());
+		assertTrue("claim should exist", sessionController.getClaims().contains(claim));
 		sessionController.removeClaim(claim);
 		assertEquals("Check if no claims saved", 0, sessionController.getClaims().size());
 	}

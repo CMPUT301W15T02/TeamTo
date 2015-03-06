@@ -8,11 +8,17 @@ import com.CMPUT301W15T02.teamtoapp.Claim.Status;
 
 public class ClaimController {
 	
+	private String claimID;
 	private Claim currentClaim;
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
-	public ClaimController() {
-		this.currentClaim = ClaimSingleton.getInstance().getClaim();
+	public ClaimController(String claimID) {
+		this.currentClaim = Session.getInstance().getCurrentClaims().findClaimByID(claimID);
+		this.claimID = claimID;
+	}
+	
+	public Claim getCurrentClaim() {
+		return currentClaim;
 	}
 	
 	public void setClaimName(String name) {

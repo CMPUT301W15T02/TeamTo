@@ -18,7 +18,8 @@ public class ClaimantExpenseListActivity extends Activity {
 
 	private Context context = this;
 	private ListView expenseListView;
-	private ClaimController claimController = new ClaimController();
+	private String claimID;
+	private ClaimController claimController = new ClaimController(claimID);
 	private ArrayList<Expense> expenses;
 	private ClaimantExpenseListAdapter adapter;
 	
