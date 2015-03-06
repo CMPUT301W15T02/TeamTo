@@ -42,7 +42,8 @@ public class ClaimTest extends TestCase {
 		assertNotNull("manager has no claim!", claims);
 		
 		// Save new information for claim, check if saved in claims
-		ClaimController controller = new ClaimController();
+		// TODO: Need to consider claimID.
+		ClaimController controller = new ClaimController(claim.getClaimId());
 		String name = "new claim";
 		Calendar start_date = Calendar.getInstance();
 		Calendar end_date = Calendar.getInstance();
