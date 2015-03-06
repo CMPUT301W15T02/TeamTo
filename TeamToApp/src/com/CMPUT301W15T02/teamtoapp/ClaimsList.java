@@ -46,4 +46,15 @@ public class ClaimsList {
 		return new Claim();	
 	}
 	
+	public Expense findExpenseByID(String expenseID) {
+		for (Claim claim : claims) {
+			for (Expense expense: claim.getExpenses()) {
+				if (expense.getExpenseId().equals(expenseID)) {
+					return expense;
+				}
+			}
+		}
+		return null; // Or should we return new Expense?
+	}
+	
 }
