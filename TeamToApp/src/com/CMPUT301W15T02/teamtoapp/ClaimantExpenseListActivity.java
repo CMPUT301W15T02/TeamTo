@@ -50,8 +50,10 @@ public class ClaimantExpenseListActivity extends Activity {
 		if (id == R.id.action_settings) {
 			return true;
 		} else if (id == R.id.addExpenseMenuButton) {
-			claimController.addExpense(new Expense());
+			Expense expense = new Expense();
+			claimController.addExpense(expense);
 			Intent intent = new Intent(getBaseContext(), ExpenseEditActivity.class);
+			intent.putExtra("expenseID", expense.getExpenseId());
 			startActivity(intent);
 			return true;
 		}
