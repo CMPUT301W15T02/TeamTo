@@ -7,8 +7,8 @@ public class ExpenseController {
 	
 	private Expense currentExpense;
 	
-	public ExpenseController() {
-		this.currentExpense = ExpenseSingleton.getInstance().getExpense();
+	public ExpenseController(Expense expense) {
+		this.currentExpense = expense;
 	}
 	
 	public void setDate(Calendar calendar) {

@@ -19,7 +19,7 @@ public class ClaimantExpenseListActivity extends Activity {
 	private Context context = this;
 	private ListView expenseListView;
 	private String claimID;
-	private ClaimController claimController = new ClaimController(claimID);
+	private ClaimController claimController;
 	private ArrayList<Expense> expenses;
 	private ClaimantExpenseListAdapter adapter;
 	
@@ -60,6 +60,9 @@ public class ClaimantExpenseListActivity extends Activity {
 	
 	
 	private void getModelObjects() {
+		Intent intent = getIntent();
+		claimID = (String) intent.getSerializableExtra("claimID");
+		claimController = new ClaimController(claimID);
 		expenses = claimController.getExpenses();
 	}
 	
@@ -72,8 +75,8 @@ public class ClaimantExpenseListActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				Expense expense = claimController.getExpenses().get(position);
-				claimController.setExpense(expense);
 				Intent intent = new Intent(context, ExpenseEditActivity.class);
+				intent.putExtra("expenseID", expense.getExpenseId());
 				startActivity(intent);
 			}
 			

@@ -130,6 +130,14 @@ public class Expense extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
+	
+	
+
+
+	public String getExpenseId() {
+		return expenseId;
+	}
 
 
 

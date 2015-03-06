@@ -25,14 +25,9 @@ public class ClaimController {
 		currentClaim.setClaimName(name);
 	}
 	
-	public void setExpense(Expense expense) {
-		ExpenseSingleton.getInstance().setExpense(expense);
-	}
-	
 	
 	public void addExpense(Expense expense) {
 		currentClaim.addExpense(expense);
-		ExpenseSingleton.getInstance().setExpense(expense);
 	}
 	
 	public void removeExpense(Expense expense) {
