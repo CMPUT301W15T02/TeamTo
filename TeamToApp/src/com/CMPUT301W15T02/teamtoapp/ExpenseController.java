@@ -35,11 +35,16 @@ public class ExpenseController {
 		currentExpense.setComplete(is_complete);
 	}
 	
+	
 	public void addPhoto(String photoPath) {
 		currentExpense.addPhoto(photoPath);
 	}
 	
 	public void removePhoto(String photoPath) {
 		currentExpense.removePhoto();
+	}
+	
+	public Expense getExpense() {
+		return currentExpense;
 	}
 }

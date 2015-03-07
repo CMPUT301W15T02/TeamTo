@@ -39,11 +39,11 @@ public class Expense extends Observable {
 	
 	public Expense() {
 		date = Calendar.getInstance();
-		setDescription("");
-		setCurrency(Currency.getInstance("CAD"));
-		setCategory("supplies");
-		setAmount(0.0);
-		setComplete(false);
+		currency = Currency.getInstance("CAD");
+		category = "other";
+		amount = 0.0;
+		complete = false;
+		description = "";
 		expenseId = UUID.randomUUID().toString();
 	}
 

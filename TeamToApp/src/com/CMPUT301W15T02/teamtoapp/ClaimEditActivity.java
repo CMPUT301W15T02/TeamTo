@@ -42,7 +42,9 @@ public class ClaimEditActivity extends Activity {
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	private String claimID;
+	
 	private ClaimController claimController;
+	
 	private ArrayList<StringTuple> destinations;
 	ArrayAdapter<StringTuple> adapter;
 	
@@ -196,6 +198,7 @@ public class ClaimEditActivity extends Activity {
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				
 				claimController.setClaimName(s.toString());
 			}
 			
