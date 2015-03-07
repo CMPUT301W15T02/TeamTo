@@ -23,7 +23,6 @@ public class ExpenseEditActivity extends Activity {
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
 	
-	private EditText expenseNameEditText;
 	private TextView dateTextView;
 	private EditText amountEditText;
 	private Spinner currencySpinner;
@@ -74,7 +73,6 @@ public class ExpenseEditActivity extends Activity {
 	}
 	
 	private void findViewsByIds() {
-		expenseNameEditText = (EditText) findViewById(R.id.ExpenseNameEditText);
 		dateTextView = (TextView) findViewById(R.id.ExpenseDateTextView);
 		amountEditText = (EditText) findViewById(R.id.ExpenseAmountEditText);
 		currencySpinner = (Spinner) findViewById(R.id.CurrencyExpenseSpinner);
