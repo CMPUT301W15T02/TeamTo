@@ -12,6 +12,11 @@
         android:id="@+id/addExpenseMenuButton"
         android:title="+"
         android:showAsAction="always"/>
-    <item android:id="@+id/submitClaimOption" android:enabled="true" android:showAsAction="withText|collapseActionView" android:visible="true" android:title="Submit Claim"></item>
+    
+    <item android:id="@+id/submitClaimOption"
+        android:enabled="true"
+        android:showAsAction="withText|collapseActionView"
+        android:visible="true"
+        android:title="Submit Claim"/>
 
 </menu>
