@@ -20,6 +20,10 @@ import java.util.Calendar;
 import java.util.Observable;
 import java.util.UUID;
 
+import android.R.integer;
+import android.content.Context;
+import android.widget.Toast;
+
 /*
  * Stores all of the data related to a claim
  * Note: for each method in this class, might need to check current claim status
@@ -208,19 +212,20 @@ public class Claim extends Observable {
 		return this.expenses.contains(expense);
 	}
 	
-	
-	public boolean checkExpenseComplete(Expense expense) {
-		// Even if everything is filled out, boolean must
-		// be set to false as a reminder for the user.
-		if (this.getExpenses().contains(expense)) {
-			if (this.status == Claim.Status.APPROVED) {
-				expense.setComplete(true);
-			} else if (this.status == Claim.Status.SUBMITTED) {
-				expense.setComplete(false); // Or should it be true? ...
-			} 
+	// TODO: Need to do tests
+	public int checkExpensesComplete() {
+		int numIncomplete = 0;
+		
+		if (expenses.size() == 0) {
+			return 0;
+		} else {
+			for (Expense expense : expenses) {
+				// TODO: the isComplete method still needs implementation.
+				if (expense.isComplete() == false) { numIncomplete++; }
+			}
 		}
-		// if the expense does not exist, return nullpointer execption?
-		return expense.isComplete();
+		
+		return numIncomplete;
 	}
 	
 	// Up to caller to be sure not null

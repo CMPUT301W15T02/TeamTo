@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.net.wifi.WifiConfiguration.Status;
 import android.os.Bundle;
 import android.R.anim;
 import android.app.Activity;
@@ -75,6 +76,7 @@ public class ClaimEditActivity extends Activity {
 		super.onBackPressed();
 	}
 
+	
 	public void addDestinationOption(View view){
 		// Pop up dialog to add another destination + reason.
 		addDestination();

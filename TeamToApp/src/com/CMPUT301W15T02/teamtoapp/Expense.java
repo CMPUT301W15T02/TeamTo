@@ -120,6 +120,8 @@ public class Expense extends Observable {
 
 
 	public boolean isComplete() {
+		// TODO: Need to go via all parts of expense to check if it's complete,
+		// and then return appropriate boolean to checkExpensesComplete() in Claim.java
 		return complete;
 	}
 

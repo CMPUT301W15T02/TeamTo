@@ -2,6 +2,8 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 
+import com.CMPUT301W15T02.teamtoapp.Claim.Status;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -56,6 +58,8 @@ public class ClaimantExpenseListActivity extends Activity {
 			intent.putExtra("expenseID", expense.getExpenseId());
 			startActivity(intent);
 			return true;
+		} else if (id == R.id.submitClaimOption) {
+			submitClaim();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -98,6 +102,55 @@ public class ClaimantExpenseListActivity extends Activity {
 		super.onResume();
 		adapter.notifyDataSetChanged();
 	}
+	
+	
+	private void submitClaim() {
+		// TODO: Check claim and expenses depending on current status
+		// TODO: Need to do test for this method. If anyone has a better way to organize this code, go for it. :)
+		
+		if (checkClaimInfoComplete() == false) {
+			Toast.makeText(context, "Claim information incomplete.", Toast.LENGTH_SHORT).show();
+		} else if (claimController.getCurrentClaim().getExpenses().size() == 0) {
+			Toast.makeText(context, "Claim has no expenses.", Toast.LENGTH_SHORT).show();
+		}
+		
+		// If claim info complete and expenses are present, check for expense incompleteness depending on status
+		com.CMPUT301W15T02.teamtoapp.Claim.Status currentStatus = claimController.getCurrentClaim().getStatus();
+		
+		if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.IN_PROGRESS) {
+			// Gives number of incomplete expenses.
+			int numExpensesIncomplete = claimController.getCurrentClaim().checkExpensesComplete();
+			
+			if (numExpensesIncomplete > 0) {
+				Toast.makeText(context, "Expenses are incomplete.", Toast.LENGTH_SHORT).show();
+			}
+			
+		} else if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.APPROVED) {
+			Toast.makeText(context, "Claim was already approved.", Toast.LENGTH_SHORT).show();
+			
+		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.RETURNED) {
+			// do something...
+			
+		} else {
+			claimController.getCurrentClaim().setStatus(Status.SUBMITTED);
+		}
+	}
+	
+	private boolean checkClaimInfoComplete() {
+		// TODO: Not sure how to check start date and end date.
+		// TODO: Need to do tests for this method.
+		Claim checkClaim = claimController.getCurrentClaim();
+		if (checkClaim.getClaimName().isEmpty()) {
+			return false;
+		}
+		
+		if (checkClaim.getDestinations().size() == 0) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 	
 	
 }
