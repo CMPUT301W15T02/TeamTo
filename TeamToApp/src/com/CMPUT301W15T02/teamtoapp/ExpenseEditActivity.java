@@ -69,4 +69,7 @@ public class ExpenseEditActivity extends Activity {
 		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
 		completedRadioButton = (RadioButton) findViewById(R.id.ExpenseCompletedRadioButton);
 	}
+	
+	private void setListeners() {
+	}
 }

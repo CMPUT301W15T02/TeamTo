@@ -53,16 +53,10 @@ public class ClaimEditActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
 		
-		Intent intent = getIntent();
-		claimID = (String) intent.getSerializableExtra("claimID");
-		claimController = new ClaimController(claimID);
-		destinations = claimController.getDestinations();
-		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_claims_list_rows, destinations);
-		
-		  
+		getModelObjects();
 		findViewsByIds();
         setListeners();
-        destinationsListView.setAdapter(adapter);
+        setUpAdapter();
 	}
 
 	@Override
@@ -124,6 +118,15 @@ public class ClaimEditActivity extends Activity {
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
+	
+	
+	private void getModelObjects() {
+		Intent intent = getIntent();
+		claimID = (String) intent.getSerializableExtra("claimID");
+		claimController = new ClaimController(claimID);
+		destinations = claimController.getDestinations();
+	}
+	
 	
 	private void findViewsByIds() {
 		startDateTextView = (TextView) findViewById(R.id.startDateTextView);
@@ -212,5 +215,10 @@ public class ClaimEditActivity extends Activity {
 		
 	}
 
+	
+	private void setUpAdapter() {
+		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_claims_list_rows, destinations);
+		destinationsListView.setAdapter(adapter);
+	}
 	
 }
