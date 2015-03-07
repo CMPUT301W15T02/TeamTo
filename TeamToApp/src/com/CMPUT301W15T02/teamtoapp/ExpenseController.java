@@ -7,8 +7,8 @@ public class ExpenseController {
 	
 	private Expense currentExpense;
 	
-	public ExpenseController(Expense expense) {
-		this.currentExpense = expense;
+	public ExpenseController(String expenseID) {
+		this.currentExpense = Session.getInstance().getCurrentClaims().findExpenseByID(expenseID);
 	}
 	
 	public void setDate(Calendar calendar) {
