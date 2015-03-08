@@ -159,6 +159,4 @@ public class Expense extends Observable {
 	}
 
 
-
-
 }

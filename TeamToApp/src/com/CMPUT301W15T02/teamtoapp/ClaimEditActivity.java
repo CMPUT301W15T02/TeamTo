@@ -102,7 +102,6 @@ public class ClaimEditActivity extends Activity {
 				if (destination.length() != 0) {
 					claimController.addDestination(destination, reason);
 					adapter.notifyDataSetChanged(); // TODO Have this call automatically when model changes
-					// DONE: made string representation display with custom list view adapter.
 					
 				} else {
 					Toast.makeText(context, "Must enter destination!", Toast.LENGTH_SHORT).show();

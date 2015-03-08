@@ -2,6 +2,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.Calendar;
 import java.util.Currency;
+import java.util.Observer;
 
 public class ExpenseController {
 	
@@ -47,4 +48,6 @@ public class ExpenseController {
 	public Expense getExpense() {
 		return currentExpense;
 	}
+	
+	
 }
