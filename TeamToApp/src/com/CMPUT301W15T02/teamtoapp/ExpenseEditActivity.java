@@ -30,7 +30,6 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	
 	private ExpenseController controller;
 	private String expenseID;
-	private Expense currentExpense;
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
 	
@@ -82,8 +81,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		Intent intent = getIntent();
 		expenseID = (String) intent.getSerializableExtra("expenseID");
 		controller = new ExpenseController(expenseID);
-		currentExpense = controller.getExpense();
-		currentExpense.addObserver(this);
+		controller.addObserverToExpense(this);
 		
 	}
 	
@@ -108,20 +106,20 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	
 	private void setFieldValues() {
 		updateValues();
-		amountEditText.setText(df.format(currentExpense.getAmount()));
-		if (currentExpense.getDescription().equals("")) {
+		amountEditText.setText(df.format(controller.getAmount()));
+		if (controller.getDescription().equals("")) {
 			descriptionEditText.setHint("Enter a description");
 		} else {
-			descriptionEditText.setText(currentExpense.getDescription());
+			descriptionEditText.setText(controller.getDescription());
 		}
 	}
 	
 	
 	private void updateValues() {
-		dateTextView.setText(formatter.format(currentExpense.getDate().getTime()));
-		currencySpinner.setSelection(currencyAdapter.getPosition(currentExpense.getCurrency().toString()));
-		categorySpinner.setSelection(categoriesAdapter.getPosition(currentExpense.getCategory()));
-		if (currentExpense.isComplete()) {
+		dateTextView.setText(formatter.format(controller.getDate().getTime()));
+		currencySpinner.setSelection(currencyAdapter.getPosition(controller.getCurrency().toString()));
+		categorySpinner.setSelection(categoriesAdapter.getPosition(controller.getCategory()));
+		if (controller.isComplete()) {
 			completedRadioButton.setChecked(true);
 		} else {
 			completedRadioButton.setChecked(false);
@@ -138,7 +136,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			}
 		});
 		
-		Calendar date = currentExpense.getDate();
+		Calendar date = controller.getDate();
 		
 		datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
@@ -240,7 +238,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		currentExpense.deleteObserver(this);
+		controller.removeObserverFromExpense(this);
 	}
 	
 	
