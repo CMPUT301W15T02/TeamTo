@@ -106,7 +106,11 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	
 	private void setFieldValues() {
 		updateValues();
-		amountEditText.setText(df.format(controller.getAmount()));
+		if (controller.getAmount().equals(0.0)) {
+			amountEditText.setHint(df.format(controller.getAmount()));
+		} else {
+			amountEditText.setText(df.format(controller.getAmount()));
+		}
 		if (controller.getDescription().equals("")) {
 			descriptionEditText.setHint("Enter a description");
 		} else {
