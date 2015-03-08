@@ -49,5 +49,13 @@ public class ExpenseController {
 		return currentExpense;
 	}
 	
+	public void addObserverToExpense(Observer observer) {
+		currentExpense.addObserver(observer);
+	}
+	
+	public void removeObserverFromExpense(Observer observer) {
+		currentExpense.deleteObserver(observer);
+	}
+	
 	
 }

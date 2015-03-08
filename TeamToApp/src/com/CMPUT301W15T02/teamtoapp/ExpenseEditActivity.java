@@ -3,6 +3,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,9 +12,12 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -103,17 +107,20 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	}
 	
 	private void setFieldValues() {
-		dateTextView.setText(formatter.format(currentExpense.getDate().getTime()));
+		updateValues();
 		amountEditText.setText(df.format(currentExpense.getAmount()));
-		currencySpinner.setSelection(currencyAdapter.getPosition(currentExpense.getCurrency().toString()));
-		categorySpinner.setSelection(categoriesAdapter.getPosition(currentExpense.getCategory()));
-		
 		if (currentExpense.getDescription().equals("")) {
 			descriptionEditText.setHint("Enter a description");
 		} else {
 			descriptionEditText.setText(currentExpense.getDescription());
 		}
-		
+	}
+	
+	
+	private void updateValues() {
+		dateTextView.setText(formatter.format(currentExpense.getDate().getTime()));
+		currencySpinner.setSelection(currencyAdapter.getPosition(currentExpense.getCurrency().toString()));
+		categorySpinner.setSelection(categoriesAdapter.getPosition(currentExpense.getCategory()));
 		if (currentExpense.isComplete()) {
 			completedRadioButton.setChecked(true);
 		} else {
@@ -142,11 +149,92 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			}
 			
 		}, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+		
+		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				controller.setCurrency(Currency.getInstance(parent.getItemAtPosition(position).toString()));
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				controller.setCategory(parent.getItemAtPosition(position).toString());
+				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		amountEditText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				double amount;
+				try {
+                	amount = Double.parseDouble(s.toString());
+                } catch (NumberFormatException nfe) {
+                	amount = 0.0;
+                }
+				controller.setAmount(amount);
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// Intentionally blank
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				// Intentionally blank
+				
+			}
+		});
+		
+		descriptionEditText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+				// Intentionally blank
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// Intentionally blank
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s) {
+				controller.setDescription(s.toString());
+			}
+		});
 	}
 
 	@Override
 	public void update(Observable observable, Object data) {
-		setFieldValues();
+		updateValues();
 	}
 
 	@Override

@@ -225,7 +225,6 @@ public class ClaimEditActivity extends Activity implements Observer {
 		
 	}
 
-	
 	private void setUpAdapter() {
 		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_claims_list_rows, destinations);
 		destinationsListView.setAdapter(adapter);
