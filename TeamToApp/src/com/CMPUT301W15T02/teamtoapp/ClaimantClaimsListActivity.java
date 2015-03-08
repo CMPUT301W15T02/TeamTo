@@ -118,6 +118,12 @@ public class ClaimantClaimsListActivity extends Activity {
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
+		} else if (id == R.id.addClaimOp) {
+			Claim newClaim = new Claim();
+			sessionController.addClaim(newClaim);
+			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
+			intent.putExtra("claimID", newClaim.getClaimId());
+			startActivity(intent);	
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -128,15 +134,6 @@ public class ClaimantClaimsListActivity extends Activity {
 		super.onResume();
 		adapter.notifyDataSetChanged();
 		
-	}
-
-	// Should this be handled in onOptionsItemSelected instead?
-	public void addClaimOption (MenuItem menu) {
-		Claim newClaim = new Claim();
-		sessionController.addClaim(newClaim);
-		Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
-		intent.putExtra("claimID", newClaim.getClaimId());
-		startActivity(intent);	
 	}
 
 	public void filterByDate(MenuItem menu) {

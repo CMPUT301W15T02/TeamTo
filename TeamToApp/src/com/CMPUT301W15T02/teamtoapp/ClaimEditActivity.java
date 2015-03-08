@@ -38,7 +38,7 @@ public class ClaimEditActivity extends Activity {
 	private TextView endDateTextView;
 	private EditText claimNameEditText;
 	private ListView destinationsListView;
-	
+	private SessionController sessionController;
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	private String claimID;
@@ -54,7 +54,7 @@ public class ClaimEditActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
-		
+		sessionController = new SessionController();
 		getModelObjects();
 		findViewsByIds();
         setListeners();
@@ -68,14 +68,33 @@ public class ClaimEditActivity extends Activity {
 	}
 	
 	public void onSaveButtonClick(MenuItem menu) {
-		// TODO Save all input once claimant saves new/existing editable claim
-		super.onBackPressed();
+		// TODO Save all input once claimant saves a claim. Otherwise delete automatically if nothing entered.
+		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
+				claimController.getDestinations().size() == 0) {
+			sessionController.removeClaim(claimController.getCurrentClaim());
+			super.onBackPressed();
+		} else {
+			super.onBackPressed();
+		}
 	}
 
 	
 	public void addDestinationOption(View view){
 		// Pop up dialog to add another destination + reason.
 		addDestination();
+	}
+	
+	
+	@Override
+	public void onBackPressed() {
+		// Makes sure a claim is deleted only when nothing entered.
+		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
+				claimController.getDestinations().size() == 0) {
+			sessionController.removeClaim(claimController.getCurrentClaim());
+			finish();
+		} else {
+			finish();
+		}
 	}
 	
 	
