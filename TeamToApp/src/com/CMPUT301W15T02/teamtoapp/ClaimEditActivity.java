@@ -38,7 +38,7 @@ public class ClaimEditActivity extends Activity {
 	private TextView endDateTextView;
 	private EditText claimNameEditText;
 	private ListView destinationsListView;
-
+	private SessionController sessionController;
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	private String claimID;
@@ -54,7 +54,7 @@ public class ClaimEditActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
-
+		sessionController = new SessionController();
 		getModelObjects();
 		findViewsByIds();
         setListeners();
