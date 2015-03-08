@@ -3,6 +3,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.Claim.Status;
 
@@ -19,6 +20,10 @@ public class ClaimController {
 	
 	public Claim getCurrentClaim() {
 		return currentClaim;
+	}
+	
+	public String getClaimName() {
+		return currentClaim.getClaimName();
 	}
 	
 	public void setClaimName(String name) {
@@ -97,6 +102,16 @@ public class ClaimController {
 	
 	public ArrayList<StringTuple> getDestinations() {
 		return currentClaim.getDestinations();
+	}
+	
+	
+	public void addObserverToClaim(Observer observer) {
+		currentClaim.addObserver(observer);
+	}
+	
+	
+	public void removeObserverFromClaim(Observer observer) {
+		currentClaim.deleteObserver(observer);
 	}
 	
 

@@ -3,9 +3,12 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.net.wifi.WifiConfiguration.Status;
 import android.os.Bundle;
@@ -19,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.style.UpdateAppearance;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +35,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ClaimEditActivity extends Activity {
+public class ClaimEditActivity extends Activity implements Observer {
 	private final Context context = this;
 	
 	private TextView startDateTextView;
@@ -59,6 +63,7 @@ public class ClaimEditActivity extends Activity {
 		findViewsByIds();
         setListeners();
         setUpAdapter();
+        setFieldValues();
 	}
 
 	@Override
@@ -120,7 +125,6 @@ public class ClaimEditActivity extends Activity {
 				// Assumption: Destination must be filled in before adding, adding reason is optional for now...
 				if (destination.length() != 0) {
 					claimController.addDestination(destination, reason);
-					adapter.notifyDataSetChanged(); // TODO Have this call automatically when model changes
 					
 				} else {
 					Toast.makeText(context, "Must enter destination!", Toast.LENGTH_SHORT).show();
@@ -139,12 +143,13 @@ public class ClaimEditActivity extends Activity {
 		alertDialog.show();
 	}
 	
-	
+	// Also where we set up observer
 	private void getModelObjects() {
 		Intent intent = getIntent();
 		claimID = (String) intent.getSerializableExtra("claimID");
 		claimController = new ClaimController(claimID);
 		destinations = claimController.getDestinations();
+		claimController.addObserverToClaim(this);
 	}
 	
 	
@@ -180,14 +185,6 @@ public class ClaimEditActivity extends Activity {
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setStartDate(calendar);
-				// Probably won't need this once mvc is working
-				// TODO Save Start Date
-				startDateTextView.setText(
-			            new StringBuilder()
-	                    // Month is 0 based so add 1
-	                    .append(monthOfYear + 1).append("/")
-	                    .append(dayOfMonth).append("/")
-	                    .append(year).append(" "));
 			}
 			
 		}, startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH));
@@ -199,13 +196,6 @@ public class ClaimEditActivity extends Activity {
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setEndDate(calendar);
-				// TODO Save End Date
-				endDateTextView.setText(
-			            new StringBuilder()
-	                    // Month is 0 based so add 1
-	                    .append(monthOfYear + 1).append("/")
-	                    .append(dayOfMonth).append("/")
-	                    .append(year).append(" "));
 				
 			}
 			
@@ -216,8 +206,7 @@ public class ClaimEditActivity extends Activity {
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				
-				claimController.setClaimName(s.toString());
+				// Intentionally Blank
 			}
 			
 			@Override
@@ -229,7 +218,7 @@ public class ClaimEditActivity extends Activity {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				// Intentionally blank
+				claimController.setClaimName(s.toString());
 				
 			}
 		});
@@ -241,5 +230,33 @@ public class ClaimEditActivity extends Activity {
 		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_claims_list_rows, destinations);
 		destinationsListView.setAdapter(adapter);
 	}
+	
+	private void setFieldValues() {
+		updateValues();
+		if (claimController.getClaimName().equals("New Claim")) {
+			claimNameEditText.setHint("Enter a claim name");
+		} else {
+			claimNameEditText.setText(claimController.getClaimName());
+		}
+	}
+	
+	private void updateValues() {
+		startDateTextView.setText(claimController.getStartDateFormatted());
+		endDateTextView.setText(claimController.getEndDateFormatted());
+	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		updateValues();
+		adapter.notifyDataSetChanged();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		claimController.removeObserverFromClaim(this);
+	}
+	
+	
 	
 }
