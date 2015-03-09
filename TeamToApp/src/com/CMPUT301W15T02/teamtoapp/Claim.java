@@ -38,8 +38,8 @@ public class Claim extends Observable {
 
 	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
 	private String c_name;
-	private Calendar startDate;
-	private Calendar endDate;
+	private GregorianCalendar startDate;
+	private GregorianCalendar endDate;
 	private ArrayList<StringTuple> destinations;
 	private ArrayList<Expense> expenses;
 	private Status status;
@@ -51,8 +51,8 @@ public class Claim extends Observable {
 	
 	public Claim() {
 		this.setClaimName("New Claim");
-		this.startDate = GregorianCalendar.getInstance();
-		this.endDate = GregorianCalendar.getInstance();
+		this.startDate = new GregorianCalendar();
+		this.endDate = new GregorianCalendar();
 		this.destinations = new ArrayList<StringTuple>();
 		this.expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
@@ -78,7 +78,7 @@ public class Claim extends Observable {
 		return this.startDate;
 	}
 
-	public void setStartDate(Calendar startDate) {
+	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
 		setChanged();
 	}
@@ -88,7 +88,7 @@ public class Claim extends Observable {
 	}
 
 	// Check end date > start date?
-	public void setEndDate(Calendar endDate) {
+	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
 		setChanged();
 		notifyObservers();
