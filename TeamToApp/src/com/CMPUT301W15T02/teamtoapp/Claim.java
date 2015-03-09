@@ -228,5 +228,4 @@ public class Claim extends Observable {
 		return ClaimId;
 	}
 	
-	
 }
