@@ -10,7 +10,11 @@ public class ClaimTest extends TestCase {
 	public void testAddClaim() {
 		String claimName = "newClaim";
 		Claim claim = new Claim();
+		claim.setClaimName(claimName);
 		assertTrue("Claim name not equal", claim.getClaimName().equals(claimName));
 	}
 	
+	public void testGetClaimName() {
+		
+	}
 }
