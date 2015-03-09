@@ -6,6 +6,7 @@ import com.CMPUT301W15T02.teamtoapp.Claim.Status;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -89,9 +90,40 @@ public class ClaimantExpenseListActivity extends Activity {
 			}
 			
 		});
-		
-		
-	}
+		//Allows the deleting of expenses
+		//Should be done, will do testing later
+		expenseListView.setLongClickable(true);
+		expenseListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			
+			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantExpenseListActivity.this);
+				builder.setMessage("Do you want to delete this Expense?");
+				builder
+				.setPositiveButton("No", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+						//Closes the dialog box (Does nothing)
+						
+					}
+				})
+				.setNegativeButton("Yes", new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int id) {
+						//Deletes the expense of the current user
+						Expense expense = claimController.getExpenses().get(position);
+						claimController.removeExpense(expense);
+						adapter.notifyDataSetChanged();
+						
+					}
+				});
+				AlertDialog alertDialog = builder.create();
+				alertDialog.show();
+				return true;
+			}
+		});
+		}
 	
 	private void setUpAdapter() {
 		adapter = new ClaimantExpenseListAdapter(this, R.layout.claimant_expense_list_rows, expenses);
