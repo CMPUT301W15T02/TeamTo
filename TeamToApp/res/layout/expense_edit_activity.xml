@@ -124,12 +124,10 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher" />
 
-    <RadioButton
-        android:id="@+id/ExpenseCompletedRadioButton"
+    <CheckBox
+        android:id="@+id/ExpenseCompletedCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Expense Completed?" />
-
-
 
 </LinearLayout>

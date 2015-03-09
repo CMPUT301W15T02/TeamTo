@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,14 +33,13 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	private String expenseID;
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
-	
 	private TextView dateTextView;
 	private EditText amountEditText;
 	private Spinner currencySpinner;
 	private Spinner categorySpinner;
 	private EditText descriptionEditText;
 	private ImageView receiptImageView;
-	private RadioButton completedRadioButton;
+	private CheckBox completedCheckBox;
 	
 	private ArrayAdapter<CharSequence> currencyAdapter;
 	private ArrayAdapter<CharSequence> categoriesAdapter;
@@ -92,7 +92,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		categorySpinner  = (Spinner) findViewById(R.id.CategoryExpenseSpinner);
 		descriptionEditText = (EditText) findViewById(R.id.ExpenseDescriptionEditText);
 		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
-		completedRadioButton = (RadioButton) findViewById(R.id.ExpenseCompletedRadioButton);
+		completedCheckBox = (CheckBox) findViewById(R.id.ExpenseCompletedCheckBox);
 	}
 	
 	private void setUpAdapters() {
@@ -124,9 +124,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		currencySpinner.setSelection(currencyAdapter.getPosition(controller.getCurrency().toString()));
 		categorySpinner.setSelection(categoriesAdapter.getPosition(controller.getCategory()));
 		if (controller.isComplete()) {
-			completedRadioButton.setChecked(true);
+			completedCheckBox.setChecked(true);
 		} else {
-			completedRadioButton.setChecked(false);
+			completedCheckBox.setChecked(false);
 		}
 	}
 	
