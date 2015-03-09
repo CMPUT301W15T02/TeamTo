@@ -6,6 +6,7 @@ public class ClaimsList {
 
 	private ArrayList<Claim> claims;
 	
+	
 	public ClaimsList() {
 		claims = new ArrayList<Claim>();
 	}
@@ -24,7 +25,6 @@ public class ClaimsList {
 	
 	public void removeClaim(Claim claim) {
 		claims.remove(claim);
-
 	}
 	
 	public Claim getClaim(Claim claim) {
