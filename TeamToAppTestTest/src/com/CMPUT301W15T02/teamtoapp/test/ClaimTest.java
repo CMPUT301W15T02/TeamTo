@@ -29,8 +29,9 @@ public class ClaimTest extends TestCase {
 	
 	public void testClaimDates() {
 		Claim claim = new Claim();
-		GregorianCalendar date = new GregorianCalendar(2015,3,24);
-		//assertTrue("", claim.getStartDate());
+		GregorianCalendar currentDate = new GregorianCalendar();
+		GregorianCalendar futureDate = new GregorianCalendar(2015, 3, 24);
+		assertFalse("Claim not instantiated with default start date", claim.getStartDate().equals(currentDate));
 	}
 	
 	public void testGetDestinations() {
