@@ -50,7 +50,15 @@ public class ClaimTest extends TestCase {
 		String reason = "business";
 		StringTuple newDestination = new StringTuple(destination, reason);
 		claim.addDestination(newDestination);
-		assertTrue("StringTuples not equal", claim.getDestinations().equals(newDestination));
+		assertTrue("StringTuples not equal", claim.getDestinations().get(0).equals(newDestination));
+		
+		StringTuple dest1 = new StringTuple("SanFran", "Business1");
+		StringTuple dest2 = new StringTuple("Chicago", "Business2");
+		ArrayList<StringTuple> newDestinationsList = new ArrayList<StringTuple>();
+		newDestinationsList.add(dest1);
+		newDestinationsList.add(dest2);
+		claim.setDestinations(newDestinationsList);
+		assertTrue("Destinations lists aren't equal", claim.getDestinations().equals(newDestinationsList));
 	}
 	
 }

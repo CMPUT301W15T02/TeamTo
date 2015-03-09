@@ -97,6 +97,7 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
+	//
 	public ArrayList<StringTuple> getDestinations() {
 		return destinations;
 	}
@@ -105,6 +106,17 @@ public class Claim extends Observable {
 		this.destinations = destinations;
 		setChanged();
 		notifyObservers();
+	}
+	
+	//
+	public void addDestination(StringTuple new_tuple) {
+		this.destinations.add(new_tuple);
+		setChanged();
+		notifyObservers();
+	}
+
+	public Boolean verifyDestination(StringTuple check_tuple) {
+		return destinations.contains(check_tuple);
 	}
 
 	public ArrayList<Expense> getExpenses() {
@@ -180,16 +192,6 @@ public class Claim extends Observable {
 		setChanged();
 		notifyObservers();
 	}	
-	
-	public void addDestination(StringTuple new_tuple) {
-		this.destinations.add(new_tuple);
-		setChanged();
-		notifyObservers();
-	}
-
-	public Boolean verifyDestination(StringTuple check_tuple) {
-		return destinations.contains(check_tuple);
-	}
 	
 	public boolean isExpense(Expense expense) {
 		return this.expenses.contains(expense);
