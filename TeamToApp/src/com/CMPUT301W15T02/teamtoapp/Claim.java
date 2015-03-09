@@ -115,6 +115,13 @@ public class Claim extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
+	//
+	public void removeDestination(StringTuple destination) {
+		this.destinations.remove(destination);
+		setChanged();
+		notifyObservers();
+	}
 
 	//
 	public Boolean verifyDestination(StringTuple check_tuple) {
@@ -193,18 +200,21 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 	
+	//
 	public void addExpense(Expense expense) {
 		this.expenses.add(expense);
 		setChanged();
 		notifyObservers();
 	}
 	
+	//
 	public void removeExpense(Expense expense) {
 		this.expenses.remove(expense);
 		setChanged();
 		notifyObservers();
 	}	
 	
+	//
 	public boolean isExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}

@@ -41,7 +41,6 @@ public class ClaimTest extends TestCase {
 		assertTrue("End date not updated", claim.getEndDate().equals(futureDate2));
 	}
 	
-	// No removeDestination() method in Claim
 	public void testGetDestinations() {
 		// Test with empty list
 		ArrayList<StringTuple> destinationsList = new ArrayList<StringTuple>();
@@ -64,9 +63,11 @@ public class ClaimTest extends TestCase {
 		claim.setDestinations(newDestinationsList);
 		assertTrue("Destinations lists aren't equal", claim.getDestinations().equals(newDestinationsList));
 		
-		// Test membership
+		// Test membership & remove
 		assertTrue("Destinations list isn't saying it contains item it does", claim.verifyDestination(dest1));
 		assertFalse("Destinations list is saying it contains item it does not", claim.verifyDestination(newDestination));
+		claim.removeDestination(dest1);
+		assertFalse("Destinations list is saying it contains item it does not", claim.verifyDestination(dest1));
 	}
 	
 }
