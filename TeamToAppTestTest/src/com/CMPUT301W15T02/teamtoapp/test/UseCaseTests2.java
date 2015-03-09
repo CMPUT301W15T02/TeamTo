@@ -15,7 +15,7 @@ import com.CMPUT301W15T02.teamtoapp.User;
 import com.CMPUT301W15T02.teamtoapp.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Expense;
 
-public class ExpenseTest extends TestCase {
+public class UseCaseTests2 extends TestCase {
 	
 	private static final Currency CAD = Currency.getInstance("CAD");
 	private static final Currency USD = Currency.getInstance("USD");

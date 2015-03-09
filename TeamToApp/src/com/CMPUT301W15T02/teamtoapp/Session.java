@@ -3,13 +3,13 @@ package com.CMPUT301W15T02.teamtoapp;
 
 public class Session {
 	private User currentUser;
-	private ClaimsList currentClaims;
+	private ClaimList currentClaims;
 	
 	private static Session instance = null;
 
 	private Session(){
 		currentUser = new User(null);
-		currentClaims = new ClaimsList();
+		currentClaims = new ClaimList();
 	};
 
 	public static Session getInstance() {
@@ -27,11 +27,11 @@ public class Session {
 		this.currentUser = currentUser;
 	}
 
-	public ClaimsList getCurrentClaims() {
+	public ClaimList getCurrentClaims() {
 		return currentClaims;
 	}
 
-	public void setCurrentClaims(ClaimsList currentClaims) {
+	public void setCurrentClaims(ClaimList currentClaims) {
 		this.currentClaims = currentClaims;
 	}
 	

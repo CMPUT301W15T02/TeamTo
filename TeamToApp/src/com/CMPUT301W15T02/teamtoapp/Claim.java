@@ -61,20 +61,17 @@ public class Claim extends Observable {
 		this.ClaimId = UUID.randomUUID().toString();
 	}
 	
-	//
 	//TODO: Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
 		return c_name;
 	}
 
-	//
 	public void setClaimName(String c_name) {
 		this.c_name = c_name;
 		setChanged();
 		notifyObservers();
 	}
 
-	//
 	public GregorianCalendar getStartDate() {
 		return this.startDate;
 	}
@@ -102,6 +99,22 @@ public class Claim extends Observable {
 		this.destinations = destinations;
 		setChanged();
 		notifyObservers();
+	}
+	
+	public void addDestination(StringTuple new_tuple) {
+		this.destinations.add(new_tuple);
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void removeDestination(StringTuple destination) {
+		this.destinations.remove(destination);
+		setChanged();
+		notifyObservers();
+	}
+
+	public Boolean verifyDestination(StringTuple check_tuple) {
+		return destinations.contains(check_tuple);
 	}
 
 	public ArrayList<Expense> getExpenses() {
@@ -143,17 +156,7 @@ public class Claim extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-
-	public String getUser() {
-		return userId;
-	}
-
-	public void setUser(String user_id) {
-		this.userId = user_id;
-		setChanged();
-		notifyObservers();
-	}
-
+	
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
 		setChanged();
@@ -162,6 +165,16 @@ public class Claim extends Observable {
 	
 	public void removeTag(Tag tag){
 		this.tags.remove(tag);
+		setChanged();
+		notifyObservers();
+	}
+
+	public String getUser() {
+		return userId;
+	}
+
+	public void setUser(String user_id) {
+		this.userId = user_id;
 		setChanged();
 		notifyObservers();
 	}
@@ -178,17 +191,7 @@ public class Claim extends Observable {
 		notifyObservers();
 	}	
 	
-	public void addDestination(StringTuple new_tuple) {
-		this.destinations.add(new_tuple);
-		setChanged();
-		notifyObservers();
-	}
-
-	public Boolean verifyDestination(StringTuple check_tuple) {
-		return destinations.contains(check_tuple);
-	}
-	
-	public boolean isExpense(Expense expense) {
+	public boolean verifyExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}
 	

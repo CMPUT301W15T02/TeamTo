@@ -7,9 +7,9 @@
     <uses-sdk
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -43,6 +43,10 @@
         <activity
             android:name=".ExpenseEditActivity"
             android:label="@string/title_activity_add_expense" >
+        </activity>
+        <activity
+            android:name=".ExpenseViewActivity"
+            android:label="@string/title_activity_expense_view" >
         </activity>
     </application>
 

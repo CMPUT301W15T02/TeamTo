@@ -2,11 +2,12 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 
-public class ClaimsList {
+public class ClaimList {
 
 	private ArrayList<Claim> claims;
 	
-	public ClaimsList() {
+	
+	public ClaimList() {
 		claims = new ArrayList<Claim>();
 	}
 
@@ -24,7 +25,6 @@ public class ClaimsList {
 	
 	public void removeClaim(Claim claim) {
 		claims.remove(claim);
-
 	}
 	
 	public Claim getClaim(Claim claim) {

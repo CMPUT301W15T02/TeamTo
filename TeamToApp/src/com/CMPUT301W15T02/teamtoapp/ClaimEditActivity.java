@@ -43,7 +43,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 	private TextView endDateTextView;
 	private EditText claimNameEditText;
 	private ListView destinationsListView;
-	private SessionController sessionController;
+	private ClaimListController claimListController;
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	private String claimID;
@@ -59,7 +59,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
-		sessionController = new SessionController();
+		claimListController = new ClaimListController();
 		getModelObjects();
 		findViewsByIds();
         setListeners();
@@ -77,7 +77,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 		// TODO Save all input once claimant saves a claim. Otherwise delete automatically if nothing entered.
 		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
 				claimController.getDestinations().size() == 0) {
-			sessionController.removeClaim(claimController.getCurrentClaim());
+			claimListController.removeClaim(claimController.getCurrentClaim());
 			super.onBackPressed();
 		} else {
 			super.onBackPressed();
@@ -96,7 +96,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 		// Makes sure a claim is deleted only when nothing entered.
 		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
 				claimController.getDestinations().size() == 0) {
-			sessionController.removeClaim(claimController.getCurrentClaim());
+			claimListController.removeClaim(claimController.getCurrentClaim());
 			finish();
 		} else {
 			finish();

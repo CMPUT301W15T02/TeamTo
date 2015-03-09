@@ -32,7 +32,7 @@ import android.widget.Toast;
 
 public class ClaimantClaimsListActivity extends Activity {
 	
-	private SessionController sessionController;
+	private ClaimListController claimListController;
 	final Context context = this;
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
@@ -42,7 +42,7 @@ public class ClaimantClaimsListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
 		
-		sessionController = new SessionController();
+		claimListController = new ClaimListController();
 		
 		findViewsByIds();
 		setListeners();
@@ -58,7 +58,7 @@ public class ClaimantClaimsListActivity extends Activity {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Claim claim = sessionController.getClaims().get(position);
+				Claim claim = claimListController.getClaim(position);
 				Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantExpenseListActivity.class);
 				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
@@ -75,7 +75,7 @@ public class ClaimantClaimsListActivity extends Activity {
 				.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						Claim claim = sessionController.getClaims().get(position);
+						Claim claim = claimListController.getClaim(position);
 						Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
 						intent.putExtra("claimID", claim.getClaimId());
 						startActivity(intent);
@@ -86,8 +86,8 @@ public class ClaimantClaimsListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						// Finished - can now delete claim
 						// TODO: Need to do a test for deleting claim in TeamToAppTest
-						Claim claim = sessionController.getClaims().get(position);
-						sessionController.removeClaim(claim);
+						Claim claim = claimListController.getClaim(position);
+						claimListController.removeClaim(claim);
 						adapter.notifyDataSetChanged();
 					}
 				});
@@ -101,7 +101,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	
 	private void setUpAdapter() {
-		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, sessionController.getClaims());
+		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getClaims());
 		listView.setAdapter(adapter);
 	}
 	
@@ -120,7 +120,7 @@ public class ClaimantClaimsListActivity extends Activity {
 			return true;
 		} else if (id == R.id.addClaimOp) {
 			Claim newClaim = new Claim();
-			sessionController.addClaim(newClaim);
+			claimListController.addClaim(newClaim);
 			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
 			intent.putExtra("claimID", newClaim.getClaimId());
 			startActivity(intent);	
