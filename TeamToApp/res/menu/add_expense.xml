@@ -1,11 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.CMPUT301W15T02.teamtoapp.AddExpenseActivity" >
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+    <item android:id="@+id/save_new_expense" android:enabled="true" android:title="SAVE" android:visible="true" android:showAsAction="always"></item>
 
 </menu>

@@ -59,6 +59,7 @@ public class ClaimantExpenseListActivity extends Activity {
 			claimController.addExpense(expense);
 			Intent intent = new Intent(getBaseContext(), ExpenseEditActivity.class);
 			intent.putExtra("expenseID", expense.getExpenseId());
+			intent.putExtra("claimID", claimID);
 			startActivity(intent);
 			return true;
 		} else if (id == R.id.submitClaimOption) {

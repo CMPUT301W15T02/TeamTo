@@ -45,6 +45,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	private ArrayAdapter<CharSequence> categoriesAdapter;
 	
 	private DatePickerDialog datePickerDialog;
+	private String claimID;
 	
 
 	@Override
@@ -71,8 +72,8 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.save_new_expense) {
+			onSaveExpenseButtonClick();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -80,6 +81,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	private void getModelObjects() {
 		Intent intent = getIntent();
 		expenseID = (String) intent.getSerializableExtra("expenseID");
+		claimID = (String) intent.getSerializableExtra("claimID");
 		controller = new ExpenseController(expenseID);
 		controller.addObserverToExpense(this);
 		
@@ -129,6 +131,18 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			completedCheckBox.setChecked(false);
 		}
 	}
+	
+	
+	private void onSaveExpenseButtonClick() {
+		if ( controller.getDescription().isEmpty() ){
+			ClaimController claimController = new ClaimController(claimID);
+			claimController.removeExpense(controller.getExpense());
+			super.onBackPressed();
+		} else {
+			super.onBackPressed();
+		}
+	}
+	
 	
 	private void setListeners() {
 		dateTextView.setOnClickListener(new View.OnClickListener() {
