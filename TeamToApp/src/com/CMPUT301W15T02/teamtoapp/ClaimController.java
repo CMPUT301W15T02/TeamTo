@@ -104,6 +104,12 @@ public class ClaimController {
 		return currentClaim.getDestinations();
 	}
 	
+	public void removeDestination(StringTuple destination) {
+		if (currentClaim.getDestinations().contains(destination)) {
+			currentClaim.getDestinations().remove(destination);
+		}
+	}
+	
 	
 	public void addObserverToClaim(Observer observer) {
 		currentClaim.addObserver(observer);

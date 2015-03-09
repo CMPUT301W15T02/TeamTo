@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -220,6 +221,38 @@ public class ClaimEditActivity extends Activity implements Observer {
 			public void afterTextChanged(Editable s) {
 				claimController.setClaimName(s.toString());
 				
+			}
+		});
+		
+		destinationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, final int position,
+					long id) {
+				// TODO Auto-generated method stub
+				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimEditActivity.this);
+				builder.setMessage("Delete Destination?");
+				builder
+				.setPositiveButton("Delete", new DialogInterface.OnClickListener () {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						StringTuple destination = claimController.getDestinations().get(position);
+						claimController.removeDestination(destination);
+						adapter.notifyDataSetChanged();
+					}
+				})
+				.setNegativeButton("Cancel",  new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// Do nothing
+					}
+					
+				});
+				
+				AlertDialog alertDialog = builder.create();
+				alertDialog.show();
 			}
 		});
 		
