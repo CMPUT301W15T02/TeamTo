@@ -70,6 +70,8 @@ public class ClaimTest extends TestCase {
 		assertFalse("Destinations list is saying it contains item it does not", claim.verifyDestination(dest1));
 	}
 	
+	// Same tests for tags, expenses, etc. but didn't implement because didn't see the point?
+	
 }
 
 
