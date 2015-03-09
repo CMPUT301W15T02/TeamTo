@@ -102,6 +102,20 @@ public class ClaimController {
 		return currentClaim.getExpenses();
 	}
 	
+	public int checkExpensesComplete() {
+		int numIncomplete = 0;
+		
+		if (currentClaim.getExpenses().size() == 0) {
+			return 0;
+		} else {
+			for (Expense expense : currentClaim.getExpenses()) {
+				if (expense.getComplete() == false) { numIncomplete++; }
+			}
+		}
+		
+		return numIncomplete;
+	}
+	
 	public ArrayList<StringTuple> getDestinations() {
 		return currentClaim.getDestinations();
 	}

@@ -155,10 +155,13 @@ public class ClaimantExpenseListActivity extends Activity {
 		
 		if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.IN_PROGRESS) {
 			// Gives number of incomplete expenses.
-			int numExpensesIncomplete = claimController.getCurrentClaim().checkExpensesComplete();
+			int numExpensesIncomplete = claimController.checkExpensesComplete();
 			
 			if (numExpensesIncomplete > 0) {
 				Toast.makeText(context, "Expenses are incomplete.", Toast.LENGTH_SHORT).show();
+			} else {
+				claimController.getCurrentClaim().setStatus(Status.SUBMITTED);
+				Toast.makeText(context, "Claim successfully submitted.", Toast.LENGTH_SHORT).show();
 			}
 			
 		} else if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.APPROVED) {
@@ -167,8 +170,8 @@ public class ClaimantExpenseListActivity extends Activity {
 		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.RETURNED) {
 			// do something...
 			
-		} else {
-			claimController.getCurrentClaim().setStatus(Status.SUBMITTED);
+		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.SUBMITTED){
+			Toast.makeText(context, "Claim already submitted.", Toast.LENGTH_SHORT).show();
 		}
 	}
 	

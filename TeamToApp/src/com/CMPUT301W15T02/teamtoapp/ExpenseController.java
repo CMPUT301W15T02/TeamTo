@@ -57,7 +57,7 @@ public class ExpenseController {
 	}
 	
 	public boolean isComplete() {
-		return currentExpense.isComplete();
+		return currentExpense.getComplete();
 	}
 	
 	

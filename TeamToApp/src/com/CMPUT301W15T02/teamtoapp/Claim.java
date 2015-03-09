@@ -192,20 +192,6 @@ public class Claim extends Observable {
 		return this.expenses.contains(expense);
 	}
 	
-	public int checkExpensesComplete() {
-		int numIncomplete = 0;
-		
-		if (expenses.size() == 0) {
-			return 0;
-		} else {
-			for (Expense expense : expenses) {
-				// TODO: the isComplete method still needs implementation.
-				if (expense.isComplete() == false) { numIncomplete++; }
-			}
-		}
-		
-		return numIncomplete;
-	}
 	
 	// Up to caller to be sure not null
 	public Expense getExpense(Expense expense) {
