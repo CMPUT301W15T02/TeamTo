@@ -75,7 +75,6 @@ public class Claim extends Observable {
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 		setChanged();
-		notifyObservers();
 	}
 
 	public Calendar getEndDate() {
