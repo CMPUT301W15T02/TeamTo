@@ -87,7 +87,6 @@ public class Claim extends Observable {
 		return endDate;
 	}
 
-	// Check end date > start date?
 	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
 		setChanged();

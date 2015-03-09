@@ -3,7 +3,6 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
@@ -30,7 +29,7 @@ public class ClaimTest extends TestCase {
 	
 	public void testClaimDates() {
 		Claim claim = new Claim();
-		Calendar date = new GregorianCalendar(2015,3,24);
+		GregorianCalendar date = new GregorianCalendar(2015,3,24);
 		//assertTrue("", claim.getStartDate());
 	}
 	
