@@ -95,7 +95,8 @@ public class UseCaseTests extends TestCase {
 		assertNull("user still has this claim!", claims.getClaim(claim));
 		
 	}
-	
+
+/*
 	// UC 1.*
 	public void testClaimsSorted() {
 		User user = new User("Peter");
@@ -186,5 +187,6 @@ public class UseCaseTests extends TestCase {
 		user.saveToCloud();
 		assertEquals("Cloud saving working", user, user.loadFromCloud());
 	}
+*/
 		
 }

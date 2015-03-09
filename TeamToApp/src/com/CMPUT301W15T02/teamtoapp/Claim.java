@@ -32,7 +32,6 @@ import android.widget.Toast;
 
 public class Claim extends Observable {
 
-	
 	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
 	private String c_name;
 	private Calendar startDate;
@@ -45,7 +44,7 @@ public class Claim extends Observable {
 	private String userId;
 	private String ClaimId;
 	
-
+	
 	public Claim() {
 		this.setClaimName("New Claim");
 		this.startDate = Calendar.getInstance();
@@ -58,11 +57,10 @@ public class Claim extends Observable {
 		this.ClaimId = UUID.randomUUID().toString();
 	}
 	
-	// Need to display claim name for custom claim list view (claimant, not for approver)
+	//TODO: Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
 		return c_name;
 	}
-
 
 	public void setClaimName(String c_name) {
 		this.c_name = c_name;
@@ -70,23 +68,19 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public Calendar getStartDate() {
 		return startDate;
 	}
 
-	
 	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 		setChanged();
 		notifyObservers();
 	}
 
-
 	public Calendar getEndDate() {
 		return endDate;
 	}
-
 
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
@@ -94,11 +88,9 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public ArrayList<StringTuple> getDestinations() {
 		return destinations;
 	}
-
 
 	public void setDestinations(ArrayList<StringTuple> destinations) {
 		this.destinations = destinations;
@@ -106,11 +98,9 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
 	}
-
 
 	public void setExpenses(ArrayList<Expense> expenses) {
 		this.expenses = expenses;
@@ -118,11 +108,9 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public Status getStatus() {
 		return status;
 	}
-
 
 	public void setStatus(Status status) {
 		this.status = status;
@@ -130,11 +118,9 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public String getComment() {
 		return comment;
 	}
-
 
 	public void setComment(String comment) {
 		this.comment = comment;
@@ -142,11 +128,9 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
-
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
@@ -154,19 +138,15 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-
 	public String getUser() {
 		return userId;
 	}
-
 
 	public void setUser(String user_id) {
 		this.userId = user_id;
 		setChanged();
 		notifyObservers();
 	}
-	
-	
 
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
@@ -179,7 +159,6 @@ public class Claim extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-
 	
 	public void addExpense(Expense expense) {
 		this.expenses.add(expense);
@@ -187,32 +166,26 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 	
-	
 	public void removeExpense(Expense expense) {
 		this.expenses.remove(expense);
 		setChanged();
 		notifyObservers();
 	}	
-
 	
 	public void addDestination(StringTuple new_tuple) {
 		this.destinations.add(new_tuple);
 		setChanged();
 		notifyObservers();
-		
 	}
 
 	public Boolean verifyDestination(StringTuple check_tuple) {
 		return destinations.contains(check_tuple);
 	}
 	
-
-	
 	public boolean isExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}
 	
-	// TODO: Need to do tests
 	public int checkExpensesComplete() {
 		int numIncomplete = 0;
 		
@@ -254,5 +227,6 @@ public class Claim extends Observable {
 	public String getClaimId() {
 		return ClaimId;
 	}
+	
 	
 }

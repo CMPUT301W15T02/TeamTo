@@ -67,7 +67,8 @@ public class ExpenseTest extends TestCase {
 		expense.setCurrency(currString);
 		assertEquals(GBP, expense.getCurrency());
 	}
-	
+
+/*
 	// Add Expense (UC 4.1)
 	public void addExpense() {
 		User user = new User("New guy");
@@ -188,7 +189,5 @@ public class ExpenseTest extends TestCase {
 		
 	}
 	
-
-	
-
+*/
 }
