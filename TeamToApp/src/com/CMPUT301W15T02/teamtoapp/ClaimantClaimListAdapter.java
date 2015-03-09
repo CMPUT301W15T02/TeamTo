@@ -55,7 +55,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			
 			holder.claimNameTextView = (TextView) row.findViewById(R.id.claimantClaimNameView);
 			holder.startDateTextView = (TextView) row.findViewById(R.id.claimantStartDateView);
-			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantDestsView);
+			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantListDestsView);
 			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
 			//TODO: holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
