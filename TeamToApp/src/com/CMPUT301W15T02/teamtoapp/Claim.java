@@ -102,6 +102,7 @@ public class Claim extends Observable {
 		return destinations;
 	}
 
+	//
 	public void setDestinations(ArrayList<StringTuple> destinations) {
 		this.destinations = destinations;
 		setChanged();
@@ -115,60 +116,59 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
+	//
 	public Boolean verifyDestination(StringTuple check_tuple) {
 		return destinations.contains(check_tuple);
 	}
 
+	//
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
 	}
 
+	//
 	public void setExpenses(ArrayList<Expense> expenses) {
 		this.expenses = expenses;
 		setChanged();
 		notifyObservers();
 	}
 
+	//
 	public Status getStatus() {
 		return status;
 	}
 
+	//
 	public void setStatus(Status status) {
 		this.status = status;
 		setChanged();
 		notifyObservers();
 	}
 
+	//
 	public String getComment() {
 		return comment;
 	}
 
+	//
 	public void setComment(String comment) {
 		this.comment = comment;
 		setChanged();
 		notifyObservers();
 	}
 
+	//
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
 
+	//
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
 		setChanged();
 		notifyObservers();
 	}
-
-	public String getUser() {
-		return userId;
-	}
-
-	public void setUser(String user_id) {
-		this.userId = user_id;
-		setChanged();
-		notifyObservers();
-	}
-
+	
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
 		setChanged();
@@ -177,6 +177,18 @@ public class Claim extends Observable {
 	
 	public void removeTag(Tag tag){
 		this.tags.remove(tag);
+		setChanged();
+		notifyObservers();
+	}
+
+	//
+	public String getUser() {
+		return userId;
+	}
+
+	//
+	public void setUser(String user_id) {
+		this.userId = user_id;
 		setChanged();
 		notifyObservers();
 	}

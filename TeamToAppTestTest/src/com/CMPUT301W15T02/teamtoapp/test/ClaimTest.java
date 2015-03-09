@@ -41,17 +41,21 @@ public class ClaimTest extends TestCase {
 		assertTrue("End date not updated", claim.getEndDate().equals(futureDate2));
 	}
 	
+	// No removeDestination() method in Claim
 	public void testGetDestinations() {
+		// Test with empty list
 		ArrayList<StringTuple> destinationsList = new ArrayList<StringTuple>();
 		Claim claim = new Claim();
 		assertTrue("List of destinations not equal", claim.getDestinations().equals(destinationsList));
 		
+		// Test adding one destination
 		String destination = "Hawaii";
 		String reason = "business";
 		StringTuple newDestination = new StringTuple(destination, reason);
 		claim.addDestination(newDestination);
 		assertTrue("StringTuples not equal", claim.getDestinations().get(0).equals(newDestination));
 		
+		// Test replacing entire destination list
 		StringTuple dest1 = new StringTuple("SanFran", "Business1");
 		StringTuple dest2 = new StringTuple("Chicago", "Business2");
 		ArrayList<StringTuple> newDestinationsList = new ArrayList<StringTuple>();
@@ -59,6 +63,10 @@ public class ClaimTest extends TestCase {
 		newDestinationsList.add(dest2);
 		claim.setDestinations(newDestinationsList);
 		assertTrue("Destinations lists aren't equal", claim.getDestinations().equals(newDestinationsList));
+		
+		// Test membership
+		assertTrue("Destinations list isn't saying it contains item it does", claim.verifyDestination(dest1));
+		assertFalse("Destinations list is saying it contains item it does not", claim.verifyDestination(newDestination));
 	}
 	
 }
