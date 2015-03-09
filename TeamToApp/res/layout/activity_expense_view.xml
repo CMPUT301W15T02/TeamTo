@@ -38,7 +38,7 @@
         android:paddingBottom="16dp"
         android:id="@+id/ExpenseDescriptionEditText"
         android:inputType="textCapSentences"
-        andrid:editable="false"/>
+        android:editable="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"
