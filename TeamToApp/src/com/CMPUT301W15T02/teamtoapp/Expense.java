@@ -40,7 +40,7 @@ public class Expense extends Observable {
 	public Expense() {
 		date = Calendar.getInstance();
 		currency = Currency.getInstance("CAD");
-		category = "other";
+		category = "Other";
 		amount = 0.0;
 		complete = false;
 		description = "";
