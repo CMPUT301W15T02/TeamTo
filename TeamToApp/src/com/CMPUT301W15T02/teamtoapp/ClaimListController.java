@@ -6,7 +6,7 @@ import android.R.integer;
 
 public class ClaimListController {
 
-	private ClaimsList claims;
+	private ClaimList claims;
 	
 	public ClaimListController() {
 		claims = Session.getInstance().getCurrentClaims();

@@ -3,13 +3,13 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.ClaimsList;
+import com.CMPUT301W15T02.teamtoapp.ClaimList;
 import junit.framework.TestCase;
 
-public class ClaimsListTest extends TestCase {
+public class ClaimListTest extends TestCase {
 
 	public void testAddClaim() {
-		ClaimsList claims = new ClaimsList();
+		ClaimList claims = new ClaimList();
 		//assert("ClaimsList contains claim when not supposed to", claims.getClaims());
 		
 		Claim claim1 = new Claim();

@@ -12,12 +12,12 @@ public class DataManager {
 		
 	}
 	
-	public ClaimsList getClaims(){
+	public ClaimList getClaims(){
 		
 		return null;
 	}
 	
-	public void saveClaims(ClaimsList claimsList){
+	public void saveClaims(ClaimList claimsList){
 		
 	}
 }
