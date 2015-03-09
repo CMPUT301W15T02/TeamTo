@@ -79,15 +79,18 @@ public class Claim extends Observable {
 		return this.startDate;
 	}
 
+	//
 	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
 		setChanged();
 	}
 
+	//
 	public Calendar getEndDate() {
 		return endDate;
 	}
 
+	//
 	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
 		setChanged();
