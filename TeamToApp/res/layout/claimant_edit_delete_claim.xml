@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ClaimTagsListView"
     android:layout_width="match_parent"
-    tools:context=".ClaimantClaimsListActivity" 
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp" >
+    android:layout_marginRight="8dp"
+    android:orientation="vertical"
+    tools:context=".ClaimantClaimsListActivity" >
 
     <EditText
     	android:id="@+id/claimNameEditText"
@@ -66,5 +66,26 @@
                 android:onClick="addDestinationOption"
                 android:text="Add Destination"
                 android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
+            <TextView
+                android:id="@+id/ClaimTagsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags:"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@android:color/darker_gray" />
+
+            <ListView
+                android:id="@+id/listView1"
+                android:layout_width="match_parent"
+                android:layout_height="107dp" >
+            </ListView>
+
+            <Button
+                android:id="@+id/ClaimAddTagsButton"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:text="Add Tags" />
 
 </LinearLayout>
