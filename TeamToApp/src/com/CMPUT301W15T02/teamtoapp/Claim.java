@@ -17,6 +17,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.UUID;
 
@@ -28,6 +29,9 @@ import android.widget.Toast;
  * Stores all of the data related to a claim
  * Note: for each method in this class, might need to check current claim status
  * to check if changes are allowed to be made.
+ * 
+ * http://stackoverflow.com/questions/25593768/difference-between-calendar-getinstance-and-gregoriancalendar-getinstance
+ * We need to use GregorianCalendar as per the info in the link above!
  */
 
 public class Claim extends Observable {
@@ -47,8 +51,8 @@ public class Claim extends Observable {
 	
 	public Claim() {
 		this.setClaimName("New Claim");
-		this.startDate = Calendar.getInstance();
-		this.endDate = Calendar.getInstance();
+		this.startDate = GregorianCalendar.getInstance();
+		this.endDate = GregorianCalendar.getInstance();
 		this.destinations = new ArrayList<StringTuple>();
 		this.expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
@@ -57,19 +61,21 @@ public class Claim extends Observable {
 		this.ClaimId = UUID.randomUUID().toString();
 	}
 	
+	//
 	//TODO: Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
 		return c_name;
 	}
 
+	//
 	public void setClaimName(String c_name) {
 		this.c_name = c_name;
 		setChanged();
 		notifyObservers();
 	}
 
-	public Calendar getStartDate() {
-		return startDate;
+	public GregorianCalendar getStartDate() {
+		return this.startDate;
 	}
 
 	public void setStartDate(Calendar startDate) {
@@ -81,6 +87,7 @@ public class Claim extends Observable {
 		return endDate;
 	}
 
+	// Check end date > start date?
 	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 		setChanged();

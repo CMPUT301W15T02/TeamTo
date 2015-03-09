@@ -3,6 +3,8 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import com.CMPUT301W15T02.teamtoapp.Claim;
 import com.CMPUT301W15T02.teamtoapp.StringTuple;
@@ -24,6 +26,12 @@ public class ClaimTest extends TestCase {
 		String aSecondClaimName = "updatedTestClaim";
 		claim.setClaimName(aSecondClaimName);
 		assertTrue("Claim name not updated", claim.getClaimName().equals(aSecondClaimName));
+	}
+	
+	public void testClaimDates() {
+		Claim claim = new Claim();
+		Calendar date = new GregorianCalendar(2015,3,24);
+		//assertTrue("", claim.getStartDate());
 	}
 	
 	public void testGetDestinations() {
