@@ -47,6 +47,10 @@ public class ClaimEditActivity extends Activity implements Observer {
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	private String claimID;
+	//TODO: ADD FUNCTIONALITY TO TAGS BUTTON AND TO TAGS LIST reference 
+	// http://theopentutorials.com/tutorials/android/listview/android-multiple-selection-listview/
+	private Button addTagButton;
+	private ListView tagListView;
 	
 	private ClaimController claimController;
 	
@@ -159,7 +163,8 @@ public class ClaimEditActivity extends Activity implements Observer {
         endDateTextView = (TextView) findViewById(R.id.endDateTextView);
         claimNameEditText = (EditText) findViewById(R.id.claimNameEditText);
         destinationsListView = (ListView) findViewById(R.id.destinationListView);
-        
+        addTagButton = (Button) findViewById(R.id.ClaimAddTagsButton);
+    	tagListView = (ListView) findViewById(R.id.ClaimsTagsListView);
 	}
 	
 	
