@@ -3,6 +3,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.Claim.Status;
@@ -59,7 +60,7 @@ public class ClaimController {
 		currentClaim.setStatus(Status.APPROVED);
 	}
 	
-	public void setStartDate(Calendar date) {
+	public void setStartDate(GregorianCalendar date) {
 		currentClaim.setStartDate(date);
 	}
 	
@@ -71,7 +72,8 @@ public class ClaimController {
 		return formatter.format(getStartDate().getTime());
 	}
 	
-	public void setEndDate(Calendar date) {
+	// Check end date > start date?
+	public void setEndDate(GregorianCalendar date) {
 		currentClaim.setEndDate(date);
 	}
 	
@@ -110,15 +112,12 @@ public class ClaimController {
 		}
 	}
 	
-	
 	public void addObserverToClaim(Observer observer) {
 		currentClaim.addObserver(observer);
 	}
-	
 	
 	public void removeObserverFromClaim(Observer observer) {
 		currentClaim.deleteObserver(observer);
 	}
 	
-
 }
