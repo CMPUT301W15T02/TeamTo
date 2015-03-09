@@ -31,7 +31,7 @@ import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
 
-public class ClaimTest extends TestCase {
+public class UseCaseTests extends TestCase {
 
 	// UC 1.0
 	public void testAddClaim () {
