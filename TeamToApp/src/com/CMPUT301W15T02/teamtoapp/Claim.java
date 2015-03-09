@@ -74,6 +74,7 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
+	//
 	public GregorianCalendar getStartDate() {
 		return this.startDate;
 	}

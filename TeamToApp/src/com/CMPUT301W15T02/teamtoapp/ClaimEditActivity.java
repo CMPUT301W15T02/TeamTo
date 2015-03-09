@@ -184,7 +184,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+				GregorianCalendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setStartDate(calendar);
 			}
 			
@@ -195,7 +195,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+				GregorianCalendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setEndDate(calendar);
 				
 			}

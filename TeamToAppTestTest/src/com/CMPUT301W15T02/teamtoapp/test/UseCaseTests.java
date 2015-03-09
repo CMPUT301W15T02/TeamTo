@@ -45,8 +45,8 @@ public class UseCaseTests extends TestCase {
 		// TODO: Need to consider claimID.
 		ClaimController controller = new ClaimController(claim.getClaimId());
 		String name = "new claim";
-		Calendar start_date = Calendar.getInstance();
-		Calendar end_date = Calendar.getInstance();
+		GregorianCalendar start_date = new GregorianCalendar();
+		GregorianCalendar end_date = new GregorianCalendar();
 		controller.setClaimName(name);
 		controller.setStartDate(start_date);
 		controller.setEndDate(end_date);
