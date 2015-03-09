@@ -20,10 +20,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -230,6 +230,14 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			@Override
 			public void afterTextChanged(Editable s) {
 				controller.setDescription(s.toString());
+			}
+		});
+		
+		completedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				controller.setComplete(isChecked);
 			}
 		});
 	}
