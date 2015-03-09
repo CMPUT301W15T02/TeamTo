@@ -76,13 +76,13 @@
                 android:textColor="@android:color/darker_gray" />
 
             <ListView
-                android:id="@+id/ClaimsTagsListView"
+                android:id="@+id/claimantTagsListView"
                 android:layout_width="match_parent"
                 android:layout_height="107dp" >
             </ListView>
 
             <Button
-                android:id="@+id/ClaimAddTagsButton"
+                android:id="@+id/claimantAddTagsButton"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="match_parent"
                 android:layout_height="43dp"

@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 public class ExpenseEditActivity extends Activity implements Observer {
 	
-	private ExpenseController controller;
+	private ExpenseController expenseController;
 	private String expenseID;
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
@@ -82,8 +82,8 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		Intent intent = getIntent();
 		expenseID = (String) intent.getSerializableExtra("expenseID");
 		claimID = (String) intent.getSerializableExtra("claimID");
-		controller = new ExpenseController(expenseID);
-		controller.addObserverToExpense(this);
+		expenseController = new ExpenseController(expenseID);
+		expenseController.addObserverToExpense(this);
 		
 	}
 	
@@ -108,24 +108,24 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	
 	private void setFieldValues() {
 		updateValues();
-		if (controller.getAmount().equals(0.0)) {
-			amountEditText.setHint(df.format(controller.getAmount()));
+		if (expenseController.getAmount().equals(0.0)) {
+			amountEditText.setHint(df.format(expenseController.getAmount()));
 		} else {
-			amountEditText.setText(df.format(controller.getAmount()));
+			amountEditText.setText(df.format(expenseController.getAmount()));
 		}
-		if (controller.getDescription().equals("")) {
+		if (expenseController.getDescription().equals("")) {
 			descriptionEditText.setHint("Enter a description");
 		} else {
-			descriptionEditText.setText(controller.getDescription());
+			descriptionEditText.setText(expenseController.getDescription());
 		}
 	}
 	
 	
 	private void updateValues() {
-		dateTextView.setText(formatter.format(controller.getDate().getTime()));
-		currencySpinner.setSelection(currencyAdapter.getPosition(controller.getCurrency().toString()));
-		categorySpinner.setSelection(categoriesAdapter.getPosition(controller.getCategory()));
-		if (controller.isComplete()) {
+		dateTextView.setText(formatter.format(expenseController.getDate().getTime()));
+		currencySpinner.setSelection(currencyAdapter.getPosition(expenseController.getCurrency().toString()));
+		categorySpinner.setSelection(categoriesAdapter.getPosition(expenseController.getCategory()));
+		if (expenseController.isComplete()) {
 			completedCheckBox.setChecked(true);
 		} else {
 			completedCheckBox.setChecked(false);
@@ -134,9 +134,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	
 	
 	private void onSaveExpenseButtonClick() {
-		if ( controller.getDescription().isEmpty() ){
+		if ( expenseController.getDescription().isEmpty() ){
 			ClaimController claimController = new ClaimController(claimID);
-			claimController.removeExpense(controller.getExpense());
+			claimController.removeExpense(expenseController.getExpense());
 			super.onBackPressed();
 		} else {
 			super.onBackPressed();
@@ -154,14 +154,14 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			}
 		});
 		
-		Calendar date = controller.getDate();
+		Calendar date = expenseController.getDate();
 		
 		datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-				controller.setDate(calendar);
+				expenseController.setDate(calendar);
 			}
 			
 		}, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
@@ -171,7 +171,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				controller.setCurrency(Currency.getInstance(parent.getItemAtPosition(position).toString()));
+				expenseController.setCurrency(Currency.getInstance(parent.getItemAtPosition(position).toString()));
 				
 			}
 
@@ -187,7 +187,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				controller.setCategory(parent.getItemAtPosition(position).toString());
+				expenseController.setCategory(parent.getItemAtPosition(position).toString());
 				
 			}
 
@@ -208,7 +208,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
                 } catch (NumberFormatException nfe) {
                 	amount = 0.0;
                 }
-				controller.setAmount(amount);
+				expenseController.setAmount(amount);
 				
 			}
 			
@@ -243,7 +243,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				controller.setDescription(s.toString());
+				expenseController.setDescription(s.toString());
 			}
 		});
 		
@@ -251,7 +251,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				controller.setComplete(isChecked);
+				expenseController.setComplete(isChecked);
 			}
 		});
 	}
@@ -264,7 +264,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		controller.removeObserverFromExpense(this);
+		expenseController.removeObserverFromExpense(this);
 	}
 	
 	

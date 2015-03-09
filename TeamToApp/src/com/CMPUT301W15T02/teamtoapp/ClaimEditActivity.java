@@ -163,8 +163,8 @@ public class ClaimEditActivity extends Activity implements Observer {
         endDateTextView = (TextView) findViewById(R.id.endDateTextView);
         claimNameEditText = (EditText) findViewById(R.id.claimNameEditText);
         destinationsListView = (ListView) findViewById(R.id.destinationListView);
-        addTagButton = (Button) findViewById(R.id.ClaimAddTagsButton);
-    	tagListView = (ListView) findViewById(R.id.ClaimsTagsListView);
+        addTagButton = (Button) findViewById(R.id.claimantAddTagsButton);
+    	tagListView = (ListView) findViewById(R.id.claimantTagsListView);
 	}
 	
 	
