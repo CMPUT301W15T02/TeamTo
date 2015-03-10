@@ -39,5 +39,13 @@ public class Tag {
 	public String getTagId() {
 		return tagId;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return tagText;
+	}
+	
+	
 	
 }

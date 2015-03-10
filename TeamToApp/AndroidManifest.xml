@@ -50,6 +50,14 @@
             android:name=".ExpenseViewActivity"
             android:label="@string/title_activity_expense_view" >
         </activity>
+        <activity
+            android:name=".TagManagerActivity"
+            android:label="@string/title_activity_tag_manager"
+            android:parentActivityName="android.app.ListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="android.app.ListActivity" />
+        </activity>
     </application>
 
 </manifest>

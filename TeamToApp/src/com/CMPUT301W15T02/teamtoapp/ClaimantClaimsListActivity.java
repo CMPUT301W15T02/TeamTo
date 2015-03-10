@@ -116,8 +116,9 @@ public class ClaimantClaimsListActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.tagsManagerButton) {
+			Intent intent = new Intent(getBaseContext(), TagManagerActivity.class);
+			startActivity(intent);
 		} else if (id == R.id.addClaimOp) {
 			Claim newClaim = new Claim();
 			claimListController.addClaim(newClaim);
