@@ -147,8 +147,10 @@ public class ClaimantExpenseListActivity extends Activity {
 		
 		if (checkClaimInfoComplete() == false) {
 			Toast.makeText(context, "Claim information incomplete.", Toast.LENGTH_SHORT).show();
+			return;
 		} else if (claimController.getCurrentClaim().getExpenses().size() == 0) {
 			Toast.makeText(context, "Claim has no expenses.", Toast.LENGTH_SHORT).show();
+			return;
 		}
 		
 		// If claim info complete and expenses are present, check for expense incompleteness depending on status
@@ -160,9 +162,11 @@ public class ClaimantExpenseListActivity extends Activity {
 			
 			if (numExpensesIncomplete > 0) {
 				Toast.makeText(context, "Expenses are incomplete.", Toast.LENGTH_SHORT).show();
+				
 			} else {
 				claimController.getCurrentClaim().setStatus(Status.SUBMITTED);
 				Toast.makeText(context, "Claim successfully submitted.", Toast.LENGTH_SHORT).show();
+				return;
 			}
 			
 		} else if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.APPROVED) {
