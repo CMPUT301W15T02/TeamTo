@@ -39,8 +39,8 @@ import android.widget.Toast;
 public class ClaimEditActivity extends Activity implements Observer {
 	private final Context context = this;
 	
-	private TextView startDateTextView;
-	private TextView endDateTextView;
+	private Button startDateTextView;
+	private Button endDateTextView;
 	private EditText claimNameEditText;
 	private ListView destinationsListView;
 	private ClaimListController claimListController;
@@ -159,8 +159,8 @@ public class ClaimEditActivity extends Activity implements Observer {
 	
 	
 	private void findViewsByIds() {
-		startDateTextView = (TextView) findViewById(R.id.startDateTextView);
-        endDateTextView = (TextView) findViewById(R.id.endDateTextView);
+		startDateTextView = (Button) findViewById(R.id.startDateTextView);
+        endDateTextView = (Button) findViewById(R.id.endDateTextView);
         claimNameEditText = (EditText) findViewById(R.id.claimNameEditText);
         destinationsListView = (ListView) findViewById(R.id.destinationListView);
         addTagButton = (Button) findViewById(R.id.claimantAddTagsButton);

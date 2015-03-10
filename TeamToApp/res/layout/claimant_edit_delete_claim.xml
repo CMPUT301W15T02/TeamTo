@@ -3,89 +3,125 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ClaimsTagsListView"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
     android:orientation="vertical"
     tools:context=".ClaimantClaimsListActivity" >
 
     <EditText
-    	android:id="@+id/claimNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/claimNameEditText"
+        android:textSize="24sp"
+        android:inputType="textCapSentences"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        style="?android:listSeparatorTextViewStyle">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start date" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/startDateTextView"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@android:color/transparent"/>
+
+        </LinearLayout>
+        
+     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        style="?android:listSeparatorTextViewStyle">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End date  " />
+
+        <Button
+            android:id="@+id/endDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+            />
+
+        </LinearLayout>
+    
+     
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+    	<TextView
+        	android:id="@+id/destinationTextView"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1"
+        	android:text="Destinations:"
+        	android:textColor="@android:color/darker_gray" >
+    	</TextView>
+    	
+    	<Space
+    	    android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+    	    android:layout_weight="1" />
+    
+    	<Button
+        	android:id="@+id/addDestinationButton"
+        	android:layout_width="0dp"
+        	android:layout_height="wrap_content"
+        	android:layout_weight="1"
+        	style="?android:attr/buttonStyleSmall"
+        	android:onClick="addDestinationOption"
+        	android:text="Add Destination"
+        	android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+    </LinearLayout> 
+
+    <ListView
+        android:id="@+id/destinationListView"
+        android:layout_width="wrap_content"
+        android:layout_height="165dp" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/ClaimTagsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Claim Name"
-        android:inputType="text" />
-   	<LinearLayout
-    	android:layout_width="match_parent"
+        android:text="Tags:"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/darker_gray" />
+
+    <ListView
+        android:id="@+id/claimantTagsListView"
+        android:layout_width="match_parent"
+        android:layout_height="107dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/claimantAddTagsButton"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"  >
-            
-    	<TextView
-       		android:id="@+id/startDateTextView"
-        	android:layout_width="0dp"
-      	    android:layout_height="wrap_content"
-       	    android:layout_weight="1"
-       	    android:text=" Start Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/darker_gray" />
-
-        <TextView
-            android:id="@+id/endDateTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.18"
-            android:text="End Date"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@android:color/darker_gray" />
-
-   	</LinearLayout>
-
-
-
-        	<TextView
-        	    android:id="@+id/destinationTextView"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:text="Destinations:"
-        	    android:textColor="@android:color/darker_gray" >
-
-        	</TextView>
-
-            <ListView
-                android:id="@+id/destinationListView"
-                android:layout_width="wrap_content"
-                android:layout_height="165dp"
-                android:dividerHeight="-5.0sp" >
-            </ListView>
-
-            <Button
-                android:id="@+id/addDestinationButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="addDestinationOption"
-                android:text="Add Destination"
-                android:textAppearance="?android:attr/textAppearanceSmallInverse" />
-
-            <TextView
-                android:id="@+id/ClaimTagsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tags:"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColor="@android:color/darker_gray" />
-
-            <ListView
-                android:id="@+id/claimantTagsListView"
-                android:layout_width="match_parent"
-                android:layout_height="107dp" >
-            </ListView>
-
-            <Button
-                android:id="@+id/claimantAddTagsButton"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="match_parent"
-                android:layout_height="43dp"
-                android:text="Add Tags" />
+        android:text="Add Tags" />
 
 </LinearLayout>
