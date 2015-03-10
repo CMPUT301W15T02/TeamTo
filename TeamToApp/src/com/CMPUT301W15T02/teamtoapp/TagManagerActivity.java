@@ -45,8 +45,7 @@ public class TagManagerActivity extends Activity implements Observer {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.managerAddTagButton) {
-			// TODO Add dialog to add tag
-			return true;
+			addTag();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -67,7 +66,6 @@ public class TagManagerActivity extends Activity implements Observer {
 	}
 	
 	private void setListeners() {
-		// TODO Add onclick listener to edit tag
 		tagsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
@@ -107,6 +105,33 @@ public class TagManagerActivity extends Activity implements Observer {
 				
 			}
 		});
+	}
+	
+	private void addTag() {
+		LayoutInflater inflater = LayoutInflater.from(getBaseContext());
+		View editDeleteTagView = inflater.inflate(R.layout.edit_delete_tag_dialog, null);
+		final EditText tagNameEditText = (EditText) editDeleteTagView.findViewById(R.id.tagNameEditText);
+		tagNameEditText.setHint("Enter a new tag");
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(TagManagerActivity.this);
+		builder.setView(editDeleteTagView);
+		builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				String tagName = tagNameEditText.getText().toString().trim();
+				if (tagName.length() != 0) {
+					userController.addTag(new Tag(tagName));
+				}
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				// Do nothing
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
 	}
 
 	@Override
