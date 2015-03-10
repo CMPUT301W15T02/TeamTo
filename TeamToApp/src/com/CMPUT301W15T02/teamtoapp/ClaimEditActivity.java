@@ -269,9 +269,12 @@ public class ClaimEditActivity extends Activity implements Observer {
 			
 			@Override
 			public void onClick(View v) {
+				
+				// TODO make this less hack jobish
 				UserController userController = new UserController();
 				CharSequence[] strings = new CharSequence[userController.getTags().size()];
-				ArrayList<Tag> tags = userController.getTags();
+				boolean[] isCheckedArray = new boolean[strings.length];
+				final ArrayList<Tag> tags = userController.getTags();
 				for (int i = 0; i < tags.size(); i++) {
 					strings[i] = tags.get(i).toString();
 				}
@@ -280,14 +283,16 @@ public class ClaimEditActivity extends Activity implements Observer {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-						// TODO Auto-generated method stub
+						if (isChecked) {
+							claimController.addTag(tags.get(which));
+						} // TODO finish this dialog
 						
 					}
 				}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
+						// TODO
 						
 					}
 				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
