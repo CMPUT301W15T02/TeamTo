@@ -3,11 +3,18 @@ package com.CMPUT301W15T02.teamtoapp;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TagManagerActivity extends Activity {
 
@@ -24,6 +31,7 @@ public class TagManagerActivity extends Activity {
 		getModelObjects();
 		findViewsByIds();
 		setUpAdapter();
+		setListeners();
 	}
 
 	@Override
@@ -62,6 +70,47 @@ public class TagManagerActivity extends Activity {
 	
 	private void setListeners() {
 		// TODO Add onclick listener to edit tag
+		tagsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					final int position, long id) {
+				LayoutInflater inflater = LayoutInflater.from(getBaseContext());
+				View editDeleteTagView = inflater.inflate(R.layout.edit_delete_tag_dialog, null);
+				final EditText tagNameEditText = (EditText) editDeleteTagView.findViewById(R.id.tagNameEditText);
+				tagNameEditText.setText(userController.getTags().get(position).getTagText());
+				
+				AlertDialog.Builder builder = new AlertDialog.Builder(TagManagerActivity.this);
+				builder.setView(editDeleteTagView);
+				builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						String tagName = tagNameEditText.getText().toString().trim();
+						String tagID = userController.getTags().get(position).getTagId();
+						userController.renameTag(tagID, tagName);
+						adapter.notifyDataSetChanged();
+					}
+				})
+				.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						userController.removeTag(userController.getTags().get(position));
+						adapter.notifyDataSetChanged();
+						
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						// Do nothing
+					}
+				});
+				
+				AlertDialog alertDialog = builder.create();
+				alertDialog.show();
+				
+			}
+		});
 		// TODO Add long click listener to delete tag
 	}
 }

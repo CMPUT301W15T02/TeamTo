@@ -15,8 +15,9 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class User {
+public class User extends Observable {
 	private String name;
 	private boolean type; // true for claimant, false for approver?
 	private ArrayList<Tag> tags;
@@ -24,6 +25,10 @@ public class User {
 	public User(String string) {
 		this.name = string;
 		tags = new ArrayList<Tag>();
+		tags.add(new Tag("Shopping"));
+		tags.add(new Tag("Business"));
+		tags.add(new Tag("Personal"));
+		tags.add(new Tag("Recreation"));
 	}
 
 
@@ -36,6 +41,8 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+		setChanged();
+		notifyObservers();
 	}
 
 
@@ -60,18 +67,39 @@ public class User {
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
+		setChanged();
+		notifyObservers();
 	}
 	
 	
 	
 	public void addTag(Tag tag) {
 		tags.add(tag);
+		setChanged();
+		notifyObservers();
 	}
 
 
 	
 	public void removeTag(Tag tag) {
 		tags.remove(tag);
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void renameTag(Tag tag, String newText) {
+		tag.setTagText(newText);
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Tag findTagsById(String tagID) {
+		for (Tag tag: tags) {
+			if (tag.getTagId().equals(tagID)) {
+				return tag;
+			}
+		}
+		return null;
 	}
 
 

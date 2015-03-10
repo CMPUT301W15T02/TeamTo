@@ -21,4 +21,12 @@ public class UserController {
 	public ArrayList<Tag> getTags() {
 		return user.getTags();
 	}
+	
+	public void renameTag(String tagID, String newText) {
+		Tag tag = user.findTagsById(tagID);
+		if (tag.equals(null)) {
+			return;
+		}
+		user.renameTag(tag, newText);
+	}
 }
