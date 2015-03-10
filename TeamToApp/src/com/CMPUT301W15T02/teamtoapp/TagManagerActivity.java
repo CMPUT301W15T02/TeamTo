@@ -39,7 +39,8 @@ public class TagManagerActivity extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == R.id.managerAddTagButton) {
+			// TODO Add dialog to add tag
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -57,5 +58,10 @@ public class TagManagerActivity extends Activity {
 	private void setUpAdapter() {
 		adapter = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, tags);
 		tagsListView.setAdapter(adapter);
+	}
+	
+	private void setListeners() {
+		// TODO Add onclick listener to edit tag
+		// TODO Add long click listener to delete tag
 	}
 }
