@@ -29,6 +29,10 @@ public class ExpenseController {
 	}
 	
 	public void setDescription(String description) {
+		// Automatically sets the expense completed, not sure if this should go in the model
+		if (!currentExpense.getAmount().equals(0.0) && !description.equals("")) {
+			currentExpense.setComplete(true);
+		}
 		currentExpense.setDescription(description);
 	}
 	
@@ -37,6 +41,10 @@ public class ExpenseController {
 	}
 	
 	public void setAmount(Double amount) {
+		// Automatically sets the expenses completed
+		if (!currentExpense.getDescription().equals("") && !amount.equals(0.0)) {
+			currentExpense.setComplete(true);
+		}
 		currentExpense.setAmount(amount);
 	}
 	

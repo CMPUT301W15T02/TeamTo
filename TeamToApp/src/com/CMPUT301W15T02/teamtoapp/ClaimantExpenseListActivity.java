@@ -141,6 +141,7 @@ public class ClaimantExpenseListActivity extends Activity {
 	}
 	
 	
+	// THIS should all be a controller method later
 	private void submitClaim() {
 		// TODO: Check claim and expenses depending on current status
 		// TODO: Need to do test for this method. If anyone has a better way to organize this code, go for it. :)
