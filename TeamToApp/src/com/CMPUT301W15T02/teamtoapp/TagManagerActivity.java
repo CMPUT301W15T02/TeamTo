@@ -78,7 +78,7 @@ public class TagManagerActivity extends Activity {
 				LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 				View editDeleteTagView = inflater.inflate(R.layout.edit_delete_tag_dialog, null);
 				final EditText tagNameEditText = (EditText) editDeleteTagView.findViewById(R.id.tagNameEditText);
-				tagNameEditText.setText(userController.getTags().get(position).getTagText());
+				tagNameEditText.setText(userController.getTagText(position));
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(TagManagerActivity.this);
 				builder.setView(editDeleteTagView);
@@ -86,7 +86,7 @@ public class TagManagerActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String tagName = tagNameEditText.getText().toString().trim();
-						String tagID = userController.getTags().get(position).getTagId();
+						String tagID = userController.getTagId(position);
 						userController.renameTag(tagID, tagName);
 						adapter.notifyDataSetChanged();
 					}
@@ -94,7 +94,7 @@ public class TagManagerActivity extends Activity {
 				.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						userController.removeTag(userController.getTags().get(position));
+						userController.removeTag(position);
 						adapter.notifyDataSetChanged();
 						
 					}
