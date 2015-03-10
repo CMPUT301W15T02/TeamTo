@@ -1,6 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import android.R.integer;
 
@@ -12,6 +13,14 @@ public class UserController {
 		user = Session.getInstance().getCurrentUser();
 	}
 	
+	public void addObserverToUser(Observer observer) {
+		user.addObserver(observer);
+	}
+	
+	public void removeObserverFromUser(Observer observer) {
+		user.deleteObserver(observer);
+	}
+	
 	public void addTag(Tag tag) {
 		user.addTag(tag);
 	}
@@ -21,7 +30,7 @@ public class UserController {
 	}
 	
 	public void removeTag(int position) {
-		user.getTags().remove(position);
+		user.removeTag(user.getTags().get(position));
 	}
 	
 	public ArrayList<Tag> getTags() {

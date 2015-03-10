@@ -1,6 +1,8 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,12 +18,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class TagManagerActivity extends Activity {
+public class TagManagerActivity extends Activity implements Observer {
 
 	private UserController userController;
 	private ArrayList<Tag> tags;
 	private ArrayAdapter<Tag> adapter;
-	
 	private ListView tagsListView;
 	
 	@Override
@@ -36,16 +37,12 @@ public class TagManagerActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.tag_manager, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.managerAddTagButton) {
 			// TODO Add dialog to add tag
@@ -56,6 +53,7 @@ public class TagManagerActivity extends Activity {
 	
 	private void getModelObjects() {
 		userController = new UserController();
+		userController.addObserverToUser(this);
 		tags = userController.getTags();
 	}
 	
@@ -88,14 +86,12 @@ public class TagManagerActivity extends Activity {
 						String tagName = tagNameEditText.getText().toString().trim();
 						String tagID = userController.getTagId(position);
 						userController.renameTag(tagID, tagName);
-						adapter.notifyDataSetChanged();
 					}
 				})
 				.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						userController.removeTag(position);
-						adapter.notifyDataSetChanged();
 						
 					}
 				})
@@ -111,6 +107,19 @@ public class TagManagerActivity extends Activity {
 				
 			}
 		});
-		// TODO Add long click listener to delete tag
 	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		adapter.notifyDataSetChanged();
+		
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		userController.removeObserverFromUser(this);
+	}
+	
+	
 }
