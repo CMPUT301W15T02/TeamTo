@@ -3,8 +3,10 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Observable;
@@ -13,6 +15,7 @@ import java.util.Observer;
 import android.net.wifi.WifiConfiguration.Status;
 import android.os.Bundle;
 import android.R.anim;
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -20,6 +23,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Loader.ForceLoadContentObserver;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.style.UpdateAppearance;
@@ -258,6 +262,44 @@ public class ClaimEditActivity extends Activity implements Observer {
 				
 				AlertDialog alertDialog = builder.create();
 				alertDialog.show();
+			}
+		});
+		
+		addTagButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				UserController userController = new UserController();
+				CharSequence[] strings = new CharSequence[userController.getTags().size()];
+				ArrayList<Tag> tags = userController.getTags();
+				for (int i = 0; i < tags.size(); i++) {
+					strings[i] = tags.get(i).toString();
+				}
+				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimEditActivity.this);
+				builder.setTitle("Select tags").setMultiChoiceItems(strings, null, new DialogInterface.OnMultiChoiceClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+						// TODO Auto-generated method stub
+						
+					}
+				}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+						
+					}
+				}).create().show();
+				
+				
 			}
 		});
 		
