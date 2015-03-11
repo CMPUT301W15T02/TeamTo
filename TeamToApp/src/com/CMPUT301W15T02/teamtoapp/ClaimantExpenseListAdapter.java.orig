@@ -1,7 +1,9 @@
 package com.CMPUT301W15T02.teamtoapp;
 
-import java.security.acl.Owner;
+<<<<<<< HEAD
+=======
 import java.text.SimpleDateFormat;
+>>>>>>> 4c1a79bb9ed9eb4041d9ba566de56c487a3b1d89
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -10,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
@@ -18,7 +19,6 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 	private Context context;
 	private int layoutId;
 	private ArrayList<Expense> expenseList;
-	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 	
 	public ClaimantExpenseListAdapter(Context context, int textViewResourceId, ArrayList<Expense> objects) {
 		super(context, textViewResourceId, objects);
@@ -29,15 +29,10 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 	
 	private class ViewHolder {
 		TextView expenseDescriptionTextView;
-<<<<<<< HEAD
-		TextView expenseCurrencyTextView;
-		ImageView ExpenseImageView;
-=======
 		TextView expenseDateTextView;
 		TextView categoryTextView;
 		TextView currencyTextView;
 		// TODO: Still need to add tags.
->>>>>>> bd6157d93ca219a44cb712ad5c115829633697ef
 	}
 	
 	@Override
@@ -51,29 +46,16 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder = new ViewHolder();
 			
 			holder.expenseDescriptionTextView = (TextView) row.findViewById(R.id.expenseDescriptionTextView);
-<<<<<<< HEAD
-			holder.expenseCurrencyTextView = (TextView) row.findViewById(R.id.expenseCurrencyTextView);
-			holder.ExpenseImageView = (ImageView) row.findViewById(R.id.ExpenseImageView);
-			
-=======
 			holder.expenseDateTextView = (TextView) row.findViewById(R.id.expenseDateTextView);
 			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
 			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
-
->>>>>>> bd6157d93ca219a44cb712ad5c115829633697ef
-			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
+			
 		} else {
 			holder = (ViewHolder) row.getTag();
 		}
 		
 		Expense expense = expenseList.get(position);
-<<<<<<< HEAD
-		holder.expenseDescriptionTextView.setText(expense.getDescription());
-		holder.expenseCurrencyTextView.setText(expense.getCurrency().toString());
-		//holder.ExpenseImageView.setImageResource(expense.getPhoto());
-		//holder.
-=======
 		if (expense.getDescription().trim().isEmpty()) {
 			holder.expenseDescriptionTextView.setText("No Description");
 		} else {
@@ -82,7 +64,6 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		holder.expenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
 		holder.categoryTextView.setText(expense.getCategory());
 		holder.currencyTextView.setText(expense.getAmount().toString()+" "+expense.getCurrency());
->>>>>>> bd6157d93ca219a44cb712ad5c115829633697ef
 		
 		return row;
 	}

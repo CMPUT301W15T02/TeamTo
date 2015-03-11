@@ -1,5 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.security.acl.Owner;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -15,6 +17,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 	private Context context;
 	private int layoutId;
 	private ArrayList<Expense> expenseList;
+	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 	
 	public ClaimantExpenseListAdapter(Context context, int textViewResourceId, ArrayList<Expense> objects) {
 		super(context, textViewResourceId, objects);
@@ -48,6 +51,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 
 			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
+			
 		} else {
 			holder = (ViewHolder) row.getTag();
 		}
