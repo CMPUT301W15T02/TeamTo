@@ -1,6 +1,5 @@
 package com.CMPUT301W15T02.teamtoapp;
 
-import java.security.acl.Owner;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -48,9 +47,8 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder.expenseDateTextView = (TextView) row.findViewById(R.id.expenseDateTextView);
 			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
 			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
-
-			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
+			
 		} else {
 			holder = (ViewHolder) row.getTag();
 		}
