@@ -7,6 +7,7 @@ package com.CMPUT301W15T02.teamtoapp;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,15 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_main_activity);
+
+		SharedPreferences settings = getSharedPreferences("data", MODE_PRIVATE);
+		SharedPreferences.Editor editor = settings.edit();
+
+		//Set "hasLoggedIn" to true
+		editor.putBoolean("hasLoggedIn", true);
+
+		// Commit the edits!
+		editor.commit();
 	}
 
 	@Override
