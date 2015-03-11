@@ -11,9 +11,9 @@ public class SessionController {
 	public SessionController() {
 	}
 
-	//Source:
-	//http://stackoverflow.com/a/9570292
-	public boolean isOnline() {
+	//Checks connection to elastic search server
+	//Source: http://stackoverflow.com/a/9570292 2015-03-10
+	public static boolean isOnline() {
         try {
             InetAddress ip = InetAddress.getByName("cmput301.softwareprocess.es:8080/cmput301w15t02/");
 

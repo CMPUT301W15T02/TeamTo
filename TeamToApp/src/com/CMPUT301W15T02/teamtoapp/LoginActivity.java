@@ -14,13 +14,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
-
+	
+	public static final String PREFS_NAME = "MyPrefsFile";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_main_activity);
+		
+		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
 
-		// TODO Make login only show up once
+		if(hasLoggedIn)  //Go directly to main activity.
+		{
+		    Intent intent = new Intent();
+			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
+			startActivity(intent);
+			LoginActivity.this.finish();
+		}
 	}
 
 	@Override
@@ -34,24 +46,25 @@ public class LoginActivity extends Activity {
 		EditText name = (EditText) findViewById(R.id.username);
 		String usernameString = name.getText().toString();
 		
-//TODO: Fix if/else block for username checking
+//TODO: Complete username session link
 		
 		//if username blank
 		if (usernameString.matches("")) {
 			Toast.makeText(this, "Please enter username!", Toast.LENGTH_SHORT).show();
 
 		}
-		//if username exists
-		else if (usernameString == ""){
-			//placeholder
-		}
-		//else create new username
-		//Requirements?  Length, content etc?
 		else {
+			
+			//User has successfully logged in, save this information
+			SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
+			SharedPreferences.Editor editor = settings.edit();
+			editor.putBoolean("hasLoggedIn", true);
+			editor.commit();
 			
 			//need some way to add username to session
 			SessionController s_control = new SessionController();
 			startActivity(intent);
+			LoginActivity.this.finish();
 		}
 	}
 
