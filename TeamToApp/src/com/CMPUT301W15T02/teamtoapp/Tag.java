@@ -27,7 +27,7 @@ public class Tag {
 		this.tagText = tag;
 		this.tagId = UUID.randomUUID().toString();
 	}
-
+	
 	public String getTagText() {
 		return tagText;
 	}
