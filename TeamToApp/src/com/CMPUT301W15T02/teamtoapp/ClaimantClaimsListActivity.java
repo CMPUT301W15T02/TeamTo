@@ -144,8 +144,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	
 	public void switchToApproverOption(MenuItem menu) {
-		// Switch to ApproverClaimListActivity.class.
-		// TODO: Need way of checking if there is access to the internet
+		// Switch to ApproverClaimListActivity.class if online
 		if(SessionController.isOnline()){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);

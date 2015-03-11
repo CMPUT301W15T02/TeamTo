@@ -18,19 +18,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ClaimantClaimsListActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ClaimantClaimsListActivity"
             android:label="@string/title_activity_claimant_claims_list" >
         </activity>
         <activity
-            android:name=".ClaimEditActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ClaimEditActivity"
             android:label="@string/title_activity_claimant_create_edit_claim" >
         </activity>
         <activity
-            android:name=".ApproverClaimsListActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ApproverClaimsListActivity"
             android:label="@string/title_activity_approver_claims_list" >
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.LoginActivity"
             android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,24 +39,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ClaimantExpenseListActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ClaimantExpenseListActivity"
             android:label="@string/title_activity_claim_expense_list" >
         </activity>
         <activity
-            android:name=".ExpenseEditActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ExpenseEditActivity"
             android:label="@string/title_activity_add_expense" >
         </activity>
         <activity
-            android:name=".ExpenseViewActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.ExpenseViewActivity"
             android:label="@string/title_activity_expense_view" >
         </activity>
         <activity
-            android:name=".TagManagerActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.TagManagerActivity"
             android:label="@string/title_activity_tag_manager"
             android:parentActivityName="android.app.ListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="android.app.ListActivity" />
+        </activity>
+        <activity
+            android:name="com.CMPUT301W15T02.teamtoapp.ApproverExpenseListActivity"
+            android:label="@string/title_activity_approver_expense_list" >
         </activity>
     </application>
 

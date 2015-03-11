@@ -12,5 +12,6 @@
     <string name="title_activity_add_expense">AddExpenseActivity</string>
     <string name="title_activity_expense_view">ExpenseViewActivity</string>
     <string name="title_activity_tag_manager">TagManagerActivity</string>
+    <string name="title_activity_approver_expense_list">Submitted Claim Overview</string>
 
 </resources>
