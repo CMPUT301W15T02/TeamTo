@@ -38,7 +38,7 @@ public class UserController {
 	}
 	
 	public void renameTag(String tagID, String newText) {
-		Tag tag = user.findTagsById(tagID);
+		Tag tag = findTagById(tagID);
 		if (tag.equals(null)) {
 			return;
 		}

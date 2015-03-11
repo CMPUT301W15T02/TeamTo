@@ -92,15 +92,6 @@ public class User extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-	
-	public Tag findTagsById(String tagID) {
-		for (Tag tag: tags) {
-			if (tag.getTagId().equals(tagID)) {
-				return tag;
-			}
-		}
-		return null;
-	}
 
 
 }
