@@ -59,7 +59,8 @@ public class ClaimEditActivity extends Activity implements Observer {
 	private ClaimController claimController;
 	
 	private ArrayList<StringTuple> destinations;
-	ArrayAdapter<StringTuple> adapter;
+	private ArrayAdapter<StringTuple> destinationsAdapter;
+	private ArrayAdapter tagsAdapter;
 	
 
 	
@@ -159,6 +160,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 		claimController = new ClaimController(claimID);
 		destinations = claimController.getDestinations();
 		claimController.addObserverToClaim(this);
+		claimController.verifyTags();
 	}
 	
 	
@@ -248,7 +250,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 					public void onClick(DialogInterface dialog, int which) {
 						StringTuple destination = claimController.getDestinations().get(position);
 						claimController.removeDestination(destination);
-						adapter.notifyDataSetChanged();
+						destinationsAdapter.notifyDataSetChanged();
 					}
 				})
 				.setNegativeButton("Cancel",  new DialogInterface.OnClickListener() {
@@ -273,7 +275,6 @@ public class ClaimEditActivity extends Activity implements Observer {
 				// TODO make this less hack jobish
 				UserController userController = new UserController();
 				CharSequence[] strings = new CharSequence[userController.getTags().size()];
-				boolean[] isCheckedArray = new boolean[strings.length];
 				final ArrayList<Tag> tags = userController.getTags();
 				for (int i = 0; i < tags.size(); i++) {
 					strings[i] = tags.get(i).toString();
@@ -285,7 +286,10 @@ public class ClaimEditActivity extends Activity implements Observer {
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 						if (isChecked) {
 							claimController.addTag(tags.get(which));
-						} // TODO finish this dialog
+						}
+						else if (claimController.getTags().contains(tags.get(which))) {
+								claimController.removeTag(tags.get(which));
+						} // TODO Still needs work
 						
 					}
 				}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -311,8 +315,10 @@ public class ClaimEditActivity extends Activity implements Observer {
 	}
 
 	private void setUpAdapter() {
-		adapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_destination_rows, destinations);
-		destinationsListView.setAdapter(adapter);
+		destinationsAdapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_destination_rows, destinations);
+		destinationsListView.setAdapter(destinationsAdapter);
+		tagsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, claimController.getTags());
+		tagListView.setAdapter(tagsAdapter);
 	}
 	
 	private void setFieldValues() {
@@ -332,7 +338,8 @@ public class ClaimEditActivity extends Activity implements Observer {
 	@Override
 	public void update(Observable observable, Object data) {
 		updateValues();
-		adapter.notifyDataSetChanged();
+		destinationsAdapter.notifyDataSetChanged();
+		tagsAdapter.notifyDataSetChanged();
 	}
 
 	@Override

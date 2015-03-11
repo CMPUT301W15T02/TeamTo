@@ -49,6 +49,13 @@ public class UserController {
 		return user.getTags().get(position);
 	}
 	
-	
+	public Tag findTagById(String tagID) {
+		for (Tag tag: user.getTags()) {
+			if (tag.getTagId().equals(tagID)) {
+				return tag;
+			}
+		}
+		return null;
+	}
 	
 }
