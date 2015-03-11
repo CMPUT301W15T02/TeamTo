@@ -90,6 +90,7 @@ public class TagManagerActivity extends Activity implements Observer {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						userController.removeTag(position);
+						userController.updateTags();
 						
 					}
 				})
