@@ -145,7 +145,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if(SessionController.isOnline()){
+		if(SessionController.isNetworkAvailable(this)){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);
 		}
