@@ -49,11 +49,6 @@ public class UserController {
 		return user.getTags().get(position);
 	}
 	
-	public String getTagId(int position) {
-		return getTag(position).getTagId();
-	}
 	
-	public String getTagText(int position) {
-		return getTag(position).getTagText();
-	}
+	
 }

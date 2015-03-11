@@ -88,7 +88,7 @@ public class User extends Observable {
 	}
 	
 	public void renameTag(Tag tag, String newText) {
-		tag.setTagText(newText);
+		tag.setTagName(newText);
 		setChanged();
 		notifyObservers();
 	}

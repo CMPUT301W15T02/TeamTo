@@ -20,24 +20,28 @@ import java.util.UUID;
 
 public class Tag {
 
-	private String tagText;
+	private String tagName;
 	private String tagId;
 	
-	public Tag(String tag) {
-		this.tagText = tag;
+	public Tag(String name) {
+		this.tagName = name;
 		this.tagId = UUID.randomUUID().toString();
 	}
-	
-	public String getTagText() {
-		return tagText;
-	}
 
-	public void setTagText(String tag) {
-		this.tagText = tag;
+	public void setTagName(String name) {
+		this.tagName = name;
 	}
 
 	public String getTagId() {
 		return tagId;
 	}
+
+	@Override
+	public String toString() {
+		// This is actually required...
+		return tagName;
+	}
+	
+	
 	
 }

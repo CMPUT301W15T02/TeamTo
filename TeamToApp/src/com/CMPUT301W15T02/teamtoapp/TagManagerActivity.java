@@ -74,7 +74,7 @@ public class TagManagerActivity extends Activity implements Observer {
 				LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 				View editDeleteTagView = inflater.inflate(R.layout.edit_delete_tag_dialog, null);
 				final EditText tagNameEditText = (EditText) editDeleteTagView.findViewById(R.id.tagNameEditText);
-				tagNameEditText.setText(userController.getTagText(position));
+				tagNameEditText.setText(userController.getTag(position).toString());
 				
 				AlertDialog.Builder builder = new AlertDialog.Builder(TagManagerActivity.this);
 				builder.setView(editDeleteTagView);
@@ -82,7 +82,7 @@ public class TagManagerActivity extends Activity implements Observer {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String tagName = tagNameEditText.getText().toString().trim();
-						String tagID = userController.getTagId(position);
+						String tagID = userController.getTag(position).getTagId();
 						userController.renameTag(tagID, tagName);
 					}
 				})
