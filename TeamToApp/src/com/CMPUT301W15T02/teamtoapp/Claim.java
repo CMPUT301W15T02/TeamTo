@@ -61,7 +61,6 @@ public class Claim extends Observable {
 		this.ClaimId = UUID.randomUUID().toString();
 	}
 	
-	//TODO: Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
 		return c_name;
 	}
