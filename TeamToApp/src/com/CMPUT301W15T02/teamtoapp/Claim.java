@@ -17,7 +17,9 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Currency;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.UUID;
 
@@ -47,6 +49,7 @@ public class Claim extends Observable {
 	private ArrayList<Tag> tags;
 	private String userId;
 	private String ClaimId;
+	private HashMap<Currency, Double> CurrencyTotals;
 	
 	
 	public Claim() {
@@ -59,9 +62,16 @@ public class Claim extends Observable {
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
 		this.ClaimId = UUID.randomUUID().toString();
+		CurrencyTotals.put(Currency.getInstance("CAD"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("USD"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("EUR"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("GBP"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("CHF"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("JPY"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("CNY"), 0.00);
+		
 	}
 	
-	//TODO: Need to display claim name for custom claim list view (claimant, not for approver)
 	public String getClaimName() {
 		return c_name;
 	}
@@ -221,6 +231,20 @@ public class Claim extends Observable {
 	
 	public String getClaimId() {
 		return ClaimId;
+	}
+	
+	public void totalExpenses(ArrayList<Expense> expenses, HashMap<String, Double> CurrencyTotals) {
+		for (Expense expense : expenses) {
+			Currency currency = expense.getCurrency();
+			
+			Double newAmount = expense.getAmount();
+			Double oldAmount = CurrencyTotals.get(currency);
+			CurrencyTotals.put("CAD", oldAmount + newAmount);
+			
+			
+		}
+		
+
 	}
 	
 }

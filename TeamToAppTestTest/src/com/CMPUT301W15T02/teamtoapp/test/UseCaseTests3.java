@@ -8,7 +8,7 @@ import com.CMPUT301W15T02.teamtoapp.SessionController;
 
 import junit.framework.TestCase;
 
-public class ClaimModelsTesting extends TestCase {
+public class UseCaseTests3 extends TestCase {
 
 	/*
 	public void testAddClaim() {

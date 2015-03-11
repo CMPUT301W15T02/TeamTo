@@ -275,16 +275,26 @@ public class ClaimEditActivity extends Activity implements Observer {
 				UserController userController = new UserController();
 				CharSequence[] strings = new CharSequence[userController.getTags().size()];
 				final ArrayList<Tag> tags = userController.getTags();
+				ArrayList<Tag> claimTags = claimController.getTags();
+				boolean[] boolArray = new boolean[tags.size()];
 				for (int i = 0; i < tags.size(); i++) {
 					strings[i] = tags.get(i).toString();
+					if (claimTags.contains(tags.get(i))) {
+						boolArray[i] = true;
+					} else {
+						boolArray[i] = false;
+					}
 				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimEditActivity.this);
-				builder.setTitle("Select tags").setMultiChoiceItems(strings, null, new DialogInterface.OnMultiChoiceClickListener() {
+				builder.setTitle("Select tags").setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-						// TODO
-						
+						if (isChecked) {
+							claimController.addTag(tags.get(which));
+						} else if (claimController.getTags().contains(tags.get(which))){
+							claimController.removeTag(tags.get(which));
+						}
 					}
 				}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					
