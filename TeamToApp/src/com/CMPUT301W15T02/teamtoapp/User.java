@@ -18,9 +18,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class User extends Observable {
+	
 	private String name;
 	private boolean type; // true for claimant, false for approver?
 	private ArrayList<Tag> tags;
+	
 	
 	public User(String string) {
 		this.name = string;
@@ -31,39 +33,27 @@ public class User extends Observable {
 		tags.add(new Tag("Recreation"));
 	}
 
-
-
 	public String getName() {
 		return name;
 	}
-
-
-
+	
 	public void setName(String name) {
 		this.name = name;
 		setChanged();
 		notifyObservers();
 	}
 
-
-
 	public boolean getType() {
 		return type;
 	}
-
-
 
 	public void setType(boolean type) {
 		this.type = type;
 	}
 
-
-
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
-
-
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
@@ -71,16 +61,12 @@ public class User extends Observable {
 		notifyObservers();
 	}
 	
-	
-	
 	public void addTag(Tag tag) {
 		tags.add(tag);
 		setChanged();
 		notifyObservers();
 	}
 
-
-	
 	public void removeTag(Tag tag) {
 		tags.remove(tag);
 		setChanged();
@@ -92,6 +78,5 @@ public class User extends Observable {
 		setChanged();
 		notifyObservers();
 	}
-
 
 }
