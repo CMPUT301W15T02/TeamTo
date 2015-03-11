@@ -31,29 +31,27 @@ import com.CMPUT301W15T02.teamtoapp.StringTuple;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
 
-public class UseCaseTests extends TestCase {
+public class UseCaseTests1 extends TestCase {
 
-	/*
 	// UC 1.0
 	public void testAddClaim () {
 		ClaimList claims = new ClaimList();
-		// Add new claim to manager - works
 		Claim claim = new Claim();
 		claims.addClaim(claim);
-		assertNotNull("manager has no claim!", claims);
+		assertTrue("No claim added", claims.getClaims().size() != 0);
 		
 		// Save new information for claim, check if saved in claims
 		// TODO: Need to consider claimID.
 		ClaimController controller = new ClaimController(claim.getClaimId());
-		String name = "new claim";
+		String claimName = "new claim";
 		GregorianCalendar start_date = new GregorianCalendar();
 		GregorianCalendar end_date = new GregorianCalendar();
-		controller.setClaimName(name);
+		controller.setClaimName(claimName);
 		controller.setStartDate(start_date);
 		controller.setEndDate(end_date);
-		// Why is this failing?
-		//assertTrue("Name is not equal", claims.getClaim(claim).getClaimName() == name);
-		//
+		
+		// Testing persistence of name, start & end dates
+		assertTrue("Name is not equal", claims.getClaim(claim).getClaimName() == claimName);
 		assertTrue("Start date is not equal", claims.getClaim(claim).getStartDate() == start_date);
 		assertTrue("End date is not equal", claims.getClaim(claim).getEndDate() == end_date);
 		
@@ -65,8 +63,8 @@ public class UseCaseTests extends TestCase {
 		
 		assertTrue("No destination and reason were added.", claims.getClaim(claim).verifyDestination(record));
 	}
-	*/
 	
+	/*
 	// UC 1.1
 	public void testEditClaim() {
 		ClaimList claims = new ClaimList();
@@ -98,7 +96,6 @@ public class UseCaseTests extends TestCase {
 		
 	}
 
-/*
 	// UC 1.*
 	public void testClaimsSorted() {
 		User user = new User("Peter");

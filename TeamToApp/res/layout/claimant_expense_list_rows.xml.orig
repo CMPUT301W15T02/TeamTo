@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <TextView
         android:id="@+id/expenseDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle= "bold" />   
+        android:textSize="16sp" />
+<<<<<<< HEAD
+    <TextView 
+        android:id = "@+id/expenseCurrencyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" 
+        
+        />
+    <ImageView 
+        android:id ="@id/ExpenseImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        />
+     
+    
+
+</RelativeLayout>
+=======
+   
     <TextView
         android:id="@+id/expenseDateTextView"
         android:layout_width="wrap_content"
@@ -29,5 +48,5 @@
         android:textSize="14sp" />
 
     
-
 </LinearLayout>
+>>>>>>> bd6157d93ca219a44cb712ad5c115829633697ef

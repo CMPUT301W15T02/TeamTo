@@ -12,7 +12,6 @@ import junit.framework.TestCase;
 
 public class ClaimTest extends TestCase {
 
-	// TODO: may need to update as per comment under getClaimName() in Claim.java
 	public void testAddClaim() {
 		String defaultClaimName = "New Claim";
 		Claim claim = new Claim();
