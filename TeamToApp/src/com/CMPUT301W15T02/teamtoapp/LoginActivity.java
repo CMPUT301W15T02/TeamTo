@@ -20,6 +20,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login_main_activity);
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
@@ -31,9 +32,6 @@ public class LoginActivity extends Activity {
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 			startActivity(intent);
 			LoginActivity.this.finish();
-		}
-		else{
-			setContentView(R.layout.login_main_activity);
 		}
 	}
 
