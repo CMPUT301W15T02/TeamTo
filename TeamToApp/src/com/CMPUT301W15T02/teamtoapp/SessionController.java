@@ -11,11 +11,13 @@ public class SessionController {
 	public SessionController() {
 	}
 
-	public boolean isInternetAvailable() {
+	//Source:
+	//http://stackoverflow.com/a/9570292
+	public boolean isOnline() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("cmput301.softwareprocess.es:8080/cmput301w15t02/");
+            InetAddress ip = InetAddress.getByName("cmput301.softwareprocess.es:8080/cmput301w15t02/");
 
-            if (ipAddr.equals("")) {
+            if (ip.equals("")) {
                 return false;
             } else {
                 return true;
