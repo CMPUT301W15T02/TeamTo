@@ -25,7 +25,7 @@ public class ApproverClaimsListActivity extends Activity {
 	}
 	
 	public void onClaimClick() {
-		
+		// TODO: Go to ApproverExpenseListActivity.java
 	}
 	
 	public void switchToClaimantOption(MenuItem menu) {
