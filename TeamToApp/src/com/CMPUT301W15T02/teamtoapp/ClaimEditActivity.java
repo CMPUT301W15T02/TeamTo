@@ -60,7 +60,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 	
 	private ArrayList<StringTuple> destinations;
 	private ArrayAdapter<StringTuple> destinationsAdapter;
-	private ArrayAdapter tagsAdapter;
+	private ArrayAdapter<Tag> tagsAdapter;
 	
 
 	
@@ -160,7 +160,6 @@ public class ClaimEditActivity extends Activity implements Observer {
 		claimController = new ClaimController(claimID);
 		destinations = claimController.getDestinations();
 		claimController.addObserverToClaim(this);
-		claimController.verifyTags();
 	}
 	
 	
@@ -284,12 +283,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-						if (isChecked) {
-							claimController.addTag(tags.get(which));
-						}
-						else if (claimController.getTags().contains(tags.get(which))) {
-								claimController.removeTag(tags.get(which));
-						} // TODO Still needs work
+						// TODO
 						
 					}
 				}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -317,7 +311,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 	private void setUpAdapter() {
 		destinationsAdapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_destination_rows, destinations);
 		destinationsListView.setAdapter(destinationsAdapter);
-		tagsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, claimController.getTags());
+		tagsAdapter = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, claimController.getTags());
 		tagListView.setAdapter(tagsAdapter);
 	}
 	

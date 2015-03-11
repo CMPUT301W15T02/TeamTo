@@ -134,14 +134,6 @@ public class ClaimController {
 		currentClaim.deleteObserver(observer);
 	}
 	
-	public void verifyTags() {
-		UserController userController = new UserController();
-		for (Tag tag: currentClaim.getTags()) {
-			if (userController.findTagById(tag.getTagId()).equals(null)) {
-				currentClaim.removeTag(tag);
-			}
-		}
-	}
 	
 	public ArrayList<Tag> getTags() {
 		return currentClaim.getTags();
