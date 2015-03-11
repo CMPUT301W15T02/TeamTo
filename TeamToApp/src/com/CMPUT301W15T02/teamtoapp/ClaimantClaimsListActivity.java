@@ -146,7 +146,13 @@ public class ClaimantClaimsListActivity extends Activity {
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class.
 		// TODO: Need way of checking if there is access to the internet
-		Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
-		startActivity(intent);
+		if(SessionController.isOnline()){
+			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
+			startActivity(intent);
+		}
+		else{
+			Toast.makeText(this, "No internet access!", Toast.LENGTH_SHORT).show();
+		}
+
 	}
 }

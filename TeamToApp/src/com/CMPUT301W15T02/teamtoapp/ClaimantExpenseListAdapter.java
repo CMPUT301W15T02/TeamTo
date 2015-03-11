@@ -1,5 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.security.acl.Owner;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -15,6 +17,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 	private Context context;
 	private int layoutId;
 	private ArrayList<Expense> expenseList;
+	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 	
 	public ClaimantExpenseListAdapter(Context context, int textViewResourceId, ArrayList<Expense> objects) {
 		super(context, textViewResourceId, objects);
@@ -25,7 +28,10 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 	
 	private class ViewHolder {
 		TextView expenseDescriptionTextView;
-		// Need to add the rest
+		TextView expenseDateTextView;
+		TextView categoryTextView;
+		TextView currencyTextView;
+		// TODO: Still need to add tags.
 	}
 	
 	@Override
@@ -39,6 +45,10 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder = new ViewHolder();
 			
 			holder.expenseDescriptionTextView = (TextView) row.findViewById(R.id.expenseDescriptionTextView);
+			holder.expenseDateTextView = (TextView) row.findViewById(R.id.expenseDateTextView);
+			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
+			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
+
 			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
 		} else {
@@ -46,7 +56,14 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		}
 		
 		Expense expense = expenseList.get(position);
-		holder.expenseDescriptionTextView.setText(expense.getDescription());
+		if (expense.getDescription().trim().isEmpty()) {
+			holder.expenseDescriptionTextView.setText("No Description");
+		} else {
+			holder.expenseDescriptionTextView.setText(expense.getDescription());
+		}
+		holder.expenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
+		holder.categoryTextView.setText(expense.getCategory());
+		holder.currencyTextView.setText(expense.getAmount().toString()+" "+expense.getCurrency());
 		
 		return row;
 	}

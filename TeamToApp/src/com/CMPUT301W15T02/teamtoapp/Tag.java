@@ -28,6 +28,10 @@ public class Tag {
 		this.tagId = UUID.randomUUID().toString();
 	}
 
+	public String getTagName() {
+		return tagName;
+	}
+	
 	public void setTagName(String name) {
 		this.tagName = name;
 	}

@@ -13,7 +13,7 @@ public class SessionController {
 
 	//Source:
 	//http://stackoverflow.com/a/9570292
-	public boolean isOnline() {
+	public static boolean isOnline() {
         try {
             InetAddress ip = InetAddress.getByName("cmput301.softwareprocess.es:8080/cmput301w15t02/");
 
