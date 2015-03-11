@@ -240,6 +240,8 @@ public class Claim extends Observable {
 			Double newAmount = expense.getAmount();
 			Double oldAmount = CurrencyTotals.get(currency);
 			CurrencyTotals.put("CAD", oldAmount + newAmount);
+			
+			
 		}
 		
 
