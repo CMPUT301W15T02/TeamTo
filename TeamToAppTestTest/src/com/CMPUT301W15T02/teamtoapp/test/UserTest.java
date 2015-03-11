@@ -40,7 +40,7 @@ public class UserTest extends TestCase {
 		user.addTag(tag1);
 		assertTrue("Tag not added", user.getTags().size() == 5);
 		
-		// Test remove defaul tag (made in constructor)
+		// Test remove default tag (made in constructor)
 		user.removeTag(tag1);
 		assertTrue("tag1 wasn't removed", user.getTags().size() == 4);
 		ArrayList<Tag> tags = user.getTags();
@@ -48,4 +48,29 @@ public class UserTest extends TestCase {
 		assertTrue("Default tag not removed", user.getTags().size() == 3);
 	}
 	
+	public void testRenameTag() {
+		String userName = "User1";
+		User user = new User(userName);
+		String tag1Name = "tag1";
+		Tag tag1 = new Tag(tag1Name);
+		user.addTag(tag1);
+		String newTagName1 = "newTag";
+		user.renameTag(tag1, newTagName1);
+		assertTrue("New tag name not changed", user.getTags().get(4).getTagName().equals(newTagName1));
+		
+		// WHY DOES THIS WORK
+		String newTagName3 = "Jello";
+		String newTagName2 = "Hello";
+		Tag newTag = new Tag(newTagName2);
+		user.renameTag(newTag, newTagName3);
+	}
+	
 }
+
+
+
+
+
+
+
+
