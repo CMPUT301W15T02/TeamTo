@@ -62,6 +62,14 @@ public class Claim extends Observable {
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
 		this.ClaimId = UUID.randomUUID().toString();
+		this.CurrencyTotals = new HashMap<Currency, Double>();
+		CurrencyTotals.put(Currency.getInstance("CAD"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("USD"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("EUR"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("GBP"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("CHF"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("JPY"), 0.00);
+		CurrencyTotals.put(Currency.getInstance("CNY"), 0.00);
 		
 	}
 	
