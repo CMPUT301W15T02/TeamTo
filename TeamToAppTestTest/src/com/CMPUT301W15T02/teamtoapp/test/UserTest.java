@@ -2,6 +2,8 @@
 
 package com.CMPUT301W15T02.teamtoapp.test;
 
+import java.util.ArrayList;
+
 import com.CMPUT301W15T02.teamtoapp.Tag;
 import com.CMPUT301W15T02.teamtoapp.User;
 
@@ -23,6 +25,11 @@ public class UserTest extends TestCase {
 		Tag tag2 = new Tag(tag2Name);
 		user.addTag(tag2);
 		assertTrue("Tag2 not added", user.getTags().size() == 6);
+		
+		String tag3Name = "Shopping";
+		Tag tag3 = new Tag(tag3Name);
+		user.addTag(tag3);
+		assertFalse("Tag3 was added and it was already in the list", user.getTags().size() == 7);
 	}
 	
 	public void testRemoveTag() {
@@ -31,11 +38,14 @@ public class UserTest extends TestCase {
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
 		user.addTag(tag1);
-		String tag2Name = "tag2";
-		Tag tag2 = new Tag(tag2Name);
-		user.addTag(tag2);
+		assertTrue("Tag not added", user.getTags().size() == 5);
 		
+		// Test remove defaul tag (made in constructor)
 		user.removeTag(tag1);
+		assertTrue("tag1 wasn't removed", user.getTags().size() == 4);
+		ArrayList<Tag> tags = user.getTags();
+		user.removeTag(user.getTags().get(1));
+		assertTrue("Default tag not removed", user.getTags().size() == 3);
 	}
 	
 }

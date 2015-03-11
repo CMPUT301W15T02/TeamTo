@@ -62,9 +62,21 @@ public class User extends Observable {
 	}
 	
 	public void addTag(Tag tag) {
-		tags.add(tag);
-		setChanged();
-		notifyObservers();
+		if( !tagIsIn(tag) ) {
+			tags.add(tag);
+			setChanged();
+			notifyObservers();
+		}
+	}
+	
+	// Helper method to check if tag already in tags (by name, not ID)
+	public boolean tagIsIn(Tag tag) {
+		for(Tag t : tags) {
+			if(t.getTagName() == tag.getTagName()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void removeTag(Tag tag) {
