@@ -58,4 +58,23 @@ public class UserController {
 		return null;
 	}
 	
+	public void updateTags() {
+		ArrayList<Tag> userTags = user.getTags();
+		ArrayList<String> userTagIds = new ArrayList<String>();
+		for (Tag tag: userTags) {
+			userTagIds.add(tag.getTagId());
+		}
+		ClaimListController claimListController = new ClaimListController();
+		ArrayList<Claim> claims = claimListController.getClaims();
+		for (Claim claim: claims) {
+			for (Tag tag: claim.getTags()) {
+				if (userTagIds.contains(tag.getTagId())) {
+					// Do nothing
+				} else {
+					claim.removeTag(tag);
+				}
+			}
+		}
+	}
+	
 }

@@ -20,6 +20,7 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.login_main_activity);
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
@@ -31,9 +32,6 @@ public class LoginActivity extends Activity {
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 			startActivity(intent);
 			LoginActivity.this.finish();
-		}
-		else{
-			setContentView(R.layout.login_main_activity);
 		}
 	}
 
@@ -48,24 +46,17 @@ public class LoginActivity extends Activity {
 		EditText name = (EditText) findViewById(R.id.username);
 		String usernameString = name.getText().toString();
 		
-//TODO: Fix if/else block for username checking
+//TODO: Complete username session link
 		
 		//if username blank
 		if (usernameString.matches("")) {
 			Toast.makeText(this, "Please enter username!", Toast.LENGTH_SHORT).show();
 
 		}
-		//if username exists
-		else if (usernameString == ""){
-			//placeholder
-		}
-		//else create new username
-		//Requirements?  Length, content etc?
 		else {
 			
-		
 			//User has successfully logged in, save this information
-			SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0); // 0 - for private mode
+			SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 			SharedPreferences.Editor editor = settings.edit();
 			editor.putBoolean("hasLoggedIn", true);
 			editor.commit();
