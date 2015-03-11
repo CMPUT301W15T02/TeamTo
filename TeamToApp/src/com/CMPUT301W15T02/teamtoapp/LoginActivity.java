@@ -20,14 +20,7 @@ public class LoginActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_main_activity);
 
-		SharedPreferences settings = getSharedPreferences("data", MODE_PRIVATE);
-		SharedPreferences.Editor editor = settings.edit();
-
-		//Set "hasLoggedIn" to true
-		editor.putBoolean("hasLoggedIn", true);
-
-		// Commit the edits!
-		editor.commit();
+		// TODO Make login only show up once
 	}
 
 	@Override
