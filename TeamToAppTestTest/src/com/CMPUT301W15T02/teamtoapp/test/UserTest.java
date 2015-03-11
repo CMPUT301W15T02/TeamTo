@@ -23,6 +23,11 @@ public class UserTest extends TestCase {
 		Tag tag2 = new Tag(tag2Name);
 		user.addTag(tag2);
 		assertTrue("Tag2 not added", user.getTags().size() == 6);
+		
+		String tag3Name = "Shopping";
+		Tag tag3 = new Tag(tag3Name);
+		user.addTag(tag3);
+		assertFalse("Tag3 was added and it was already in the list", user.getTags().size() == 7);
 	}
 	
 	public void testRemoveTag() {
