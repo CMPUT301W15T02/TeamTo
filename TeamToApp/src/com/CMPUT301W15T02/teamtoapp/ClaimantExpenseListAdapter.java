@@ -1,6 +1,8 @@
 package com.CMPUT301W15T02.teamtoapp;
 
 import java.security.acl.Owner;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -18,6 +20,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 	private int layoutId;
 	private ArrayList<Expense> expenseList;
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
+	private NumberFormat numformatter = new DecimalFormat("#0.00");
 	
 	public ClaimantExpenseListAdapter(Context context, int textViewResourceId, ArrayList<Expense> objects) {
 		super(context, textViewResourceId, objects);
@@ -64,7 +67,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		}
 		holder.expenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
 		holder.categoryTextView.setText(expense.getCategory());
-		holder.currencyTextView.setText(expense.getAmount().toString()+" "+expense.getCurrency());
+		holder.currencyTextView.setText(numformatter.format(expense.getAmount()).toString()+" "+expense.getCurrency());
 		
 		return row;
 	}

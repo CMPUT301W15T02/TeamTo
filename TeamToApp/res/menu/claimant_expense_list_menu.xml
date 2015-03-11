@@ -1,4 +1,5 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.CMPUT301W15T02.teamtoapp.ClaimExpenseListActivity" >
 
@@ -13,7 +14,8 @@
         android:title="+"
         android:showAsAction="always"/>
     
-    <item android:id="@+id/submitClaimOption"
+    <item 
+        android:id="@+id/submitClaimOption"
         android:enabled="true"
         android:showAsAction="withText|collapseActionView"
         android:visible="true"
