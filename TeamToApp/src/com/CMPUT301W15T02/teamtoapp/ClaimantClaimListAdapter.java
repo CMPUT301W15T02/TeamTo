@@ -37,6 +37,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView startDateTextView;
 		TextView destinationsTextView;
 		TextView statusTextView;
+		TextView claimantTotalCurrencyView;
 		
 		// TODO: The following will be used later (need to add them in claimant_claims_list_rows.xml):
 		//TextView txtTags;
@@ -57,7 +58,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			holder.startDateTextView = (TextView) row.findViewById(R.id.claimantStartDateView);
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantListDestsView);
 			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
-			//TODO: holder.txtTags..., holder.txtTotalCurr..., etc.
+			holder.claimantTotalCurrencyView = (TextView) row.findViewById(R.id.claimantTotalCurrencyView);
+			//TODO: holder.txtTags..., 
 			row.setTag(holder);
 		} else {
 			holder = (ViewHolder) row.getTag();

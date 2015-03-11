@@ -74,6 +74,11 @@ public class ClaimListTest extends TestCase {
 		//
 	}
 	
+	// RV might change
+	public void testFindExpenseByID() {
+		
+	}
+	
 }
 
 
