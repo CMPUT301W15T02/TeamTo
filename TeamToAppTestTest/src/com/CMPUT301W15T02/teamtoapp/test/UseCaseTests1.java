@@ -22,12 +22,12 @@ import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
-import com.CMPUT301W15T02.teamtoapp.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Expense;
-import com.CMPUT301W15T02.teamtoapp.User;
-import com.CMPUT301W15T02.teamtoapp.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
 

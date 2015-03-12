@@ -4,8 +4,8 @@ package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.Tag;
-import com.CMPUT301W15T02.teamtoapp.User;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import junit.framework.TestCase;
 

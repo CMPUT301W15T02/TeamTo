@@ -13,10 +13,15 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Adapters;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.R.id;
+
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;

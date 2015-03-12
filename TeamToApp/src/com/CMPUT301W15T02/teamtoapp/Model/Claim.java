@@ -13,7 +13,7 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 import java.util.Calendar;

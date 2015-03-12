@@ -1,4 +1,5 @@
-/* 
+/* Tags class that gives each user the ability to add their personal tags and use other user 
+ * made tags, as well as edit, and delete their tag own tags.
  * 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
@@ -13,29 +14,38 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Model;
 
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
+import java.util.UUID;
 
-public class DataManager {
+public class Tag {
 
+	private String tagName;
+	private String tagId;
 	
-	public User getUser(){
-		
-		return null;
+	public Tag(String name) {
+		this.tagName = name;
+		this.tagId = UUID.randomUUID().toString();
+	}
+
+	public String getTagName() {
+		return tagName;
 	}
 	
-	public void saveUser(){
-		
+	public void setTagName(String name) {
+		this.tagName = name;
+	}
+
+	public String getTagId() {
+		return tagId;
+	}
+
+	@Override
+	public String toString() {
+		// This is actually required...
+		return tagName;
 	}
 	
-	public ClaimList getClaims(){
-		
-		return null;
-	}
 	
-	public void saveClaims(ClaimList claimsList){
-		
-	}
+	
 }

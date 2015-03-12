@@ -1,5 +1,4 @@
-/* Tags class that gives each user the ability to add their personal tags and use other user 
- * made tags, as well as edit, and delete their tag own tags.
+/* 
  * 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
@@ -14,38 +13,42 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Model;
 
-import java.util.UUID;
 
-public class Tag {
 
-	private String tagName;
-	private String tagId;
+public class Session {
+	private User currentUser;
+	private ClaimList currentClaims;
 	
-	public Tag(String name) {
-		this.tagName = name;
-		this.tagId = UUID.randomUUID().toString();
+	private static Session instance = null;
+
+	private Session(){
+		currentUser = new User(null);
+		currentClaims = new ClaimList();
+	};
+
+	public static Session getInstance() {
+		if (instance == null) {
+			instance = new Session();
+		}
+		return instance;
 	}
 
-	public String getTagName() {
-		return tagName;
-	}
-	
-	public void setTagName(String name) {
-		this.tagName = name;
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
-	public String getTagId() {
-		return tagId;
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
 	}
 
-	@Override
-	public String toString() {
-		// This is actually required...
-		return tagName;
+	public ClaimList getCurrentClaims() {
+		return currentClaims;
 	}
-	
-	
+
+	public void setCurrentClaims(ClaimList currentClaims) {
+		this.currentClaims = currentClaims;
+	}
 	
 }

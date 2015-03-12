@@ -2,8 +2,9 @@
 
 package com.CMPUT301W15T02.teamtoapp.test;
 
-import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+
 import junit.framework.TestCase;
 
 public class ClaimListTest extends TestCase {

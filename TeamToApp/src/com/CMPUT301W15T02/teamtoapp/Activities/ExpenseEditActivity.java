@@ -13,7 +13,7 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -22,6 +22,14 @@ import java.util.Currency;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
+import com.CMPUT301W15T02.teamtoapp.R.array;
+import com.CMPUT301W15T02.teamtoapp.R.id;
+import com.CMPUT301W15T02.teamtoapp.R.layout;
+import com.CMPUT301W15T02.teamtoapp.R.menu;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

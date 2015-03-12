@@ -13,41 +13,28 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Controllers;
+
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
+
+import android.content.Context;
+import android.net.ConnectivityManager;
 
 
-public class Session {
-	private User currentUser;
-	private ClaimList currentClaims;
+public class SessionController {
 	
-	private static Session instance = null;
-
-	private Session(){
-		currentUser = new User(null);
-		currentClaims = new ClaimList();
-	};
-
-	public static Session getInstance() {
-		if (instance == null) {
-			instance = new Session();
-		}
-		return instance;
-	}
-
-	public User getCurrentUser() {
-		return currentUser;
-	}
-
-	public void setCurrentUser(User currentUser) {
-		this.currentUser = currentUser;
-	}
-
-	public ClaimList getCurrentClaims() {
-		return currentClaims;
-	}
-
-	public void setCurrentClaims(ClaimList currentClaims) {
-		this.currentClaims = currentClaims;
-	}
+	private User user;
+	private ClaimList claims;
 	
+	public SessionController() {
+	}
+
+	//Checks connection to Internet
+	//Source: http://stackoverflow.com/a/9570292 2015-03-10
+	public static boolean isNetworkAvailable(Context context) {
+	    return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
+	}
 }
+
+	    

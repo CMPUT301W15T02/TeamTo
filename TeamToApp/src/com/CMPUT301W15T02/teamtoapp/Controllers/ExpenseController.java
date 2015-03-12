@@ -13,11 +13,14 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.Observer;
+
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Model.Session;
 
 public class ExpenseController {
 	

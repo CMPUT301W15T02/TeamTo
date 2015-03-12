@@ -13,10 +13,15 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
 import java.util.Observer;
+
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Session;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.R.integer;
 

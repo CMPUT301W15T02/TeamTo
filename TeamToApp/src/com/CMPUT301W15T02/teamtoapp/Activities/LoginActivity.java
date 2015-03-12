@@ -18,7 +18,13 @@
 
 //Parses entered username to get specific claims and approvals
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Activities;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
+import com.CMPUT301W15T02.teamtoapp.R.id;
+import com.CMPUT301W15T02.teamtoapp.R.layout;
+import com.CMPUT301W15T02.teamtoapp.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

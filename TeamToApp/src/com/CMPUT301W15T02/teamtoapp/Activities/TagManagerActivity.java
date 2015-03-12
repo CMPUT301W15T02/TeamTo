@@ -13,11 +13,18 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.R.id;
+import com.CMPUT301W15T02.teamtoapp.R.layout;
+import com.CMPUT301W15T02.teamtoapp.R.menu;
 
 import android.app.Activity;
 import android.app.AlertDialog;

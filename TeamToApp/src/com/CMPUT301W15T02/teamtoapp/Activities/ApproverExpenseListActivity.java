@@ -13,15 +13,28 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Activities;
 
-// Tuple class, not sure if we should put this in its own file...
-public class StringTuple {
-	String destination;
-	String reason;
-	
-	public StringTuple(String a, String b) {
-		this.destination = a;
-		this.reason = b;
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.R.layout;
+import com.CMPUT301W15T02.teamtoapp.R.menu;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+
+public class ApproverExpenseListActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.approver_expense_list);
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.approver_expense_list, menu);
+		return true;
+	}
+
 }

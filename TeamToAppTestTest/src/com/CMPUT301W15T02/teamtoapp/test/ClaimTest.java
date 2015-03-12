@@ -5,8 +5,8 @@ package com.CMPUT301W15T02.teamtoapp.test;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 
 import junit.framework.TestCase;
 

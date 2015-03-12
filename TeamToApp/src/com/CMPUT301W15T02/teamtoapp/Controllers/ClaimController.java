@@ -13,7 +13,7 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,7 +21,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Observer;
 
-import com.CMPUT301W15T02.teamtoapp.Claim.Status;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Model.Session;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
 public class ClaimController {
 	

@@ -13,7 +13,12 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Activities;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.R.id;
+import com.CMPUT301W15T02.teamtoapp.R.layout;
+import com.CMPUT301W15T02.teamtoapp.R.menu;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -13,11 +13,19 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.Claim.Status;
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantExpenseListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
+import com.CMPUT301W15T02.teamtoapp.R.id;
+import com.CMPUT301W15T02.teamtoapp.R.layout;
+import com.CMPUT301W15T02.teamtoapp.R.menu;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -170,9 +178,9 @@ public class ClaimantExpenseListActivity extends Activity {
 		}
 		
 		// If claim info complete and expenses are present, check for expense incompleteness depending on status
-		com.CMPUT301W15T02.teamtoapp.Claim.Status currentStatus = claimController.getCurrentClaim().getStatus();
+		com.CMPUT301W15T02.teamtoapp.Model.Claim.Status currentStatus = claimController.getCurrentClaim().getStatus();
 		
-		if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.IN_PROGRESS) {
+		if (currentStatus == com.CMPUT301W15T02.teamtoapp.Model.Claim.Status.IN_PROGRESS) {
 			// Gives number of incomplete expenses.
 			int numExpensesIncomplete = claimController.checkExpensesComplete();
 			
@@ -185,13 +193,13 @@ public class ClaimantExpenseListActivity extends Activity {
 				return;
 			}
 			
-		} else if (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.APPROVED) {
+		} else if (currentStatus == com.CMPUT301W15T02.teamtoapp.Model.Claim.Status.APPROVED) {
 			Toast.makeText(context, "Claim was already approved.", Toast.LENGTH_SHORT).show();
 			
-		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.RETURNED) {
+		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Model.Claim.Status.RETURNED) {
 			// do something...
 			
-		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Claim.Status.SUBMITTED){
+		} else if  (currentStatus == com.CMPUT301W15T02.teamtoapp.Model.Claim.Status.SUBMITTED){
 			Toast.makeText(context, "Claim already submitted.", Toast.LENGTH_SHORT).show();
 		}
 	}

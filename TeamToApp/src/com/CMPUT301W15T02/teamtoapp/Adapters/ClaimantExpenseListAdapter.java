@@ -13,12 +13,17 @@
  * limitations under the License.
 */
 
-package com.CMPUT301W15T02.teamtoapp;
+package com.CMPUT301W15T02.teamtoapp.Adapters;
 
+import java.security.acl.Owner;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.R.id;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,13 +33,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/*
- * As an approver, I want to list all the expense items for a submitted claim, in order of entry, 
- * showing for each expense item: the date the expense was incurred, 
- * the category, the textual description, amount spent, unit of currency, 
- * and whether there is a photographic receipt.
- */
-public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
+public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 
 	private Context context;
 	private int layoutId;
@@ -42,8 +41,7 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); 
 	private NumberFormat numformatter = new DecimalFormat("#0.00");
 	
-	public ApproverExpenseListAdapter(Context context, int textViewResourceId,
-			ArrayList<Expense> objects) {
+	public ClaimantExpenseListAdapter(Context context, int textViewResourceId, ArrayList<Expense> objects) {
 		super(context, textViewResourceId, objects);
 		this.context = context;
 		this.layoutId = textViewResourceId;
@@ -51,12 +49,11 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 	}
 	
 	private class ViewHolder {
-		TextView approverExpenseDescriptionTextView;
-		TextView approverExpenseDateTextView;
-		TextView approverCategoryTextView;
-		TextView approverCurrencyTextView;
-		TextView approverPhotoReceiptTextView; // Should say yes/or no if it exists.
-
+		TextView expenseDescriptionTextView;
+		TextView expenseDateTextView;
+		TextView categoryTextView;
+		TextView currencyTextView;
+		// TODO: Still need to add tags.
 	}
 	
 	@Override
@@ -69,11 +66,12 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 			row = inflater.inflate(layoutId, parent, false);
 			holder = new ViewHolder();
 			
-			holder.approverExpenseDescriptionTextView = (TextView) row.findViewById(R.id.approverExpenseDescriptionTextView);
-			holder.approverExpenseDateTextView = (TextView) row.findViewById(R.id.approverExpenseDateTextView);
-			holder.approverCategoryTextView = (TextView) row.findViewById(R.id.approverCategoryTextView);
-			holder.approverCurrencyTextView = (TextView) row.findViewById(R.id.approverCurrencyTextView);
-			holder.approverPhotoReceiptTextView = (TextView) row.findViewById(R.id.approverPhotoReceiptTextView);
+			holder.expenseDescriptionTextView = (TextView) row.findViewById(R.id.expenseDescriptionTextView);
+			holder.expenseDateTextView = (TextView) row.findViewById(R.id.expenseDateTextView);
+			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
+			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
+
+			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
 			
 		} else {
@@ -81,9 +79,16 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 		}
 		
 		Expense expense = expenseList.get(position);
-		// TODO: do stuff here
+		if (expense.getDescription().trim().isEmpty()) {
+			holder.expenseDescriptionTextView.setText("No Description");
+		} else {
+			holder.expenseDescriptionTextView.setText(expense.getDescription());
+		}
+		holder.expenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
+		holder.categoryTextView.setText(expense.getCategory());
+		holder.currencyTextView.setText(numformatter.format(expense.getAmount()).toString()+" "+expense.getCurrency());
 		
 		return row;
 	}
-
+	
 }

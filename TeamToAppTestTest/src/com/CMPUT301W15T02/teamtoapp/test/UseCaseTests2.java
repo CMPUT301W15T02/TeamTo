@@ -10,10 +10,10 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import com.CMPUT301W15T02.teamtoapp.Claim;
-import com.CMPUT301W15T02.teamtoapp.User;
-import com.CMPUT301W15T02.teamtoapp.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Expense;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 public class UseCaseTests2 extends TestCase {
 	
