@@ -79,21 +79,21 @@ public class UserController {
 	}
 	
 	public void updateTags() {
-		ArrayList<Tag> userTags = user.getTags();
+		ArrayList<Tag> userTags = getTags();
 		ArrayList<String> userTagIds = new ArrayList<String>();
 		for (Tag tag: userTags) {
 			userTagIds.add(tag.getTagId());
 		}
 		ClaimListController claimListController = new ClaimListController();
 		ArrayList<Claim> claims = claimListController.getClaims();
+		ArrayList<Tag> newTags = new ArrayList<Tag>();
 		for (Claim claim: claims) {
 			for (Tag tag: claim.getTags()) {
 				if (userTagIds.contains(tag.getTagId())) {
-					// Do nothing
-				} else {
-					claim.removeTag(tag);
+					newTags.add(tag);
 				}
 			}
+			claim.setTags(newTags);
 		}
 	}
 	
