@@ -112,7 +112,6 @@ public class TagManagerActivity extends Activity implements Observer {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						userController.removeTag(position);
-						Toast.makeText(TagManagerActivity.this, Integer.toString(userController.getTags().size()), Toast.LENGTH_SHORT).show();
 						userController.updateTags();
 						
 					}

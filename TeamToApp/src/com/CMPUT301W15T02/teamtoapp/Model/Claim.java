@@ -207,21 +207,6 @@ public class Claim extends Observable {
 	}
 	
 	
-	// Up to caller to be sure not null
-	public Expense getExpense(Expense expense) {
-		if( this.expenses.size() == 0 ) {
-			return null;
-		} else {
-			for(int i = 0; i < expenses.size(); i++) {
-				Expense currentExpense = expenses.get(i);
-				if( currentExpense.equals(expense) ) {
-					return currentExpense;
-				}
-			}
-			return null;
-		}
-	}
-	
 	public String getUserId() {
 		return userId;
 	}
