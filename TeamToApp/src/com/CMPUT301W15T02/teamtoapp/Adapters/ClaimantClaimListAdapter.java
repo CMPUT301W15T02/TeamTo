@@ -23,8 +23,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Activities.TagManagerActivity;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.R.id;
 
 import android.app.Activity;
@@ -58,6 +60,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView destinationsTextView;
 		TextView statusTextView;
 		TextView claimantTotalCurrencyView;
+		TextView tagsTextView;
 		
 		// TODO: The following will be used later (need to add them in claimant_claims_list_rows.xml):
 		//TextView txtTags;
@@ -79,15 +82,19 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantListDestsView);
 			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
 			holder.claimantTotalCurrencyView = (TextView) row.findViewById(R.id.claimantTotalCurrencyView);
-			//TODO: holder.txtTags..., 
+			holder.tagsTextView = (TextView) row.findViewById(R.id.claimantTagsListView); 
 			row.setTag(holder);
 		} else {
 			holder = (ViewHolder) row.getTag();
 		}
 		
+		//these holders update the data for the recently made or changed claim for the claimant claims
 		Claim claim = claimsList.get(position);
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
+		
+		//This part of the code takes the updates from the destinations list view from the make a claim 
+		//from the claimant and puts the new information to the claimants list view 
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "Destinations: \n";
@@ -97,9 +104,18 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 	        allDest += "\n";
 	    }
 		
+		//This part of the code takes the updates from the tags list view from the claimant claims 
+		// and puts the new information to the claimants list view 
+		ArrayList<Tag> tags = claim.getTags();
+		String allTags = "Tags:";
+		for (Tag tag: tags)
+		{
+			allTags += " ("+ tag.getTagName()+ ")";
+		}
+		
 		holder.destinationsTextView.setText(allDest);
 		holder.statusTextView.setText("Status: "+claim.getStatus().toString());
-		
+		holder.tagsTextView.setText(allTags);
 		return row;
 	}
 }

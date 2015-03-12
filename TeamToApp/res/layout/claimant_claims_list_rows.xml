@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -13,35 +13,49 @@
         android:id="@+id/claimantClaimNameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="3dp"
-        android:textSize="16sp" />
+        android:paddingBottom="5dp"
+        
+        android:textSize="16sp"
+        android:textStyle="bold" />
  
     <TextView
         android:id="@+id/claimantStartDateView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        android:layout_alignParentEnd="true"
+        
         android:textSize="14sp" />
     
     <TextView
         android:id="@+id/claimantListDestsView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        android:layout_below="@+id/claimantClaimNameView"
+        
         android:textSize="14sp"/>
     
     <TextView
         android:id="@+id/claimantStatusView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/claimantClaimNameView"
+        
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/claimantTotalCurrencyView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        
         android:textSize="14sp" />
     
-</LinearLayout>
+    <TextView 
+        android:id="@+id/claimantTagsListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/claimantListDestsView"
+        
+        android:textSize="12sp" />
+    
+</RelativeLayout>
