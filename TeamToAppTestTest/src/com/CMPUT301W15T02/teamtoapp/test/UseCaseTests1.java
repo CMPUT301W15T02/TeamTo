@@ -25,6 +25,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
@@ -62,7 +63,7 @@ public class UseCaseTests1 extends TestCase {
 		assertTrue("No destination and reason were added.", claims.getClaim(claim).verifyDestination(record));
 	}
 	
-	/*
+	
 	// UC 1.1
 	public void testEditClaim() {
 		ClaimList claims = new ClaimList();
@@ -82,7 +83,7 @@ public class UseCaseTests1 extends TestCase {
 		claim.setClaimName("returned name");
 		assertEquals("Claim name changed when returned", "returned name", claims.getClaim(claim).getClaimName());
 	}
-		
+	
 	// UC 1.2
 	public void testDeleteClaim() {
 		ClaimList claims = new ClaimList();
@@ -93,7 +94,7 @@ public class UseCaseTests1 extends TestCase {
 		assertNull("user still has this claim!", claims.getClaim(claim));
 		
 	}
-
+/*
 	// UC 1.*
 	public void testClaimsSorted() {
 		User user = new User("Peter");
@@ -101,30 +102,33 @@ public class UseCaseTests1 extends TestCase {
 		Claim claim2 = new Claim();
 		user.addClaim(claim1);
 		user.addClaim(claim2);
-		Calendar cal1 = new GregorianCalendar(2005, 07, 28);
-		Calendar cal2 = new GregorianCalendar(1999, 07, 28);
+		GregorianCalendar cal1 = new GregorianCalendar(2005, 07, 28);
+		GregorianCalendar cal2 = new GregorianCalendar(1999, 07, 28);
 		claim1.setStartDate(cal1); // should be first claim
 		claim2.setStartDate(cal2); 
 		// Not really sure how to sort the claims by most recent dates 
 		assertEquals("Sorting by start date?", claim2, user.getClaimPos(0));
 	}
-	
+	*/
 	
 	// UC 3.2, UC 3.3
 	public void testAddTags() {
 		User user = new User("Kent Brockman");
-		user.addTag(null);
-		assertTrue("Contains tag", user.getTags().contains("tag"));
+		Tag testTag = new Tag("test");
+		user.addTag(testTag);
+		assertTrue("Contains tag", user.tagIsIn(testTag));
 	}
 	
 	// UC 3.1
 	public void testRemoveTags() {
 		User user = new User("Peter");
-		user.addTag(null);
-		user.removeTag(null);
-		assertEquals("Removed tag?", true, user.getTags().size()==0);
+		Tag testTag = new Tag("test");
+		user.addTag(testTag);
+		int initialSize = user.getTags().size();
+		user.removeTag(testTag);
+		assertEquals("Removed tag?", initialSize-1, user.getTags().size());
 	}
-	
+	/*
 	// UC 3.0
 	public void testEditTags() {
 		User user = new User("Sarah");
