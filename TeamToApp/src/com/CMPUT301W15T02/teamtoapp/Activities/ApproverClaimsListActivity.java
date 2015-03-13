@@ -16,40 +16,62 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
+import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 public class ApproverClaimsListActivity extends Activity {
 
+	final Context context = this;
+	private ListView listView;
+	private SessionController sessionController;
+	private ClaimListController claimListController;
+	private ApproverClaimListAdapter adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_claims_list);
+		
+		getModelObjects();
+		findViewsByIds();
+		setListeners();
+		setUpAdapter();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.approver_claims_list_menu, menu);
 		return true;
 	}
 
-	public void filterByDate(MenuItem menu) {
+
+	private void getModelObjects() {
+		sessionController = new SessionController();
+		claimListController = new ClaimListController();
+	}
+	
+	private void findViewsByIds() {
+		listView = (ListView) findViewById(R.id.approverClaimListView);
+	}
+	
+	private void setListeners() {
 		
 	}
 	
-	public void onClaimClick() {
-		// TODO: Go to ApproverExpenseListActivity.java
+	private void setUpAdapter() {
+		
 	}
 	
 	public void switchToClaimantOption(MenuItem menu) {
-		// Not really sure if this is the correct way to do it.
-		// Changes by approver should be saved before going back.
+		// TODO
 		super.onBackPressed();
 	}
 }

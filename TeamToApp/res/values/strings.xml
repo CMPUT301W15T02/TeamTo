@@ -9,9 +9,9 @@
     <string name="title_activity_approver_claims_list">Submitted Claims</string>
     <string name="title_activity_login">TeamTo App!</string>
     <string name="title_activity_claim_expense_list">Claim Overview</string>
-    <string name="title_activity_add_expense">AddExpenseActivity</string>
-    <string name="title_activity_expense_view">ExpenseViewActivity</string>
-    <string name="title_activity_tag_manager">TagManagerActivity</string>
+    <string name="title_activity_add_expense">Create/Edit Expense</string>
+    <string name="title_activity_expense_view">Expense Overview</string>
+    <string name="title_activity_tag_manager">Tags</string>
     <string name="title_activity_approver_expense_list">Submitted Claim Overview</string>
 
 </resources>

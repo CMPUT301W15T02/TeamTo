@@ -23,10 +23,6 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -37,7 +33,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -62,6 +57,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	}
 	
 	private void getModelObjects() {
+		// Initalize objects
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
 		String user = settings.getString("username", null);
 		sessionController = new SessionController();
@@ -117,6 +113,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	
 	private void setUpAdapter() {
+		// Sets up claim list adapter to give customized list view for claimant.
 		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getClaims());
 		adapter.sort(new ClaimComparatorNewestFirst());
 		listView.setAdapter(adapter);
@@ -134,9 +131,11 @@ public class ClaimantClaimsListActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.tagsManagerButton) {
+			// Switch to TagManagerActivity
 			Intent intent = new Intent(getBaseContext(), TagManagerActivity.class);
 			startActivity(intent);
 		} else if (id == R.id.addClaimOp) {
+			// Go to ClaimEditActivity to edit new claim.
 			Claim newClaim = new Claim();
 			claimListController.addClaim(newClaim);
 			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
@@ -149,6 +148,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	@Override
 	protected void onResume() {
+		// Keep claim list view adapter up-to-date.
 		super.onResume();
 		adapter.notifyDataSetChanged();
 		adapter.sort(new ClaimComparatorNewestFirst());
