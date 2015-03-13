@@ -26,4 +26,20 @@ public class StringTuple {
 		this.destination = a;
 		this.reason = b;
 	}
+	
+	public String getDestination() {
+		return this.destination;
+	}
+	
+	public String getReason() {
+		return this.reason;
+	}
+	
+	public void setDestination(String newDestination) {
+		this.destination = newDestination;
+	}
+	
+	public void setReason(String newReason) {
+		this.reason = newReason;
+	}
 }
