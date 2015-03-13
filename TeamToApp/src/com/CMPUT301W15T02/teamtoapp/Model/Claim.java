@@ -63,41 +63,34 @@ public class Claim extends Observable {
 		this.comment = "";
 		this.ClaimId = UUID.randomUUID().toString();
 		this.CurrencyTotals = new HashMap<Currency, Double>();
-		CurrencyTotals.put(Currency.getInstance("CAD"), 0.00);
-		CurrencyTotals.put(Currency.getInstance("USD"), 0.00);
-		CurrencyTotals.put(Currency.getInstance("EUR"), 0.00);
-		CurrencyTotals.put(Currency.getInstance("GBP"), 0.00);
-		CurrencyTotals.put(Currency.getInstance("CHF"), 0.00);
-		CurrencyTotals.put(Currency.getInstance("JPY"), 0.00);
-		CurrencyTotals.put(Currency.getInstance("CNY"), 0.00);
 		
 	}
 	public void setTotalCurrencies() {
 		
-		int totalCAD = 0;
-		int totalUSD = 0;
-		int totalEUR = 0;
-		int totalGBP = 0;
-		int totalCHF = 0;
-		int totalJPY = 0;
-		int totalCNY = 0;
+		Double totalCAD = 0.0;
+		Double totalUSD = 0.0;
+		Double totalEUR = 0.0;
+		Double totalGBP = 0.0;
+		Double totalCHF = 0.0;
+		Double totalJPY = 0.0;
+		Double totalCNY = 0.0;
 		
 		for (Expense expense : this.expenses) {
 			if (expense.getAmount() != 0) {
 				if (expense.getCurrency() == Currency.getInstance("CAD")) {
-					totalCAD++;
+					totalCAD += expense.getAmount();
 				} else if (expense.getCurrency() == Currency.getInstance("USD")) {
-					totalUSD++;
+					totalUSD += expense.getAmount();
 				} else if (expense.getCurrency() == Currency.getInstance("EUR")) {
-					totalEUR++;
+					totalEUR += expense.getAmount();
 				} else if (expense.getCurrency() == Currency.getInstance("GBP")) {
-					totalGBP++;
+					totalGBP += expense.getAmount();
 				} else if (expense.getCurrency() == Currency.getInstance("CHF")) {
-					totalCHF++;
+					totalCHF += expense.getAmount();
 				} else if (expense.getCurrency() == Currency.getInstance("JPY")) {
-					totalJPY++;
+					totalJPY += expense.getAmount();
 				} else if (expense.getCurrency() == Currency.getInstance("CNY")) {
-					totalCNY++;
+					totalCNY += expense.getAmount();
 				}
 			}
 		}
@@ -108,6 +101,11 @@ public class Claim extends Observable {
 		CurrencyTotals.put(Currency.getInstance("CHF"), (double) (totalCHF));
 		CurrencyTotals.put(Currency.getInstance("JPY"), (double) (totalJPY));
 		CurrencyTotals.put(Currency.getInstance("CNY"), (double) (totalCNY));
+		notifyObservers();
+	}
+	
+	public HashMap<Currency, Double> getTotalCurrencies() {
+		return CurrencyTotals;
 	}
 	
 	public String getClaimName() {
