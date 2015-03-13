@@ -167,4 +167,52 @@ public class ClaimController {
 		}
 	}
 	
+	public boolean checkClaimInfoComplete() {
+		// TODO: Not sure how to check start date and end date.
+		// TODO: Need to do tests for this method.
+		if (currentClaim.getClaimName().isEmpty()) {
+			return false;
+		}
+		
+		if (currentClaim.getDestinations().size() == 0) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public int checkBeforeSubmittingClaim() {
+		
+		if (checkClaimInfoComplete() == false) {
+			return 1;
+		} else if (getExpenses().size() == 0) {
+			return 2;
+		}
+		
+		int numExpensesIncomplete = checkExpensesComplete();
+		
+		if (currentClaim.getStatus() == Status.IN_PROGRESS) {
+			if (numExpensesIncomplete > 0) {
+				// Toast expenses are incomplete
+				return 3;
+			} else {
+				// Toast submitted claim successfully -> return 0;
+				submitClaim();
+			}
+		} else if (currentClaim.getStatus() == Status.APPROVED) {
+			// Toast it's been approved.
+			return 4;
+			
+		} else if (currentClaim.getStatus() == Status.RETURNED) {
+			// do something...
+			return 5;
+			
+		} else if (currentClaim.getStatus() == Status.SUBMITTED) {
+			// Toast already submitted.
+			return 6;
+		}
+		
+		return 0;
+	}
+	
 }

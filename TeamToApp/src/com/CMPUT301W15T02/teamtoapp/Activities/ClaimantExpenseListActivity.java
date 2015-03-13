@@ -27,6 +27,7 @@ import com.CMPUT301W15T02.teamtoapp.R.id;
 import com.CMPUT301W15T02.teamtoapp.R.layout;
 import com.CMPUT301W15T02.teamtoapp.R.menu;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -185,60 +186,33 @@ public class ClaimantExpenseListActivity extends Activity {
 	
 	
 	// THIS should all be a controller method later
+	// -- couldn't move it entirely into controller method if using toasts.
 	private void submitClaim() {
 		// TODO: Check claim and expenses depending on current status
-		// TODO: Need to do test for this method. If anyone has a better way to organize this code, go for it. :)
-		
-		if (checkClaimInfoComplete() == false) {
+		int result = claimController.checkBeforeSubmittingClaim();
+		switch (result) {
+		case 0:
+			Toast.makeText(context, "Claim successfully submitted.", Toast.LENGTH_SHORT).show();
+			break;
+		case 1: 
 			Toast.makeText(context, "Claim information incomplete.", Toast.LENGTH_SHORT).show();
-			return;
-		} else if (claimController.getCurrentClaim().getExpenses().size() == 0) {
+			break;
+		case 2:
 			Toast.makeText(context, "Claim has no expenses.", Toast.LENGTH_SHORT).show();
-			return;
-		}
-		
-		// If claim info complete and expenses are present, check for expense incompleteness depending on status
-		Status currentStatus = claimController.getCurrentClaim().getStatus();
-		
-		if (currentStatus == Status.IN_PROGRESS) {
-			// Gives number of incomplete expenses.
-			int numExpensesIncomplete = claimController.checkExpensesComplete();
-			
-			if (numExpensesIncomplete > 0) {
-				Toast.makeText(context, "Expenses are incomplete.", Toast.LENGTH_SHORT).show();
-				
-			} else {
-				claimController.submitClaim();
-				Toast.makeText(context, "Claim successfully submitted.", Toast.LENGTH_SHORT).show();
-				return;
-			}
-			
-		} else if (currentStatus == Status.APPROVED) {
+			break;
+		case 3:
+			Toast.makeText(context, "Expenses are incomplete.", Toast.LENGTH_SHORT).show();
+			break;
+		case 4:
 			Toast.makeText(context, "Claim was already approved.", Toast.LENGTH_SHORT).show();
-			
-		} else if  (currentStatus == Status.RETURNED) {
-			// do something...
-			
-		} else if  (currentStatus == Status.SUBMITTED){
+			break;
+		case 5:
+			// Do something...
+			break;
+		case 6:
 			Toast.makeText(context, "Claim already submitted.", Toast.LENGTH_SHORT).show();
+			break;
 		}
 	}
-	
-	private boolean checkClaimInfoComplete() {
-		// TODO: Not sure how to check start date and end date.
-		// TODO: Need to do tests for this method.
-		Claim checkClaim = claimController.getCurrentClaim();
-		if (checkClaim.getClaimName().isEmpty()) {
-			return false;
-		}
 		
-		if (checkClaim.getDestinations().size() == 0) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	
-	
 }
