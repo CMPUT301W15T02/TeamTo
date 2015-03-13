@@ -21,11 +21,9 @@ import java.util.UUID;
 public class Tag {
 
 	private String tagName;
-	private String tagId;
 	
 	public Tag(String name) {
 		this.tagName = name;
-		this.tagId = UUID.randomUUID().toString();
 	}
 
 	public String getTagName() {
@@ -36,9 +34,6 @@ public class Tag {
 		this.tagName = name;
 	}
 
-	public String getTagId() {
-		return tagId;
-	}
 
 	@Override
 	public String toString() {

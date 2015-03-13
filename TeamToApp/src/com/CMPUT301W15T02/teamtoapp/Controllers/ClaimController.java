@@ -167,4 +167,18 @@ public class ClaimController {
 		}
 	}
 	
+	public boolean checkClaimInfoComplete() {
+		// TODO: Not sure how to check start date and end date.
+		// TODO: Need to do tests for this method.
+		if (currentClaim.getClaimName().isEmpty()) {
+			return false;
+		}
+		
+		if (currentClaim.getDestinations().size() == 0) {
+			return false;
+		}
+		
+		return true;
+	}
+	
 }

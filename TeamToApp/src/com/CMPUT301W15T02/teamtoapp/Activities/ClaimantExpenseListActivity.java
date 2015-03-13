@@ -189,7 +189,7 @@ public class ClaimantExpenseListActivity extends Activity {
 		// TODO: Check claim and expenses depending on current status
 		// TODO: Need to do test for this method. If anyone has a better way to organize this code, go for it. :)
 		
-		if (checkClaimInfoComplete() == false) {
+		if (claimController.checkClaimInfoComplete() == false) {
 			Toast.makeText(context, "Claim information incomplete.", Toast.LENGTH_SHORT).show();
 			return;
 		} else if (claimController.getCurrentClaim().getExpenses().size() == 0) {
@@ -223,22 +223,5 @@ public class ClaimantExpenseListActivity extends Activity {
 			Toast.makeText(context, "Claim already submitted.", Toast.LENGTH_SHORT).show();
 		}
 	}
-	
-	private boolean checkClaimInfoComplete() {
-		// TODO: Not sure how to check start date and end date.
-		// TODO: Need to do tests for this method.
-		Claim checkClaim = claimController.getCurrentClaim();
-		if (checkClaim.getClaimName().isEmpty()) {
-			return false;
-		}
 		
-		if (checkClaim.getDestinations().size() == 0) {
-			return false;
-		}
-		
-		return true;
-	}
-	
-	
-	
 }
