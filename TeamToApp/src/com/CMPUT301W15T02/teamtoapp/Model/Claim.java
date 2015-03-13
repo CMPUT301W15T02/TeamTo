@@ -72,6 +72,43 @@ public class Claim extends Observable {
 		CurrencyTotals.put(Currency.getInstance("CNY"), 0.00);
 		
 	}
+	public void setTotalCurrencies() {
+		
+		int totalCAD = 0;
+		int totalUSD = 0;
+		int totalEUR = 0;
+		int totalGBP = 0;
+		int totalCHF = 0;
+		int totalJPY = 0;
+		int totalCNY = 0;
+		
+		for (Expense expense : this.expenses) {
+			if (expense.getAmount() != 0) {
+				if (expense.getCurrency() == Currency.getInstance("CAD")) {
+					totalCAD++;
+				} else if (expense.getCurrency() == Currency.getInstance("USD")) {
+					totalUSD++;
+				} else if (expense.getCurrency() == Currency.getInstance("EUR")) {
+					totalEUR++;
+				} else if (expense.getCurrency() == Currency.getInstance("GBP")) {
+					totalGBP++;
+				} else if (expense.getCurrency() == Currency.getInstance("CHF")) {
+					totalCHF++;
+				} else if (expense.getCurrency() == Currency.getInstance("JPY")) {
+					totalJPY++;
+				} else if (expense.getCurrency() == Currency.getInstance("CNY")) {
+					totalCNY++;
+				}
+			}
+		}
+		CurrencyTotals.put(Currency.getInstance("CAD"), (double) (totalCAD));
+		CurrencyTotals.put(Currency.getInstance("USD"), (double) (totalUSD));
+		CurrencyTotals.put(Currency.getInstance("EUR"), (double) (totalEUR));
+		CurrencyTotals.put(Currency.getInstance("GBP"), (double) (totalGBP));
+		CurrencyTotals.put(Currency.getInstance("CHF"), (double) (totalCHF));
+		CurrencyTotals.put(Currency.getInstance("JPY"), (double) (totalJPY));
+		CurrencyTotals.put(Currency.getInstance("CNY"), (double) (totalCNY));
+	}
 	
 	public String getClaimName() {
 		return c_name;

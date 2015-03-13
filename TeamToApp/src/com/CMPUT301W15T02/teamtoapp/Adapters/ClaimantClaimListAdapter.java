@@ -116,6 +116,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		holder.destinationsTextView.setText(allDest);
 		holder.statusTextView.setText("Status: "+claim.getStatus().toString());
 		holder.tagsTextView.setText(allTags);
+		// Create total currency view: 
+
 		return row;
 	}
 }
