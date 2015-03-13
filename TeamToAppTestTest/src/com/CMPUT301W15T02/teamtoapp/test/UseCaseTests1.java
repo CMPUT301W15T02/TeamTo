@@ -16,8 +16,6 @@
 
 package com.CMPUT301W15T02.teamtoapp.test;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
@@ -43,7 +41,7 @@ public class UseCaseTests1 extends TestCase {
 		// Save new information for claim, check if saved in claims
 		// TODO: Need to consider claimID.
 		ClaimController controller = new ClaimController(claim.getClaimId());
-		String claimName = "new claim";
+		String claimName = "New Claim";
 		GregorianCalendar start_date = new GregorianCalendar();
 		GregorianCalendar end_date = new GregorianCalendar();
 		controller.setClaimName(claimName);
@@ -51,9 +49,9 @@ public class UseCaseTests1 extends TestCase {
 		controller.setEndDate(end_date);
 		
 		// Testing persistence of name, start & end dates
-		assertTrue("Name is not equal", claims.getClaim(claim).getClaimName() == claimName);
-		assertTrue("Start date is not equal", claims.getClaim(claim).getStartDate() == start_date);
-		assertTrue("End date is not equal", claims.getClaim(claim).getEndDate() == end_date);
+		assertEquals("Name is not equal", claims.getClaim(claim).getClaimName(),claimName);
+		assertEquals("Start date is not equal", claims.getClaim(claim).getStartDate(), start_date);
+		assertEquals("End date is not equal", claims.getClaim(claim).getEndDate(), end_date);
 		
 		
 		String dest = "some destination";

@@ -57,8 +57,7 @@ public class UserController {
 		return user.getTags();
 	}
 	
-	public void renameTag(String tagID, String newText) {
-		Tag tag = findTagById(tagID);
+	public void renameTag(Tag tag, String newText) {
 		if (tag.equals(null)) {
 			return;
 		}
@@ -69,27 +68,15 @@ public class UserController {
 		return user.getTags().get(position);
 	}
 	
-	public Tag findTagById(String tagID) {
-		for (Tag tag: user.getTags()) {
-			if (tag.getTagId().equals(tagID)) {
-				return tag;
-			}
-		}
-		return null;
-	}
 	
 	public void updateTags() {
-		ArrayList<Tag> userTags = getTags();
-		ArrayList<String> userTagIds = new ArrayList<String>();
-		for (Tag tag: userTags) {
-			userTagIds.add(tag.getTagId());
-		}
+		ArrayList<Tag> userTags = getTags(); // userTags
 		ClaimListController claimListController = new ClaimListController();
 		ArrayList<Claim> claims = claimListController.getClaims();
 		ArrayList<Tag> newTags = new ArrayList<Tag>();
 		for (Claim claim: claims) {
 			for (Tag tag: claim.getTags()) {
-				if (userTagIds.contains(tag.getTagId())) {
+				if (userTags.contains(tag)) {
 					newTags.add(tag);
 				}
 			}
