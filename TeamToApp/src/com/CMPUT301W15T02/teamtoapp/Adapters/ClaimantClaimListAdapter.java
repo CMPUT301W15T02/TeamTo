@@ -97,7 +97,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		//from the claimant and puts the new information to the claimants list view 
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
-		String allDest = "Destinations: ";
+		String allDest = "";
 		for (StringTuple s: destStringTuple)
 	    {           
 	        allDest += s.destination;
@@ -120,7 +120,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		// Set the total currencies first, then display currencies with amount > 0.
 		claim.setTotalCurrencies();
 		HashMap<Currency, Double> totalCurrencies = claim.getTotalCurrencies();
-		String totalCurrencyOuput = "Currencies: \n";
+		String totalCurrencyOuput = "";
 
 		if (totalCurrencies.get(Currency.getInstance("CAD")) != 0) {
 			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CAD")).toString()+" CAD\n";
