@@ -20,7 +20,6 @@ public class StringTuple {
 	public String destination;
 	public String reason;
 	
-	// TODO Make getters and setters
 	
 	public StringTuple(String a, String b) {
 		this.destination = a;
