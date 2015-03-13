@@ -18,7 +18,11 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:editable="false" />
+        android:editable="false"
+        android:clickable="false" 
+        android:cursorVisible="false" 
+        android:focusable="false" 
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +42,11 @@
         android:paddingBottom="16dp"
         android:id="@+id/ExpenseDescriptionEditText"
         android:inputType="textCapSentences"
-        android:editable="false"/>
+        android:editable="false"
+        android:clickable="false" 
+        android:cursorVisible="false" 
+        android:focusable="false" 
+        android:focusableInTouchMode="false"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -92,7 +100,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="false"
-                android:id="@+id/CurrencyExpenseSpinner"/>
+                android:id="@+id/CurrencyExpenseSpinner"
+                android:clickable="false" 
+        		android:cursorVisible="false" 
+        		android:focusable="false" 
+        		android:focusableInTouchMode="false"/>
 
         </LinearLayout>
 
@@ -117,7 +129,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/CategoryExpenseSpinner"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:clickable="false" 
+        		android:cursorVisible="false" 
+        		android:focusable="false" 
+        		android:focusableInTouchMode="false"/>
 
             </LinearLayout>
 

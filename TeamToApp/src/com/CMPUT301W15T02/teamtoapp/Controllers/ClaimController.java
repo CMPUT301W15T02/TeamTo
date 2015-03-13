@@ -159,4 +159,12 @@ public class ClaimController {
 		return currentClaim.getTags();
 	}
 	
+	public boolean isEditable() {
+		if (currentClaim.getStatus().equals(Status.IN_PROGRESS) || currentClaim.getStatus().equals(Status.RETURNED)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
