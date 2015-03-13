@@ -126,34 +126,36 @@ public class ClaimantExpenseListActivity extends Activity {
 			}
 			
 		});
-		//Allows the deleting of expenses
-		//Should be done, will do testing later
 		expenseListView.setLongClickable(true);
 		expenseListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			
 			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantExpenseListActivity.this);
-				builder.setMessage("Do you want to delete this Expense?");
-				builder
-				.setPositiveButton("No", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-						//Closes the dialog box (Does nothing)
-						
-					}
-				})
-				.setNegativeButton("Yes", new DialogInterface.OnClickListener(){
-					public void onClick(DialogInterface dialog, int id) {
-						//Deletes the expense of the current user
-						Expense expense = claimController.getExpenses().get(position);
-						claimController.removeExpense(expense);
-						adapter.notifyDataSetChanged();
-						
-					}
-				}).create().show();
+				if (claimController.isEditable()) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantExpenseListActivity.this);
+					builder.setMessage("Do you want to delete this Expense?");
+					builder
+					.setPositiveButton("No", new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int id) {
+							dialog.cancel();
+							//Closes the dialog box (Does nothing)
+
+						}
+					})
+					.setNegativeButton("Yes", new DialogInterface.OnClickListener(){
+						public void onClick(DialogInterface dialog, int id) {
+							//Deletes the expense of the current user
+							Expense expense = claimController.getExpenses().get(position);
+							claimController.removeExpense(expense);
+							adapter.notifyDataSetChanged();
+
+						}
+					}).create().show();
+				} else {
+					Toast.makeText(context, "Can't delete expenses when claim is submitted or approved", Toast.LENGTH_SHORT).show();
+				}
 				return true;
 			}
 		});
