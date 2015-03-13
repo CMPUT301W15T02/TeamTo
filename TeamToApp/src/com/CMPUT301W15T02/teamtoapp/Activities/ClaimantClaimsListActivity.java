@@ -53,6 +53,8 @@ public class ClaimantClaimsListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
+		
+		// TODO Clean this up
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
 		String user = settings.getString("username", null);
 		SessionController sessionController = new SessionController();

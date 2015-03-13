@@ -20,18 +20,22 @@ import java.util.ArrayList;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Session;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.R.integer;
 
 public class ClaimListController {
 
 	private ClaimList claims;
+	private User user;
 	
 	public ClaimListController() {
 		claims = Session.getInstance().getCurrentClaims();
+		user = Session.getInstance().getCurrentUser();
 	}
 	
 	public void addClaim(Claim claim) {
+		claim.setUser(user.getName());
 		claims.addClaim(claim);
 	}
 	
