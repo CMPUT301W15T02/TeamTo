@@ -83,6 +83,7 @@ public class LoginActivity extends Activity {
 			editor.putBoolean("hasLoggedIn", true);
 			editor.commit();
 			
+			// TODO need to store the username in sharedPreferences
 			//need some way to add username to session
 			SessionController s_control = new SessionController();
 			startActivity(intent);
