@@ -38,7 +38,19 @@ import android.widget.Toast;
 
 public class Claim extends Observable {
 
-	public enum Status {IN_PROGRESS, SUBMITTED, RETURNED, APPROVED}
+	public enum Status {IN_PROGRESS ("In Progress"), SUBMITTED ("Submitted"), RETURNED ("Returned"), APPROVED ("Approved");
+	
+		private final String name;
+		
+		private Status(String s) {
+			name = s;
+		}
+		@Override
+		public String toString() {
+			return name;
+		}
+	}
+
 	private String c_name;
 	private GregorianCalendar startDate;
 	private GregorianCalendar endDate;

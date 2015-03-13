@@ -65,9 +65,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView totalCurrencyView;
 		TextView tagsTextView;
 		
-		// TODO: The following will be used later (need to add them in claimant_claims_list_rows.xml):
-		//TextView txtTags;
-		//TextView txtTotalCurr;
 	}
 	
 	@Override
@@ -100,7 +97,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		//from the claimant and puts the new information to the claimants list view 
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
-		String allDest = "Destinations: \n";
+		String allDest = "Destinations: ";
 		for (StringTuple s: destStringTuple)
 	    {           
 	        allDest += s.destination;
@@ -110,14 +107,14 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		//This part of the code takes the updates from the tags list view from the claimant claims 
 		// and puts the new information to the claimants list view 
 		ArrayList<Tag> tags = claim.getTags();
-		String allTags = "Tags:";
+		String allTags = "Tags: ";
 		for (Tag tag: tags)
 		{
-			allTags += " ("+ tag.getTagName()+ ")";
+			allTags += ""+ tag.getTagName()+ "  ";
 		}
 		
 		holder.destinationsTextView.setText(allDest);
-		holder.statusTextView.setText("Status: "+claim.getStatus().toString());
+		holder.statusTextView.setText(claim.getStatus().toString());
 		holder.tagsTextView.setText(allTags);
 		
 		// Set the total currencies first, then display currencies with amount > 0.
