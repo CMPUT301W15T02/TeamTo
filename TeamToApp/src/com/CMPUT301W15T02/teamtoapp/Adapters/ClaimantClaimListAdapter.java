@@ -21,6 +21,8 @@ package com.CMPUT301W15T02.teamtoapp.Adapters;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.HashMap;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Activities.TagManagerActivity;
@@ -37,6 +39,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+//This adapter customizes the claim list view for the claimant.
 public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;
@@ -59,7 +62,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView startDateTextView;
 		TextView destinationsTextView;
 		TextView statusTextView;
-		TextView claimantTotalCurrencyView;
+		TextView totalCurrencyView;
 		TextView tagsTextView;
 		
 		// TODO: The following will be used later (need to add them in claimant_claims_list_rows.xml):
@@ -81,7 +84,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			holder.startDateTextView = (TextView) row.findViewById(R.id.claimantStartDateView);
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantListDestsView);
 			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
-			holder.claimantTotalCurrencyView = (TextView) row.findViewById(R.id.claimantTotalCurrencyView);
+			holder.totalCurrencyView = (TextView) row.findViewById(R.id.claimantTotalCurrencyView);
 			holder.tagsTextView = (TextView) row.findViewById(R.id.claimantTagsListView); 
 			row.setTag(holder);
 		} else {
@@ -116,7 +119,41 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		holder.destinationsTextView.setText(allDest);
 		holder.statusTextView.setText("Status: "+claim.getStatus().toString());
 		holder.tagsTextView.setText(allTags);
-		// Create total currency view: 
+		
+		// Set the total currencies first, then display currencies with amount > 0.
+		claim.setTotalCurrencies();
+		HashMap<Currency, Double> totalCurrencies = claim.getTotalCurrencies();
+		String totalCurrencyOuput = "Currencies: \n";
+
+		if (totalCurrencies.get(Currency.getInstance("CAD")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CAD")).toString()+" CAD\n";
+		}
+		
+		if (totalCurrencies.get(Currency.getInstance("USD")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("USD")).toString()+" USD\n";
+		}
+		
+		if (totalCurrencies.get(Currency.getInstance("EUR")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("EUR")).toString()+" EUR\n";
+		}
+
+		if (totalCurrencies.get(Currency.getInstance("GBP")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("GBP")).toString()+" GBP\n";
+		}
+		
+		if (totalCurrencies.get(Currency.getInstance("CHF")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CHF")).toString()+" CHF\n";
+		}
+		
+		if (totalCurrencies.get(Currency.getInstance("JPY")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("JPY")).toString()+" JPY\n";
+		}
+		
+		if (totalCurrencies.get(Currency.getInstance("CNY")) != 0) {
+			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CNY")).toString()+" CNY\n";
+		}
+		
+		holder.totalCurrencyView.setText(totalCurrencyOuput);
 
 		return row;
 	}
