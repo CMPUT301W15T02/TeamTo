@@ -16,8 +16,6 @@
 
 package com.CMPUT301W15T02.teamtoapp.Model;
 
-import java.util.UUID;
-
 public class Tag {
 
 	private String tagName;
