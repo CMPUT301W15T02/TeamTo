@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.R.id;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,12 +31,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-/*
- * As an approver, I want to list all the expense items for a submitted claim, in order of entry, 
- * showing for each expense item: the date the expense was incurred, 
- * the category, the textual description, amount spent, unit of currency, 
- * and whether there is a photographic receipt.
- */
+// This adapter customizes the expense list view for the approver.
 public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 
 	private Context context;
