@@ -24,3 +24,9 @@ proguard/
 
 # Log Files
 *.log
+
+#OS Generated Files
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
