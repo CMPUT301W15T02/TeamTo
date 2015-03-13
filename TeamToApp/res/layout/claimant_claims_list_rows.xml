@@ -14,7 +14,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingBottom="5dp"
-        
         android:textSize="16sp"
         android:textStyle="bold" />
  
@@ -23,7 +22,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        
         android:textSize="14sp" />
     
     <TextView
@@ -31,7 +29,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/claimantClaimNameView"
-        
         android:textSize="14sp"/>
     
     <TextView
@@ -40,22 +37,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/claimantClaimNameView"
-        
         android:textSize="14sp" />
 
     <TextView
         android:id="@+id/claimantTotalCurrencyView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        
+        android:layout_below="@+id/claimantListDestsView"
         android:textSize="14sp" />
     
     <TextView 
         android:id="@+id/claimantTagsListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/claimantListDestsView"
-        
-        android:textSize="12sp" />
+        android:layout_below="@+id/claimantTotalCurrencyView"
+        android:textSize="14sp" />
     
 </RelativeLayout>

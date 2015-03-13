@@ -121,7 +121,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		// Create total currency view: 
 		claim.setTotalCurrencies();
 		HashMap<Currency, Double> totalCurrencies = claim.getTotalCurrencies();
-		String totalCurrencyOuput = "Total Currencies: \n";
+		String totalCurrencyOuput = "Currencies: \n";
 
 		if (totalCurrencies.get(Currency.getInstance("CAD")) != 0) {
 			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CAD")).toString()+" CAD\n";
