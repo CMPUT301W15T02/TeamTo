@@ -20,17 +20,9 @@ import java.util.ArrayList;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantExpenseListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,7 +31,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -162,9 +153,7 @@ public class ClaimantExpenseListActivity extends Activity {
 						adapter.notifyDataSetChanged();
 						
 					}
-				});
-				AlertDialog alertDialog = builder.create();
-				alertDialog.show();
+				}).create().show();
 				return true;
 			}
 		});
@@ -179,40 +168,15 @@ public class ClaimantExpenseListActivity extends Activity {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
 		adapter.notifyDataSetChanged();
 	}
 	
 	
-	// THIS should all be a controller method later
-	// -- couldn't move it entirely into controller method if using toasts.
 	private void submitClaim() {
 		// TODO: Check claim and expenses depending on current status
-		int result = claimController.checkBeforeSubmittingClaim();
-		switch (result) {
-		case 0:
-			Toast.makeText(context, "Claim successfully submitted.", Toast.LENGTH_SHORT).show();
-			break;
-		case 1: 
-			Toast.makeText(context, "Claim information incomplete.", Toast.LENGTH_SHORT).show();
-			break;
-		case 2:
-			Toast.makeText(context, "Claim has no expenses.", Toast.LENGTH_SHORT).show();
-			break;
-		case 3:
-			Toast.makeText(context, "Expenses are incomplete.", Toast.LENGTH_SHORT).show();
-			break;
-		case 4:
-			Toast.makeText(context, "Claim was already approved.", Toast.LENGTH_SHORT).show();
-			break;
-		case 5:
-			// Do something...
-			break;
-		case 6:
-			Toast.makeText(context, "Claim already submitted.", Toast.LENGTH_SHORT).show();
-			break;
-		}
+		String result = claimController.checkBeforeSubmittingClaim();
+		Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
 	}
 		
 }
