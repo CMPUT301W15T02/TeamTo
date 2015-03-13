@@ -118,7 +118,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		holder.destinationsTextView.setText(allDest);
 		holder.statusTextView.setText("Status: "+claim.getStatus().toString());
 		holder.tagsTextView.setText(allTags);
-		// Create total currency view: 
+		
+		// Set the total currencies first, then display currencies with amount > 0.
 		claim.setTotalCurrencies();
 		HashMap<Currency, Double> totalCurrencies = claim.getTotalCurrencies();
 		String totalCurrencyOuput = "Currencies: \n";
