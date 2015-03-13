@@ -37,6 +37,7 @@ public class SessionController {
 
 	//Checks connection to Internet
 	//Source: http://stackoverflow.com/a/9570292 2015-03-10
+	// Is there any reason this is static?
 	public static boolean isNetworkAvailable(Context context) {
 	    return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}

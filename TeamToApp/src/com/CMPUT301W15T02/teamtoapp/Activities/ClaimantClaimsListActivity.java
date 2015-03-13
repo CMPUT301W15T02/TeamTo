@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 public class ClaimantClaimsListActivity extends Activity {
 	
+	private SessionController sessionController;
 	private ClaimListController claimListController;
 	final Context context = this;
 	private ListView listView;
@@ -54,16 +55,18 @@ public class ClaimantClaimsListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
 		
-		// TODO Clean this up
-		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
-		String user = settings.getString("username", null);
-		SessionController sessionController = new SessionController();
-		sessionController.setUser(user);
-		claimListController = new ClaimListController();
-		
+		getModelObjects();
 		findViewsByIds();
 		setListeners();
 		setUpAdapter();
+	}
+	
+	private void getModelObjects() {
+		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
+		String user = settings.getString("username", null);
+		sessionController = new SessionController();
+		sessionController.setUser(user);
+		claimListController = new ClaimListController();
 	}
 	
 	private void findViewsByIds() {
@@ -101,16 +104,12 @@ public class ClaimantClaimsListActivity extends Activity {
 				.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// Finished - can now delete claim
 						// TODO: Need to do a test for deleting claim in TeamToAppTest
 						Claim claim = claimListController.getClaim(position);
 						claimListController.removeClaim(claim);
 						adapter.notifyDataSetChanged();
 					}
-				});
-				
-				AlertDialog alertDialog = builder.create();
-				alertDialog.show();
+				}).create().show();;
 				return true;
 			}
 		});
@@ -156,14 +155,11 @@ public class ClaimantClaimsListActivity extends Activity {
 		
 	}
 
-	public void filterByDate(MenuItem menu) {
-		
-	}
 	
 	
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if(SessionController.isNetworkAvailable(this)){
+		if( SessionController.isNetworkAvailable(this)){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);
 		}

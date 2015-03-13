@@ -40,12 +40,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ClaimantExpenseListActivity extends Activity {
 
 	private Context context = this;
 	private ListView expenseListView;
+	private TextView claimNameTextView;
+	private TextView claimStartDateTextView;
+	private TextView claimEndDateTextView;
+	
 	private String claimID;
 	private ClaimController claimController;
 	private ArrayList<Expense> expenses;
@@ -57,6 +62,7 @@ public class ClaimantExpenseListActivity extends Activity {
 		setContentView(R.layout.claimant_expense_list);
 		getModelObjects();
 		findViewsByIds();
+		setFieldValues();
 		setListeners();
 		setUpAdapter();
 		
@@ -101,6 +107,15 @@ public class ClaimantExpenseListActivity extends Activity {
 	
 	private void findViewsByIds() {
 		expenseListView = (ListView) findViewById(R.id.claimantExpenseListView);
+		claimNameTextView = (TextView) findViewById(R.id.claimNameTextView);
+		claimStartDateTextView = (TextView) findViewById(R.id.claimStartDateTextView);
+		claimEndDateTextView = (TextView) findViewById(R.id.claimEndDateTextView);
+	}
+	
+	private void setFieldValues() {
+		claimNameTextView.setText(claimController.getClaimName());
+		claimStartDateTextView.setText(claimController.getStartDateFormatted());
+		claimEndDateTextView.setText(claimController.getEndDateFormatted());
 	}
 	
 	private void setListeners() {
@@ -111,7 +126,6 @@ public class ClaimantExpenseListActivity extends Activity {
 				Intent intent;
 				if (claimController.isEditable()) {
 					intent = new Intent(context, ExpenseEditActivity.class);
-					Toast.makeText(context, "Starting editable", Toast.LENGTH_LONG).show();
 				} else {
 					intent = new Intent(context, ExpenseViewActivity.class);
 				}
