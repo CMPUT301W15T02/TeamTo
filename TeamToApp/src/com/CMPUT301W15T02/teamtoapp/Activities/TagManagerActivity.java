@@ -104,8 +104,8 @@ public class TagManagerActivity extends Activity implements Observer {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String tagName = tagNameEditText.getText().toString().trim();
-						String tagID = userController.getTag(position).getTagId();
-						userController.renameTag(tagID, tagName);
+						Tag currentTag = userController.getTag(position);
+						userController.renameTag(currentTag, tagName);
 					}
 				})
 				.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
