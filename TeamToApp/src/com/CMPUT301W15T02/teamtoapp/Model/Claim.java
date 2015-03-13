@@ -90,6 +90,7 @@ public class Claim extends Observable {
 	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
 		setChanged();
+		notifyObservers();
 	}
 
 	public Calendar getEndDate() {

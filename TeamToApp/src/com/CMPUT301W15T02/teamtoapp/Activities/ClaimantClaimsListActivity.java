@@ -22,6 +22,7 @@ import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 import com.CMPUT301W15T02.teamtoapp.R.id;
 import com.CMPUT301W15T02.teamtoapp.R.layout;
 import com.CMPUT301W15T02.teamtoapp.R.menu;
@@ -112,6 +113,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	
 	private void setUpAdapter() {
 		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getClaims());
+		adapter.sort(new ClaimComparatorNewestFirst());
 		listView.setAdapter(adapter);
 	}
 	
@@ -144,6 +146,7 @@ public class ClaimantClaimsListActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		adapter.notifyDataSetChanged();
+		adapter.sort(new ClaimComparatorNewestFirst());
 		
 	}
 
