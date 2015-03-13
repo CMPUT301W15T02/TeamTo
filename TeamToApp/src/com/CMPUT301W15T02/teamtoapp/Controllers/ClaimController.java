@@ -181,4 +181,38 @@ public class ClaimController {
 		return true;
 	}
 	
+	public int checkBeforeSubmittingClaim() {
+		
+		if (checkClaimInfoComplete() == false) {
+			return 1;
+		} else if (getExpenses().size() == 0) {
+			return 2;
+		}
+		
+		int numExpensesIncomplete = checkExpensesComplete();
+		
+		if (currentClaim.getStatus() == Status.IN_PROGRESS) {
+			if (numExpensesIncomplete > 0) {
+				// Toast expenses are incomplete
+				return 3;
+			} else {
+				// Toast submitted claim successfully -> return 0;
+				submitClaim();
+			}
+		} else if (currentClaim.getStatus() == Status.APPROVED) {
+			// Toast it's been approved.
+			return 4;
+			
+		} else if (currentClaim.getStatus() == Status.RETURNED) {
+			// do something...
+			return 5;
+			
+		} else if (currentClaim.getStatus() == Status.SUBMITTED) {
+			// Toast already submitted.
+			return 6;
+		}
+		
+		return 0;
+	}
+	
 }
