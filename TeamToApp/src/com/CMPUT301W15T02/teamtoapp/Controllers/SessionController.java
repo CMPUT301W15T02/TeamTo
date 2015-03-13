@@ -16,6 +16,7 @@
 package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.content.Context;
@@ -28,6 +29,10 @@ public class SessionController {
 	private ClaimList claims;
 	
 	public SessionController() {
+	}
+	
+	public void setUser(String name) {
+		Session.getInstance().setCurrentUser(new User(name));
 	}
 
 	//Checks connection to Internet

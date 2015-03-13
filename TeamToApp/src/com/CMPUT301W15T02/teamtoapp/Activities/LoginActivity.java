@@ -81,6 +81,7 @@ public class LoginActivity extends Activity {
 			SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 			SharedPreferences.Editor editor = settings.edit();
 			editor.putBoolean("hasLoggedIn", true);
+			editor.putString("username", usernameString);
 			editor.commit();
 			
 			// TODO need to store the username in sharedPreferences

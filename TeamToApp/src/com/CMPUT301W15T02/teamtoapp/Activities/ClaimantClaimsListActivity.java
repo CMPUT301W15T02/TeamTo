@@ -32,6 +32,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,7 +53,10 @@ public class ClaimantClaimsListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
-		
+		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
+		String user = settings.getString("username", null);
+		SessionController sessionController = new SessionController();
+		sessionController.setUser(user);
 		claimListController = new ClaimListController();
 		
 		findViewsByIds();
