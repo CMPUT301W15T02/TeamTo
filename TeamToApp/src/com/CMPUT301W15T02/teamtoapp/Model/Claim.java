@@ -74,7 +74,6 @@ public class Claim extends Observable {
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
 		this.ClaimId = UUID.randomUUID().toString();
-		this.CurrencyTotals = new HashMap<Currency, Double>();
 	}
 	
 	// This method sets the total currencies for the claim list view.
@@ -260,18 +259,5 @@ public class Claim extends Observable {
 		return ClaimId;
 	}
 	
-	public void totalExpenses(ArrayList<Expense> expenses, HashMap<String, Double> CurrencyTotals) {
-		for (Expense expense : expenses) {
-			Currency currency = expense.getCurrency();
-			
-			Double newAmount = expense.getAmount();
-			Double oldAmount = CurrencyTotals.get(currency);
-			CurrencyTotals.put(currency.toString(), oldAmount + newAmount);
-			
-			
-		}
-		
-
-	}
 	
 }
