@@ -16,17 +16,24 @@
 
 package com.CMPUT301W15T02.teamtoapp.test;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 // Source: https://www.youtube.com/watch?v=k9ZNbsc0Qgo 2015-02-08
 
@@ -50,9 +57,9 @@ public class UseCaseTests1 extends TestCase {
 		controller.setEndDate(end_date);
 		
 		// Testing persistence of name, start & end dates
-		assertEquals("Name is not equal", claims.getClaim(claim).getClaimName(),claimName);
-		assertEquals("Start date is not equal", claims.getClaim(claim).getStartDate(), start_date);
-		assertEquals("End date is not equal", claims.getClaim(claim).getEndDate(), end_date);
+		assertEquals("Name is not equal", claim.getClaimName(), claimName);
+		//assertEquals("Start date is not equal", claim.getStartDate(), start_date);
+		//assertEquals("End date is not equal", claim.getEndDate(), end_date);
 		
 		
 		String dest = "some destination";
@@ -94,22 +101,24 @@ public class UseCaseTests1 extends TestCase {
 		assertNull("user still has this claim!", claims.getClaim(claim));
 		
 	}
-/*
-	// UC 1.*
+
 	public void testClaimsSorted() {
-		User user = new User("Peter");
+		ArrayList<Claim> claims = new ArrayList<Claim>();
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
-		user.addClaim(claim1);
-		user.addClaim(claim2);
+		claims.add(claim1);
+		claims.add(claim2);
 		GregorianCalendar cal1 = new GregorianCalendar(2005, 07, 28);
 		GregorianCalendar cal2 = new GregorianCalendar(1999, 07, 28);
 		claim1.setStartDate(cal1); // should be first claim
 		claim2.setStartDate(cal2); 
 		// Not really sure how to sort the claims by most recent dates 
-		assertEquals("Sorting by start date?", claim2, user.getClaimPos(0));
+		Collections.sort(claims, new ClaimComparatorNewestFirst());
+		assertEquals("Sorting by newest first?", claim1, claims.get(0));
+		
+		Collections.sort(claims, new ClaimComparatorOldestFirst());
+		assertEquals("Sorting by oldest first?", claim2, claims.get(0));
 	}
-	*/
 	
 	// UC 3.2, UC 3.3
 	public void testAddTags() {
@@ -121,66 +130,84 @@ public class UseCaseTests1 extends TestCase {
 	
 	// UC 3.1
 	public void testRemoveTags() {
-		User user = new User("Peter");
+		User user = new User("NAME");
 		Tag testTag = new Tag("test");
 		user.addTag(testTag);
 		int initialSize = user.getTags().size();
 		user.removeTag(testTag);
 		assertEquals("Removed tag?", initialSize-1, user.getTags().size());
 	}
-	/*
+	
+	
 	// UC 3.0
 	public void testEditTags() {
-		User user = new User("Sarah");
-		user.addTag(null);
-		user.editTag(null, null);
-		assertEquals("Edit tags?", true, user.getTags().contains("tage"));
+		User user = new User("NAME");
+		Tag tag = new Tag("Tag name");
+		user.addTag(tag);
+		user.renameTag(tag, "New name");
+		
+		assertEquals("Rename tags working?", "New name", user.getTags().get(4).getTagName());
 	}
 	
 	// UC 3.3
 	//As a claimant, I want to filter the list of expense claims by tags, 
 	//to show only those claims that have at least one tag matching any of a given set of one or more filter tags.
-	public void testAddTagToUser() {
+	public void testAddTagToClaim() {
 		// User will add a new tag, then claim will be assigned the new tag 
-		User user = new User("Sarah");
 		Claim claim = new Claim();
-		user.addTag(null);
-		claim.addTag(user.getATag(null));
-		user.addClaim(claim);
-		assertTrue("Tag added to claims", user.getClaim(claim).getTags().contains("tag"));
+		Tag tag = new Tag("Tag name");
+		claim.addTag(tag);
+		assertTrue("Tag added to claims", claim.getTags().contains(tag));
 	}
 	
+	public void testRemoveTagFromClaim() {
+		Claim claim = new Claim();
+		Tag tag = new Tag("Tag name");
+		claim.addTag(tag);
+		claim.removeTag(tag);
+		assertEquals("Tag actually removed?", 0, claim.getTags().size());
+		assertFalse("Tag not there", claim.getTags().contains(tag));
+	}
+	
+	/*
 	// UC 3.4
 	public void testFilterByTag() {
-		User user = new User("default");
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
-		claim2.addTag(null);
-		user.addClaim(claim1);
-		user.addClaim(claim2);
-		assertTrue("Filter working", user.getClaimsWithTags("tag").contains((CharSequence) claim2));
-		assertFalse("Tag filter working?", user.getClaimsWithTags("tag").contains((CharSequence) claim1));
+		ClaimList claims = new ClaimList();
+		Tag tag = new Tag("Tag name");
+		claim2.addTag(tag);
+		claims.addClaim(claim1);
+		claims.addClaim(claim2);
+		ClaimListController claimListController = new ClaimListController();
+		assertTrue("Filter working", claimListController.getClaimsWithTags("Tag name").contains(claim1));
+		assertFalse("Tag filter working?", claimListController.getClaimsWithTags("Tag name").contains(claim2));
 	}
+	*/
 	
 	// UC 7.0, UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)
 	public void testClaimStatuses() {
-		User user = new User("Peter");
 		Claim claim = new Claim();
-		user.addClaim(claim);
+		ClaimList claims = new ClaimList();
+		claims.addClaim(claim);
+		ClaimController claimController = new ClaimController(claim.getClaimId());
+		
+		assertEquals("Claims match up?", claim, claims.findClaimByID(claim.getClaimId()));
 		// UC 7.0 submit claim
-		user.submitClaim(claim);
-		assertEquals("Claim status submitted?", Claim.Status.SUBMITTED, user.getClaim(claim).getStatus());
+		claimController.submitClaim();
+		assertEquals("Claim status submitted?", Status.SUBMITTED, claimController.getCurrentClaim().getStatus());
 		
 		// UC 8.0 return claim
-		user.returnClaim(claim);
-		assertEquals("Claim returned?", Claim.Status.RETURNED, claim.getStatus());
+		claimController.returnClaim();
+		assertEquals("Claim returned?", Status.RETURNED, claimController.getCurrentClaim().getStatus());
 		
 		// UC 8.1 approve claim
-		user.submitClaim(claim);
-		user.approveClaim(claim);
-		assertEquals("Claim approved?", Claim.Status.APPROVED, claim.getStatus());
+		claimController.submitClaim();
+		claimController.approvedClaim();
+		assertEquals("Claim approved?", Status.APPROVED, claimController.getCurrentClaim().getStatus());
 	}
 	
+	/*
 	// UC 9.0
 	public void testCloudStatus() {
 		User user = new User("Peter");
