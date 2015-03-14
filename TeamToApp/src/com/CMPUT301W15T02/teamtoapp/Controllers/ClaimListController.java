@@ -27,15 +27,15 @@ import android.R.integer;
 public class ClaimListController {
 
 	private ClaimList claims;
-	private User user;
+	private String userName;
 	
 	public ClaimListController() {
 		claims = Session.getInstance().getCurrentClaims();
-		user = Session.getInstance().getCurrentUser();
+		userName = Session.getInstance().getCurrentUser().getName();
 	}
 	
 	public void addClaim(Claim claim) {
-		claim.setUser(user.getName());
+		claim.setUser(userName);
 		claims.addClaim(claim);
 	}
 	
