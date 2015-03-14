@@ -99,13 +99,15 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "";
-		int i;
+		int i ;
 		for (i = 0; i < destStringTuple.size()-1 ; i++)
 	    {           
 	        allDest += destStringTuple.get(i).destination;
 	        allDest += ", ";
 	    }
-		allDest += destStringTuple.get(i).destination;
+		if (destStringTuple.size() != 0) {
+			allDest += destStringTuple.get(i).destination;
+		}
 		//This part of the code takes the updates from the tags list view from the claimant claims 
 		// and puts the new information to the claimants list view 
 		ArrayList<Tag> tags = claim.getTags();
