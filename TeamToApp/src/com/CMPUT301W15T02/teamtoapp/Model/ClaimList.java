@@ -19,8 +19,9 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
-public class ClaimList extends Observable {
+public class ClaimList extends Observable implements Observer {
 
 	private ArrayList<Claim> claims;
 	
@@ -79,6 +80,12 @@ public class ClaimList extends Observable {
 			}
 		}
 		return new Expense(); // Or should we return new Expense?
+	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		setChanged();
+		notifyObservers();
 	}
 	
 }

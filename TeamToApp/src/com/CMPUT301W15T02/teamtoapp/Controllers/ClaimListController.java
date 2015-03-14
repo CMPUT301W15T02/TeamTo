@@ -38,10 +38,12 @@ public class ClaimListController {
 	public void addClaim(Claim claim) {
 		claim.setUser(userName);
 		claims.addClaim(claim);
+		claim.addObserver(claims);
 	}
 	
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
+		claim.deleteObserver(claims);
 	}
 	
 	public Claim getClaim(int position) {
