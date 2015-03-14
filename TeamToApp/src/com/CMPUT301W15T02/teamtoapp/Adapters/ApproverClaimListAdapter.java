@@ -84,7 +84,9 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		}
 		
 		Claim claim = approverClaimList.get(position);
-		// Do stuff here
+		holder.claimantNameTextView.setText(claim.getUser());
+		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
+		//TODO Finish this up
 		
 		return row;
 	}

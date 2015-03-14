@@ -15,10 +15,14 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+import java.util.ArrayList;
+
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -31,9 +35,9 @@ public class ApproverClaimsListActivity extends Activity {
 
 	final Context context = this;
 	private ListView listView;
-	private SessionController sessionController;
 	private ClaimListController claimListController;
 	private ApproverClaimListAdapter adapter;
+	private ArrayList<Claim> submittedClaims;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +58,8 @@ public class ApproverClaimsListActivity extends Activity {
 
 
 	private void getModelObjects() {
-		sessionController = new SessionController();
 		claimListController = new ClaimListController();
+		submittedClaims = claimListController.getSubmittedClaims();
 	}
 	
 	private void findViewsByIds() {
@@ -67,6 +71,9 @@ public class ApproverClaimsListActivity extends Activity {
 	}
 	
 	private void setUpAdapter() {
+		adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
+		adapter.sort(new ClaimComparatorOldestFirst());
+		listView.setAdapter(adapter);
 		
 	}
 	
@@ -74,4 +81,6 @@ public class ApproverClaimsListActivity extends Activity {
 		// TODO
 		super.onBackPressed();
 	}
+	
+	
 }

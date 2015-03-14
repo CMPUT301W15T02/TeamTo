@@ -22,6 +22,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 import android.R.integer;
 
@@ -60,6 +62,17 @@ public class ClaimListController {
 	
 	public void removeObserverFromClaimList(Observer observer) {
 		claims.deleteObserver(observer);
+	}
+	
+	// DUMMY METHOD won't need this when the networking is working
+	public ArrayList<Claim> getSubmittedClaims() {
+		ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
+		for (Claim claim : claims.getClaims()) {
+			if (claim.getStatus() == Status.SUBMITTED) {
+				submittedClaims.add(claim);
+			}
+		}
+		return submittedClaims;
 	}
 	
 }
