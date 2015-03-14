@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Activities.TagManagerActivity;
@@ -98,12 +99,13 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "";
-		for (StringTuple s: destStringTuple)
+		int i;
+		for (i = 0; i < destStringTuple.size()-1 ; i++)
 	    {           
-	        allDest += s.destination;
-	        allDest += "\n";
+	        allDest += destStringTuple.get(i).destination;
+	        allDest += ", ";
 	    }
-		
+		allDest += destStringTuple.get(i).destination;
 		//This part of the code takes the updates from the tags list view from the claimant claims 
 		// and puts the new information to the claimants list view 
 		ArrayList<Tag> tags = claim.getTags();
@@ -120,38 +122,49 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		// Set the total currencies first, then display currencies with amount > 0.
 		claim.setTotalCurrencies();
 		HashMap<Currency, Double> totalCurrencies = claim.getTotalCurrencies();
-		String totalCurrencyOuput = "";
-
+		ArrayList<String> sortedCurrList = new ArrayList<String>();
+		
 		if (totalCurrencies.get(Currency.getInstance("CAD")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CAD")).toString()+" CAD\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("CAD")).toString()+" CAD");
 		}
 		
 		if (totalCurrencies.get(Currency.getInstance("USD")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("USD")).toString()+" USD\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("USD")).toString()+" USD");
 		}
 		
 		if (totalCurrencies.get(Currency.getInstance("EUR")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("EUR")).toString()+" EUR\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("EUR")).toString()+" EUR");
 		}
 
 		if (totalCurrencies.get(Currency.getInstance("GBP")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("GBP")).toString()+" GBP\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("GBP")).toString()+" GBP");
 		}
 		
 		if (totalCurrencies.get(Currency.getInstance("CHF")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CHF")).toString()+" CHF\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("CHF")).toString()+" CHF");
 		}
 		
 		if (totalCurrencies.get(Currency.getInstance("JPY")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("JPY")).toString()+" JPY\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("JPY")).toString()+" JPY");
 		}
 		
 		if (totalCurrencies.get(Currency.getInstance("CNY")) != 0) {
-			totalCurrencyOuput += totalCurrencies.get(Currency.getInstance("CNY")).toString()+" CNY\n";
+			sortedCurrList.add(totalCurrencies.get(Currency.getInstance("CNY")).toString()+" CNY");
 		}
 		
-		holder.totalCurrencyView.setText(totalCurrencyOuput);
-
+		String totalCurrencyOuput = "";
+		if (sortedCurrList.size() != 0) {
+			int index;
+			for (index = 0; index < sortedCurrList.size()-1; index++) {
+				totalCurrencyOuput += sortedCurrList.get(index);
+				totalCurrencyOuput += ", ";
+			}
+			totalCurrencyOuput += sortedCurrList.get(index);
+			holder.totalCurrencyView.setText(totalCurrencyOuput);
+		} else {
+			holder.totalCurrencyView.setText(totalCurrencyOuput);
+		}
+		
 		return row;
 	}
 }
