@@ -109,7 +109,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		//This part of the code takes the updates from the tags list view from the claimant claims 
 		// and puts the new information to the claimants list view 
 		ArrayList<Tag> tags = claim.getTags();
-		String allTags = "Tags: ";
+		String allTags = "";
 		for (Tag tag: tags)
 		{
 			allTags += ""+ tag.getTagName()+ "  ";

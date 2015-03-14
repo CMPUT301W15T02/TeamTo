@@ -80,7 +80,6 @@
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:text="Destinations:"
-    	    android:textColor="@android:color/darker_gray"
     	    android:textSize="18sp" >
 
     	</TextView>
@@ -89,17 +88,17 @@
     	    android:layout_width="0dp"
         	android:layout_height="wrap_content"
     	    android:layout_weight="1" />
-    
-    	<Button
-        	android:id="@+id/addDestinationButton"
-        	android:layout_width="0dp"
-        	android:layout_height="wrap_content"
-        	android:layout_weight="1"
-        	style="?android:attr/buttonStyleSmall"
-        	android:onClick="addDestinationOption"
-        	android:text="Add Destination"
-        	android:textAppearance="?android:attr/textAppearanceSmallInverse" />
+
     </LinearLayout> 
+
+        	<Button
+        	    android:id="@+id/addDestinationButton"
+        	    style="?android:attr/buttonStyleSmall"
+        	    android:layout_width="match_parent"
+        	    android:layout_height="wrap_content"
+        	    android:onClick="addDestinationOption"
+        	    android:text="Add Destination"
+        	    android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
     <ListView
         android:id="@+id/destinationListView"
@@ -112,9 +111,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Tags:"
-        android:textSize="18sp"
-        android:textColor="@android:color/darker_gray"
-         />
+        android:textSize="18sp" />
 
     <ListView
         android:id="@+id/claimantTagsListView"
