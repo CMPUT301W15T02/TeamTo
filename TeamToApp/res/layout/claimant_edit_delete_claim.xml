@@ -40,9 +40,9 @@
             android:gravity="center"
             android:background="@android:color/transparent"/>
 
-        </LinearLayout>
+	</LinearLayout>
         
-     <LinearLayout
+	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -66,7 +66,7 @@
             android:background="@android:color/transparent"
             />
 
-        </LinearLayout>
+	</LinearLayout>
     
      
     <LinearLayout
@@ -80,53 +80,62 @@
     	    android:layout_width="wrap_content"
     	    android:layout_height="wrap_content"
     	    android:text="Destinations:"
-    	    android:textColor="@android:color/darker_gray"
-    	    android:textSize="18sp" >
-
-    	</TextView>
+    	    android:textSize="18sp" />
     	
     	<Space
     	    android:layout_width="0dp"
         	android:layout_height="wrap_content"
     	    android:layout_weight="1" />
-    
-    	<Button
-        	android:id="@+id/addDestinationButton"
-        	android:layout_width="0dp"
-        	android:layout_height="wrap_content"
-        	android:layout_weight="1"
-        	style="?android:attr/buttonStyleSmall"
-        	android:onClick="addDestinationOption"
-        	android:text="Add Destination"
-        	android:textAppearance="?android:attr/textAppearanceSmallInverse" />
-    </LinearLayout> 
 
+    </LinearLayout> 
+    
     <ListView
-        android:id="@+id/destinationListView"
+       	android:id="@+id/destinationListView"
         android:layout_width="wrap_content"
         android:layout_height="100dp" >
-    </ListView>
-
-    <TextView
-        android:id="@+id/ClaimTagsTextView"
-        android:layout_width="wrap_content"
+   	 </ListView>
+   	 
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tags:"
-        android:textSize="18sp"
-        android:textColor="@android:color/darker_gray"
-         />
+        android:orientation="vertical"
+        style="?android:listSeparatorTextViewStyle">    
 
-    <ListView
-        android:id="@+id/claimantTagsListView"
+		<Button
+    		android:id="@+id/addDestinationButton"
+       		style="?android:attr/buttonStyleSmall"
+       		android:layout_width="match_parent"
+       		android:layout_height="wrap_content"
+       		android:onClick="addDestinationOption"
+       		android:text="Add Destination"
+       		android:textAppearance="?android:attr/textAppearanceSmallInverse" />        
+    </LinearLayout> 
+       		
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        style="?android:listSeparatorTextViewStyle">      
+    
+    	<TextView
+        	android:id="@+id/ClaimTagsTextView"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Tags:"
+        	android:textSize="18sp"/>
+	</LinearLayout>
+
+	<ListView
+   	   	android:id="@+id/claimantTagsListView"
         android:layout_width="match_parent"
         android:layout_height="95dp" >
-    </ListView>
-
+    </ListView>    	
+    
     <Button
-        android:id="@+id/claimantAddTagsButton"
+    	android:id="@+id/claimantAddTagsButton"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Tags" />
-
+        android:text="Add Tags" />	
+    	
 </LinearLayout>
