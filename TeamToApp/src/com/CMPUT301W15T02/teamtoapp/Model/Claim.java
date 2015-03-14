@@ -61,7 +61,7 @@ public class Claim extends Observable {
 	private ArrayList<Tag> tags;
 	private String userId;
 	private String ClaimId;
-	private HashMap<Currency, Double> CurrencyTotals;
+	private HashMap<Currency, Double> CurrencyTotals = new HashMap<Currency, Double>();
 	
 	
 	public Claim() {
