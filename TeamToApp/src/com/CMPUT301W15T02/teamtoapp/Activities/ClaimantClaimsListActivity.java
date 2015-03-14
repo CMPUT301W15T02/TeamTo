@@ -17,12 +17,17 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
+import java.util.Observable;
+import java.util.Observer;
+
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -37,7 +42,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ClaimantClaimsListActivity extends Activity {
+public class ClaimantClaimsListActivity extends Activity implements Observer {
 	
 	private SessionController sessionController;
 	private ClaimListController claimListController;
@@ -63,6 +68,7 @@ public class ClaimantClaimsListActivity extends Activity {
 		sessionController = new SessionController();
 		sessionController.setUser(user);
 		claimListController = new ClaimListController();
+		claimListController.addObserverToClaimList(this);
 	}
 	
 	private void findViewsByIds() {
@@ -85,27 +91,32 @@ public class ClaimantClaimsListActivity extends Activity {
 		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
-				builder.setMessage("Edit or Delete Claim?");
-				builder
-				.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
-					@Override
-					public void onClick(DialogInterface dialog, int id) {
-						Claim claim = claimListController.getClaim(position);
-						Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
-						intent.putExtra("claimID", claim.getClaimId());
-						startActivity(intent);
-					}
-				})
-				.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int id) {
-						// TODO: Need to do a test for deleting claim in TeamToAppTest
-						Claim claim = claimListController.getClaim(position);
-						claimListController.removeClaim(claim);
-						adapter.notifyDataSetChanged();
-					}
-				}).create().show();;
+				ClaimController claimController = new ClaimController(claimListController.getClaim(position).getClaimId());
+				if (claimController.isEditable()) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
+					builder.setMessage("Edit or Delete Claim?");
+					builder
+					.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
+						@Override
+						public void onClick(DialogInterface dialog, int id) {
+							Claim claim = claimListController.getClaim(position);
+							Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
+							intent.putExtra("claimID", claim.getClaimId());
+							startActivity(intent);
+						}
+					})
+					.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int id) {
+							// TODO: Need to do a test for deleting claim in TeamToAppTest
+							Claim claim = claimListController.getClaim(position);
+							claimListController.removeClaim(claim);
+							adapter.notifyDataSetChanged();
+						}
+					}).create().show();
+				} else {
+					Toast.makeText(context, "Cannot currently edit/delete claims", Toast.LENGTH_SHORT).show();
+				}
 				return true;
 			}
 		});
@@ -136,24 +147,13 @@ public class ClaimantClaimsListActivity extends Activity {
 			startActivity(intent);
 		} else if (id == R.id.addClaimOp) {
 			// Go to ClaimEditActivity to edit new claim.
-			Claim newClaim = new Claim();
-			claimListController.addClaim(newClaim);
 			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
-			intent.putExtra("claimID", newClaim.getClaimId());
+			intent.putExtra("claimID", "");
 			startActivity(intent);	
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
-	
-	@Override
-	protected void onResume() {
-		// Keep claim list view adapter up-to-date.
-		super.onResume();
-		adapter.notifyDataSetChanged();
-		adapter.sort(new ClaimComparatorNewestFirst());
-		
-	}
 
 	
 	
@@ -168,4 +168,20 @@ public class ClaimantClaimsListActivity extends Activity {
 		}
 
 	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		adapter.notifyDataSetChanged();
+		adapter.sort(new ClaimComparatorNewestFirst());
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		claimListController.removeObserverFromClaimList(this);
+	}
+	
+	
+	
+	
 }

@@ -109,14 +109,8 @@ public class ClaimEditActivity extends Activity implements Observer {
 	}
 	
 	public void onSaveButtonClick(MenuItem menu) {
-		// TODO Save all input once claimant saves a claim. Otherwise delete automatically if nothing entered.
-		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
-				claimController.getDestinations().size() == 0) {
-			claimListController.removeClaim(claimController.getCurrentClaim());
-			super.onBackPressed();
-		} else {
-			super.onBackPressed();
-		}
+		onBackPressed();
+		
 	}
 
 	
@@ -131,11 +125,10 @@ public class ClaimEditActivity extends Activity implements Observer {
 		// Makes sure a claim is deleted only when nothing entered.
 		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
 				claimController.getDestinations().size() == 0) {
-			claimListController.removeClaim(claimController.getCurrentClaim());
-			finish();
-		} else {
-			finish();
+		} else if (!claimListController.getClaims().contains(claimController.getCurrentClaim())) {
+			claimListController.addClaim(claimController.getCurrentClaim());
 		}
+		finish();
 	}
 	
 	

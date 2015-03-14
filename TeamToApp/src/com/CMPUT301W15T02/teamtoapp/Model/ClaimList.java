@@ -18,8 +18,9 @@
 package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class ClaimList {
+public class ClaimList extends Observable {
 
 	private ArrayList<Claim> claims;
 	
@@ -34,14 +35,20 @@ public class ClaimList {
 
 	public void setClaims(ArrayList<Claim> claims) {
 		this.claims = claims;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void addClaim(Claim claim) {
 		claims.add(claim);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public void removeClaim(Claim claim) {
 		claims.remove(claim);
+		setChanged();
+		notifyObservers();
 	}
 	
 	public Claim getClaim(Claim claim) {
@@ -71,7 +78,7 @@ public class ClaimList {
 				}
 			}
 		}
-		return null; // Or should we return new Expense?
+		return new Expense(); // Or should we return new Expense?
 	}
 	
 }

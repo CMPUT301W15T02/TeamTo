@@ -16,6 +16,7 @@
 package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
@@ -49,6 +50,14 @@ public class ClaimListController {
 
 	public ArrayList<Claim> getClaims() {
 		return claims.getClaims();
+	}
+	
+	public void addObserverToClaimList(Observer observer) {
+		claims.addObserver(observer);
+	}
+	
+	public void removeObserverFromClaimList(Observer observer) {
+		claims.deleteObserver(observer);
 	}
 	
 }
