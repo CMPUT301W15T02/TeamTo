@@ -72,29 +72,44 @@ public class TagManagerActivity extends Activity implements Observer {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Create or retrieves all of the necessary model objects/controllers for the activity
+	 */
 	private void getModelObjects() {
 		userController = new UserController();
 		userController.addObserverToUser(this);
 		tags = userController.getTags();
 	}
 	
+	/**
+	 * Finds all the necessary views
+	 */
 	private void findViewsByIds() {
 		tagsListView = (ListView) findViewById(R.id.tagManagerListView);
 	}
 	
+	/**
+	 * Setting up the array adapter and binding it to the list view
+	 */
 	private void setUpAdapter() {
 		adapter = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, tags);
 		tagsListView.setAdapter(adapter);
 	}
 	
+	/**
+	 * When an item in the list is clicked it creates a dialog that allows
+	 * the user to edit or delete tags
+	 */
 	private void setListeners() {
 		tagsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+			
+			// Create edit/delete/cancel dialog on click
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					final int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 				LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 				View editDeleteTagView = inflater.inflate(R.layout.edit_delete_tag_dialog, null);
+				
+				// Tag name in dialog
 				final EditText tagNameEditText = (EditText) editDeleteTagView.findViewById(R.id.tagNameEditText);
 				tagNameEditText.setText(userController.getTag(position).toString());
 				
@@ -103,6 +118,7 @@ public class TagManagerActivity extends Activity implements Observer {
 				builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
+						// Saves the current tag
 						String tagName = tagNameEditText.getText().toString().trim();
 						Tag currentTag = userController.getTag(position);
 						userController.renameTag(currentTag, tagName);
@@ -111,8 +127,8 @@ public class TagManagerActivity extends Activity implements Observer {
 				.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
+						// Removes the current tag
 						userController.removeTag(position);
-						userController.updateTags();
 						
 					}
 				})
@@ -121,15 +137,15 @@ public class TagManagerActivity extends Activity implements Observer {
 					public void onClick(DialogInterface dialog, int id) {
 						// Do nothing
 					}
-				});
-				
-				AlertDialog alertDialog = builder.create();
-				alertDialog.show();
+				}).create().show();
 				
 			}
 		});
 	}
 	
+	/**
+	 * Creates a dialog for entering new tags with save/cancel buttons
+	 */
 	private void addTag() {
 		LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 		View editDeleteTagView = inflater.inflate(R.layout.edit_delete_tag_dialog, null);
@@ -141,6 +157,7 @@ public class TagManagerActivity extends Activity implements Observer {
 		builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
+				// Adds a new tag only if they actually entered something
 				String tagName = tagNameEditText.getText().toString().trim();
 				if (tagName.length() != 0) {
 					userController.addTag(new Tag(tagName));
@@ -152,17 +169,23 @@ public class TagManagerActivity extends Activity implements Observer {
 			public void onClick(DialogInterface dialog, int id) {
 				// Do nothing
 			}
-		});
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
+		}).create().show();
 	}
 
+	
+	/**
+	 * Observer function called when the user object has changed
+	 * It updates the adapter that something has changed
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		adapter.notifyDataSetChanged();
 		
 	}
 
+	/**
+	 * onDestroy is called when the activity is about to be destroyed and thus we remove the observer
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

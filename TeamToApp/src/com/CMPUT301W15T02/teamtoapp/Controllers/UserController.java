@@ -71,10 +71,12 @@ public class UserController {
 	 */
 	public void removeTag(Tag tag) {
 		user.removeTag(tag);
+		updateTags();
 	}
 	
 	public void removeTag(int position) {
 		user.removeTag(user.getTags().get(position));
+		updateTags();
 	}
 	
 	public ArrayList<Tag> getTags() {
@@ -91,6 +93,7 @@ public class UserController {
 			return;
 		}
 		user.renameTag(tag, newText);
+		updateTags();
 	}
 	
 	public Tag getTag(int position) {
