@@ -3,9 +3,12 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Currency;
 import java.util.GregorianCalendar;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 
 import junit.framework.TestCase;
@@ -68,6 +71,42 @@ public class ClaimTest extends TestCase {
 		claim.removeDestination(dest1);
 		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(dest1));
 	}
+	
+	
+	public void testTotalExpenses() {
+		Claim claim = new Claim();
+		
+		Expense expense1 = new Expense();
+		Calendar date = Calendar.getInstance();
+		String cat = "some category";
+		String info = "descriptical text";
+		Double amt = 70.00;
+		Currency curr = Currency.getInstance("CAD");
+		
+		expense1.setDate(date);
+		expense1.setCategory(cat);
+		expense1.setDescription(info);
+		expense1.setAmount(amt);
+		expense1.setCurrency(curr);
+		
+		Expense expense2 = new Expense();
+		Calendar date2 = Calendar.getInstance();
+		String cat2 = "another category";
+		String info2 = "some other text";
+		Double amt2 = 30.00;
+		Currency curr2 = Currency.getInstance("CAD");
+		
+		expense2.setDate(date2);
+		expense2.setCategory(cat2);
+		expense2.setDescription(info2);
+		expense2.setAmount(amt2);
+		expense2.setCurrency(curr2);
+		
+		claim.setTotalCurrencies();
+		assertTrue("expenses not adding up correctly", claim.getTotalCurrencies().equals(100.0));
+		
+	}
+	
 	
 	// Same tests for tags, expenses, etc. but didn't implement because didn't see the point because the methods are identical?
 	
