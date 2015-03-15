@@ -15,7 +15,12 @@
 
 package com.CMPUT301W15T02.teamtoapp.Model;
 
-// Tuple class, not sure if we should put this in its own file...
+/**
+ * 
+ * Simple tuple that holds two strings
+ *
+ */
+
 public class StringTuple {
 	public String destination;
 	public String reason;

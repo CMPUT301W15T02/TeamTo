@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Holds the current list of claims in order to seperate
+ *
+ */
+
 public class ClaimList extends Observable implements Observer {
 
 	private ArrayList<Claim> claims;
@@ -60,7 +65,11 @@ public class ClaimList extends Observable implements Observer {
 		}
 	}
 	
-	// TODO: Need to test this in ClaimModelsTesting
+	/**
+	 * Responsible for finding a claim by its ID, if one is not found it returns a new claim
+	 * @param claimID 	The ID of a claim
+	 * @return 			A claim, either one that was found or a new claim
+	 */
 	public Claim findClaimByID(String claimID) {
 		for (Claim claim : claims) {
 			if (claim.getClaimId().equals(claimID)) {
@@ -71,6 +80,11 @@ public class ClaimList extends Observable implements Observer {
 		return new Claim();	
 	}
 	
+	/**
+	 * Responsible for finding an expense by its ID, if one is not found it returns a new claim
+	 * @param expenseID The ID of a claim
+	 * @return 			An expense, either one that was found or a new expense
+	 */
 	public Expense findExpenseByID(String expenseID) {
 		for (Claim claim : claims) {
 			for (Expense expense: claim.getExpenses()) {
@@ -82,6 +96,10 @@ public class ClaimList extends Observable implements Observer {
 		return new Expense(); // Or should we return new Expense?
 	}
 
+	/**
+	 * Notifies the ClaimList that something it was observing has changed
+	 * The ClaimList then notifies any of its listeners that it has changed as well
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		setChanged();

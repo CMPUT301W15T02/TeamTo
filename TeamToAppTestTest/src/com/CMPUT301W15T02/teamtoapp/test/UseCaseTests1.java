@@ -125,7 +125,7 @@ public class UseCaseTests1 extends TestCase {
 		User user = new User("Kent Brockman");
 		Tag testTag = new Tag("test");
 		user.addTag(testTag);
-		assertTrue("Contains tag", user.tagIsIn(testTag));
+		assertTrue("Contains tag", user.getTags().contains(testTag));
 	}
 	
 	// UC 3.1

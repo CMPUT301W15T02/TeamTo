@@ -17,16 +17,24 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 import java.util.ArrayList;
 import java.util.Observable;
 
+/**
+ * 
+ * User class consists of the name of the user, the type of user (claimant or approver) and a personal list of tags
+ *
+ */
+
 public class User extends Observable {
 	
 	private String name;
-	private boolean type; // true for claimant, false for approver?
+	private boolean type; // true for claimant, false for approver
 	private ArrayList<Tag> tags;
 	
 	
 	public User(String string) {
 		this.name = string;
 		tags = new ArrayList<Tag>();
+		type = true;
+		// Default tags for now
 		tags.add(new Tag("Shopping"));
 		tags.add(new Tag("Business"));
 		tags.add(new Tag("Personal"));
@@ -61,34 +69,41 @@ public class User extends Observable {
 		notifyObservers();
 	}
 	
+	/**
+	 * Adds a tag to the users personal list of tags only if it is unique to avoid duplicates
+	 * @param tag
+	 */
 	public void addTag(Tag tag) {
-		if( !tagIsIn(tag) ) {
+		if(!tags.contains(tag)) {
 			tags.add(tag);
 			setChanged();
 			notifyObservers();
 		}
 	}
 	
-	// Helper method to check if tag already in tags (by name, not ID)
-	public boolean tagIsIn(Tag tag) {
-		for(Tag t : tags) {
-			if(t.getTagName() == tag.getTagName()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	/**
+	 * Removes a tag from the users personal list of tags only if it exists
+	 * @param tag
+	 */
 	public void removeTag(Tag tag) {
-		tags.remove(tag);
-		setChanged();
-		notifyObservers();
+		if (tags.contains(tag)) {
+			tags.remove(tag);
+			setChanged();
+			notifyObservers();
+		}
 	}
 	
+	/**
+	 * Renames a tag
+	 * @param tag		The tag to be renamed
+	 * @param newText	The new name for the tag
+	 */
 	public void renameTag(Tag tag, String newText) {
-		tag.setTagName(newText);
-		setChanged();
-		notifyObservers();
+		if (tags.contains(tag)) {
+			tag.setTagName(newText);
+			setChanged();
+			notifyObservers();
+		}
 	}
 
 }

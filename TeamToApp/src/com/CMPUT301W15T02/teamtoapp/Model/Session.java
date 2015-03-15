@@ -1,4 +1,4 @@
-/* 
+/* Session class
  * 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
@@ -15,7 +15,12 @@
 
 package com.CMPUT301W15T02.teamtoapp.Model;
 
-
+/**
+ * 
+ * Singleton that contains all information about the current session 
+ * including the current users and the current list of claims
+ *
+ */
 
 public class Session {
 	private User currentUser;
@@ -28,6 +33,10 @@ public class Session {
 		currentClaims = new ClaimList();
 	};
 
+	/**
+	 * Contains the current instance of the singleton if it exists or returns a new instance
+	 * @return
+	 */
 	public static Session getInstance() {
 		if (instance == null) {
 			instance = new Session();

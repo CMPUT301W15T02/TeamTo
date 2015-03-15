@@ -19,10 +19,10 @@ import java.util.Currency;
 import java.util.Observable;
 import java.util.UUID;
 
-/*
- * Stores all of the data related to an expense
- * Note: for each method in this class, might need to check current status of its claim
- * to check if changes are allowed to be made.
+/**
+ * 
+ * Contains all of the information necessary to record an expense
+ *
  */
 
 public class Expense extends Observable {

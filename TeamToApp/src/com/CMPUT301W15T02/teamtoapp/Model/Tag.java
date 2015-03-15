@@ -16,6 +16,12 @@
 
 package com.CMPUT301W15T02.teamtoapp.Model;
 
+/**
+ * 
+ * Tag is a simple object that contains only a string for now
+ *
+ */
+
 public class Tag {
 
 	private String tagName;
@@ -35,7 +41,6 @@ public class Tag {
 
 	@Override
 	public String toString() {
-		// This is actually required...
 		return tagName;
 	}
 	
