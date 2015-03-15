@@ -16,9 +16,9 @@ import junit.framework.TestCase;
 public class ClaimTest extends TestCase {
 
 	public void testAddClaim() {
-		String defaultClaimName = "New Claim";
+		String defaultClaimName = "";
 		Claim claim = new Claim();
-		assertTrue("Default claim name not 'New Claim'", claim.getClaimName().equals(defaultClaimName));
+		assertTrue("Default claim name not ''", claim.getClaimName().equals(defaultClaimName));
 		
 		String newClaimName = "newTestClaim";
 		claim.setClaimName(newClaimName);
@@ -102,8 +102,11 @@ public class ClaimTest extends TestCase {
 		expense2.setAmount(amt2);
 		expense2.setCurrency(curr2);
 		
+		claim.addExpense(expense1);
+		claim.addExpense(expense2);
+		
 		claim.setTotalCurrencies();
-		assertTrue("expenses not adding up correctly", claim.getTotalCurrencies().equals(100.0));
+		assertTrue("expenses not adding up correctly", claim.getTotalCurrencies().get("CAD")==100.00);
 		
 	}
 	

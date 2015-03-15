@@ -75,7 +75,7 @@ public class Claim extends Observable {
 		currencyTotals.clear();
 		for (Expense expense : this.expenses) {
 			if (currencyTotals.containsKey(expense.getCurrency().toString())) {
-				double amount = currencyTotals.get(expense.getCurrency());
+				double amount = currencyTotals.get(expense.getCurrency().toString());
 				amount = amount + expense.getAmount();
 				currencyTotals.put(expense.getCurrency().toString(), amount);
 			} else {
