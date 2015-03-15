@@ -66,14 +66,18 @@ public class UserController {
 	}
 	
 	/**
-	 * Removes a tag from the current user
-	 * @param tag
+	 * Removes a tag from the current user and updates all associated claims
+	 * @param tag	the tag to be removed
 	 */
 	public void removeTag(Tag tag) {
 		user.removeTag(tag);
 		updateTags();
 	}
 	
+	/**
+	 * Removes a tag from the current user and updates all associated claims
+	 * @param tag	the position of the tag to be removed
+	 */
 	public void removeTag(int position) {
 		user.removeTag(user.getTags().get(position));
 		updateTags();
@@ -84,7 +88,7 @@ public class UserController {
 	}
 	
 	/**
-	 * Renames one of the users tags
+	 * Renames one of the users tags and updates all associated claims
 	 * @param tag		tag to be renamed
 	 * @param newText	new name for tag
 	 */
