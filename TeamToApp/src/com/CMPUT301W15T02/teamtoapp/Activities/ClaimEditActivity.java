@@ -123,7 +123,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 	@Override
 	public void onBackPressed() {
 		// Makes sure a claim is deleted only when nothing entered.
-		if (claimController.getCurrentClaim().getClaimName().equals("New Claim") &&
+		if (claimController.getCurrentClaim().getClaimName().equals("") &&
 				claimController.getDestinations().size() == 0) {
 		} else if (!claimListController.getClaims().contains(claimController.getCurrentClaim())) {
 			claimListController.addClaim(claimController.getCurrentClaim());

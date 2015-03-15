@@ -63,10 +63,10 @@ public class ClaimTest extends TestCase {
 		assertTrue("Destinations lists aren't equal", claim.getDestinations().equals(newDestinationsList));
 		
 		// Test membership & remove
-		assertTrue("Destinations list isn't saying it contains item it does", claim.verifyDestination(dest1));
-		assertFalse("Destinations list is saying it contains item it does not", claim.verifyDestination(newDestination));
+		assertTrue("Destinations list isn't saying it contains item it does", claim.getDestinations().contains(dest1));
+		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(newDestination));
 		claim.removeDestination(dest1);
-		assertFalse("Destinations list is saying it contains item it does not", claim.verifyDestination(dest1));
+		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(dest1));
 	}
 	
 	// Same tests for tags, expenses, etc. but didn't implement because didn't see the point because the methods are identical?

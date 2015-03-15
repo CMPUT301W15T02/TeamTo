@@ -67,7 +67,7 @@ public class UseCaseTests1 extends TestCase {
 		StringTuple record = new StringTuple(dest, reason);
 		claim.addDestination(record);
 		
-		assertTrue("No destination and reason were added.", claims.getClaim(claim).verifyDestination(record));
+		assertTrue("No destination and reason were added.", claims.getClaim(claim).getDestinations().contains(record));
 	}
 	
 	

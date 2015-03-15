@@ -17,25 +17,14 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Currency;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.Observable;
-import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import android.R.integer;
-import android.content.Context;
-import android.widget.Toast;
-
-/*
- * Stores all of the data related to a claim
- * Note: for each method in this class, might need to check current claim status
- * to check if changes are allowed to be made.
+/**
+ * Stores all of the data related to a claim including any associated expenses
  * 
- * http://stackoverflow.com/questions/25593768/difference-between-calendar-getinstance-and-gregoriancalendar-getinstance
- * We need to use GregorianCalendar as per the info in the link above!
  */
 
 public class Claim extends Observable {
@@ -53,7 +42,7 @@ public class Claim extends Observable {
 		}
 	}
 
-	private String c_name;
+	private String claimName;
 	private GregorianCalendar startDate;
 	private GregorianCalendar endDate;
 	private ArrayList<StringTuple> destinations;
@@ -61,13 +50,13 @@ public class Claim extends Observable {
 	private Status status;
 	private String comment;
 	private ArrayList<Tag> tags;
-	private String userId;
-	private String ClaimId;
-	private TreeMap<String, Double> CurrencyTotals = new TreeMap<String, Double>();
+	private String userName;
+	private String claimdID;
+	private TreeMap<String, Double> currencyTotals;
 	
 	
 	public Claim() {
-		this.setClaimName("New Claim");
+		this.claimName="";
 		this.startDate = new GregorianCalendar();
 		this.endDate = new GregorianCalendar();
 		this.destinations = new ArrayList<StringTuple>();
@@ -75,33 +64,38 @@ public class Claim extends Observable {
 		status = Status.IN_PROGRESS;
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
-		this.ClaimId = UUID.randomUUID().toString();
+		this.claimdID = UUID.randomUUID().toString();
+		currencyTotals = new TreeMap<String, Double>();
 	}
 	
-	// This method sets the total currencies for the claim list view.
+	/**
+	 *  Compiles the total currencies of all associated expenses into a TreeMap
+	 */
 	public void setTotalCurrencies() {
-		CurrencyTotals.clear();
+		currencyTotals.clear();
 		for (Expense expense : this.expenses) {
-			if (CurrencyTotals.containsKey(expense.getCurrency().toString())) {
-				double amount = CurrencyTotals.get(expense.getCurrency());
+			if (currencyTotals.containsKey(expense.getCurrency().toString())) {
+				double amount = currencyTotals.get(expense.getCurrency());
 				amount = amount + expense.getAmount();
-				CurrencyTotals.put(expense.getCurrency().toString(), amount);
+				currencyTotals.put(expense.getCurrency().toString(), amount);
 			} else {
-				CurrencyTotals.put(expense.getCurrency().toString(), expense.getAmount());
+				currencyTotals.put(expense.getCurrency().toString(), expense.getAmount());
 			}
 		}
+		setChanged();
+		notifyObservers();
 	}
 	
 	public TreeMap<String, Double> getTotalCurrencies() {
-		return CurrencyTotals;
+		return currencyTotals;
 	}
 	
 	public String getClaimName() {
-		return c_name;
+		return claimName;
 	}
 
-	public void setClaimName(String c_name) {
-		this.c_name = c_name;
+	public void setClaimName(String claimName) {
+		this.claimName = claimName;
 		setChanged();
 		notifyObservers();
 	}
@@ -148,9 +142,6 @@ public class Claim extends Observable {
 		notifyObservers();
 	}
 
-	public Boolean verifyDestination(StringTuple check_tuple) {
-		return destinations.contains(check_tuple);
-	}
 
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
@@ -205,11 +196,11 @@ public class Claim extends Observable {
 	}
 
 	public String getUser() {
-		return userId;
+		return userName;
 	}
 
-	public void setUser(String user_id) {
-		this.userId = user_id;
+	public void setUser(String userName) {
+		this.userName = userName;
 		setChanged();
 		notifyObservers();
 	}
@@ -232,7 +223,7 @@ public class Claim extends Observable {
 	
 	
 	public String getClaimId() {
-		return ClaimId;
+		return claimdID;
 	}
 	
 	
