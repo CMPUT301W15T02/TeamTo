@@ -11,7 +11,7 @@
     
     <item 
         android:id="@+id/addExpenseMenuButton"
-        android:title="+"
+        android:title="Add expense"
         android:showAsAction="always"/>
     
     <item 

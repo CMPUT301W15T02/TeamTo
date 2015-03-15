@@ -3,7 +3,7 @@
     tools:context="com.CMPUT301W15T02.teamtoapp.MainActivity" >
 
 
-    <item android:id="@+id/addClaimOp" android:title="+" android:showAsAction="always"></item>
+    <item android:id="@+id/addClaimOp" android:title="Add claim" android:showAsAction="always"></item>
     <item android:id="@+id/switchToApprover" android:title="Switch To Approver Mode" android:onClick="switchToApproverOption" android:visible="true" android:showAsAction="withText|collapseActionView"></item>
     <item android:id="@+id/tagsManagerButton" android:title="Manage tags" android:showAsAction="never"></item>
 </menu>
