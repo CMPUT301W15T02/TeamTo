@@ -153,16 +153,18 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	
 	
 	private void onSaveExpenseButtonClick() {
-		if ( expenseController.getDescription().isEmpty() ){
-			ClaimController claimController = new ClaimController(claimID);
-			claimController.removeExpense(expenseController.getExpense());
-			super.onBackPressed();
-		} else {
-			super.onBackPressed();
-		}
+		onBackPressed();
 	}
 	
 	
+	
+	@Override
+	public void onBackPressed() {
+		ClaimController claimController = new ClaimController(claimID);
+		claimController.addExpense(expenseController.getExpense());
+		super.onBackPressed();
+	}
+
 	private void setListeners() {
 		dateTextView.setOnClickListener(new View.OnClickListener() {
 			
