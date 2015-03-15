@@ -20,21 +20,22 @@ import java.text.SimpleDateFormat;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+/**
+ * 
+ * Non-editable activity for viewing the expense, will have the ability to preview picture when photos are added
+ *
+ */
 
 public class ExpenseViewActivity extends Activity {
 	
@@ -77,6 +78,10 @@ public class ExpenseViewActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Gets the associated expense and sets the expense controller
+	 * Don't have to worry about observers because no edits can be made
+	 */
 	private void getModelObjects() {
 		Intent intent = getIntent();
 		expenseID = (String) intent.getSerializableExtra("expenseID");
@@ -84,6 +89,9 @@ public class ExpenseViewActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Finds all of the associated views
+	 */
 	private void findViewsByIds() {
 		dateTextView = (TextView) findViewById(R.id.ExpenseDateTextView);
 		amountEditText = (EditText) findViewById(R.id.ExpenseAmountEditText);
@@ -93,6 +101,9 @@ public class ExpenseViewActivity extends Activity {
 		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
 	}
 	
+	/**
+	 * Sets up the adapters
+	 */
 	private void setUpAdapters() {
 		currencyAdapter = ArrayAdapter.createFromResource(this, R.array.currency_string,
 				android.R.layout.simple_spinner_dropdown_item);
@@ -102,6 +113,10 @@ public class ExpenseViewActivity extends Activity {
 		categorySpinner.setAdapter(categoriesAdapter);
 	}
 	
+	
+	/**
+	 * Sets the value of the different fields according to the values of the expense
+	 */
 	private void setFieldValues() {
 		dateTextView.setText(formatter.format(expenseController.getDate().getTime()));
 		currencySpinner.setSelection(currencyAdapter.getPosition(expenseController.getCurrency().toString()));

@@ -27,12 +27,9 @@ import java.util.GregorianCalendar;
 import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;

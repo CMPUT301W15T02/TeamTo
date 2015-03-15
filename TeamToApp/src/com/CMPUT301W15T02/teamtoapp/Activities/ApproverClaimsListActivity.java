@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
@@ -30,6 +29,13 @@ import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+
+/**
+ * 
+ * Activity that allows a user to look at all the different submitted claims
+ * Not finished
+ *
+ */
 
 public class ApproverClaimsListActivity extends Activity {
 
@@ -57,11 +63,17 @@ public class ApproverClaimsListActivity extends Activity {
 	}
 
 
+	/**
+	 * Get references to the controller and model objects
+	 */
 	private void getModelObjects() {
 		claimListController = new ClaimListController();
 		submittedClaims = claimListController.getSubmittedClaims();
 	}
 	
+	/**
+	 * Find the different views
+	 */
 	private void findViewsByIds() {
 		listView = (ListView) findViewById(R.id.approverClaimListView);
 	}
@@ -70,15 +82,21 @@ public class ApproverClaimsListActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Set up the adapter and bind it to the list view
+	 */
 	private void setUpAdapter() {
 		adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
 		adapter.sort(new ClaimComparatorOldestFirst());
 		listView.setAdapter(adapter);
 		
 	}
-	
+	/**
+	 * Switch back to claimant mode
+	 * @param menu
+	 */
 	public void switchToClaimantOption(MenuItem menu) {
-		// TODO
+		// Need to do other stuff
 		super.onBackPressed();
 	}
 	

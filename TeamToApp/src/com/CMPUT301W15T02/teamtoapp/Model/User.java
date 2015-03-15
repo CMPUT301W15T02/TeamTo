@@ -54,7 +54,11 @@ public class User extends Observable {
 	public boolean getType() {
 		return type;
 	}
-
+	
+	/**
+	 * Sets the type of user, false is approver mode, true for claimant
+	 * @param type 
+	 */
 	public void setType(boolean type) {
 		this.type = type;
 	}

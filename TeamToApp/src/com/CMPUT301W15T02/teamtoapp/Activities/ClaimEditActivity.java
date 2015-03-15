@@ -18,10 +18,7 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Observable;
@@ -34,25 +31,15 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
-import android.net.wifi.WifiConfiguration.Status;
 import android.os.Bundle;
-import android.R.anim;
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader.ForceLoadContentObserver;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.style.UpdateAppearance;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,8 +50,13 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
+
+/**
+ * 
+ * Activity for both editing and adding a claim
+ *
+ */
 
 public class ClaimEditActivity extends Activity implements Observer {
 	private final Context context = this;
@@ -77,8 +69,6 @@ public class ClaimEditActivity extends Activity implements Observer {
 	private DatePickerDialog startDatePickerDialog;
 	private DatePickerDialog endDatePickerDialog;
 	private String claimID;
-	//TODO: ADD FUNCTIONALITY TO TAGS BUTTON AND TO TAGS LIST reference 
-	// http://theopentutorials.com/tutorials/android/listview/android-multiple-selection-listview/
 	private Button addTagButton;
 	private ListView tagListView;
 	
@@ -94,7 +84,6 @@ public class ClaimEditActivity extends Activity implements Observer {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
-		claimListController = new ClaimListController();
 		getModelObjects();
 		findViewsByIds();
         setListeners();
@@ -108,6 +97,11 @@ public class ClaimEditActivity extends Activity implements Observer {
 		return true;
 	}
 	
+	/**
+	 * Saves the current claim, mostly replicates functionality of onBackPressed
+	 * because we are saving in place
+	 * @param menu
+	 */
 	public void onSaveButtonClick(MenuItem menu) {
 		onBackPressed();
 		
@@ -131,7 +125,9 @@ public class ClaimEditActivity extends Activity implements Observer {
 		finish();
 	}
 	
-	
+	/**
+	 * Add destination will show a dialog that will allow a user to add a new destination and associated reason
+	 */
 	private void addDestination() {
 		LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 		View addDestView = inflater.inflate(R.layout.add_destination_dialog, null);
@@ -142,8 +138,8 @@ public class ClaimEditActivity extends Activity implements Observer {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		builder.setView(addDestView);
+		// Saves the destination and adds it to the claim
 		builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
-
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				String destination = destinationEditText.getText().toString();
@@ -160,28 +156,33 @@ public class ClaimEditActivity extends Activity implements Observer {
 				}
 			}
 		})
-		
+		// Does nothing
 		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				// Do nothing
 			}
-		});
-		
-		AlertDialog alertDialog = builder.create();
-		alertDialog.show();
+		}).create().show();
 	}
 	
-	// Also where we set up observer
+	/**
+	 * Gets all of the model objects, initializes the controllers, adds the activity as an observer to the current claim
+	 */
 	private void getModelObjects() {
 		Intent intent = getIntent();
 		claimID = (String) intent.getSerializableExtra("claimID");
+		// Make new controller from the claimID that was passed in
 		claimController = new ClaimController(claimID);
 		destinations = claimController.getDestinations();
+		// Make this activity observe the new claim
 		claimController.addObserverToClaim(this);
+		// Claim list controller will have a minor role of just adding the claim to the list of claims
+		claimListController = new ClaimListController();
 	}
 	
-	
+	/**
+	 * Gets all of the views needed for the activity
+	 */
 	private void findViewsByIds() {
 		startDateTextView = (Button) findViewById(R.id.startDateTextView);
         endDateTextView = (Button) findViewById(R.id.endDateTextView);
@@ -191,16 +192,23 @@ public class ClaimEditActivity extends Activity implements Observer {
     	tagListView = (ListView) findViewById(R.id.claimantTagsListView);
 	}
 	
-	
+	/**
+	 * Sets up all of the listeners on the different views
+	 */
 	private void setListeners() {
 		
+		/**
+		 * Sets up a listener that will show a date picke dialog on click
+		 */
 		startDateTextView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startDatePickerDialog.show();
             }
         });
         
-
+		/**
+		 * Sets up a listener that will show a date picke dialog on click
+		 */
         endDateTextView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 endDatePickerDialog.show();
@@ -208,30 +216,31 @@ public class ClaimEditActivity extends Activity implements Observer {
         });
 		
 		Calendar startDate = claimController.getStartDate();
-		
+		// Date picker dialog for start date
 		startDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				GregorianCalendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setStartDate(calendar);
 			}
-			
+			// Set the default date in the dialog
 		}, startDate.get(Calendar.YEAR), startDate.get(Calendar.MONTH), startDate.get(Calendar.DAY_OF_MONTH));
 		
+		
 		Calendar endDate = claimController.getEndDate();
+		// Date picker dialog for end date
 		endDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				GregorianCalendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				claimController.setEndDate(calendar);
-				
 			}
-			
+			// Set the default date in the dialog
 		}, endDate.get(Calendar.YEAR), endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
 		
-		// TODO: What if user edited existing claim and saved a blank claim name? Save "Existing Claim" as default.
+		/**
+		 * Saves the claim name
+		 */
 		claimNameEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -253,60 +262,72 @@ public class ClaimEditActivity extends Activity implements Observer {
 			}
 		});
 		
+		/**
+		 * Sets a listener that allows users to delete destinations from the list
+		 * May add functionality to edit destinations also
+		 */
 		destinationsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, final int position,
 					long id) {
-				// TODO Auto-generated method stub
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimEditActivity.this);
 				builder.setMessage("Delete Destination?");
 				builder
+				// Delete the destination
 				.setPositiveButton("Delete", new DialogInterface.OnClickListener () {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						StringTuple destination = claimController.getDestinations().get(position);
 						claimController.removeDestination(destination);
-						destinationsAdapter.notifyDataSetChanged();
 					}
 				})
+				// Do nothing
 				.setNegativeButton("Cancel",  new DialogInterface.OnClickListener() {
-
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						// Do nothing
 					}
 					
-				});
-				
-				AlertDialog alertDialog = builder.create();
-				alertDialog.show();
+				}).create().show();
 			}
 		});
 		
+		/**
+		 * Button to add a tag to the current claim
+		 */
 		addTagButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				// Get the list of available tags
+				final ArrayList<Tag> tags = new UserController().getTags();
 				
-				// TODO make this less hack jobish
-				UserController userController = new UserController();
-				CharSequence[] strings = new CharSequence[userController.getTags().size()];
-				final ArrayList<Tag> tags = userController.getTags();
+				// Make an array of the same size containing string representations of the tags
+				CharSequence[] strings = new CharSequence[tags.size()];
+				
+				// Get the current tags on the claim
 				ArrayList<Tag> claimTags = claimController.getTags();
+				
+				// Create a boolean array of the same size
 				boolean[] boolArray = new boolean[tags.size()];
+				
+				// Add the tag from the user tags into the array of strings
 				for (int i = 0; i < tags.size(); i++) {
 					strings[i] = tags.get(i).toString();
+					// If the tag is in the list of tags then set true
 					if (claimTags.contains(tags.get(i))) {
 						boolArray[i] = true;
+						// Otherwise set false
 					} else {
 						boolArray[i] = false;
 					}
 				}
+				
 				AlertDialog.Builder builder = new AlertDialog.Builder(ClaimEditActivity.this);
 				builder.setTitle("Select tags").setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
-					
+					// Add or remove tags based on the boolean array
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 						if (isChecked) {
@@ -319,14 +340,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO
-						
-					}
-				}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
+						// Does nothing
 						
 					}
 				}).create().show();
@@ -337,6 +351,9 @@ public class ClaimEditActivity extends Activity implements Observer {
 		
 	}
 
+	/**
+	 * Sets up the adapters for the destinations and the list of tags
+	 */
 	private void setUpAdapter() {
 		destinationsAdapter = new ClaimantDestinationsListAdapter(context, R.layout.claimant_destination_rows, destinations);
 		destinationsListView.setAdapter(destinationsAdapter);
@@ -344,6 +361,11 @@ public class ClaimEditActivity extends Activity implements Observer {
 		tagListView.setAdapter(tagsAdapter);
 	}
 	
+	
+	/**
+	 * Sets the values of the different fields
+	 * Also calls updateValues() for fields that will be changed when a change happens to the model
+	 */
 	private void setFieldValues() {
 		updateValues();
 		if (claimController.getClaimName().equals("New Claim")) {
@@ -353,11 +375,19 @@ public class ClaimEditActivity extends Activity implements Observer {
 		}
 	}
 	
+	/**
+	 * Called when a change happens to the model that lets it know to update
+	 */
 	private void updateValues() {
 		startDateTextView.setText(claimController.getStartDateFormatted());
 		endDateTextView.setText(claimController.getEndDateFormatted());
 	}
 
+	
+	/**
+	 * The observed object calls this function to tell it to update
+	 * It updates fields that might change and tells the adapters to refresh
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		updateValues();
@@ -365,6 +395,10 @@ public class ClaimEditActivity extends Activity implements Observer {
 		tagsAdapter.notifyDataSetChanged();
 	}
 
+	
+	/**
+	 * Called when the activity is destroyed, thus we remove this activity as an observer
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
