@@ -12,7 +12,9 @@ import junit.framework.TestCase;
 
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 public class UseCaseTests2 extends TestCase {
@@ -68,10 +70,8 @@ public class UseCaseTests2 extends TestCase {
 		assertEquals(GBP, expense.getCurrency());
 	}
 
-/*
 	// Add Expense (UC 4.1)
-	public void addExpense() {
-		User user = new User("New guy");
+	public void testAddExpense() {
 		Claim claim = new Claim();
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
@@ -86,46 +86,49 @@ public class UseCaseTests2 extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 
-		user.addClaim(claim);
-		user.getClaim(claim).addExpense(expense);
+		claim.addExpense(expense);
 		// Assert the expense exists in the claim
-		assertTrue("Expense is not added.", user.getClaim(claim).isExpense(expense));
+		assertTrue("Expense is not added.", claim.getExpenses().contains(expense));
+	}
+	
+	public void testControllerAddExpense() {
+		ClaimList claimList = new ClaimList();
+		Claim claim = new Claim();
+		claimList.addClaim(claim);
+		ClaimController claimController = new ClaimController(claim.getClaimId());
+		
+		Expense expense = new Expense();
+		expense.setDescription("Some cool descriptuon");
+		claimController.addExpense(expense);
+		assertTrue("Controller adding expense", claimController.getExpenses().contains(expense));
 	}
 	
 	// US 04.04 (UC 4.1.2)
 	public void testCheckCompleteFlag() {
-		// Check if completeness of new expense is already set to false.
-		User user = new User("John");
+		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim();
-		Expense expense = new Expense();
-		
-		user.addClaim(claim);
-		user.getClaim(claim).addExpense(expense);
-		// Checks if all information is filled in - should be false.
-		assertFalse("Not complete", user.getClaim(claim).checkExpenseComplete(expense));
+		claimList.addClaim(claim);
+		ClaimController claimController = new ClaimController(claim.getClaimId());
+		assertFalse("Claim intially incomplete", claimController.checkClaimInfoComplete());
+		claimController.setClaimName("Some name");
+		claimController.addDestination("some destination", "some reason");
+		assertTrue("Claim complete after description and destination entered", claimController.checkClaimInfoComplete());
 	}
 	
 	// US 4.06 (UC 4.3)
 	public void testEditExpense() {
 		
-		User user = new User("John");
-		Claim claim = new Claim();
 		Expense expense = new Expense();
 		
 		String info = "textual description";
 		expense.setDescription(info);
-		
-		user.addClaim(claim);
-		user.getClaim(claim).addExpense(expense);
-		user.getClaim(claim).getExpense(expense).setDescription("blehhh");
-		assertEquals("blehhh",
-				user.getClaim(claim).getExpense(expense).getDescription());
+		assertEquals("Changing expense working properly",
+				info, expense.getDescription());
 	}
 	
 	// US 4.07 (UC 4.2)
 	public void testDeleteExpense() {
 		
-		User user = new User("John");
 		Claim claim = new Claim();
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
@@ -140,11 +143,11 @@ public class UseCaseTests2 extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
-		user.addClaim(claim);
-		user.getClaim(claim).addExpense(expense);
+		claim.addExpense(expense);
+		assertTrue("Claim contains expense", claim.getExpenses().contains(expense));
 		// deleting expense
-		user.getClaim(claim).removeExpense(expense);
-		assertFalse("Expense is still there!", user.getClaim(claim).isExpense(expense));
+		claim.removeExpense(expense);
+		assertFalse("Expense is still there!", claim.getExpenses().contains(expense));
 	}
 	
 	// UC 4.1 - UC 4.3
@@ -162,8 +165,6 @@ public class UseCaseTests2 extends TestCase {
 	// UC 6.0, UC 6.2 (UC 6.1 is simply viewing the screen)
 	public void testAddAndDeletePhoto() {
 		
-		User user = new User("John");
-		Claim claim = new Claim();
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
 		String cat = "some category from a category spinner";
@@ -177,8 +178,6 @@ public class UseCaseTests2 extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
-		user.addClaim(claim);
-		user.getClaim(claim).addExpense(expense);
 		String photoPath = "sdcard/photos/cats.jpg";
 		expense.addPhoto(photoPath);
 		assertEquals("Photo added to expense?", photoPath, expense.getPhoto());
@@ -189,5 +188,4 @@ public class UseCaseTests2 extends TestCase {
 		
 	}
 	
-*/
 }

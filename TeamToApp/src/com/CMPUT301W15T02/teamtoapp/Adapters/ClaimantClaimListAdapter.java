@@ -23,19 +23,11 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Currency;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.SortedMap;
-import java.util.TreeMap;
-
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Activities.TagManagerActivity;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
