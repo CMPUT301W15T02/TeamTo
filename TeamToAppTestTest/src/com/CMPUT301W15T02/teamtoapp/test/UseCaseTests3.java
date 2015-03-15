@@ -1,11 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
-import java.util.ArrayList;
-
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.Session;
 
 import junit.framework.TestCase;

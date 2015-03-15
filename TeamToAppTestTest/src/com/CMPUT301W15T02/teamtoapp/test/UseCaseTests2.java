@@ -1,10 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp.test;
 
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Currency;
 import java.util.List;
 
@@ -14,8 +11,7 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
+
 
 public class UseCaseTests2 extends TestCase {
 	
