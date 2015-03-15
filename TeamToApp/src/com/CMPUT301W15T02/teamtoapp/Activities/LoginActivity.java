@@ -48,7 +48,7 @@ public class LoginActivity extends Activity {
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
-		String usernameString = settings.getString("username", null);
+		//String usernameString = settings.getString("username", null);
 
 		if(hasLoggedIn)  //Go directly to main activity
 		{
@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
 			editor.commit();
 			
 			SessionController s_control = new SessionController();
-			s_control.setUser(usernameString);
+			//s_control.setUser(usernameString);
 			startActivity(intent);
 			LoginActivity.this.finish();
 		}
