@@ -26,11 +26,6 @@ import java.util.Observer;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
-import com.CMPUT301W15T02.teamtoapp.R.array;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -97,6 +92,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		return super.onOptionsItemSelected(item);
 	}
 	
+	/**
+	 * Gets the model objects that are needed (expense) and any controllers, also binds the observers to the model
+	 */
 	private void getModelObjects() {
 		Intent intent = getIntent();
 		expenseID = (String) intent.getSerializableExtra("expenseID");
@@ -106,6 +104,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		
 	}
 	
+	/**
+	 * Finds all of the views that are needed in this activity
+	 */
 	private void findViewsByIds() {
 		dateTextView = (TextView) findViewById(R.id.ExpenseDateTextView);
 		amountEditText = (EditText) findViewById(R.id.ExpenseAmountEditText);
@@ -116,6 +117,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		completedCheckBox = (CheckBox) findViewById(R.id.ExpenseCompletedCheckBox);
 	}
 	
+	/**
+	 * Sets up both the currency spinner and the catgeory spinner
+	 */
 	private void setUpAdapters() {
 		currencyAdapter = ArrayAdapter.createFromResource(this, R.array.currency_string,
 				android.R.layout.simple_spinner_dropdown_item);
@@ -125,13 +129,18 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		categorySpinner.setAdapter(categoriesAdapter);
 	}
 	
+	/**
+	 * Sets the default values of the fields, also calls updateValues on fields that will be updated through mvc
+	 */
 	private void setFieldValues() {
 		updateValues();
+		// If there is no amount then set a hint, otherwise set the amount
 		if (expenseController.getAmount().equals(0.0)) {
 			amountEditText.setHint(df.format(expenseController.getAmount()));
 		} else {
 			amountEditText.setText(df.format(expenseController.getAmount()));
 		}
+		// If there is no description then set a hint, otherwise set the description
 		if (expenseController.getDescription().equals("")) {
 			descriptionEditText.setHint("Enter a description");
 		} else {
@@ -140,6 +149,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	}
 	
 	
+	/**
+	 * Updates values that will be updated through the model changing (mvc)
+	 */
 	private void updateValues() {
 		dateTextView.setText(formatter.format(expenseController.getDate().getTime()));
 		currencySpinner.setSelection(currencyAdapter.getPosition(expenseController.getCurrency().toString()));
@@ -151,7 +163,9 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		}
 	}
 	
-	
+	/**
+	 * Saves the current claim, duplicates functionality of onBackPressed
+	 */
 	private void onSaveExpenseButtonClick() {
 		onBackPressed();
 	}
@@ -165,30 +179,33 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		super.onBackPressed();
 	}
 
+	/**
+	 * Sets up listeners for the different fields
+	 */
 	private void setListeners() {
+		// Show a datepicker dialog when clicked
 		dateTextView.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				datePickerDialog.show();
 				
 			}
 		});
-		
+		// Get the default date
 		Calendar date = expenseController.getDate();
-		
 		datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+				// When the date is set then set the date of the expense
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
 				expenseController.setDate(calendar);
 			}
-			
+		// Set the expenses current date as a default
 		}, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
 		
+		// Set the correct currency when selected
 		currencySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
@@ -198,11 +215,12 @@ public class ExpenseEditActivity extends Activity implements Observer {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
+				// Do nothing
 				
 			}
 		});
 		
+		// Set the correct category when selected
 		categorySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
 			@Override
@@ -214,11 +232,12 @@ public class ExpenseEditActivity extends Activity implements Observer {
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
-				// TODO Auto-generated method stub
+				// Do nothing
 				
 			}
 		});
 		
+		// Get the total amount for the expense
 		amountEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -247,6 +266,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			}
 		});
 		
+		// Get the description
 		descriptionEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -268,6 +288,8 @@ public class ExpenseEditActivity extends Activity implements Observer {
 			}
 		});
 		
+		// Check box that is automatically set if the user enters a description and amount
+		// But can also be manually changed
 		completedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
 			@Override
@@ -277,11 +299,20 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		});
 	}
 
+	/**
+	 * Called when something in the model changes, it then calls update values
+	 * @param observable	the expense that changes
+	 * @param data
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		updateValues();
 	}
 
+	
+	/**
+	 * Called when the activity is destroyed, it then removes this activity as an observer on the expense
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
