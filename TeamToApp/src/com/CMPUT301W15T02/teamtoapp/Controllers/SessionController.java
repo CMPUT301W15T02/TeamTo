@@ -23,6 +23,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 
 
+/**
+ * 
+ * Responsible for communicating with the session
+ *
+ */
+
 public class SessionController {
 	
 	private User user;
@@ -35,9 +41,12 @@ public class SessionController {
 		Session.getInstance().setCurrentUser(new User(name));
 	}
 
-	//Checks connection to Internet
 	//Source: http://stackoverflow.com/a/9570292 2015-03-10
-	// Is there any reason this is static?
+	/**
+	 * Checks if there is network availability
+	 * @param 	context	Current state of the application
+	 * @return	boolean false if no connections, true otherwise
+	 */
 	public static boolean isNetworkAvailable(Context context) {
 	    return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}

@@ -22,6 +22,12 @@ import java.util.Observer;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.Session;
 
+/**
+ * 
+ * Responsible for communicating between any view which wishes to access an expense object
+ *
+ */
+
 public class ExpenseController {
 	
 	private Expense currentExpense;
@@ -86,11 +92,18 @@ public class ExpenseController {
 		return currentExpense.getComplete();
 	}
 	
-	
+	/**
+	 * Adds a photo to the current expense
+	 * @param photoPath
+	 */
 	public void addPhoto(String photoPath) {
 		currentExpense.addPhoto(photoPath);
 	}
 	
+	/**
+	 * Removes a photo from the current expense
+	 * @param photoPath
+	 */
 	public void removePhoto(String photoPath) {
 		currentExpense.removePhoto();
 	}
@@ -99,10 +112,19 @@ public class ExpenseController {
 		return currentExpense;
 	}
 	
+	
+	/**
+	 * Adds an observer to the associated expense
+	 * @param observer
+	 */
 	public void addObserverToExpense(Observer observer) {
 		currentExpense.addObserver(observer);
 	}
 	
+	/**
+	 * Removes an observer from the associated expense
+	 * @param observer
+	 */
 	public void removeObserverFromExpense(Observer observer) {
 		currentExpense.deleteObserver(observer);
 	}

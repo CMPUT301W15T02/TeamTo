@@ -28,6 +28,13 @@ import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
+/** 
+ * 
+ * Claim controller is responsible for communicating from any associated views to the model
+ * as well as attaching observers to the model
+ *
+ */
+
 public class ClaimController {
 	
 	private String claimID;
@@ -68,14 +75,29 @@ public class ClaimController {
 		currentClaim.removeTag(tag);
 	}
 	
+	/**
+	 * Responsible for submitting a claim for approval
+	 * Currently the functionality is incomplete
+	 * 
+	 */
 	public void submitClaim() {
 		currentClaim.setStatus(Status.SUBMITTED);
 	}
 	
+	/**
+	 * Responsible for returning a claim that was submitted
+	 * Currently the functionality is incomplete
+	 * 
+	 */
 	public void returnClaim() {
 		currentClaim.setStatus(Status.RETURNED);
 	}
 	
+	/**
+	 * Responsible for approving a claim that was submitted
+	 * Currently the functionality is incomplete
+	 * 
+	 */
 	public void approvedClaim() {
 		currentClaim.setStatus(Status.APPROVED);
 	}
@@ -88,6 +110,10 @@ public class ClaimController {
 		return currentClaim.getStartDate();
 	}
 	
+	/**
+	 * Gets the start date as a properly formatted string
+	 * @return	A string representing the start date
+	 */
 	public String getStartDateFormatted() {
 		return formatter.format(getStartDate().getTime());
 	}
@@ -101,6 +127,11 @@ public class ClaimController {
 		return currentClaim.getEndDate();
 	}
 	
+	
+	/**
+	 * Gets the end date as a properly formatted string
+	 * @return	A string representing the end date
+	 */
 	public String getEndDateFormatted() {
 		return formatter.format(getEndDate().getTime());
 	}
@@ -113,6 +144,12 @@ public class ClaimController {
 		currentClaim.setComment(comment);
 	}
 	
+	
+	/**
+	 * Takes in two strings and makes a string tuple that is added to the claim
+	 * @param destination	String representing the destination
+	 * @param reason		String representing the reason for visiting the destination
+	 */
 	public void addDestination(String destination, String reason) {
 		StringTuple newDestination = new StringTuple(destination, reason);
 		currentClaim.addDestination(newDestination);
@@ -122,9 +159,12 @@ public class ClaimController {
 		return currentClaim.getExpenses();
 	}
 	
+	/**
+	 * Checks the number of expenses that are complete
+	 * @return	Number of incomplete expenses
+	 */
 	public int checkExpensesComplete() {
 		int numIncomplete = 0;
-		
 		if (currentClaim.getExpenses().size() == 0) {
 			return 0;
 		} else {
@@ -132,7 +172,6 @@ public class ClaimController {
 				if (expense.getComplete() == false) { numIncomplete++; }
 			}
 		}
-		
 		return numIncomplete;
 	}
 	
@@ -146,10 +185,19 @@ public class ClaimController {
 		}
 	}
 	
+	
+	/**
+	 * Adds an observer to the current claim
+	 * @param observer
+	 */
 	public void addObserverToClaim(Observer observer) {
 		currentClaim.addObserver(observer);
 	}
 	
+	/**
+	 * Removes an observer from the current claim
+	 * @param observer
+	 */
 	public void removeObserverFromClaim(Observer observer) {
 		currentClaim.deleteObserver(observer);
 	}
@@ -159,6 +207,10 @@ public class ClaimController {
 		return currentClaim.getTags();
 	}
 	
+	/**
+	 * Method to tell if a claim should be currently editable or not
+	 * @return	boolean representing a claims editable status (true for editable, false otherwise)
+	 */
 	public boolean isEditable() {
 		if (currentClaim.getStatus().equals(Status.IN_PROGRESS) || currentClaim.getStatus().equals(Status.RETURNED)) {
 			return true;
@@ -167,8 +219,12 @@ public class ClaimController {
 		}
 	}
 	
+	
+	/**
+	 * Helper method which checks if a claim is missing any information that should be added before it is submitted
+	 * @return	false if incomplete, true if it is complete
+	 */
 	public boolean checkClaimInfoComplete() {
-		// TODO: Not sure how to check start date and end date.
 		// TODO: Need to do tests for this method.
 		if (currentClaim.getClaimName().isEmpty()) {
 			return false;
@@ -181,6 +237,11 @@ public class ClaimController {
 		return true;
 	}
 	
+	
+	/**
+	 * Called when submitting a claim, will return a string representing the current outcome of the submission
+	 * @return	information about current status of claim
+	 */
 	public String checkBeforeSubmittingClaim() {
 		if (checkClaimInfoComplete() == false) {
 			return "Claim information incomplete";

@@ -25,6 +25,14 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.R.integer;
 
+
+/**
+ * 
+ * Responsible for communicating between any associated views and the user object
+ *
+ */
+
+
 public class UserController {
 	
 	private User user;
@@ -33,18 +41,34 @@ public class UserController {
 		user = Session.getInstance().getCurrentUser();
 	}
 	
+	/**
+	 * Adds an observer to the current user
+	 * @param observer
+	 */
 	public void addObserverToUser(Observer observer) {
 		user.addObserver(observer);
 	}
 	
+	/**
+	 * Removes an observer from the current user
+	 * @param observer
+	 */
 	public void removeObserverFromUser(Observer observer) {
 		user.deleteObserver(observer);
 	}
 	
+	/**
+	 * Adds a tag to the current user
+	 * @param tag
+	 */
 	public void addTag(Tag tag) {
 		user.addTag(tag);
 	}
 	
+	/**
+	 * Removes a tag from the current user
+	 * @param tag
+	 */
 	public void removeTag(Tag tag) {
 		user.removeTag(tag);
 	}
@@ -57,6 +81,11 @@ public class UserController {
 		return user.getTags();
 	}
 	
+	/**
+	 * Renames one of the users tags
+	 * @param tag		tag to be renamed
+	 * @param newText	new name for tag
+	 */
 	public void renameTag(Tag tag, String newText) {
 		if (tag.equals(null)) {
 			return;
@@ -68,7 +97,9 @@ public class UserController {
 		return user.getTags().get(position);
 	}
 	
-	
+	/**
+	 * Updates all claims when a user updates one of their tags
+	 */
 	public void updateTags() {
 		ArrayList<Tag> userTags = getTags(); // userTags
 		ClaimListController claimListController = new ClaimListController();
