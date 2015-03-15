@@ -60,4 +60,9 @@ public class Session {
 		this.currentClaims = currentClaims;
 	}
 	
+	// ONLY FOR TESTING
+	public static void tearDownForTesting() {
+		instance = null;
+	}
+	
 }
