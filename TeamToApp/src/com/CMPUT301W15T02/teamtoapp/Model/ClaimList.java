@@ -22,7 +22,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Holds the current list of claims in order to seperate
+ * Holds the current list of claims in order to separate
  *
  */
 
