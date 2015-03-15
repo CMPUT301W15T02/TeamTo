@@ -71,6 +71,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	 */
 	private void getModelObjects() {
 		// Initialize objects
+		// Set the current user so it can be added to claims
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
 		String user = settings.getString("username", null);
 		sessionController = new SessionController();
@@ -131,7 +132,6 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
 							// When delete is clicked remove the current claim
-							// TODO: Need to do a test for deleting claim in TeamToAppTest
 							Claim claim = claimListController.getClaim(position);
 							claimListController.removeClaim(claim);
 							adapter.notifyDataSetChanged();
