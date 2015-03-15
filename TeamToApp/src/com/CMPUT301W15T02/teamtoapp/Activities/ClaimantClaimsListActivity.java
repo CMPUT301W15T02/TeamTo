@@ -16,6 +16,11 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+/**
+ * The activity that the claimant will come to if they have already logged in.
+ * Contains a list of their claims and has the ability to add new claims, manage tags,
+ * and switch to approver mode
+ */
 
 import java.util.Observable;
 import java.util.Observer;
@@ -61,8 +66,11 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 		setUpAdapter();
 	}
 	
+	/**
+	 * Initializes all of the model objects and controllers needed throughout the activity
+	 */
 	private void getModelObjects() {
-		// Initalize objects
+		// Initialize objects
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
 		String user = settings.getString("username", null);
 		sessionController = new SessionController();
@@ -71,12 +79,20 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 		claimListController.addObserverToClaimList(this);
 	}
 	
+	/**
+	 * Finds all of the necessary views need for the activity
+	 */
 	private void findViewsByIds() {
 		listView = (ListView) findViewById(R.id.claimantClaimListView);
 	}
 	
+	/**
+	 * Sets up all of the listeners needed for the activity
+	 */
 	private void setListeners() {
-		// Item in the list is clicked, user taken to expenseListActivity
+		/**
+		 * When an item in the list is clicked, user taken to expenseListActivity
+		 */
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -86,12 +102,17 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 				startActivity(intent);
 			}
 		});
-		// Brings up Edit or Delete dialog on long click		
+		/**
+		 * When an item in the list is long clicked, a dialog is shown that allows the user to edit or delete the claim
+		 * Dialog is only shown if the claim is currently editable, otherwise it toasts a warning		
+		 */
 		listView.setLongClickable(true);
 		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+				// Get the current claim
 				ClaimController claimController = new ClaimController(claimListController.getClaim(position).getClaimId());
+				// Check if it is editable, if it is then show the edit/delete dialog
 				if (claimController.isEditable()) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 					builder.setMessage("Edit or Delete Claim?");
@@ -99,6 +120,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 					.setPositiveButton("Edit", new DialogInterface.OnClickListener () {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
+							// When edit is clicked add an extra to the intent and start the ClaimEditActivity
 							Claim claim = claimListController.getClaim(position);
 							Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
 							intent.putExtra("claimID", claim.getClaimId());
@@ -108,6 +130,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 					.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
+							// When delete is clicked remove the current claim
 							// TODO: Need to do a test for deleting claim in TeamToAppTest
 							Claim claim = claimListController.getClaim(position);
 							claimListController.removeClaim(claim);
@@ -115,6 +138,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 						}
 					}).create().show();
 				} else {
+					// If the expense is not editable then alert the user
 					Toast.makeText(context, "Cannot currently edit/delete claims", Toast.LENGTH_SHORT).show();
 				}
 				return true;
@@ -122,9 +146,10 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 		});
 	}
 	
-	
+	/**
+	 * Sets up claim list adapter and binds it to the current list view
+	 */
 	private void setUpAdapter() {
-		// Sets up claim list adapter to give customized list view for claimant.
 		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getClaims());
 		adapter.sort(new ClaimComparatorNewestFirst());
 		listView.setAdapter(adapter);
@@ -146,7 +171,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 			Intent intent = new Intent(getBaseContext(), TagManagerActivity.class);
 			startActivity(intent);
 		} else if (id == R.id.addClaimOp) {
-			// Go to ClaimEditActivity to edit new claim.
+			// Go to ClaimEditActivity to add new claim.
 			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
 			intent.putExtra("claimID", "");
 			startActivity(intent);	
@@ -156,25 +181,37 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	
 
 	
-	
+	/**
+	 * Button that switches the claimant to the approver mode only if there is internet connectivity
+	 * @param menu	the button that was clicked
+	 */
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if( SessionController.isNetworkAvailable(this)){
+		if (SessionController.isNetworkAvailable(this)){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);
 		}
-		else{
+		else {
+			// Alert the user that there is no internet access
 			Toast.makeText(this, "No internet access!", Toast.LENGTH_SHORT).show();
 		}
 
 	}
 
+	/**
+	 * Observer functions that is called when the model changed
+	 * Updates the list view if anything has changed
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		adapter.notifyDataSetChanged();
 		adapter.sort(new ClaimComparatorNewestFirst());
 	}
 
+	/**
+	 * Called when the activity is destroyed
+	 * Observer is removed because it is no longer needed
+	 */
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
