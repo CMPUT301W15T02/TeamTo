@@ -85,10 +85,8 @@ public class LoginActivity extends Activity {
 			editor.putString("username", usernameString);
 			editor.commit();
 			
-			//pull user data from cloud (if exists)
-			
-			//need some way to add username to session
 			SessionController s_control = new SessionController();
+			s_control.setUser(usernameString);
 			startActivity(intent);
 			LoginActivity.this.finish();
 		}
