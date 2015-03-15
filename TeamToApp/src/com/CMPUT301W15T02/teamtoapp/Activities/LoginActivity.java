@@ -22,9 +22,6 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -45,10 +42,10 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.login_main_activity);
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+		String usernameString = settings.getString("username", null);
 
-		if(hasLoggedIn)  //Go directly to main activity.
+		if(hasLoggedIn)  //Go directly to main activity
 		{
 		    Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
@@ -76,7 +73,6 @@ public class LoginActivity extends Activity {
 
 		}
 		else {
-			
 			//User has successfully logged in, save this information
 			SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 			SharedPreferences.Editor editor = settings.edit();
@@ -84,7 +80,8 @@ public class LoginActivity extends Activity {
 			editor.putString("username", usernameString);
 			editor.commit();
 			
-			// TODO need to store the username in sharedPreferences
+			//pull user data from cloud (if exists)
+			
 			//need some way to add username to session
 			SessionController s_control = new SessionController();
 			startActivity(intent);
