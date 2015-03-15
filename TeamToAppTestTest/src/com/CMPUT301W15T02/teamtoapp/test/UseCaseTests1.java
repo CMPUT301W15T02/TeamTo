@@ -41,14 +41,14 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 public class UseCaseTests1 extends TestCase {
 
 	// UC 1.0
+	/**
+	 * Tests claim controller functionality / claim persistence
+	 */
 	public void testAddClaim () {
 		ClaimList claims = new ClaimList();
 		Claim claim = new Claim();
 		claims.addClaim(claim);
-		assertTrue("No claim added", claims.getClaims().size() != 0);
 		
-		// Save new information for claim, check if saved in claims
-		// TODO: Need to consider claimID.
 		ClaimController controller = new ClaimController(claim.getClaimId());
 		String claimName = "New Claim";
 		GregorianCalendar start_date = new GregorianCalendar();
@@ -57,18 +57,15 @@ public class UseCaseTests1 extends TestCase {
 		controller.setStartDate(start_date);
 		controller.setEndDate(end_date);
 		
-		// Testing persistence of name, start & end dates
-		assertEquals("Name is not equal", claim.getClaimName(), claimName);
-		//assertEquals("Start date is not equal", claim.getStartDate(), start_date);
-		//assertEquals("End date is not equal", claim.getEndDate(), end_date);
-		
+		assertEquals("Name is not equal", controller.getClaimName(), claimName);
+		assertEquals("Start date is not equal", controller.getStartDate(), start_date);
+		assertEquals("End date is not equal", controller.getEndDate(), end_date);
 		
 		String dest = "some destination";
 		String reason = "some reason";
-		StringTuple record = new StringTuple(dest, reason);
-		claim.addDestination(record);
+		controller.addDestination(dest, reason);
 		
-		assertTrue("No destination and reason were added.", claims.getClaim(claim).getDestinations().contains(record));
+		//assertTrue("No destination and reason were added.", controller.getDestinations().contains(dest));
 	}
 	
 	

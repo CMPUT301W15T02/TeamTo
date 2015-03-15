@@ -58,7 +58,6 @@ public class ClaimController {
 		currentClaim.setClaimName(name);
 	}
 	
-	
 	public void addExpense(Expense expense) {
 		currentClaim.addExpense(expense);
 	}
