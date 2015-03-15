@@ -20,6 +20,11 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+/**
+ * Activity that user will see upon first starting app,
+ * prompts for login and saves username for next session
+ */
+
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 

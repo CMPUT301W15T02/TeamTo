@@ -15,6 +15,10 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
+/**
+ * Controls link between local storage and elastic search server
+ */
+
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
