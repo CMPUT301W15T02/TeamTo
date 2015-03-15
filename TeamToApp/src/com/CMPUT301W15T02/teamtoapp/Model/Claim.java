@@ -19,15 +19,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Observable;
+import java.util.Observer;
 import java.util.TreeMap;
 import java.util.UUID;
+
+import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 
 /**
  * Stores all of the data related to a claim including any associated expenses
  * 
  */
 
-public class Claim extends Observable {
+public class Claim extends Observable implements Observer {
 
 	public enum Status {IN_PROGRESS ("In Progress"), SUBMITTED ("Submitted"), RETURNED ("Returned"), APPROVED ("Approved");
 	
@@ -206,12 +209,14 @@ public class Claim extends Observable {
 	}
 	
 	public void addExpense(Expense expense) {
+		expense.addObserver(this);
 		this.expenses.add(expense);
 		setChanged();
 		notifyObservers();
 	}
 	
 	public void removeExpense(Expense expense) {
+		expense.deleteObserver(this);
 		this.expenses.remove(expense);
 		setChanged();
 		notifyObservers();
@@ -224,6 +229,12 @@ public class Claim extends Observable {
 	
 	public String getClaimId() {
 		return claimdID;
+	}
+
+	@Override
+	public void update(Observable observable, Object data) {
+		setChanged();
+		notifyObservers();
 	}
 	
 	
