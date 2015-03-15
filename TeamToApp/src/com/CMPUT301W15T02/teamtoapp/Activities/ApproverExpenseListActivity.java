@@ -16,12 +16,15 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+
+/**
+ * 
+ * Activity to allow the approver to look at the different expenses of a submitted claim
+ *
+ */
 
 public class ApproverExpenseListActivity extends Activity {
 
