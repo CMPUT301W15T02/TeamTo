@@ -1,5 +1,9 @@
-/* Claim tests for TeamToApp
- * 
+/** Tests for use cases for TeamTo App. 
+ * 	Use cases mostly apply to adding/editing/deleting claims, adding/editing/deleting tags, and 
+ *  claim statuses.
+ */
+
+/* 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,7 +15,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 
 
 package com.CMPUT301W15T02.teamtoapp.test;
