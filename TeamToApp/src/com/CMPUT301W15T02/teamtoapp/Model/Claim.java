@@ -21,6 +21,8 @@ import java.util.Currency;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.UUID;
 
 import android.R.integer;
@@ -61,7 +63,7 @@ public class Claim extends Observable {
 	private ArrayList<Tag> tags;
 	private String userId;
 	private String ClaimId;
-	private HashMap<Currency, Double> CurrencyTotals = new HashMap<Currency, Double>();
+	private TreeMap<String, Double> CurrencyTotals = new TreeMap<String, Double>();
 	
 	
 	public Claim() {
@@ -78,45 +80,19 @@ public class Claim extends Observable {
 	
 	// This method sets the total currencies for the claim list view.
 	public void setTotalCurrencies() {
-		
-		Double totalCAD = 0.0;
-		Double totalUSD = 0.0;
-		Double totalEUR = 0.0;
-		Double totalGBP = 0.0;
-		Double totalCHF = 0.0;
-		Double totalJPY = 0.0;
-		Double totalCNY = 0.0;
-		
+		CurrencyTotals.clear();
 		for (Expense expense : this.expenses) {
-			if (expense.getAmount() != 0) {
-				if (expense.getCurrency() == Currency.getInstance("CAD")) {
-					totalCAD += expense.getAmount();
-				} else if (expense.getCurrency() == Currency.getInstance("USD")) {
-					totalUSD += expense.getAmount();
-				} else if (expense.getCurrency() == Currency.getInstance("EUR")) {
-					totalEUR += expense.getAmount();
-				} else if (expense.getCurrency() == Currency.getInstance("GBP")) {
-					totalGBP += expense.getAmount();
-				} else if (expense.getCurrency() == Currency.getInstance("CHF")) {
-					totalCHF += expense.getAmount();
-				} else if (expense.getCurrency() == Currency.getInstance("JPY")) {
-					totalJPY += expense.getAmount();
-				} else if (expense.getCurrency() == Currency.getInstance("CNY")) {
-					totalCNY += expense.getAmount();
-				}
+			if (CurrencyTotals.containsKey(expense.getCurrency().toString())) {
+				double amount = CurrencyTotals.get(expense.getCurrency());
+				amount = amount + expense.getAmount();
+				CurrencyTotals.put(expense.getCurrency().toString(), amount);
+			} else {
+				CurrencyTotals.put(expense.getCurrency().toString(), expense.getAmount());
 			}
 		}
-		CurrencyTotals.put(Currency.getInstance("CAD"), (double) (totalCAD));
-		CurrencyTotals.put(Currency.getInstance("USD"), (double) (totalUSD));
-		CurrencyTotals.put(Currency.getInstance("EUR"), (double) (totalEUR));
-		CurrencyTotals.put(Currency.getInstance("GBP"), (double) (totalGBP));
-		CurrencyTotals.put(Currency.getInstance("CHF"), (double) (totalCHF));
-		CurrencyTotals.put(Currency.getInstance("JPY"), (double) (totalJPY));
-		CurrencyTotals.put(Currency.getInstance("CNY"), (double) (totalCNY));
-		notifyObservers();
 	}
 	
-	public HashMap<Currency, Double> getTotalCurrencies() {
+	public TreeMap<String, Double> getTotalCurrencies() {
 		return CurrencyTotals;
 	}
 	
