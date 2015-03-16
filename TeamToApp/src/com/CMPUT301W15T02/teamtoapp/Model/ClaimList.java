@@ -1,5 +1,4 @@
-/* ClaimList class
- * 
+/* 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,6 @@
  * limitations under the License.
  */
 		
-
-
 package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Holds the current list of claims in order to separate
+ * Holds the current list of claims.
  *
  */
 

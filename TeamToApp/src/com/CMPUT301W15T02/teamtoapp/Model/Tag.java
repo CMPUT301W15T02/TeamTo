@@ -1,6 +1,4 @@
-/* Tags class that gives each user the ability to add their personal tags and use other user 
- * made tags, as well as edit, and delete their tag own tags.
- * 
+/*
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,13 +16,14 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 /**
  * 
- * Tag is a simple object that contains only a string for now
+ * Tag is a simple object that contains only a string for now.
  *
  */
 
 public class Tag {
 
 	private String tagName;
+	
 	
 	public Tag(String name) {
 		this.tagName = name;

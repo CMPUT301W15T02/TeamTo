@@ -1,5 +1,4 @@
-/* Claim class
- * 
+/* 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +25,7 @@ import java.util.UUID;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 
 /**
- * Stores all of the data related to a claim including any associated expenses
+ * Stores all of the data related to a claim including any associated expenses.
  * 
  */
 

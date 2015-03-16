@@ -1,5 +1,4 @@
-/* Session class
- * 
+/* 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");

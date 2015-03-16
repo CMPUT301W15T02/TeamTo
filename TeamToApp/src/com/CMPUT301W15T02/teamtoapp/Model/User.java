@@ -1,5 +1,4 @@
-/* User class which consists a user's list of claims and personalized tags.
- * 
+/* 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,6 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
+
 package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ import java.util.Observable;
 
 /**
  * 
- * User class consists of the name of the user, the type of user (claimant or approver) and a personal list of tags
+ * User class consists of the name of the user, the type of user (claimant or approver), and a personal list of tags.
  *
  */
 

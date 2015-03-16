@@ -1,5 +1,4 @@
 /* 
- * 
  * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,11 +16,12 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 /**
  * 
- * Simple tuple that holds two strings
+ * Simple tuple that holds two strings to aid in the functionality of Expense.java
  *
  */
 
 public class StringTuple {
+	
 	public String destination;
 	public String reason;
 	
@@ -46,4 +46,5 @@ public class StringTuple {
 	public void setReason(String newReason) {
 		this.reason = newReason;
 	}
+	
 }
