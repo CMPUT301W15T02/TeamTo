@@ -60,9 +60,8 @@ public class UseCase1Test extends TestCase {
 		String dest = "some destination";
 		String reason = "some reason";
 		controller.addDestination(dest, reason);
-		// TODO: Why isn't this working?  Already tested addDestination functionality in Claim.java but
-		// cannot see wouldn't be working for ClaimController?
-		assertFalse("No destination and reason were added.", controller.getDestinations().size() != 0);
+		// TODO: Why isn't this working?  You had it backwards
+		assertTrue("No destination and reason were added.", controller.getDestinations().size() != 0);
 	}
 	
 	
