@@ -22,8 +22,6 @@ import java.util.Observer;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
-
 /**
  * Stores all of the data related to a claim including any associated expenses.
  * 

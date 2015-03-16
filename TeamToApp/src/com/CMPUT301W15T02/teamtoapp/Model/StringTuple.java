@@ -16,7 +16,7 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 /**
  * 
- * Simple tuple that holds two strings to aid in the functionality of Expense.java
+ * Simple tuple that holds two strings to aid in the functionality of Claim.java
  *
  */
 

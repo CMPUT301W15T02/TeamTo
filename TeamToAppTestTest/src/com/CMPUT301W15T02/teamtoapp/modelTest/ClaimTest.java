@@ -88,7 +88,6 @@ public class ClaimTest extends TestCase {
 		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(dest1));
 	}
 	
-	
 	public void testTotalExpenses() {
 		Claim claim = new Claim();
 		
@@ -123,7 +122,6 @@ public class ClaimTest extends TestCase {
 		
 		claim.setTotalCurrencies();
 		assertTrue("expenses not adding up correctly", claim.getTotalCurrencies().get("CAD")==100.00);
-		
 	}
 	
 	// Same tests for tags, expenses, etc. but didn't implement because didn't see the point because the methods are identical?

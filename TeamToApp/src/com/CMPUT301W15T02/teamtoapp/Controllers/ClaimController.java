@@ -126,7 +126,6 @@ public class ClaimController {
 		return currentClaim.getEndDate();
 	}
 	
-	
 	/**
 	 * Gets the end date as a properly formatted string
 	 * @return	A string representing the end date
@@ -141,17 +140,6 @@ public class ClaimController {
 	
 	public void addComment(String comment) {
 		currentClaim.setComment(comment);
-	}
-	
-	
-	/**
-	 * Takes in two strings and makes a string tuple that is added to the claim
-	 * @param destination	String representing the destination
-	 * @param reason		String representing the reason for visiting the destination
-	 */
-	public void addDestination(String destination, String reason) {
-		StringTuple newDestination = new StringTuple(destination, reason);
-		currentClaim.addDestination(newDestination);
 	}
 	
 	public ArrayList<Expense> getExpenses() {
@@ -172,6 +160,16 @@ public class ClaimController {
 			}
 		}
 		return numIncomplete;
+	}
+	
+	/**
+	 * Takes in two strings and makes a string tuple that is added to the claim
+	 * @param destination	String representing the destination
+	 * @param reason		String representing the reason for visiting the destination
+	 */
+	public void addDestination(String destination, String reason) {
+		StringTuple newDestination = new StringTuple(destination, reason);
+		currentClaim.addDestination(newDestination);
 	}
 	
 	public ArrayList<StringTuple> getDestinations() {

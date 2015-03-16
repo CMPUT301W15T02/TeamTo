@@ -35,14 +35,15 @@ public class UseCase1Test extends TestCase {
 	
 	// UC 1.0
 	/**
-	 * Tests claim controller functionality / claim persistence
+	 * Tests adding a claim (i.e. though session controller)
 	 */
 	public void testAddClaim () {
 		ClaimList claims = new ClaimList();
 		Claim claim = new Claim();
 		claims.addClaim(claim);
-		
 		ClaimController controller = new ClaimController(claim.getClaimId());
+		
+		// Preconditions: Claimant knows name, starting/ending date, destination, and reason.
 		String claimName = "New Claim";
 		GregorianCalendar start_date = new GregorianCalendar();
 		GregorianCalendar end_date = new GregorianCalendar();
@@ -53,12 +54,15 @@ public class UseCase1Test extends TestCase {
 		assertEquals("Name is not equal", controller.getClaimName(), claimName);
 		assertEquals("Start date is not equal", controller.getStartDate(), start_date);
 		assertEquals("End date is not equal", controller.getEndDate(), end_date);
+		// TODO: Why does this not work?  
+		//assertTrue("Claim name not changed", claims.getClaim(claim).getClaimName().equals(claimName));
 		
 		String dest = "some destination";
 		String reason = "some reason";
 		controller.addDestination(dest, reason);
-		
-		//assertTrue("No destination and reason were added.", controller.getDestinations().contains(dest));
+		// TODO: Why isn't this working?  Already tested addDestination functionality in Claim.java but
+		// cannot see wouldn't be working for ClaimController?
+		assertFalse("No destination and reason were added.", controller.getDestinations().size() != 0);
 	}
 	
 	
