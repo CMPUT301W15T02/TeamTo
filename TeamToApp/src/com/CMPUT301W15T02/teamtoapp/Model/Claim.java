@@ -25,10 +25,17 @@ import java.util.UUID;
 /**
  * Stores all of the data related to a claim including any associated expenses.
  * 
+ * Claim watches its expenses and must be updated when an expense updates
+ * 
  */
 
 public class Claim extends Observable implements Observer {
 
+	/**
+	 * 
+	 * Enumerated type for the different Statuses of a claim
+	 *
+	 */
 	public enum Status {IN_PROGRESS ("In Progress"), SUBMITTED ("Submitted"), RETURNED ("Returned"), APPROVED ("Approved");
 	
 		private final String name;
@@ -41,7 +48,10 @@ public class Claim extends Observable implements Observer {
 			return name;
 		}
 	}
+	
 
+	
+	
 	private String claimName;
 	private GregorianCalendar startDate;
 	private GregorianCalendar endDate;
@@ -68,61 +78,54 @@ public class Claim extends Observable implements Observer {
 		currencyTotals = new TreeMap<String, Double>();
 	}
 	
-	/**
-	 *  Compiles the total currencies of all associated expenses into a TreeMap
-	 */
-	public void setTotalCurrencies() {
-		currencyTotals.clear();
-		for (Expense expense : this.expenses) {
-			if (currencyTotals.containsKey(expense.getCurrency().toString())) {
-				double amount = currencyTotals.get(expense.getCurrency().toString());
-				amount = amount + expense.getAmount();
-				currencyTotals.put(expense.getCurrency().toString(), amount);
-			} else {
-				currencyTotals.put(expense.getCurrency().toString(), expense.getAmount());
-			}
-		}
-		setChanged();
-		notifyObservers();
-	}
-	
-	public TreeMap<String, Double> getTotalCurrencies() {
-		return currencyTotals;
-	}
 	
 	public String getClaimName() {
 		return claimName;
 	}
+	
+	
 
 	public void setClaimName(String claimName) {
 		this.claimName = claimName;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public GregorianCalendar getStartDate() {
 		return this.startDate;
 	}
+	
+	
 
 	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public Calendar getEndDate() {
 		return endDate;
 	}
+	
+	
 
 	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public ArrayList<StringTuple> getDestinations() {
 		return destinations;
 	}
+	
+	
 
 	public void setDestinations(ArrayList<StringTuple> destinations) {
 		this.destinations = destinations;
@@ -130,77 +133,33 @@ public class Claim extends Observable implements Observer {
 		notifyObservers();
 	}
 	
+	
+	
 	public void addDestination(StringTuple new_tuple) {
 		this.destinations.add(new_tuple);
 		setChanged();
 		notifyObservers();
 	}
 	
+	
+	
 	public void removeDestination(StringTuple destination) {
 		this.destinations.remove(destination);
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
 	}
+	
+	
 
 	public void setExpenses(ArrayList<Expense> expenses) {
 		this.expenses = expenses;
-		setChanged();
-		notifyObservers();
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-		setChanged();
-		notifyObservers();
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-		setChanged();
-		notifyObservers();
-	}
-
-	public ArrayList<Tag> getTags() {
-		return tags;
-	}
-
-	public void setTags(ArrayList<Tag> tags) {
-		this.tags = tags;
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void addTag(Tag tag) {
-		this.tags.add(tag);
-		setChanged();
-		notifyObservers();
-	}
-	
-	public void removeTag(Tag tag){
-		this.tags.remove(tag);
-		setChanged();
-		notifyObservers();
-	}
-
-	public String getUser() {
-		return userName;
-	}
-
-	public void setUser(String userName) {
-		this.userName = userName;
 		setChanged();
 		notifyObservers();
 	}
@@ -212,6 +171,8 @@ public class Claim extends Observable implements Observer {
 		notifyObservers();
 	}
 	
+	
+	
 	public void removeExpense(Expense expense) {
 		expense.deleteObserver(this);
 		this.expenses.remove(expense);
@@ -219,15 +180,124 @@ public class Claim extends Observable implements Observer {
 		notifyObservers();
 	}	
 	
+	
+	
 	public boolean verifyExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}
 	
 	
+
+	public Status getStatus() {
+		return status;
+	}
+	
+	
+
+	public void setStatus(Status status) {
+		this.status = status;
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+
+	public String getComment() {
+		return comment;
+	}
+	
+	
+
+	public void setComment(String comment) {
+		this.comment = comment;
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+
+	public ArrayList<Tag> getTags() {
+		return tags;
+	}
+	
+	
+
+	public void setTags(ArrayList<Tag> tags) {
+		this.tags = tags;
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+	
+	public void addTag(Tag tag) {
+		this.tags.add(tag);
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+	
+	public void removeTag(Tag tag){
+		this.tags.remove(tag);
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+
+	public String getUser() {
+		return userName;
+	}
+	
+	
+
+	public void setUser(String userName) {
+		this.userName = userName;
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+	
+	
 	public String getClaimId() {
 		return claimdID;
 	}
+	
+	
+	
+	/**
+	 *  Compiles the total currencies of all associated expenses into a TreeMap
+	 *  The treemap consists of a string representing the currency code and the amount
+	 */
+	public void setTotalCurrencies() {
+		// Clear the current currencyTotals
+		currencyTotals.clear();
+		// Loop through all expenses of claim
+		for (Expense expense : this.expenses) {
+			// If it already exists in the dictionary then update it
+			if (currencyTotals.containsKey(expense.getCurrency().toString())) {
+				double amount = currencyTotals.get(expense.getCurrency().toString());
+				amount = amount + expense.getAmount();
+				currencyTotals.put(expense.getCurrency().toString(), amount);
+				// Otherwise insert it in the dictionary with new value
+			} else {
+				currencyTotals.put(expense.getCurrency().toString(), expense.getAmount());
+			}
+		}
+		setChanged();
+		notifyObservers();
+	}
+	
+	public TreeMap<String, Double> getTotalCurrencies() {
+		return currencyTotals;
+	}
 
+	/**
+	 * Claim observes it's expenses so when they have been updated claim needs to let any
+	 * observers know that it has also updated
+	 */
 	@Override
 	public void update(Observable observable, Object data) {
 		setChanged();

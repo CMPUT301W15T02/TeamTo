@@ -27,14 +27,17 @@ public class ClaimList extends Observable implements Observer {
 
 	private ArrayList<Claim> claims;
 	
-	
 	public ClaimList() {
 		claims = new ArrayList<Claim>();
 	}
+	
+	
 
 	public ArrayList<Claim> getClaims() {
 		return claims;
 	}
+	
+	
 
 	public void setClaims(ArrayList<Claim> claims) {
 		this.claims = claims;
@@ -42,17 +45,23 @@ public class ClaimList extends Observable implements Observer {
 		notifyObservers();
 	}
 	
+	
+	
 	public void addClaim(Claim claim) {
 		claims.add(claim);
 		setChanged();
 		notifyObservers();
 	}
 	
+	
+	
 	public void removeClaim(Claim claim) {
 		claims.remove(claim);
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 	
 	public Claim getClaim(Claim claim) {
 		if (claims.contains(claim)) {
@@ -61,6 +70,8 @@ public class ClaimList extends Observable implements Observer {
 			return null;
 		}
 	}
+	
+	
 	
 	/**
 	 * Responsible for finding a claim by its ID, if one is not found it returns a new claim
@@ -77,6 +88,8 @@ public class ClaimList extends Observable implements Observer {
 		return new Claim();	
 	}
 	
+	
+	
 	/**
 	 * Responsible for finding an expense by its ID, if one is not found it returns a new claim
 	 * @param expenseID The ID of a claim
@@ -92,9 +105,12 @@ public class ClaimList extends Observable implements Observer {
 		}
 		return new Expense(); // Or should we return new Expense?
 	}
+	
+	
 
 	/**
-	 * Notifies the ClaimList that something it was observing has changed
+	 * Notifies the ClaimList that a claim it was observing has changed.  
+	 * 
 	 * The ClaimList then notifies any of its listeners that it has changed as well
 	 */
 	@Override

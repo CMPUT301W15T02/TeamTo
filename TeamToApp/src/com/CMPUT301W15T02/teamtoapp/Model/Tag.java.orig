@@ -37,7 +37,12 @@ public class Tag {
 		this.tagName = name;
 	}
 
+<<<<<<< HEAD
+	// What does this do?
+	// overrides the method of toString
+=======
 	// Converts the tag into a string representation to make user of simple list adapters
+>>>>>>> f6758b981522aa3b740b60a89b8dbcce71db3312
 	@Override
 	public String toString() {
 		return tagName;
