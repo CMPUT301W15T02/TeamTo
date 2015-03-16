@@ -50,7 +50,12 @@ public class StringTupleTest extends TestCase {
 		
 		String newReason = "newReason";
 		tuple.setReason(newReason);
+<<<<<<< HEAD
 		assertTrue("Reason not set", tuple.getReason().equals(newReason));
+=======
+		// WHY IS THIS FAILING? You are comparing a destination and a reason
+		assertEquals("Reason not set", newReason, tuple.getReason());
+>>>>>>> a4bc28f8374e650103abc9f0baecf9d9b037f35f
 	}
 	
 }
