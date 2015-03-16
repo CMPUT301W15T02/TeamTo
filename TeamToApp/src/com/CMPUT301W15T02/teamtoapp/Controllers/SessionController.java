@@ -29,6 +29,8 @@ import android.net.ConnectivityManager;
  *
  */
 
+
+// NOTE: this class will likely be replaced
 public class SessionController {
 	
 	private User user;
