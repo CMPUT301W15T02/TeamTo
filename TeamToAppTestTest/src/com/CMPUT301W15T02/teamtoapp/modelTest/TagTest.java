@@ -14,7 +14,9 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import junit.framework.TestCase;
 
@@ -28,6 +30,15 @@ public class TagTest extends TestCase {
 		String tagName = "tag1";
 		Tag tag = new Tag(tagName);
 		assertTrue("", tag.toString().equals(tagName));
+	}
+	
+	public void testAddTag() {
+		UserController userController = new UserController();
+		Tag tag1 = new Tag("hello");
+		Tag tag2 = new Tag("hello");
+		userController.addTag(tag1);
+		userController.addTag(tag2);
+		assertEquals("Adding tags when it shouldn't", 5, userController.getTags().size());
 	}
 	
 }

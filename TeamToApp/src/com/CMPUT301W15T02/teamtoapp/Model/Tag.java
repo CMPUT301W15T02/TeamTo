@@ -28,19 +28,42 @@ public class Tag {
 	public Tag(String name) {
 		this.tagName = name;
 	}
+	
+	
 
 	public String getTagName() {
 		return tagName;
 	}
 	
+	
+	
 	public void setTagName(String name) {
 		this.tagName = name;
 	}
+	
+	
 
 	// Converts the tag into a string representation to make user of simple list adapters
 	@Override
 	public String toString() {
 		return tagName;
 	}
+	
+	
+
+	@Override
+	public boolean equals(Object o) {
+		if (o instanceof Tag) {
+			Tag tocompare = (Tag) o;
+			if (tocompare.getTagName().equals(this.getTagName())) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return super.equals(o);
+	}
+	
+	
 	
 }
