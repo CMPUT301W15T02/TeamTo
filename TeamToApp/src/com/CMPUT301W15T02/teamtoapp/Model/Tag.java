@@ -38,6 +38,7 @@ public class Tag {
 		this.tagName = name;
 	}
 
+	// What does this do?
 	@Override
 	public String toString() {
 		return tagName;
