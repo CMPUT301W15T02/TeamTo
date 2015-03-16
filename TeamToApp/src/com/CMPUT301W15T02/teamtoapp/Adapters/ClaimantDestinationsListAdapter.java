@@ -29,7 +29,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+/**
+ * 
+ * A customized adapter for the claimant's destination list view
+ * for the Create/Edit Claim interface (ClaimEditActivity.java)
+ *
+ */
 public class ClaimantDestinationsListAdapter extends ArrayAdapter<StringTuple> {
 
 	private Context context;

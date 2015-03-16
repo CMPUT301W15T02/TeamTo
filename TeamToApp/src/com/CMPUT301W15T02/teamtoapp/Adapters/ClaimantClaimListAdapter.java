@@ -35,8 +35,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-//This adapter customizes the claim list view for the claimant.
+/**
+ * 
+ * A customized adapter for the claimant's list of claims.
+ *
+ */
 public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;

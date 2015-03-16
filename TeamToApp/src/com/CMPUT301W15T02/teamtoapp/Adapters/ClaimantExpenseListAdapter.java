@@ -32,7 +32,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
+/**
+ * 
+ * A customized adapter for the claimant's list of expenses. 
+ *
+ */
 public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 
 	private Context context;
@@ -53,7 +57,6 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		TextView expenseDateTextView;
 		TextView categoryTextView;
 		TextView currencyTextView;
-		// TODO: Still need to add tags.
 	}
 	//The method that update the Expense list of the claimant once an expense has been created or changes have been made to an expense
 	@Override
@@ -70,8 +73,6 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder.expenseDateTextView = (TextView) row.findViewById(R.id.expenseDateTextView);
 			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
 			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
-
-			// holder.txtTags..., holder.txtTotalCurr..., etc.
 			row.setTag(holder);
 			
 		} else {

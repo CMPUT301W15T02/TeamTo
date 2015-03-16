@@ -28,12 +28,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-/*
- * As an approver, I want to view a list of all the expense claims that were submitted for approval, 
- * which have their claim status as submitted, showing for each claim: the claimant name, 
- * the starting date of travel, the destination(s) of travel, the claim status, 
- * total currency amounts, and any approver name.
- * */
+/**
+ * 
+ * This adapter will provide a list of submitted claims for the approver. In progress.
+ *
+ */
 public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 	
 	private Context context;
