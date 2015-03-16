@@ -64,7 +64,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView tagsTextView;
 		
 	}
-	
+	//Updates the view of the Claims list of the claimant once created or shows the changes once they are edited
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 

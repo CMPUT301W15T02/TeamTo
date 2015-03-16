@@ -55,7 +55,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		TextView currencyTextView;
 		// TODO: Still need to add tags.
 	}
-	
+	//The method that update the Expense list of the claimant once an expense has been created or changes have been made to an expense
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 

@@ -38,6 +38,7 @@ public class Tag {
 	}
 
 	// What does this do?
+	// overrides the method of toString
 	@Override
 	public String toString() {
 		return tagName;

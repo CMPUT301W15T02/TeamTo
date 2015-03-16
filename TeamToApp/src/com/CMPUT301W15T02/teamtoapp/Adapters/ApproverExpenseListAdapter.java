@@ -56,7 +56,7 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 		TextView approverPhotoReceiptTextView; // Should say yes/or no if it exists.
 
 	}
-	
+	//Updates the expense list view of the approver from the information of a submitted claim only
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
