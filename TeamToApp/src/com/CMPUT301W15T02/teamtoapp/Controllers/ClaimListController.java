@@ -38,6 +38,10 @@ public class ClaimListController {
 		userName = Session.getInstance().getCurrentUser().getName();
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+	
 	public void addClaim(Claim claim) {
 		claim.setUser(userName);
 		claims.addClaim(claim);

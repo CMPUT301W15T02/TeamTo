@@ -20,6 +20,7 @@ import java.util.GregorianCalendar;
 
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
@@ -38,8 +39,13 @@ public class UseCase1Test extends TestCase {
 	 * Tests adding a claim (i.e. though session controller)
 	 */
 	public void testAddClaim () {
+		SessionController sessionController = new SessionController();
+		sessionController.setUser("New name");
 		ClaimListController claims = new ClaimListController();
 		Claim claim = new Claim();
+		claims.getUserName();
+		// added getUserName to ClaimListController just to see if username is the same - method only for testing.
+		assertEquals("New name", claims.getUserName());
 		claims.addClaim(claim);
 		
 		ClaimController controller = new ClaimController(claim.getClaimId());
