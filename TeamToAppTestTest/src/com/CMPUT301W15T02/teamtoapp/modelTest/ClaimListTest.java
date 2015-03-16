@@ -1,11 +1,13 @@
-/* Tests for ClaimsList.java */
-
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 
 import junit.framework.TestCase;
+
+/**
+ * Tests the functionality of ClaimList.java
+ */
 
 public class ClaimListTest extends TestCase {
 

@@ -38,12 +38,9 @@ public class Tag {
 		this.tagName = name;
 	}
 
-
 	@Override
 	public String toString() {
 		return tagName;
 	}
-	
-	
 	
 }

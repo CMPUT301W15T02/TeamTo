@@ -4,6 +4,10 @@ import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 
 import junit.framework.TestCase;
 
+/**
+ * Tests the functionality of StringTupleTest.java
+ */
+
 public class StringTupleTest extends TestCase {
 	
 	public void testCreateTuple() {
@@ -30,6 +34,7 @@ public class StringTupleTest extends TestCase {
 		tuple.setReason("newReason");
 		assertTrue("reason not set", tuple.getDestination().equals("newReason"));
 	}
+	
 }
 
 

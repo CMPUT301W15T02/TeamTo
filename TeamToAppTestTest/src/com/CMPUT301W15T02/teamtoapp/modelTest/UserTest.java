@@ -1,5 +1,3 @@
-/* Tests for User.java */
-
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 import java.util.ArrayList;
@@ -8,6 +6,10 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import junit.framework.TestCase;
+
+/**
+ * Tests the functionality of User.java
+ */
 
 public class UserTest extends TestCase {
 

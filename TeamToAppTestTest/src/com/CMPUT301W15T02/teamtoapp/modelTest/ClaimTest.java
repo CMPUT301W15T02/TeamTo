@@ -1,5 +1,3 @@
-/* Tests for Claim.java */
-
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 import java.util.ArrayList;
@@ -12,6 +10,10 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 
 import junit.framework.TestCase;
+
+/**
+ * Tests the functionality of Claim.java
+ */
 
 public class ClaimTest extends TestCase {
 
