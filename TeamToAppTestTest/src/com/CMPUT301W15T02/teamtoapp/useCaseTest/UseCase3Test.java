@@ -1,6 +1,8 @@
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -57,7 +59,6 @@ public class UseCase3Test extends TestCase {
 		assertFalse("Tag not there", claim.getTags().contains(tag));
 	}
 	
-	/*
 	// UC 3.4
 	public void testFilterByTag() {
 		Claim claim1 = new Claim();
@@ -71,5 +72,4 @@ public class UseCase3Test extends TestCase {
 		assertTrue("Filter working", claimListController.getClaimsWithTags("Tag name").contains(claim1));
 		assertFalse("Tag filter working?", claimListController.getClaimsWithTags("Tag name").contains(claim2));
 	}
-	*/
 }

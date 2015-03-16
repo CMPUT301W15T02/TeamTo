@@ -21,6 +21,7 @@ import java.util.Observer;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Session;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
@@ -73,6 +74,11 @@ public class ClaimListController {
 			}
 		}
 		return submittedClaims;
+	}
+
+	public ArrayList<Tag> getClaimsWithTags(String string) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

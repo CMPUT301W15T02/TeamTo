@@ -9,13 +9,14 @@ import junit.framework.TestCase;
 
 public class UseCase9Test extends TestCase {
 
-	/*
+	
 	// UC 9.0
 	public void testCloudStatus() {
-		User user = new User("Peter");
 		Claim claim = new Claim();
-		user.saveToCloud();
-		assertEquals("Cloud saving working", user, user.loadFromCloud());
+		ClaimList claimList = new ClaimList();
+		claimList.addClaim(claim);
+		ClaimController claimController = new ClaimController(claim.getClaimId());
+		claimController.submitClaim();
+		//assertEquals("Cloud saving working", user, user.loadFromCloud());
 	}
-*/
 }

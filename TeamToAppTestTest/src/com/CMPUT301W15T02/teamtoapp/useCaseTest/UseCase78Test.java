@@ -7,7 +7,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
 import junit.framework.TestCase;
 
-public class UseCase7Test extends TestCase {
+public class UseCase78Test extends TestCase {
 	
 	// UC 7.0, UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)
 	public void testClaimStatuses() {
@@ -30,14 +30,4 @@ public class UseCase7Test extends TestCase {
 		claimController.approvedClaim();
 		assertEquals("Claim approved?", Status.APPROVED, claimController.getCurrentClaim().getStatus());
 	}
-	
-	/*
-	// UC 9.0
-	public void testCloudStatus() {
-		User user = new User("Peter");
-		Claim claim = new Claim();
-		user.saveToCloud();
-		assertEquals("Cloud saving working", user, user.loadFromCloud());
-	}
-*/
 }
