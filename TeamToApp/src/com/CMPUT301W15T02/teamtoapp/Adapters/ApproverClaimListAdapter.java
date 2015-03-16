@@ -59,7 +59,9 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		
 	}
 	
-	//This method updates the list view of the approver with submitted claims only
+	/**
+	 * This method updates the list view of the approver with submitted claims only
+	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 

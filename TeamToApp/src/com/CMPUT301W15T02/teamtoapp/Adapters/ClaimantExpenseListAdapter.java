@@ -59,8 +59,10 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		TextView currencyTextView;
 		TextView incompletenessTextView;
 	}
-	// The method that update the Expense list of the claimant once an expense 
-	// has been created or changes have been made to an expense
+	/**
+	 * The method that update the Expense list of the claimant once an expense 
+	 *	has been created or changes have been made to an expense
+	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -82,6 +84,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder = (ViewHolder) row.getTag();
 		}
 		
+		// Set text of different fields
 		Expense expense = expenseList.get(position);
 		if (expense.getDescription().trim().isEmpty()) {
 			holder.expenseDescriptionTextView.setText("No Description");
