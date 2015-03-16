@@ -50,7 +50,9 @@ public class Tag {
 	}
 	
 	
-
+	/**
+	 * Compares two tags by checking if they have the same name
+	 */
 	@Override
 	public boolean equals(Object o) {
 		if (o instanceof Tag) {
