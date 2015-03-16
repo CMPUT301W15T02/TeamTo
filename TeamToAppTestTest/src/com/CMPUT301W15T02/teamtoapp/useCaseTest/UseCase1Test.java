@@ -54,8 +54,8 @@ public class UseCase1Test extends TestCase {
 		assertEquals("Name is not equal", controller.getClaimName(), claimName);
 		assertEquals("Start date is not equal", controller.getStartDate(), start_date);
 		assertEquals("End date is not equal", controller.getEndDate(), end_date);
-		// TODO: Why does this not work?  
-		//assertTrue("Claim name not changed", claims.getClaim(claim).getClaimName().equals(claimName));
+		// TODO: Why does this not work? You updated the controller object but not the one you stored in the ClaimList
+		// assertEquals("Claim name not changed", claimName, claims.getClaim(claim).getClaimName());
 		
 		String dest = "some destination";
 		String reason = "some reason";
