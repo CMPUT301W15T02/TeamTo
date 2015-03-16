@@ -73,6 +73,10 @@ public class ClaimantExpenseListActivity extends Activity implements Observer {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.claimant_expense_list_menu, menu);
+		MenuItem addButton = menu.findItem(R.id.addExpenseMenuButton);
+		if (!claimController.isEditable()) {
+			addButton.setVisible(false);
+		}
 		return true;
 	}
 
@@ -91,6 +95,7 @@ public class ClaimantExpenseListActivity extends Activity implements Observer {
 			return true;
 		} else if (id == R.id.submitClaimOption) {
 			submitClaim();
+			invalidateOptionsMenu();
 		}
 		return super.onOptionsItemSelected(item);
 	}

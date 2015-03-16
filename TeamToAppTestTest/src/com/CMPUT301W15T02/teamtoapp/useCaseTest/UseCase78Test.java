@@ -20,6 +20,7 @@ public class UseCase78Test extends TestCase {
 		// UC 7.0 submit claim
 		claimController.submitClaim();
 		assertEquals("Claim status submitted?", Status.SUBMITTED, claimController.getCurrentClaim().getStatus());
+		assertFalse("Claim still editable?", claimController.isEditable());
 		
 		// UC 8.0 return claim
 		claimController.returnClaim();
