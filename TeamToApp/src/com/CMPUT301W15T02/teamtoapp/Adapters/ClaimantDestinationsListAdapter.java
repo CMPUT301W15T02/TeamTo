@@ -51,7 +51,7 @@ public class ClaimantDestinationsListAdapter extends ArrayAdapter<StringTuple> {
 		TextView reasonTextView;
 		
 	}
-	
+	//A method that updates the list view within the claim creation of the claimant once a claim is either edited or first created
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 		
