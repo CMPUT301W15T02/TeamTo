@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
@@ -37,9 +38,10 @@ public class UseCase1Test extends TestCase {
 	 * Tests adding a claim (i.e. though session controller)
 	 */
 	public void testAddClaim () {
-		ClaimList claims = new ClaimList();
+		ClaimListController claims = new ClaimListController();
 		Claim claim = new Claim();
 		claims.addClaim(claim);
+		
 		ClaimController controller = new ClaimController(claim.getClaimId());
 		
 		// Preconditions: Claimant knows name, starting/ending date, destination, and reason.

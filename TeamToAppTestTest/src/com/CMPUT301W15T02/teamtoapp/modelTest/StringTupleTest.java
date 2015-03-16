@@ -50,7 +50,6 @@ public class StringTupleTest extends TestCase {
 		
 		String newReason = "newReason";
 		tuple.setReason(newReason);
-		// WHY IS THIS FAILING?
 		assertTrue("Reason not set", tuple.getReason().equals(newReason));
 	}
 	
