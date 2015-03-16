@@ -57,8 +57,10 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		TextView expenseDateTextView;
 		TextView categoryTextView;
 		TextView currencyTextView;
+		TextView incompletenessTextView;
 	}
-	//The method that update the Expense list of the claimant once an expense has been created or changes have been made to an expense
+	// The method that update the Expense list of the claimant once an expense 
+	// has been created or changes have been made to an expense
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
@@ -73,6 +75,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder.expenseDateTextView = (TextView) row.findViewById(R.id.expenseDateTextView);
 			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
 			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
+			holder.incompletenessTextView = (TextView) row.findViewById(R.id.incompletenessTextView);
 			row.setTag(holder);
 			
 		} else {
@@ -88,7 +91,11 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		holder.expenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
 		holder.categoryTextView.setText(expense.getCategory());
 		holder.currencyTextView.setText(numformatter.format(expense.getAmount()).toString()+" "+expense.getCurrency());
-		
+		if (expense.getComplete() == false) {
+			holder.incompletenessTextView.setText("Incomplete");
+		} else {
+			holder.incompletenessTextView.setText("Complete");
+		}
 		return row;
 	}
 	
