@@ -112,8 +112,7 @@ public class Expense extends Observable {
 	}
 
 	public void addPhoto(String photoPath) {
-		// Not sure how to add photos
-		
+		// TODO: Not sure how to add photos
 	}
 
 	public String getPhoto() {
