@@ -47,39 +47,55 @@ public class Expense extends Observable {
 		expenseId = UUID.randomUUID().toString();
 	}
 
+	
+	
 	public Calendar getDate() {
 		return date;
 	}
 
+	
+	
 	public void setDate(Calendar date) {
 		this.date = date;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public String getDescription() {
 		return description;
 	}
+	
+	
 
 	public void setDescription(String description) {
 		this.description = description;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public Currency getCurrency() {
 		return currency;
 	}
 
+	
+	
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public String getCategory() {
 		return category;
 	}
+	
+	
 
 	public void setCategory(String category) {
 		this.category = category;
@@ -90,35 +106,49 @@ public class Expense extends Observable {
 	public Double getAmount() {
 		return amount;
 	}
+	
+	
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public boolean getComplete() {
 		return complete;
 	}
+	
+	
 	
 	public void setComplete(boolean complete) {
 		this.complete = complete;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public String getExpenseId() {
 		return expenseId;
 	}
+	
+	
 
 	public void addPhoto(String photoPath) {
 		// TODO: Not sure how to add photos
 	}
+	
+	
 
 	public String getPhoto() {
 		// TODO Incomplete.
 		return null;
 	}
+	
+	
 
 	public void removePhoto() {
 		// TODO Incomplete - make sure claim is editable before removing photo.

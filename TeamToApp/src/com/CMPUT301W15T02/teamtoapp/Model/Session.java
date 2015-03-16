@@ -22,16 +22,22 @@ package com.CMPUT301W15T02.teamtoapp.Model;
  */
 
 public class Session {
+	
 	private User currentUser;
 	private ClaimList currentClaims;
 	
 	private static Session instance = null;
 
+	/**
+	 * Private constructor that is only called if there is no instance of the singleton
+	 */
 	private Session(){
 		currentUser = new User(null);
 		currentClaims = new ClaimList();
 	};
 
+	
+	
 	/**
 	 * Contains the current instance of the singleton if it exists or returns a new instance
 	 * @return
@@ -42,22 +48,32 @@ public class Session {
 		}
 		return instance;
 	}
+	
+	
 
 	public User getCurrentUser() {
 		return currentUser;
 	}
+	
+	
 
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}
+	
+	
 
 	public ClaimList getCurrentClaims() {
 		return currentClaims;
 	}
+	
+	
 
 	public void setCurrentClaims(ClaimList currentClaims) {
 		this.currentClaims = currentClaims;
 	}
+	
+	
 	
 	// ONLY FOR TESTING
 	public static void tearDownForTesting() {

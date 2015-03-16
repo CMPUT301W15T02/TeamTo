@@ -16,7 +16,7 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 /**
  * 
- * Tag is a simple object that contains only a string for now.
+ * Tag is only composed of a string for now 
  *
  */
 
@@ -37,7 +37,7 @@ public class Tag {
 		this.tagName = name;
 	}
 
-	// What does this do?
+	// Converts the tag into a string representation to make user of simple list adapters
 	@Override
 	public String toString() {
 		return tagName;

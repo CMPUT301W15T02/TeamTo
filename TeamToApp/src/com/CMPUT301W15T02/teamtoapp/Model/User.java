@@ -29,7 +29,10 @@ public class User extends Observable {
 	private boolean type; // true for claimant, false for approver
 	private ArrayList<Tag> tags;
 	
-	
+	/**
+	 * User constructor
+	 * @param string	the name of the user
+	 */
 	public User(String string) {
 		this.name = string;
 		tags = new ArrayList<Tag>();
@@ -40,20 +43,28 @@ public class User extends Observable {
 		tags.add(new Tag("Personal"));
 		tags.add(new Tag("Recreation"));
 	}
+	
+	
 
 	public String getName() {
 		return name;
 	}
+	
+	
 	
 	public void setName(String name) {
 		this.name = name;
 		setChanged();
 		notifyObservers();
 	}
+	
+	
 
 	public boolean getType() {
 		return type;
 	}
+	
+	
 	
 	/**
 	 * Sets the type of user, false is approver mode, true for claimant
@@ -62,10 +73,14 @@ public class User extends Observable {
 	public void setType(boolean type) {
 		this.type = type;
 	}
+	
+	
 
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+	
+	
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
@@ -78,7 +93,7 @@ public class User extends Observable {
 	 * @param tag
 	 */
 	public void addTag(Tag tag) {
-		if(!tags.contains(tag)) {
+		if (!tags.contains(tag)) {
 			tags.add(tag);
 			setChanged();
 			notifyObservers();
