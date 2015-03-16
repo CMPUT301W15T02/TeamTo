@@ -26,6 +26,10 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 import junit.framework.TestCase;
 
+/**
+ * Tests use cases 1.X
+ */
+
 public class UseCase1Test extends TestCase {
 
 	
