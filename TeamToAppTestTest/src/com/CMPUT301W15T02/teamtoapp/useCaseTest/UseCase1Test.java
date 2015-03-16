@@ -32,7 +32,6 @@ import junit.framework.TestCase;
 
 public class UseCase1Test extends TestCase {
 
-	
 	// UC 1.0
 	/**
 	 * Tests adding a claim (i.e. though session controller)
@@ -64,7 +63,6 @@ public class UseCase1Test extends TestCase {
 		// cannot see wouldn't be working for ClaimController?
 		assertFalse("No destination and reason were added.", controller.getDestinations().size() != 0);
 	}
-	
 	
 	// UC 1.1
 	public void testEditClaim() {
@@ -114,4 +112,5 @@ public class UseCase1Test extends TestCase {
 		Collections.sort(claims, new ClaimComparatorOldestFirst());
 		assertEquals("Sorting by oldest first?", claim2, claims.get(0));
 	}
+	
 }

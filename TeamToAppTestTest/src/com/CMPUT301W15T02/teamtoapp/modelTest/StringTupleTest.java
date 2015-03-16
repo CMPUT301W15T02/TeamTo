@@ -25,27 +25,33 @@ import junit.framework.TestCase;
 public class StringTupleTest extends TestCase {
 	
 	public void testCreateTuple() {
-	String string1 = new String("destination");
-	String string2 = new String("reason");
-	StringTuple tuple = new StringTuple(string1, string2);
-	assertTrue("destination not initialized correctly", tuple.getDestination().equals("destination"));
-	assertTrue("reason not initialized correctly", tuple.getReason().equals("destination"));
+		String string1 = new String("destination");
+		String string2 = new String("reason");
+		StringTuple tuple = new StringTuple(string1, string2);
+		
+		assertTrue("destination not initialized correctly", tuple.getDestination().equals(string1));
+		assertTrue("reason not initialized correctly", tuple.getReason().equals(string2));
 	}
 	
 	public void testSetDestination() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
 		StringTuple tuple = new StringTuple(string1, string2);
-		tuple.setDestination("newDestination");
-		assertTrue("destination not set", tuple.getDestination().equals("newDestination"));
+		
+		String newDest = "newDestination";
+		tuple.setDestination(newDest);
+		assertTrue("Destination not set", tuple.getDestination().equals(newDest));
 	}
 	
 	public void testSetReason() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
 		StringTuple tuple = new StringTuple(string1, string2);
-		tuple.setReason("newReason");
-		assertTrue("reason not set", tuple.getDestination().equals("newReason"));
+		
+		String newReason = "newReason";
+		tuple.setReason(newReason);
+		// WHY IS THIS FAILING?
+		assertTrue("Reason not set", tuple.getDestination().equals(newReason));
 	}
 	
 }

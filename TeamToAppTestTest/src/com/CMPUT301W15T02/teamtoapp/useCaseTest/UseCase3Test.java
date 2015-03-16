@@ -45,7 +45,6 @@ public class UseCase3Test extends TestCase {
 		assertEquals("Removed tag?", initialSize-1, user.getTags().size());
 	}
 	
-	
 	// UC 3.0
 	public void testEditTags() {
 		User user = new User("NAME");
