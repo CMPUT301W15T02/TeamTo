@@ -20,10 +20,6 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
-/**
- * Activity that user will see upon first starting app,
- * prompts for login and saves username for next session
- */
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
@@ -37,6 +33,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Activity that user will see upon first starting app,
+ * prompts for login and saves username for next session
+ */
 public class LoginActivity extends Activity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";

@@ -28,6 +28,11 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 import android.R.integer;
 
+/**
+ * 
+ * Controller for editing/adding/removing claims from the list of claims
+ *
+ */
 public class ClaimListController {
 
 	private ClaimList claims;

@@ -45,6 +45,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * 
+ * Activity for editing an expense
+ *
+ */
 public class ExpenseEditActivity extends Activity implements Observer {
 	
 	private ExpenseController expenseController;

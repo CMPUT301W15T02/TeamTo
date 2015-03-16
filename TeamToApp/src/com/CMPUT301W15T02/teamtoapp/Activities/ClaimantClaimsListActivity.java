@@ -16,11 +16,6 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
-/**
- * The activity that the claimant will come to if they have already logged in.
- * Contains a list of their claims and has the ability to add new claims, manage tags,
- * and switch to approver mode
- */
 
 import java.util.Observable;
 import java.util.Observer;
@@ -47,6 +42,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ * The activity that the claimant will come to if they have already logged in.
+ * Contains a list of their claims and has the ability to add new claims, manage tags,
+ * and switch to approver mode
+ */
 public class ClaimantClaimsListActivity extends Activity implements Observer {
 	
 	private SessionController sessionController;
