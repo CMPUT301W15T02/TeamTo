@@ -30,8 +30,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-// This adapter customizes the expense list view for the approver.
+/**
+ * 
+ * A customized adapter for the approver's list of expenses. 
+ *
+ */
 public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 
 	private Context context;
