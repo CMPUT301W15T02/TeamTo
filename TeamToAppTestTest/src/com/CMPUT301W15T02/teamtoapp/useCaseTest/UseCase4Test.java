@@ -73,6 +73,7 @@ public class UseCase4Test extends TestCase {
 		expense.setCategory(cat);
 		assertEquals(categories.get(0), expense.getCategory());
 	}
+	
 	// US 4.03 (UC 4.1.1 & 4.3)
 	public void testCurrency() {
 		Expense expense = new Expense();
