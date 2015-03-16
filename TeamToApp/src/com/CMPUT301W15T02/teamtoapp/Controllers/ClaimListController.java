@@ -38,6 +38,7 @@ public class ClaimListController {
 		userName = Session.getInstance().getCurrentUser().getName();
 	}
 	
+	// for testing purposes - UseCase1Test.java
 	public String getUserName() {
 		return userName;
 	}
