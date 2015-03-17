@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
@@ -187,16 +188,16 @@ public class ClaimController {
 	 * Adds an observer to the current claim
 	 * @param observer
 	 */
-	public void addObserverToClaim(Observer observer) {
-		currentClaim.addObserver(observer);
+	public void addListenerToClaim(Listener listener) {
+		currentClaim.addListener(listener);
 	}
 	
 	/**
 	 * Removes an observer from the current claim
 	 * @param observer
 	 */
-	public void removeObserverFromClaim(Observer observer) {
-		currentClaim.deleteObserver(observer);
+	public void removeListenerFromClaim(Listener listener) {
+		currentClaim.removeListener(listener);;
 	}
 	
 	
