@@ -76,7 +76,7 @@ public class DataManager {
 	}
 	
 	
-	public void getUser(String usernameString){
+	public void loadUser(String usernameString){
 		Gson gson = new Gson();
 		User user = new User(usernameString);
 		try {
@@ -114,12 +114,12 @@ public class DataManager {
 		}
 	}
 	
-	public void getClaims() {
+	public void loadClaims() {
 		Gson gson = new Gson();
 		ArrayList<Claim> claims = new ArrayList<Claim>();
 		try {
 			FileInputStream fis = applicationContext.openFileInput(CLAIMFILE);
-			Type dataType = new TypeToken<ClaimList>() {}.getType();
+			Type dataType = new TypeToken<ArrayList<Claim>>() {}.getType();
 			InputStreamReader isr = new InputStreamReader(fis);
 			claims = gson.fromJson(isr, dataType);
 			fis.close();
@@ -135,9 +135,8 @@ public class DataManager {
 		setClaims(claims);
 	}
 	
-	public void saveClaims(ClaimList claimList) {
+	public void saveClaims(ArrayList<Claim> claims) {
 		Gson gson = new Gson();
-		ArrayList<Claim> claims = claimList.getClaims();
 		try {
 			FileOutputStream fos = applicationContext.openFileOutput(CLAIMFILE,0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);

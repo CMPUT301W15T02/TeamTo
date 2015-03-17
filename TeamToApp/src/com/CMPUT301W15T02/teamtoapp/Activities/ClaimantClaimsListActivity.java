@@ -204,6 +204,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	public void update(Observable observable, Object data) {
 		adapter.notifyDataSetChanged();
 		adapter.sort(new ClaimComparatorNewestFirst());
+		dataManager.saveClaims(claimListController.getClaims());
 	}
 
 	/**
@@ -219,7 +220,6 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		dataManager.saveClaims(claimListController.getClaimList());
 	}
 	
 	
