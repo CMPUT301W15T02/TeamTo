@@ -31,7 +31,7 @@ import com.CMPUT301W15T02.teamtoapp.Listener;
  * 
  */
 
-public class Claim {
+public class Claim implements Observer {
 
 	/**
 	 * 
@@ -298,6 +298,13 @@ public class Claim {
 		if (listeners.contains(listener)) {
 			listeners.remove(listener);
 		}
+	}
+
+
+	@Override
+	public void update(Observable observable, Object data) {
+		notifyListeners();
+		
 	}
 	
 	

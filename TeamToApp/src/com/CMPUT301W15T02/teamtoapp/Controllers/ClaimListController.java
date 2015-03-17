@@ -18,6 +18,7 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 import java.util.ArrayList;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
@@ -50,12 +51,10 @@ public class ClaimListController {
 	public void addClaim(Claim claim) {
 		claim.setUser(userName);
 		claims.addClaim(claim);
-		claim.addObserver(claims);
 	}
 	
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
-		claim.deleteObserver(claims);
 	}
 	
 	public Claim getClaim(int position) {
@@ -71,12 +70,12 @@ public class ClaimListController {
 	}
 	
 	
-	public void addObserverToClaimList(Observer observer) {
-		claims.addObserver(observer);
+	public void addListenerToClaimList(Listener listener) {
+		claims.addListener(listener);
 	}
 	
-	public void removeObserverFromClaimList(Observer observer) {
-		claims.deleteObserver(observer);
+	public void removeListenerFromClaimList(Listener listener) {
+		claims.removeListener(listener);
 	}
 	
 	// DUMMY METHOD won't need this when the networking is working

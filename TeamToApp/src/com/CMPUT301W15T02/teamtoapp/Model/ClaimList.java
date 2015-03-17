@@ -22,7 +22,7 @@ import com.CMPUT301W15T02.teamtoapp.Listener;
  *
  */
 
-public class ClaimList  {
+public class ClaimList {
 
 	
 	private ArrayList<Claim> claims;
@@ -62,13 +62,13 @@ public class ClaimList  {
 	}
 	
 	
-	public void addListener(Listener l) {
-		getListeners().add(l);
+	public void addListener(Listener listener) {
+		getListeners().add(listener);
 	}
 	
 	
-	public void removeListeners(Listener l) {
-		getListeners().remove(l);
+	public void removeListener(Listener listener) {
+		getListeners().remove(listener);
 	}
 	
 
@@ -135,6 +135,7 @@ public class ClaimList  {
 		}
 		return new Expense(); // Or should we return new Expense?
 	}
+
 	
 	
 }
