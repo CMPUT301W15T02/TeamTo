@@ -17,8 +17,6 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.TreeMap;
 import java.util.UUID;
 
@@ -31,7 +29,7 @@ import com.CMPUT301W15T02.teamtoapp.Listener;
  * 
  */
 
-public class Claim {
+public class Claim implements Listener {
 
 	/**
 	 * 
@@ -164,7 +162,7 @@ public class Claim {
 	
 	// TODO
 	public void addExpense(Expense expense) {
-		//expense.addObserver(this);
+		expense.addListener(this);
 		this.expenses.add(expense);
 		notifyListeners();
 	}
@@ -172,7 +170,7 @@ public class Claim {
 	
 	// TODO
 	public void removeExpense(Expense expense) {
-		//expense.deleteObserver(this);
+		expense.removeListener(this);
 		this.expenses.remove(expense);
 		notifyListeners();
 	}	
@@ -298,6 +296,13 @@ public class Claim {
 		if (listeners.contains(listener)) {
 			listeners.remove(listener);
 		}
+	}
+
+
+	@Override
+	public void update() {
+		notifyListeners();
+		
 	}
 
 

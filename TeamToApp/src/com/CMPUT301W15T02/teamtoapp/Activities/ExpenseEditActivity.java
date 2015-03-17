@@ -23,9 +23,11 @@ import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
+
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -50,7 +52,7 @@ import android.widget.TextView;
  * Activity for editing an expense
  *
  */
-public class ExpenseEditActivity extends Activity implements Observer {
+public class ExpenseEditActivity extends Activity implements Listener {
 	
 	private ExpenseController expenseController;
 	private String expenseID;
@@ -105,7 +107,7 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		expenseID = (String) intent.getSerializableExtra("expenseID");
 		claimID = (String) intent.getSerializableExtra("claimID");
 		expenseController = new ExpenseController(expenseID);
-		expenseController.addObserverToExpense(this);
+		expenseController.addListenerToExpense(this);
 		
 	}
 	
@@ -304,16 +306,6 @@ public class ExpenseEditActivity extends Activity implements Observer {
 		});
 	}
 
-	/**
-	 * Called when something in the model changes, it then calls update values
-	 * @param observable	the expense that changes
-	 * @param data
-	 */
-	@Override
-	public void update(Observable observable, Object data) {
-		updateValues();
-	}
-
 	
 	/**
 	 * Called when the activity is destroyed, it then removes this activity as an observer on the expense
@@ -321,7 +313,19 @@ public class ExpenseEditActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		expenseController.removeObserverFromExpense(this);
+		expenseController.removeListenerFromExpense(this);
+	}
+
+	
+	/**
+	 * Called when something in the model changes, it then calls update values
+	 * @param observable	the expense that changes
+	 * @param data
+	 */
+	@Override
+	public void update() {
+		updateValues();
+		
 	}
 	
 	

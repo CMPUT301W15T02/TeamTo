@@ -22,7 +22,7 @@ import com.CMPUT301W15T02.teamtoapp.Listener;
  *
  */
 
-public class ClaimList {
+public class ClaimList implements Listener {
 
 	
 	private ArrayList<Claim> claims;
@@ -31,7 +31,6 @@ public class ClaimList {
 	
 	
 	private ClaimList() {
-		super();
 		claims = new ArrayList<Claim>();
 		listeners = new ArrayList<Listener>();
 	}
@@ -87,6 +86,7 @@ public class ClaimList {
 	
 	
 	public void addClaim(Claim claim) {
+		claim.addListener(this);
 		claims.add(claim);
 		// notify listeners that claim has been updated (addition)
 		notifyListeners();
@@ -96,6 +96,7 @@ public class ClaimList {
 	
 	
 	public void removeClaim(Claim claim) {
+		claim.removeListener(this);
 		claims.remove(claim);
 		// notify listeners that claim has been updated (deleted)
 		notifyListeners();
@@ -134,6 +135,13 @@ public class ClaimList {
 			}
 		}
 		return new Expense(); // Or should we return new Expense?
+	}
+
+
+	@Override
+	public void update() {
+		notifyListeners();
+		
 	}
 
 	
