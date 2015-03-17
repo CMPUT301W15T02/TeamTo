@@ -20,11 +20,11 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.DataManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.SessionController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
@@ -49,7 +49,6 @@ import android.widget.Toast;
  */
 public class ClaimantClaimsListActivity extends Activity implements Observer {
 	
-	private SessionController sessionController;
 	private ClaimListController claimListController;
 	final Context context = this;
 	private ListView listView;
@@ -72,10 +71,6 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	private void getModelObjects() {
 		// Initialize objects
 		// Set the current user so it can be added to claims
-		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, MODE_PRIVATE);
-		String user = settings.getString("username", null);
-		sessionController = new SessionController();
-		sessionController.setUser(user);
 		claimListController = new ClaimListController();
 		claimListController.addObserverToClaimList(this);
 	}
@@ -187,7 +182,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	 */
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if (SessionController.isNetworkAvailable(this)){
+		if (DataManager.isNetworkAvailable(this)){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);
 		}

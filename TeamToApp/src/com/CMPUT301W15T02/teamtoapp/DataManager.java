@@ -19,27 +19,36 @@ package com.CMPUT301W15T02.teamtoapp;
  * Controls link between local storage and elastic search server
  */
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 public class DataManager {
 
 	
-	public User getUser(){
-		
-		return null;
+	private static Context applicationContext;
+	
+	
+	public void initializeContext(Context context) {
+		applicationContext = context.getApplicationContext();
 	}
 	
-	public void saveUser(){
-		
+	
+	
+	public void setUser(String name) {
+		Session.getInstance().setCurrentUser(new User(name));
 	}
 	
-	public ClaimList getClaims(){
-		
-		return null;
-	}
-	
-	public void saveClaims(ClaimList claimsList){
-		
+	//Source: http://stackoverflow.com/a/9570292 2015-03-10
+	/**
+	 * Checks if there is network availability
+	 * @param 	context	Current state of the application
+	 * @return	boolean false if no connections, true otherwise
+	 */
+	public static boolean isNetworkAvailable(Context context) {
+		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}
 }

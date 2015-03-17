@@ -25,6 +25,8 @@ import java.util.Observer;
 
 public class ClaimList extends Observable implements Observer {
 
+	
+	
 	private ArrayList<Claim> claims;
 	
 	public ClaimList() {
