@@ -31,7 +31,7 @@ import com.CMPUT301W15T02.teamtoapp.Listener;
  * 
  */
 
-public class Claim implements Observer {
+public class Claim {
 
 	/**
 	 * 
@@ -301,11 +301,6 @@ public class Claim implements Observer {
 	}
 
 
-	@Override
-	public void update(Observable observable, Object data) {
-		notifyListeners();
-		
-	}
 	
 	
 }

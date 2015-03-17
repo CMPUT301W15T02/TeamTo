@@ -19,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -41,7 +43,7 @@ import android.widget.ListView;
  * Activity where a user can view a list of their tags and also edit, delete, or add new tags
  *
  */
-public class TagManagerActivity extends Activity implements Observer {
+public class TagManagerActivity extends Activity implements Listener {
 
 	private UserController userController;
 	private ArrayList<Tag> tags;
@@ -78,7 +80,7 @@ public class TagManagerActivity extends Activity implements Observer {
 	 */
 	private void getModelObjects() {
 		userController = new UserController();
-		userController.addObserverToUser(this);
+		userController.addListenerToUser(this);
 		tags = userController.getTags();
 	}
 	
@@ -174,15 +176,6 @@ public class TagManagerActivity extends Activity implements Observer {
 	}
 
 	
-	/**
-	 * Observer function called when the user object has changed
-	 * It updates the adapter that something has changed
-	 */
-	@Override
-	public void update(Observable observable, Object data) {
-		adapter.notifyDataSetChanged();
-		
-	}
 
 	/**
 	 * onDestroy is called when the activity is about to be destroyed and thus we remove the observer
@@ -190,7 +183,18 @@ public class TagManagerActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		userController.removeObserverFromUser(this);
+		userController.removeListenerFromUser(this);
+	}
+
+	
+	/**
+	 * Listener function called when the user object has changed
+	 * It updates the adapter that something has changed
+	 */
+	@Override
+	public void update() {
+		adapter.notifyDataSetChanged();
+		
 	}
 	
 	
