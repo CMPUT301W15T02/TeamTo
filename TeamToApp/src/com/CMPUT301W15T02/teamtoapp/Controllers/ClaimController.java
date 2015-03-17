@@ -32,7 +32,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 /** 
  * 
  * Claim controller is responsible for communicating from any associated views to the model
- * as well as attaching observers to the model
+ * as well as attaching listeners to the model
  *
  */
 
@@ -185,16 +185,16 @@ public class ClaimController {
 	
 	
 	/**
-	 * Adds an observer to the current claim
-	 * @param observer
+	 * Adds a listener to the current claim
+	 * @param listener
 	 */
 	public void addListenerToClaim(Listener listener) {
 		currentClaim.addListener(listener);
 	}
 	
 	/**
-	 * Removes an observer from the current claim
-	 * @param observer
+	 * Removes a listener from the current claim
+	 * @param listener
 	 */
 	public void removeListenerFromClaim(Listener listener) {
 		currentClaim.removeListener(listener);;

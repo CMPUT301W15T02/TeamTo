@@ -17,8 +17,8 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.Calendar;
 import java.util.Currency;
-import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
@@ -114,21 +114,21 @@ public class ExpenseController {
 	
 	
 	/**
-	 * Adds an observer to the associated expense
-	 * @param observer
+	 * Adds a listener to the associated expense
+	 * @param listener
 	 */
-	public void addObserverToExpense(Observer observer) {
-		currentExpense.addObserver(observer);
+	public void addListenerToExpense(Listener listener) {
+		currentExpense.addListener(listener);
 	}
+	
 	
 	/**
-	 * Removes an observer from the associated expense
-	 * @param observer
+	 * Removes a listener from the associated expense
+	 * @param listener
 	 */
-	public void removeObserverFromExpense(Observer observer) {
-		currentExpense.deleteObserver(observer);
+	public void removeListenerFromExpense(Listener listener) {
+		currentExpense.removeListener(listener);;
 	}
-	
 	
 	
 }
