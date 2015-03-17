@@ -132,6 +132,7 @@ public class DataManager {
 			FileOutputStream fos = applicationContext.openFileOutput(CLAIMFILE,0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(ClaimList.getInstance().getClaims(), osw);
+			osw.flush();
 			osw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

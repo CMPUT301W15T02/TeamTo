@@ -57,6 +57,7 @@ public class LoginActivity extends Activity {
 		if (hasLoggedIn)  //Go directly to main activity
 		{
 			dataManager.loadUser();
+			dataManager.loadClaims();
 		    Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 			startActivity(intent);
@@ -91,6 +92,7 @@ public class LoginActivity extends Activity {
 			editor.commit();
 			
 			dataManager.loadUser();
+			dataManager.loadClaims();
 			startActivity(intent);
 			LoginActivity.this.finish();
 		}

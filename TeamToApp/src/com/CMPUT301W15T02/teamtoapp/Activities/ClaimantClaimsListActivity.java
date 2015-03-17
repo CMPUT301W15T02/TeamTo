@@ -210,6 +210,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		DataManager.saveClaims();
 	}
 
 	
