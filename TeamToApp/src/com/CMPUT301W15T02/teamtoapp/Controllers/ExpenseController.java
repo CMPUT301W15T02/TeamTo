@@ -127,7 +127,7 @@ public class ExpenseController {
 	 * @param listener
 	 */
 	public void removeListenerFromExpense(Listener listener) {
-		currentExpense.removeListener(listener);;
+		currentExpense.removeListener(listener);
 	}
 	
 	
