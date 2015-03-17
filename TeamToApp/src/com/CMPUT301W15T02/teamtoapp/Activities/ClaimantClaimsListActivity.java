@@ -26,6 +26,7 @@ import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 import android.app.Activity;
@@ -204,7 +205,6 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	public void update(Observable observable, Object data) {
 		adapter.notifyDataSetChanged();
 		adapter.sort(new ClaimComparatorNewestFirst());
-		dataManager.saveClaims(claimListController.getClaims());
 	}
 
 	/**

@@ -28,12 +28,12 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import android.content.ContentProviderClient;
 import android.content.Context;
 import android.net.ConnectivityManager;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -55,14 +55,9 @@ public class DataManager {
 	}
 	
 	
-	public void setUser(User user) {
-		Session.getInstance().setCurrentUser(user);
-	}
 	
 	public void setClaims(ArrayList<Claim> claims) {
-		ClaimList claimList = new ClaimList();
-		claimList.setClaims(claims);
-		Session.getInstance().setCurrentClaims(claimList);
+		ClaimList.getInstance().setClaims(claims);
 	}
 	
 	//Source: http://stackoverflow.com/a/9570292 2015-03-10
@@ -76,9 +71,9 @@ public class DataManager {
 	}
 	
 	
-	public void loadUser(String usernameString){
+	public void loadUser() {
 		Gson gson = new Gson();
-		User user = new User(usernameString);
+		User user;
 		try {
 			FileInputStream fis = applicationContext.openFileInput(USERFILE);
 			Type dataType = new TypeToken<User>() {}.getType();
@@ -91,11 +86,7 @@ public class DataManager {
 		} catch (IOException e) {
 			user = null;
 		}
-		if (user == null) {
-			user = new User(usernameString);
-		}
-		
-		setUser(user);
+		User.getInstance().setUser(user);
 	}
 	
 	
@@ -114,9 +105,9 @@ public class DataManager {
 		}
 	}
 	
-	public void loadClaims() {
+	public static void loadClaims() {
 		Gson gson = new Gson();
-		ArrayList<Claim> claims = new ArrayList<Claim>();
+		ArrayList<Claim> claims;
 		try {
 			FileInputStream fis = applicationContext.openFileInput(CLAIMFILE);
 			Type dataType = new TypeToken<ArrayList<Claim>>() {}.getType();
@@ -132,15 +123,15 @@ public class DataManager {
 		if (claims == null) {
 			claims = new ArrayList<Claim>();
 		}
-		setClaims(claims);
+		ClaimList.getInstance().setClaims(claims);
 	}
 	
-	public void saveClaims(ArrayList<Claim> claims) {
+	public static void saveClaims() {
 		Gson gson = new Gson();
 		try {
 			FileOutputStream fos = applicationContext.openFileOutput(CLAIMFILE,0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			gson.toJson(claims, osw);
+			gson.toJson(ClaimList.getInstance().getClaims(), osw);
 			osw.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -20,7 +20,6 @@ import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
@@ -39,8 +38,8 @@ public class ClaimListController {
 	private String userName;
 	
 	public ClaimListController() {
-		claims = Session.getInstance().getCurrentClaims();
-		userName = Session.getInstance().getCurrentUser().getName();
+		claims = ClaimList.getInstance();
+		userName = User.getInstance().getName();
 	}
 	
 	// for testing purposes - UseCase1Test.java

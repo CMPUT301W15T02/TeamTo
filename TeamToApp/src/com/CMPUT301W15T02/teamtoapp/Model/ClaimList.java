@@ -14,9 +14,17 @@
 		
 package com.CMPUT301W15T02.teamtoapp.Model;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import android.content.Context;
+
+import com.google.gson.Gson;
 
 /**
  * Holds the current list of claims.
@@ -29,8 +37,17 @@ public class ClaimList extends Observable implements Observer {
 	
 	private ArrayList<Claim> claims;
 	
-	public ClaimList() {
+	private static ClaimList instance = null;
+	
+	private ClaimList() {
 		claims = new ArrayList<Claim>();
+	}
+	
+	public static ClaimList getInstance() {
+		if (instance == null) {
+			instance = new ClaimList();
+		}
+		return instance;
 	}
 	
 	
@@ -64,14 +81,6 @@ public class ClaimList extends Observable implements Observer {
 	}
 	
 	
-	
-	public Claim getClaim(Claim claim) {
-		if (claims.contains(claim)) {
-			return claim;
-		} else {
-			return null;
-		}
-	}
 	
 	
 	
@@ -120,5 +129,6 @@ public class ClaimList extends Observable implements Observer {
 		setChanged();
 		notifyObservers();
 	}
+	
 	
 }

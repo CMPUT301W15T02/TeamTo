@@ -19,8 +19,8 @@ import java.util.Calendar;
 import java.util.Currency;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.Session;
 
 /**
  * 
@@ -33,7 +33,7 @@ public class ExpenseController {
 	private Expense currentExpense;
 	
 	public ExpenseController(String expenseID) {
-		this.currentExpense = Session.getInstance().getCurrentClaims().findExpenseByID(expenseID);
+		this.currentExpense = ClaimList.getInstance().findExpenseByID(expenseID);
 	}
 	
 	public void setDate(Calendar calendar) {

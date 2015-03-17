@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -38,7 +37,7 @@ public class UserController {
 	private User user;
 	
 	public UserController() {
-		user = Session.getInstance().getCurrentUser();
+		user = User.getInstance();
 	}
 	
 	/**

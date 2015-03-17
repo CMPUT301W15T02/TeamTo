@@ -29,12 +29,17 @@ public class User extends Observable {
 	private boolean type; // true for claimant, false for approver
 	private ArrayList<Tag> tags;
 	
+	private static User instance = null;
+	
+	
+	
+	
 	/**
 	 * User constructor
 	 * @param string	the name of the user
 	 */
-	public User(String string) {
-		this.name = string;
+	private User() {
+		this.name = "";
 		tags = new ArrayList<Tag>();
 		type = true;
 		// Default tags for now
@@ -42,6 +47,19 @@ public class User extends Observable {
 		tags.add(new Tag("Business"));
 		tags.add(new Tag("Personal"));
 		tags.add(new Tag("Recreation"));
+	}
+	
+	
+	public static User getInstance() {
+		if (instance == null) {
+			instance = new User();
+		}
+		return instance;
+	}
+	
+	
+	public static void setUser(User user) {
+		instance = user;
 	}
 	
 	

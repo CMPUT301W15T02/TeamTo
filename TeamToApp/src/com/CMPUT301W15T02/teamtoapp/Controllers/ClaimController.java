@@ -22,8 +22,8 @@ import java.util.GregorianCalendar;
 import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.Session;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
@@ -42,7 +42,7 @@ public class ClaimController {
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public ClaimController(String claimID) {
-		this.currentClaim = Session.getInstance().getCurrentClaims().findClaimByID(claimID);
+		this.currentClaim = ClaimList.getInstance().findClaimByID(claimID);
 		this.claimID = claimID;
 	}
 	
