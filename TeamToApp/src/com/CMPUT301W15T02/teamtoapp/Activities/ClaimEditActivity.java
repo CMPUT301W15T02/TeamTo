@@ -21,9 +21,8 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Observable;
-import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantDestinationsListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -31,6 +30,7 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -58,7 +58,7 @@ import android.widget.Toast;
  *
  */
 
-public class ClaimEditActivity extends Activity implements Observer {
+public class ClaimEditActivity extends Activity implements Listener {
 	private final Context context = this;
 	
 	private Button startDateTextView;
@@ -175,7 +175,7 @@ public class ClaimEditActivity extends Activity implements Observer {
 		claimController = new ClaimController(claimID);
 		destinations = claimController.getDestinations();
 		// Make this activity observe the new claim
-		claimController.addObserverToClaim(this);
+		claimController.addListenerToClaim(this);
 		// Claim list controller will have a minor role of just adding the claim to the list of claims
 		claimListController = new ClaimListController();
 	}
@@ -389,11 +389,13 @@ public class ClaimEditActivity extends Activity implements Observer {
 	 * It updates fields that might change and tells the adapters to refresh
 	 */
 	@Override
-	public void update(Observable observable, Object data) {
+	public void update() {
 		updateValues();
 		destinationsAdapter.notifyDataSetChanged();
 		tagsAdapter.notifyDataSetChanged();
+		
 	}
+	
 
 	
 	/**
@@ -402,8 +404,10 @@ public class ClaimEditActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		claimController.removeObserverFromClaim(this);
+		claimController.removeListenerFromClaim(this);
 	}
+
+	
 	
 	
 	

@@ -22,6 +22,8 @@ import java.util.Observer;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
+
 /**
  * Stores all of the data related to a claim including any associated expenses.
  * 
@@ -29,7 +31,7 @@ import java.util.UUID;
  * 
  */
 
-public class Claim extends Observable implements Observer {
+public class Claim {
 
 	/**
 	 * 
@@ -64,6 +66,8 @@ public class Claim extends Observable implements Observer {
 	private String claimdID;
 	private TreeMap<String, Double> currencyTotals;
 	
+	private transient ArrayList<Listener> listeners = null;
+	
 	
 	public Claim() {
 		this.claimName="";
@@ -76,6 +80,7 @@ public class Claim extends Observable implements Observer {
 		this.comment = "";
 		this.claimdID = UUID.randomUUID().toString();
 		currencyTotals = new TreeMap<String, Double>();
+		listeners = new ArrayList<Listener>();
 	}
 	
 	
@@ -87,8 +92,7 @@ public class Claim extends Observable implements Observer {
 
 	public void setClaimName(String claimName) {
 		this.claimName = claimName;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -101,8 +105,7 @@ public class Claim extends Observable implements Observer {
 
 	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -115,8 +118,7 @@ public class Claim extends Observable implements Observer {
 
 	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -129,24 +131,21 @@ public class Claim extends Observable implements Observer {
 
 	public void setDestinations(ArrayList<StringTuple> destinations) {
 		this.destinations = destinations;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
 	
 	public void addDestination(StringTuple new_tuple) {
 		this.destinations.add(new_tuple);
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
 	
 	public void removeDestination(StringTuple destination) {
 		this.destinations.remove(destination);
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -160,24 +159,22 @@ public class Claim extends Observable implements Observer {
 
 	public void setExpenses(ArrayList<Expense> expenses) {
 		this.expenses = expenses;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
+	// TODO
 	public void addExpense(Expense expense) {
-		expense.addObserver(this);
+		//expense.addObserver(this);
 		this.expenses.add(expense);
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
-	
+	// TODO
 	public void removeExpense(Expense expense) {
-		expense.deleteObserver(this);
+		//expense.deleteObserver(this);
 		this.expenses.remove(expense);
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}	
 	
 	
@@ -196,8 +193,7 @@ public class Claim extends Observable implements Observer {
 
 	public void setStatus(Status status) {
 		this.status = status;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -210,8 +206,7 @@ public class Claim extends Observable implements Observer {
 
 	public void setComment(String comment) {
 		this.comment = comment;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -224,24 +219,21 @@ public class Claim extends Observable implements Observer {
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
 	
 	public void addTag(Tag tag) {
 		this.tags.add(tag);
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
 	
 	public void removeTag(Tag tag){
 		this.tags.remove(tag);
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -254,8 +246,7 @@ public class Claim extends Observable implements Observer {
 
 	public void setUser(String userName) {
 		this.userName = userName;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -286,22 +277,27 @@ public class Claim extends Observable implements Observer {
 				currencyTotals.put(expense.getCurrency().toString(), expense.getAmount());
 			}
 		}
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	public TreeMap<String, Double> getTotalCurrencies() {
 		return currencyTotals;
 	}
 
-	/**
-	 * Claim observes it's expenses so when they have been updated claim needs to let any
-	 * observers know that it has also updated
-	 */
-	@Override
-	public void update(Observable observable, Object data) {
-		setChanged();
-		notifyObservers();
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	public void removeListener(Listener listener) {
+		if (listeners.contains(listener)) {
+			listeners.remove(listener);
+		}
 	}
 	
 	
