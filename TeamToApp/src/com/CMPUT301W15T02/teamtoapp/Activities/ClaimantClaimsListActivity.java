@@ -53,16 +53,19 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	final Context context = this;
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
+	DataManager dataManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
 		
+		dataManager = new DataManager();
 		getModelObjects();
 		findViewsByIds();
 		setListeners();
 		setUpAdapter();
+		
 	}
 	
 	/**
@@ -212,6 +215,14 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 		super.onDestroy();
 		claimListController.removeObserverFromClaimList(this);
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		dataManager.saveClaims(claimListController.getClaimList());
+	}
+	
+	
 	
 	
 	

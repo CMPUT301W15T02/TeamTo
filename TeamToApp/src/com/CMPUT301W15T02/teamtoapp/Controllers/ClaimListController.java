@@ -67,6 +67,11 @@ public class ClaimListController {
 		return claims.getClaims();
 	}
 	
+	public ClaimList getClaimList() {
+		return claims;
+	}
+	
+	
 	public void addObserverToClaimList(Observer observer) {
 		claims.addObserver(observer);
 	}

@@ -23,6 +23,7 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import com.CMPUT301W15T02.teamtoapp.DataManager;
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -55,7 +56,7 @@ public class LoginActivity extends Activity {
 
 		if (hasLoggedIn)  //Go directly to main activity
 		{
-			dataManager.setUser(usernameString);
+			dataManager.getUser(usernameString);
 		    Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 			startActivity(intent);
@@ -89,7 +90,7 @@ public class LoginActivity extends Activity {
 			editor.putString("username", usernameString);
 			editor.commit();
 			
-			dataManager.setUser("kyle");
+			dataManager.getUser(usernameString);
 			startActivity(intent);
 			LoginActivity.this.finish();
 		}
