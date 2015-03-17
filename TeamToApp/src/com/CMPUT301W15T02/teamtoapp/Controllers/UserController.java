@@ -16,13 +16,10 @@
 package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
-import java.util.Observer;
-
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
-
-import android.R.integer;
 
 
 /**
@@ -38,22 +35,6 @@ public class UserController {
 	
 	public UserController() {
 		user = User.getInstance();
-	}
-	
-	/**
-	 * Adds an observer to the current user
-	 * @param observer
-	 */
-	public void addObserverToUser(Observer observer) {
-		user.addObserver(observer);
-	}
-	
-	/**
-	 * Removes an observer from the current user
-	 * @param observer
-	 */
-	public void removeObserverFromUser(Observer observer) {
-		user.deleteObserver(observer);
 	}
 	
 	/**
@@ -119,6 +100,23 @@ public class UserController {
 			}
 			claim.setTags(newTags);
 		}
+	}
+	
+	/**
+	 * Adds a listener to the current user
+	 * @param listener
+	 */
+	public void addListenerToUser(Listener listener) {
+		user.addListener(listener);
+	}
+	
+	
+	/**
+	 * Removes a listener from the current user
+	 * @param listener
+	 */
+	public void removeListenerFromUser(Listener listener) {
+		user.removeListener(listener);;
 	}
 	
 }
