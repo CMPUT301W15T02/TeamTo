@@ -46,6 +46,10 @@ public class DataManager {
 	private static final String USERFILE = "user.sav";
 	
 	
+	public DataManager() {
+		
+	}
+	
 	public void initializeContext(Context context) {
 		applicationContext = context.getApplicationContext();
 	}
@@ -70,6 +74,7 @@ public class DataManager {
 	public static boolean isNetworkAvailable(Context context) {
 		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}
+	
 	
 	public void getUser(String usernameString){
 		Gson gson = new Gson();
