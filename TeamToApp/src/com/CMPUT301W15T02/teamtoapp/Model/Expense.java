@@ -14,10 +14,12 @@
 
 package com.CMPUT301W15T02.teamtoapp.Model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Currency;
-import java.util.Observable;
 import java.util.UUID;
+
+import com.CMPUT301W15T02.teamtoapp.Listener;
 
 /**
  * 
@@ -25,7 +27,7 @@ import java.util.UUID;
  *
  */
 
-public class Expense extends Observable {
+public class Expense {
 
 	private Calendar date;
 	private String description;
@@ -35,7 +37,7 @@ public class Expense extends Observable {
 	private boolean complete;
 	public String photo_uri;
 	private String expenseId;
-	
+	protected transient ArrayList<Listener> listeners = null;
 	
 	public Expense() {
 		date = Calendar.getInstance();
@@ -45,6 +47,8 @@ public class Expense extends Observable {
 		complete = false;
 		description = "";
 		expenseId = UUID.randomUUID().toString();
+		listeners = new ArrayList<Listener>();
+		
 	}
 
 	
@@ -57,8 +61,8 @@ public class Expense extends Observable {
 	
 	public void setDate(Calendar date) {
 		this.date = date;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 	
 	
@@ -71,8 +75,8 @@ public class Expense extends Observable {
 
 	public void setDescription(String description) {
 		this.description = description;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 	
 	
@@ -85,8 +89,8 @@ public class Expense extends Observable {
 	
 	public void setCurrency(Currency currency) {
 		this.currency = currency;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 	
 	
@@ -99,8 +103,8 @@ public class Expense extends Observable {
 
 	public void setCategory(String category) {
 		this.category = category;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 
 	public Double getAmount() {
@@ -111,8 +115,8 @@ public class Expense extends Observable {
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 	
 	
@@ -125,8 +129,8 @@ public class Expense extends Observable {
 	
 	public void setComplete(boolean complete) {
 		this.complete = complete;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 	
 	
@@ -153,6 +157,25 @@ public class Expense extends Observable {
 	public void removePhoto() {
 		// TODO Incomplete - make sure claim is editable before removing photo.
 		
+	}
+	
+	
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
+	
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	
+	public void removeListener(Listener listener) {
+		if (listeners.contains(listener)) {
+			listeners.remove(listener);
+		}
 	}
 
 }

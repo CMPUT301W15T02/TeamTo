@@ -15,7 +15,8 @@
 package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
-import java.util.Observable;
+
+import com.CMPUT301W15T02.teamtoapp.Listener;
 
 /**
  * 
@@ -23,14 +24,14 @@ import java.util.Observable;
  *
  */
 
-public class User extends Observable {
+public class User {
 	
 	private String name;
 	private boolean type; // true for claimant, false for approver
 	private ArrayList<Tag> tags;
 	
 	private static User instance = null;
-	
+	protected transient ArrayList<Listener> listeners = null;
 	
 	
 	
@@ -47,6 +48,7 @@ public class User extends Observable {
 		tags.add(new Tag("Business"));
 		tags.add(new Tag("Personal"));
 		tags.add(new Tag("Recreation"));
+		listeners = new ArrayList<Listener>();
 	}
 	
 	
@@ -72,8 +74,7 @@ public class User extends Observable {
 	
 	public void setName(String name) {
 		this.name = name;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	
@@ -90,6 +91,7 @@ public class User extends Observable {
 	 */
 	public void setType(boolean type) {
 		this.type = type;
+		notifyListeners();
 	}
 	
 	
@@ -102,8 +104,7 @@ public class User extends Observable {
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
 	}
 	
 	/**
@@ -113,8 +114,7 @@ public class User extends Observable {
 	public void addTag(Tag tag) {
 		if (!tags.contains(tag)) {
 			tags.add(tag);
-			setChanged();
-			notifyObservers();
+			notifyListeners();
 		}
 	}
 	
@@ -125,8 +125,7 @@ public class User extends Observable {
 	public void removeTag(Tag tag) {
 		if (tags.contains(tag)) {
 			tags.remove(tag);
-			setChanged();
-			notifyObservers();
+			notifyListeners();
 		}
 	}
 	
@@ -138,8 +137,26 @@ public class User extends Observable {
 	public void renameTag(Tag tag, String newText) {
 		if (tags.contains(tag)) {
 			tag.setTagName(newText);
-			setChanged();
-			notifyObservers();
+			notifyListeners();
+		}
+	}
+	
+	
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
+	
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	
+	public void removeListener(Listener listener) {
+		if (listeners.contains(listener)) {
+			listeners.remove(listener);
 		}
 	}
 
