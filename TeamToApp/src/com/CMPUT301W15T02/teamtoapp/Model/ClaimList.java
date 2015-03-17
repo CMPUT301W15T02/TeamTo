@@ -14,34 +14,28 @@
 		
 package com.CMPUT301W15T02.teamtoapp.Model;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
-import android.content.Context;
-
-import com.google.gson.Gson;
+import com.CMPUT301W15T02.teamtoapp.Listener;
 
 /**
  * Holds the current list of claims.
  *
  */
 
-public class ClaimList extends Observable implements Observer {
+public class ClaimList  {
 
 	
-	
 	private ArrayList<Claim> claims;
-	
+	protected transient ArrayList<Listener> listeners = null;
 	private static ClaimList instance = null;
 	
+	
 	private ClaimList() {
+		super();
 		claims = new ArrayList<Claim>();
+		listeners = new ArrayList<Listener>();
 	}
+	
 	
 	public static ClaimList getInstance() {
 		if (instance == null) {
@@ -50,6 +44,32 @@ public class ClaimList extends Observable implements Observer {
 		return instance;
 	}
 	
+	
+	// To prevent issues from serialization make sure all listeners are initialized
+	// so that all changes are saved to the disk except the listeners themselves
+	private ArrayList<Listener> getListeners() {
+		if (listeners == null) {
+			listeners = new ArrayList<Listener>();
+		}
+		return listeners;
+	}
+	
+	// This will be called inside activities when changes occur.
+	protected void notifyListeners() {
+		for (Listener listener: getListeners()) {
+			listener.update();
+		}	
+	}
+	
+	
+	public void addListener(Listener l) {
+		getListeners().add(l);
+	}
+	
+	
+	public void removeListeners(Listener l) {
+		getListeners().remove(l);
+	}
 	
 
 	public ArrayList<Claim> getClaims() {
@@ -60,29 +80,28 @@ public class ClaimList extends Observable implements Observer {
 
 	public void setClaims(ArrayList<Claim> claims) {
 		this.claims = claims;
-		setChanged();
-		notifyObservers();
+		notifyListeners();
+
 	}
 	
 	
 	
 	public void addClaim(Claim claim) {
 		claims.add(claim);
-		setChanged();
-		notifyObservers();
+		// notify listeners that claim has been updated (addition)
+		notifyListeners();
+
 	}
 	
 	
 	
 	public void removeClaim(Claim claim) {
 		claims.remove(claim);
-		setChanged();
-		notifyObservers();
+		// notify listeners that claim has been updated (deleted)
+		notifyListeners();
+
 	}
-	
-	
-	
-	
+
 	
 	/**
 	 * Responsible for finding a claim by its ID, if one is not found it returns a new claim
@@ -115,19 +134,6 @@ public class ClaimList extends Observable implements Observer {
 			}
 		}
 		return new Expense(); // Or should we return new Expense?
-	}
-	
-	
-
-	/**
-	 * Notifies the ClaimList that a claim it was observing has changed.  
-	 * 
-	 * The ClaimList then notifies any of its listeners that it has changed as well
-	 */
-	@Override
-	public void update(Observable observable, Object data) {
-		setChanged();
-		notifyObservers();
 	}
 	
 	
