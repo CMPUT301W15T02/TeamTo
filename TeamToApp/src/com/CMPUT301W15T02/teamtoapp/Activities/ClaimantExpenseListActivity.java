@@ -16,9 +16,8 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantExpenseListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -45,7 +44,7 @@ import android.widget.Toast;
  *
  */
 
-public class ClaimantExpenseListActivity extends Activity implements Observer {
+public class ClaimantExpenseListActivity extends Activity implements Listener {
 
 	private Context context = this;
 	private ListView expenseListView;
@@ -108,7 +107,7 @@ public class ClaimantExpenseListActivity extends Activity implements Observer {
 		claimID = (String) intent.getSerializableExtra("claimID");
 		claimController = new ClaimController(claimID);
 		expenses = claimController.getExpenses();
-		claimController.addObserverToClaim(this);
+		claimController.addListenerToClaim(this);
 	}
 	
 	/**
@@ -220,14 +219,14 @@ public class ClaimantExpenseListActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		claimController.removeObserverFromClaim(this);
+		claimController.removeListenerFromClaim(this);
 	}
 
 	/**
 	 * Observer method that is called when something in the model (claim) changes
 	 */
 	@Override
-	public void update(Observable observable, Object data) {
+	public void update() {
 		adapter.notifyDataSetChanged();
 		
 	}

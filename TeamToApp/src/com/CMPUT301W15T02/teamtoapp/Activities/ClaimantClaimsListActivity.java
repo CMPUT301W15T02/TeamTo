@@ -17,10 +17,9 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
-import java.util.Observable;
-import java.util.Observer;
 
 import com.CMPUT301W15T02.teamtoapp.DataManager;
+import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -48,7 +47,7 @@ import android.widget.Toast;
  * Contains a list of their claims and has the ability to add new claims, manage tags,
  * and switch to approver mode
  */
-public class ClaimantClaimsListActivity extends Activity implements Observer {
+public class ClaimantClaimsListActivity extends Activity implements Listener {
 	
 	private ClaimListController claimListController;
 	final Context context = this;
@@ -76,7 +75,7 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 		// Initialize objects
 		// Set the current user so it can be added to claims
 		claimListController = new ClaimListController();
-		claimListController.addObserverToClaimList(this);
+		claimListController.addListenerToClaimList(this);
 	}
 	
 	/**
@@ -197,15 +196,6 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 
 	}
 
-	/**
-	 * Observer functions that is called when the model changed
-	 * Updates the list view if anything has changed
-	 */
-	@Override
-	public void update(Observable observable, Object data) {
-		adapter.notifyDataSetChanged();
-		adapter.sort(new ClaimComparatorNewestFirst());
-	}
 
 	/**
 	 * Called when the activity is destroyed
@@ -214,12 +204,24 @@ public class ClaimantClaimsListActivity extends Activity implements Observer {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		claimListController.removeObserverFromClaimList(this);
+		claimListController.removeListenerFromClaimList(this);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+	}
+
+	
+	/**
+	 * Observer functions that is called when the model changed
+	 * Updates the list view if anything has changed
+	 */
+	@Override
+	public void update() {
+		adapter.notifyDataSetChanged();
+		adapter.sort(new ClaimComparatorNewestFirst());
+		
 	}
 	
 	
