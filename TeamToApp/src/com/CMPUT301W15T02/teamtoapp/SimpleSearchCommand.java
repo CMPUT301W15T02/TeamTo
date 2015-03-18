@@ -9,7 +9,6 @@ package com.CMPUT301W15T02.teamtoapp;
 *
 * @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
 *
-* @param <T>
 */
 
 public class SimpleSearchCommand {
