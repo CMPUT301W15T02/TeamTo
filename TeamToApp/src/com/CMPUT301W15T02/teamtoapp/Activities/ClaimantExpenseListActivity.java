@@ -17,10 +17,10 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantExpenseListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 import android.app.Activity;

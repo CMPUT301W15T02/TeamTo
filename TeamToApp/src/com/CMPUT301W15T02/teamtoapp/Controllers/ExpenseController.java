@@ -18,7 +18,7 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 import java.util.Calendar;
 import java.util.Currency;
 
-import com.CMPUT301W15T02.teamtoapp.Listener;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 

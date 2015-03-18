@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.CMPUT301W15T02.teamtoapp.Listener;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 import android.app.Activity;

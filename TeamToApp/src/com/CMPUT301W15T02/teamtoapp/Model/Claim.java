@@ -20,7 +20,7 @@ import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import com.CMPUT301W15T02.teamtoapp.Listener;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * Stores all of the data related to a claim including any associated expenses.

@@ -16,7 +16,7 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.Listener;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * 
