@@ -18,7 +18,7 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 
-import com.CMPUT301W15T02.teamtoapp.DataManager;
+import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -53,14 +53,14 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	final Context context = this;
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
-	DataManager dataManager;
+	LocalDataManager dataManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
 		
-		dataManager = new DataManager();
+		dataManager = new LocalDataManager();
 		getModelObjects();
 		findViewsByIds();
 		setListeners();
@@ -185,7 +185,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	 */
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if (DataManager.isNetworkAvailable(this)){
+		if (LocalDataManager.isNetworkAvailable(this)){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);
 		}
@@ -210,7 +210,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		DataManager.saveClaims();
+		LocalDataManager.saveClaims();
 	}
 
 	

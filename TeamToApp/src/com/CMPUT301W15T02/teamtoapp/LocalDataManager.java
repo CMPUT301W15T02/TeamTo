@@ -38,15 +38,16 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-public class DataManager {
+public class LocalDataManager {
 
 	
+	private static final int _ERASE_FILE = 0;
 	private static Context applicationContext;
 	private static final String CLAIMFILE = "claims.sav";
 	private static final String USERFILE = "user.sav";
 	
 	
-	public DataManager() {
+	public LocalDataManager() {
 		
 	}
 	
@@ -94,7 +95,7 @@ public class DataManager {
 	public void saveUser(User user){
 		Gson gson = new Gson();
 		try {
-			FileOutputStream fos = applicationContext.openFileOutput(USERFILE,0);
+			FileOutputStream fos = applicationContext.openFileOutput(USERFILE,_ERASE_FILE);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(user, osw);
 			osw.close();
@@ -129,7 +130,7 @@ public class DataManager {
 	public static void saveClaims() {
 		Gson gson = new Gson();
 		try {
-			FileOutputStream fos = applicationContext.openFileOutput(CLAIMFILE,0);
+			FileOutputStream fos = applicationContext.openFileOutput(CLAIMFILE,_ERASE_FILE);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(ClaimList.getInstance().getClaims(), osw);
 			osw.flush();

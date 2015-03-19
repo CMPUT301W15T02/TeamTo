@@ -2,7 +2,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 /**
 *
-* Adapted from AndroidElasticSearch by Joshua Campbell
+* Adapted from AndroidElasticSearch by Joshua Campbell 2015-03-18
 *
 * @see https://github.com/joshua2ua/AndroidElasticSearch
 *
