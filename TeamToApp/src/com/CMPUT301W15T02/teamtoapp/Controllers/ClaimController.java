@@ -134,8 +134,8 @@ public class ClaimController {
 		return formatter.format(getEndDate().getTime());
 	}
 	
-	public void setUser(String name) {
-		currentClaim.setUser(name);
+	public void setUserName(String name) {
+		currentClaim.setUserName(name);
 	}
 	
 	public void addComment(String comment) {

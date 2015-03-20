@@ -24,6 +24,7 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.os.Bundle;
@@ -92,6 +93,8 @@ public class LoginActivity extends Activity {
 			
 			MainManager.loadUser();
 			MainManager.loadClaims();
+			User.getInstance().setName(usernameString);
+			Toast.makeText(this, "Username:"+User.getInstance().getName(), Toast.LENGTH_SHORT).show();
 			intent.putExtra("claimantName", usernameString);
 			startActivity(intent);
 			LoginActivity.this.finish();

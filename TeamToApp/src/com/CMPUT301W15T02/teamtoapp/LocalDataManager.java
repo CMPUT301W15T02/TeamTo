@@ -137,7 +137,7 @@ public class LocalDataManager {
 	public static void logClaim() {
 		Gson gson = new Gson();
 		Claim claim = new Claim();
-		claim.setUser("Kyle");
+		claim.setUserName("Kyle");
 		String json = gson.toJson(claim);
 		Log.i("GSON STUFF", json);
 	}

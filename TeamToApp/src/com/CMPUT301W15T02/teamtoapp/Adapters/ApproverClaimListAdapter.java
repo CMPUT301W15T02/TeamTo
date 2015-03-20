@@ -25,6 +25,7 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.app.Activity;
 import android.content.Context;
@@ -92,7 +93,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		Claim claim = approverClaimList.get(position);
 		// TODO: Need to fix claimant name
-		holder.claimantNameTextView.setText(claim.getUser());
+		holder.claimantNameTextView.setText(claim.getUserName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
 		// Format destinations

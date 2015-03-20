@@ -233,14 +233,14 @@ public class Claim implements Listener {
 	}
 	
 	
-
-	public String getUser() {
+	// Required for approver claim list
+	public String getUserName() {
 		return userName;
 	}
 	
 	
-
-	public void setUser(String userName) {
+	
+	public void setUserName(String userName) {
 		this.userName = userName;
 		notifyListeners();
 	}

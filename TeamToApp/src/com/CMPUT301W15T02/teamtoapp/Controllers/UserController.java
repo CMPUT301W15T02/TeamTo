@@ -122,10 +122,6 @@ public class UserController {
 		user.removeListener(listener);
 	}
 
-	public void setUserName(String userName) {
-		// TODO Auto-generated method stub
-		//this.userName = User.getInstance().setName(userName);
-		
-	}
+
 	
 }
