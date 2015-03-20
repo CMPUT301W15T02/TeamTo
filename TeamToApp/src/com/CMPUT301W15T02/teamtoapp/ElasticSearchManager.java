@@ -43,11 +43,9 @@ public class ElasticSearchManager {
 	private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/";
 	private static final String TAG = "ClaimSearch"; // used for logcat.
 	private static Context applicationContext;
-	private Gson gson;
 	
 	
 	public ElasticSearchManager() {
-		gson = new Gson();
 	}
 	
 	
@@ -67,6 +65,7 @@ public class ElasticSearchManager {
 	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
 	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
 	public Claim getClaim(String claimID) {
+		Gson gson = new Gson();
 		
 		SearchHit<Claim> search_hit = null;
 		HttpClient httpClient = new DefaultHttpClient();
@@ -130,7 +129,8 @@ public class ElasticSearchManager {
 	/*Source:
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
 	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
-	public void addClaim(Claim claim) {
+	public static void addClaim(Claim claim) {
+		Gson gson = new Gson();
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
 			
@@ -169,7 +169,7 @@ public class ElasticSearchManager {
 	/*Source:
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
 	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
-	public void deleteClaim(String claimId) {
+	public static void deleteClaim(String claimId) {
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
 			

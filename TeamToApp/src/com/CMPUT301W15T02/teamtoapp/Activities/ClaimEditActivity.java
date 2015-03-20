@@ -32,6 +32,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -89,6 +90,11 @@ public class ClaimEditActivity extends Activity implements Listener {
         setListeners();
         setUpAdapter();
         setFieldValues();
+        
+        // TODO hackey solution need to fix
+        StrictMode.ThreadPolicy policy = new StrictMode.
+        ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy); 
 	}
 
 	@Override

@@ -37,16 +37,38 @@ public class MainManager {
 	
 	
 	public static void addClaim(Claim claim) {
+		// TODO
 		if (isNetworkAvailable(applicationContext)) {
-			
+			ElasticSearchManager.addClaim(claim);
 		}
+	}
+	
+	public static void removeClaim(Claim claim) {
+		if (isNetworkAvailable(applicationContext)) {
+			ElasticSearchManager.deleteClaim(claim.getClaimId());
+		}
+	}
+	
+	public static void updateClaim(Claim claim) {
+		// TODO
 	}
 	
 	public static void loadClaims() {
 		LocalDataManager.loadClaims();
 	}
 	
+	
+	public static void saveClaims() {
+		// TODO
+	}
+	
+	
 	public static void loadUser() {
 		LocalDataManager.loadUser();
+	}
+	
+	
+	public static void saveUser() {
+		// TODO
 	}
 }
