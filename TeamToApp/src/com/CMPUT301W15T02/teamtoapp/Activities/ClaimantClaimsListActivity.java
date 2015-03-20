@@ -36,6 +36,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -67,6 +68,10 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		setListeners();
 		setUpAdapter();
 		LocalDataManager.logClaim();
+		// TODO hackey solution need to fix
+        StrictMode.ThreadPolicy policy = new StrictMode.
+        ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy); 
 		
 	}
 	
