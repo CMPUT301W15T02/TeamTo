@@ -31,11 +31,13 @@ import java.util.ArrayList;
 import android.content.ContentProviderClient;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
+import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.reflect.TypeToken;
 
 public class LocalDataManager {
@@ -140,5 +142,13 @@ public class LocalDataManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void logClaim() {
+		Gson gson = new Gson();
+		Claim claim = new Claim();
+		claim.setUser("Kyle");
+		String json = gson.toJson(claim);
+		Log.i("GSON STUFF", json);
 	}
 }

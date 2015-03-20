@@ -29,7 +29,7 @@ public class UserTest extends TestCase {
 
 	public void testAddTag() {
 		String userName = "User1";
-		User user = new User(userName);
+		User user = User.getInstance();
 		assertTrue("Tag list not empty", user.getTags().size() == 4);
 		
 		String tag1Name = "tag1";
@@ -50,7 +50,7 @@ public class UserTest extends TestCase {
 	
 	public void testRemoveTag() {
 		String userName = "User1";
-		User user = new User(userName);
+		User user = User.getInstance();
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
 		user.addTag(tag1);
@@ -66,7 +66,7 @@ public class UserTest extends TestCase {
 	
 	public void testRenameTag() {
 		String userName = "User1";
-		User user = new User(userName);
+		User user = User.getInstance();
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
 		user.addTag(tag1);
