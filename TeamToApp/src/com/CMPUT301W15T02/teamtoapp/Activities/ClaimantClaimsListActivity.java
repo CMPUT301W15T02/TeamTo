@@ -19,6 +19,7 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -186,7 +187,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	 */
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if (LocalDataManager.isNetworkAvailable(this)){
+		if (MainManager.isNetworkAvailable(this)){
 			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
 			startActivity(intent);
 		}

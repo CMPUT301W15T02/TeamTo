@@ -53,7 +53,7 @@ public class LocalDataManager {
 		
 	}
 	
-	public void initializeContext(Context context) {
+	public static void initializeContext(Context context) {
 		applicationContext = context.getApplicationContext();
 	}
 	
@@ -63,18 +63,8 @@ public class LocalDataManager {
 		ClaimList.getInstance().setClaims(claims);
 	}
 	
-	//Source: http://stackoverflow.com/a/9570292 2015-03-10
-	/**
-	 * Checks if there is network availability
-	 * @param 	context	Current state of the application
-	 * @return	boolean false if no connections, true otherwise
-	 */
-	public static boolean isNetworkAvailable(Context context) {
-		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
-	}
 	
-	
-	public void loadUser() {
+	public static void loadUser() {
 		Gson gson = new Gson();
 		User user;
 		try {

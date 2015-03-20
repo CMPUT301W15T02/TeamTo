@@ -22,6 +22,7 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -41,7 +42,6 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
-	private LocalDataManager dataManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +51,12 @@ public class LoginActivity extends Activity {
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
 		String usernameString = settings.getString("username", null);
-		dataManager = new LocalDataManager();
-		dataManager.initializeContext(getApplicationContext());
+		MainManager.initializeContext(getApplicationContext());
 
 		if (hasLoggedIn)  //Go directly to main activity
 		{
-			dataManager.loadUser();
-			dataManager.loadClaims();
+			MainManager.loadUser();
+			MainManager.loadClaims();
 		    Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 			startActivity(intent);
@@ -91,8 +90,8 @@ public class LoginActivity extends Activity {
 			editor.putString("username", usernameString);
 			editor.commit();
 			
-			dataManager.loadUser();
-			dataManager.loadClaims();
+			MainManager.loadUser();
+			MainManager.loadClaims();
 			startActivity(intent);
 			LoginActivity.this.finish();
 		}

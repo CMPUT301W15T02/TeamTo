@@ -51,7 +51,7 @@ public class ElasticSearchManager {
 	}
 	
 	
-	public void initializeContext(Context context) {
+	public static void initializeContext(Context context) {
 		applicationContext = context.getApplicationContext();
 	}
 	
