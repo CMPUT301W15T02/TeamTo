@@ -66,14 +66,11 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		setListeners();
 		setUpAdapter();
 		LocalDataManager.logClaim();
-<<<<<<< HEAD
-=======
+
 		// TODO hackey solution need to fix
         StrictMode.ThreadPolicy policy = new StrictMode.
         ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy); 
-		
->>>>>>> 48f6f4af6f1da2b6fb6359782d5684bfb8d91f71
 	}
 	
 	/**

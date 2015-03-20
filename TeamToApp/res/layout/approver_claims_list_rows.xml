@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -8,22 +8,23 @@
         android:id="@+id/claimantNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="3dp"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
  
     <TextView
         android:id="@+id/approverStartDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:textSize="14sp" />
+        android:layout_alignParentEnd="true"
+        android:paddingLeft="20sp"
+        android:textStyle="bold" />
     
     <TextView
         android:id="@+id/approverDestsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
+        android:layout_below="@+id/claimantNameTextView"
+        android:textColor="@android:color/darker_gray"
         android:textSize="14sp"/>
     
     <TextView
@@ -47,4 +48,4 @@
         android:paddingLeft="10dp"
         android:textSize="14sp" />    
 
-</LinearLayout>
+</RelativeLayout>
