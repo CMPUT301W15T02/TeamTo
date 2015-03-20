@@ -98,7 +98,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		// This part of the code takes the updates from the destinations list view from the make a claim 
 		// from the claimant and puts the new information to the claimants list view 
-		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "";
 		int i;
@@ -109,7 +108,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		if (destStringTuple.size() != 0) {
 			allDest += destStringTuple.get(i).destination;
 		}
-		//This part of the code takes the updates from the tags list view from the claimant claims 
+		// This part of the code takes the updates from the tags list view from the claimant claims 
 		// and puts the new information to the claimants list view 
 		ArrayList<Tag> tags = claim.getTags();
 		String allTags = "";
@@ -125,8 +124,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		// Set the total currencies first, then display currencies with amount > 0.
 		claim.setTotalCurrencies();
 		SortedMap<String, Double> map = Collections.synchronizedSortedMap(claim.getTotalCurrencies());
-		
-		
 		
 		String totalCurrencyOuput = "";
 		

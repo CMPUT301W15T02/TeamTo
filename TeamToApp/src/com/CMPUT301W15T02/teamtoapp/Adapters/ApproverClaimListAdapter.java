@@ -15,8 +15,11 @@
 
 package com.CMPUT301W15T02.teamtoapp.Adapters;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.SortedMap;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
@@ -41,6 +44,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 	private int layoutId;
 	private ArrayList<Claim> approverClaimList;
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	private DecimalFormat df = new DecimalFormat("#0.00");
 
 	public ApproverClaimListAdapter(Context context, int textViewResourceId,
 			ArrayList<Claim> items) {
@@ -86,13 +90,12 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			holder = (ViewHolder) row.getTag();
 		}
 		
+		// TODO: Need to fix claimant name
 		Claim claim = approverClaimList.get(position);
-		//holder.claimantNameTextView.setText(claim.getUser());
-		holder.claimantNameTextView.setText(claim.getClaimName());
+		holder.claimantNameTextView.setText(claim.getUser());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
-		//TODO Finish this up
-		
+		// Format destinations
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "";
 		int i;
@@ -104,15 +107,24 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			allDest += destStringTuple.get(i).destination;
 		}
 		
-		ArrayList<Tag> tags = claim.getTags();
-		String allTags = "";
-		for (Tag tag: tags)
-		{
-			allTags += ""+ tag.getTagName()+ "  ";
-		}
-		
 		holder.destinationsTextView.setText(allDest);
 		holder.statusTextView.setText(claim.getStatus().toString());
+		
+		// Format currencies
+		claim.setTotalCurrencies();
+		SortedMap<String, Double> map = Collections.synchronizedSortedMap(claim.getTotalCurrencies());
+		
+		String totalCurrencyOuput = "";
+		
+		for (String key : map.keySet()) {
+			totalCurrencyOuput += df.format(map.get(key)) + " " + key.toString() + ", ";
+		}
+		if (totalCurrencyOuput.length() > 3) {
+			totalCurrencyOuput = totalCurrencyOuput.substring(0, totalCurrencyOuput.length()-2);
+		}
+		holder.totalCurrencyView.setText(totalCurrencyOuput);
+		
+		//TODO: Still need to do approver name
 		
 		return row;
 	}
