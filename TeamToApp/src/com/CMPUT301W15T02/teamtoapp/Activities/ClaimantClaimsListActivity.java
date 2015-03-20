@@ -26,7 +26,6 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 import android.app.Activity;
@@ -34,7 +33,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -67,7 +65,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		setListeners();
 		setUpAdapter();
 		LocalDataManager.logClaim();
-		
 	}
 	
 	/**
@@ -154,7 +151,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		adapter.sort(new ClaimComparatorNewestFirst());
 		listView.setAdapter(adapter);
 	}
-	
 	
 
 	@Override

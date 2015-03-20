@@ -91,19 +91,18 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			holder = (ViewHolder) row.getTag();
 		}
 		
-		//these holders update the data for the recently made or changed claim for the claimant claims
+		// These holders update the data for the recently made or changed claim for the claimant claims
 		Claim claim = claimsList.get(position);
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
-		//This part of the code takes the updates from the destinations list view from the make a claim 
-		//from the claimant and puts the new information to the claimants list view 
+		// This part of the code takes the updates from the destinations list view from the make a claim 
+		// from the claimant and puts the new information to the claimants list view 
 		
 		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
 		String allDest = "";
-		int i ;
-		for (i = 0; i < destStringTuple.size()-1 ; i++)
-	    {           
+		int i;
+		for (i = 0; i < destStringTuple.size()-1 ; i++) {           
 	        allDest += destStringTuple.get(i).destination;
 	        allDest += ", ";
 	    }

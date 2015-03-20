@@ -68,6 +68,7 @@ public class ApproverClaimsListActivity extends Activity {
 	 */
 	private void getModelObjects() {
 		claimListController = new ClaimListController();
+		// Need to modify once networking is completed
 		submittedClaims = claimListController.getSubmittedClaims();
 	}
 	
@@ -88,9 +89,9 @@ public class ApproverClaimsListActivity extends Activity {
 	private void setUpAdapter() {
 		adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
 		adapter.sort(new ClaimComparatorOldestFirst());
-		listView.setAdapter(adapter);
-		
+		listView.setAdapter(adapter);	
 	}
+	
 	/**
 	 * Switch back to claimant mode
 	 * @param menu

@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 import android.app.Activity;
 import android.content.Context;
@@ -85,10 +87,44 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		}
 		
 		Claim claim = approverClaimList.get(position);
-		holder.claimantNameTextView.setText(claim.getUser());
+		//holder.claimantNameTextView.setText(claim.getUser());
+		holder.claimantNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
+		
 		//TODO Finish this up
+		
+		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
+		String allDest = "";
+		int i;
+		for (i = 0; i < destStringTuple.size()-1 ; i++) {           
+	        allDest += destStringTuple.get(i).destination;
+	        allDest += ", ";
+	    }
+		if (destStringTuple.size() != 0) {
+			allDest += destStringTuple.get(i).destination;
+		}
+		
+		ArrayList<Tag> tags = claim.getTags();
+		String allTags = "";
+		for (Tag tag: tags)
+		{
+			allTags += ""+ tag.getTagName()+ "  ";
+		}
+		
+		holder.destinationsTextView.setText(allDest);
+		holder.statusTextView.setText(claim.getStatus().toString());
 		
 		return row;
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
