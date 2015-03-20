@@ -33,9 +33,11 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 public class UserController {
 	
 	private User user;
+	private String userName;
 	
 	public UserController() {
 		user = User.getInstance();
+		userName = User.getInstance().getName();
 	}
 	
 	/**
@@ -117,7 +119,13 @@ public class UserController {
 	 * @param listener
 	 */
 	public void removeListenerFromUser(Listener listener) {
-		user.removeListener(listener);;
+		user.removeListener(listener);
+	}
+
+	public void setUserName(String userName) {
+		// TODO Auto-generated method stub
+		//this.userName = User.getInstance().setName(userName);
+		
 	}
 	
 }

@@ -53,6 +53,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	final Context context = this;
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
+	private String userName;
 	LocalDataManager dataManager;
 	
 	@Override
@@ -81,6 +82,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// Set the current user so it can be added to claims
 		claimListController = new ClaimListController();
 		claimListController.addListenerToClaimList(this);
+		Intent intent = getIntent();
+		userName = (String) intent.getSerializableExtra("claimantName");
+		
 	}
 	
 	/**

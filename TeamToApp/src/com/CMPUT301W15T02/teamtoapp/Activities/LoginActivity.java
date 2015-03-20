@@ -92,6 +92,7 @@ public class LoginActivity extends Activity {
 			
 			MainManager.loadUser();
 			MainManager.loadClaims();
+			intent.putExtra("claimantName", usernameString);
 			startActivity(intent);
 			LoginActivity.this.finish();
 		}

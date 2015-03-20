@@ -90,8 +90,8 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			holder = (ViewHolder) row.getTag();
 		}
 		
-		// TODO: Need to fix claimant name
 		Claim claim = approverClaimList.get(position);
+		// TODO: Need to fix claimant name
 		holder.claimantNameTextView.setText(claim.getUser());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		

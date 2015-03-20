@@ -49,9 +49,6 @@ public class Claim implements Listener {
 		}
 	}
 	
-
-	
-	
 	private String claimName;
 	private GregorianCalendar startDate;
 	private GregorianCalendar endDate;
@@ -76,6 +73,7 @@ public class Claim implements Listener {
 		status = Status.IN_PROGRESS;
 		this.tags = new ArrayList<Tag>();
 		this.comment = "";
+		this.userName = User.getInstance().getName();
 		this.claimdID = UUID.randomUUID().toString();
 		currencyTotals = new TreeMap<String, Double>();
 		listeners = new ArrayList<Listener>();
