@@ -29,6 +29,7 @@ import junit.framework.TestCase;
 public class UseCase3Test extends TestCase {
 
 	// UC 3.2, UC 3.3
+/*
 	public void testAddTags() {
 		User user = new User("Kent Brockman");
 		Tag testTag = new Tag("test");
@@ -89,5 +90,5 @@ public class UseCase3Test extends TestCase {
 		assertTrue("Filter working", claimListController.getClaimsWithTags("Tag name").contains(claim1));
 		assertFalse("Tag filter working?", claimListController.getClaimsWithTags("Tag name").contains(claim2));
 	}
-	
+*/
 }

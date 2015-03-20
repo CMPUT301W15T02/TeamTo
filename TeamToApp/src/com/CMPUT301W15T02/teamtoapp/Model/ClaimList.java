@@ -95,7 +95,6 @@ public class ClaimList implements Listener {
 	}
 	
 	
-	
 	public void removeClaim(Claim claim) {
 		claim.removeListener(this);
 		claims.remove(claim);

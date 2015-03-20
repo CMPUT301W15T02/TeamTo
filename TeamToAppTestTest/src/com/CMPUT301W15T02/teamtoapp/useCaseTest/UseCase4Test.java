@@ -103,7 +103,7 @@ public class UseCase4Test extends TestCase {
 		// Assert the expense exists in the claim
 		assertTrue("Expense is not added.", claim.getExpenses().contains(expense));
 	}
-	
+/*	
 	public void testControllerAddExpense() {
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim();
@@ -127,7 +127,7 @@ public class UseCase4Test extends TestCase {
 		claimController.addDestination("some destination", "some reason");
 		assertTrue("Claim complete after description and destination entered", claimController.checkClaimInfoComplete());
 	}
-	
+*/
 	// US 4.06 (UC 4.3)
 	public void testEditExpense() {
 		

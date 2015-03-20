@@ -28,6 +28,7 @@ import junit.framework.TestCase;
 public class UseCase7Test extends TestCase {
 	
 	// UC 7.0
+/*
 	public void testClaimStatuses() {
 		Claim claim = new Claim();
 		ClaimList claims = new ClaimList();
@@ -39,5 +40,5 @@ public class UseCase7Test extends TestCase {
 		claimController.submitClaim();
 		assertEquals("Claim status submitted?", Status.SUBMITTED, claimController.getCurrentClaim().getStatus());
 	}
-
+*/
 }
