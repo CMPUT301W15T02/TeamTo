@@ -65,12 +65,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		findViewsByIds();
 		setListeners();
 		setUpAdapter();
-		LocalDataManager.logClaim();
-
-		// TODO hackey solution need to fix
-        StrictMode.ThreadPolicy policy = new StrictMode.
-        ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy); 
 	}
 	
 	/**
@@ -211,11 +205,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		claimListController.removeListenerFromClaimList(this);
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		LocalDataManager.saveClaims();
-	}
 
 	
 	/**

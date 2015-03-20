@@ -36,21 +36,37 @@ public class MainManager {
 	}
 	
 	
-	public static void addClaim(Claim claim) {
+	public static void addClaim(final Claim claim) {
 		// TODO
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.addClaim(claim);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ElasticSearchManager.addClaim(claim);
+					
+				}
+			}).start();
 		}
+		LocalDataManager.saveClaims();
 	}
 	
-	public static void removeClaim(Claim claim) {
+	public static void removeClaim(final Claim claim) {
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.deleteClaim(claim.getClaimId());
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ElasticSearchManager.deleteClaim(claim.getClaimId());
+					
+				}
+			}).start();
 		}
+		LocalDataManager.saveClaims();
 	}
 	
 	public static void updateClaim(Claim claim) {
-		// TODO
+		LocalDataManager.saveClaims();
 	}
 	
 	public static void loadClaims() {

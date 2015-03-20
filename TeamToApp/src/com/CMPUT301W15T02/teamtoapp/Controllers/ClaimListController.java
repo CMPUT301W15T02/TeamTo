@@ -17,6 +17,8 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
@@ -50,12 +52,13 @@ public class ClaimListController {
 	public void addClaim(Claim claim) {
 		claim.setUserName(userName);
 		claims.addClaim(claim);
-		//MainManager.addClaim(claim);
+		MainManager.addClaim(claim);
+		Log.i("CLAIMINFO", claim.getClaimId());
 	}
 	
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
-		//MainManager.removeClaim(claim);
+		MainManager.removeClaim(claim);
 	}
 	
 	public Claim getClaim(int position) {

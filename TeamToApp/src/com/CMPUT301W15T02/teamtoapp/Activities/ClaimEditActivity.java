@@ -91,10 +91,6 @@ public class ClaimEditActivity extends Activity implements Listener {
         setUpAdapter();
         setFieldValues();
         
-        // TODO hackey solution need to fix
-        StrictMode.ThreadPolicy policy = new StrictMode.
-        ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy); 
 	}
 
 	@Override

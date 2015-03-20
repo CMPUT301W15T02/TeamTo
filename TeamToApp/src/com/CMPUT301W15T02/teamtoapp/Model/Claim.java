@@ -20,6 +20,7 @@ import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
@@ -284,6 +285,8 @@ public class Claim implements Listener {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
+		// TODO discuss this
+		MainManager.updateClaim(this);
 	}
 	
 	public void addListener(Listener listener) {
