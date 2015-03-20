@@ -65,6 +65,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		findViewsByIds();
 		setListeners();
 		setUpAdapter();
+		LocalDataManager.logClaim();
 		
 	}
 	

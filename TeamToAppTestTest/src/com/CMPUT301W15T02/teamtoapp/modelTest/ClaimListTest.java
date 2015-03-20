@@ -26,7 +26,7 @@ import junit.framework.TestCase;
 public class ClaimListTest extends TestCase {
 
 	public void testAddClaim() {
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
@@ -42,7 +42,7 @@ public class ClaimListTest extends TestCase {
 	}
 	
 	public void testGetClaim() {
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
 		String claimName1 = "firstClaim";
@@ -50,15 +50,15 @@ public class ClaimListTest extends TestCase {
 		claim1.setClaimName(claimName1);
 		claim2.setClaimName(claimName2);
 		claims.addClaim(claim1);
-		assertTrue("Didn't get right claim", claims.getClaim(claim1).equals(claim1));
-		assertNull("Didn't get right claim", claims.getClaim(claim2));
+		assertTrue("Didn't get right claim", claims.getClaims().contains(claim1));
+		assertFalse("Didn't get right claim", claims.getClaims().contains(claim2));
 		
 		claims.addClaim(claim2);
-		assertTrue("Didn't get right claim", claims.getClaim(claim2).equals(claim2));
+		assertTrue("Didn't get right claim", claims.getClaims().contains(claim2));
 	}
 	
 	public void testRemoveClaim() {
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
 		String claimName1 = "firstClaim";
@@ -69,14 +69,14 @@ public class ClaimListTest extends TestCase {
 		claims.addClaim(claim2);
 		
 		claims.removeClaim(claim2);
-		assertNull("Did not remove claim2", claims.getClaim(claim2));
+		assertFalse("Did not remove claim2", claims.getClaims().contains(claim2));
 		claims.removeClaim(claim1);
-		assertNull("Did not remove claim1", claims.getClaim(claim1));
+		assertFalse("Did not remove claim1", claims.getClaims().contains(claim1));
 		assertTrue("Claims not empty", claims.getClaims().size() == 0);
 	}
 	
 	public void testFindClaimByID() {
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
 		String claimName1 = "firstClaim";

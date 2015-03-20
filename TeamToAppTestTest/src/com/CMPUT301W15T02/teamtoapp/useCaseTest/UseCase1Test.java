@@ -39,8 +39,6 @@ public class UseCase1Test extends TestCase {
 	 * Tests adding a claim (i.e. though session controller)
 	 */
 	public void testAddClaim () {
-		SessionController sessionController = new SessionController();
-		sessionController.setUser("New name");
 		ClaimListController claims = new ClaimListController();
 		Claim claim = new Claim();
 		claims.getUserName();
@@ -71,7 +69,7 @@ public class UseCase1Test extends TestCase {
 	
 	// UC 1.1
 	public void testEditClaim() {
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 		Claim claim = new Claim();
 		
 		claim.setStatus(Claim.Status.IN_PROGRESS);
@@ -82,7 +80,7 @@ public class UseCase1Test extends TestCase {
 		
 		claim.setStatus(Claim.Status.SUBMITTED);
 		claim.setClaimName("submitted name");
-		assertTrue("Claim name has not changed.", claims.getClaim(claim).getClaimName().equals("submitted name"));
+		assertTrue("Claim name has not changed.", claim.getClaimName().equals("submitted name"));
 		
 		claim.setStatus(Claim.Status.RETURNED);
 		claim.setClaimName("returned name");
