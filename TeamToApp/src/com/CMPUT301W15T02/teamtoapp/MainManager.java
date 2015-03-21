@@ -17,6 +17,7 @@ import android.net.ConnectivityManager;
 public class MainManager {
 
 	private static Context applicationContext;
+	private static ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
 	
 	
 	
@@ -85,6 +86,22 @@ public class MainManager {
 			Cache.getInstance().addUpdateToCache(claim, applicationContext);
 		}
 		LocalDataManager.saveClaims();
+	}
+	
+	public static ArrayList<Claim> getSubmittedClaims() {
+		
+		
+		if (isNetworkAvailable(applicationContext)) {
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					submittedClaims = ElasticSearchManager.getSubmittedClaims();
+				}
+			}).start();
+		} 
+		
+		return submittedClaims;
 	}
 	
 	public static void loadClaims() {

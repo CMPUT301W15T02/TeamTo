@@ -78,6 +78,7 @@ public class ApproverClaimsListActivity extends Activity {
 		ElasticSearchManager elasticSearchManager = new ElasticSearchManager();
 		submittedClaims = elasticSearchManager.getSubmittedClaims();
 		*/
+		submittedClaims = MainManager.getSubmittedClaims();
 	}
 	
 	/**

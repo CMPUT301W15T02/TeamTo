@@ -115,7 +115,7 @@ public class ElasticSearchManager {
 	 */	
 	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
 	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
-	public ArrayList<Claim> getSubmittedClaims() {
+	public static ArrayList<Claim> getSubmittedClaims() {
 		String searchString = "SUBMITTED";
 		ArrayList<Claim> submittedClaimsResult = new ArrayList<Claim>();
 		Gson gson = new Gson();
