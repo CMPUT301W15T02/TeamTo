@@ -17,7 +17,6 @@ import android.net.ConnectivityManager;
 public class MainManager {
 
 	private static Context applicationContext;
-	private static ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
 	
 	
 	
@@ -90,17 +89,10 @@ public class MainManager {
 	
 	public static ArrayList<Claim> getSubmittedClaims() {
 		
-		
+		ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
 		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					submittedClaims = ElasticSearchManager.getSubmittedClaims();
-				}
-			}).start();
+			submittedClaims = ElasticSearchManager.getSubmittedClaims();
 		} 
-		
 		return submittedClaims;
 	}
 	
