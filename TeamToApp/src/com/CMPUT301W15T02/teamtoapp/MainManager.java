@@ -1,5 +1,6 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 
 import android.content.Context;
@@ -47,6 +48,8 @@ public class MainManager {
 					
 				}
 			}).start();
+		} else {
+			Cache.getInstance().addUpdateToCache(claim, applicationContext);
 		}
 		LocalDataManager.saveClaims();
 	}
@@ -61,6 +64,8 @@ public class MainManager {
 					
 				}
 			}).start();
+		} else {
+			Cache.getInstance().addRemovalToCache(claim, applicationContext);
 		}
 		LocalDataManager.saveClaims();
 	}
@@ -74,6 +79,8 @@ public class MainManager {
 					ElasticSearchManager.updateClaim(claim);
 				}
 			}).start();
+		} else {
+			Cache.getInstance().addUpdateToCache(claim, applicationContext);
 		}
 		LocalDataManager.saveClaims();
 	}
