@@ -42,7 +42,7 @@ public class ElasticSearchManager {
 	/** Location of online server in which claims with their expenses will be saved. */
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/";
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/_search";
-	private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/claims";
+	private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/claims/";
 	private static final String TAG = "ClaimSearch"; // used for logcat.
 	private static Context applicationContext;
 	
