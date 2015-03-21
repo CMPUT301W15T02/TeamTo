@@ -2,6 +2,7 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
@@ -40,6 +41,7 @@ public class ElasticSearchManager {
 
 	/** Location of online server in which claims with their expenses will be saved. */
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/";
+	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/_search";
 	private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/";
 	private static final String TAG = "ClaimSearch"; // used for logcat.
 	private static Context applicationContext;
@@ -106,18 +108,94 @@ public class ElasticSearchManager {
 	}
 
 	/**
-	 * Get all submitted claims where the approver name != claimant name. (Approver mode)
-	 * If the search does not
-	 * specify fields, it searches on all the fields.
+	 * Get all submitted claims for the approver (Approver mode)
+	 * If the search does not specify fields, it searches on all the fields.
 	 * 
 	 *  TODO: Needs testing
 	 */	
 	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
 	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
-	public ArrayList<Claim> getSubmittedClaims() {
+	public ArrayList<Claim> getSubmittedClaims(String searchString, String field) {
 		
+		ArrayList<Claim> submittedClaimsResult = new ArrayList<Claim>();
+		Gson gson = new Gson();
 		
-		return null;
+		HttpPost searchRequest = new HttpPost(SEARCH_URL);
+		
+		if (searchString.equals(null) || searchString.equals("")) {
+			searchString = "*";
+		}
+		
+		SimpleSearchCommand command = new SimpleSearchCommand(searchString);
+		String query = gson.toJson(command);
+		Log.i(TAG, "JSON COMMAND: " + query);
+		
+		StringEntity stringEntity = null;
+		try {
+			stringEntity = new StringEntity(query);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+		
+		searchRequest.setHeader("Accept", "application/json");
+		searchRequest.setEntity(stringEntity);
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		HttpResponse response = null;
+		try
+		{
+			response = httpClient.execute(searchRequest);
+		
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+			
+		} catch (ClientProtocolException e) {
+			throw new RuntimeException(e);
+			
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+			
+		}
+		
+		/**
+		* Parse the response of the search, then extract claims from esResponse
+		* and add them into submittedClaimsResult ArrayList.
+		*/
+		Type searchResponseType = new TypeToken<SearchResponse<Claim>>() {}.getType();
+		try {
+
+			SearchResponse<Claim> esResponse = gson.fromJson(
+					new InputStreamReader(response.getEntity().getContent()),
+						searchResponseType);
+			
+			Hits<Claim> hits = esResponse.getHits();
+			if (hits != null) {
+				if (hits.getHits() != null) {
+					for (int i = 0; i < hits.getHits().size(); i++) {
+						SearchHit<Claim> searchHit = hits.getHits().get(i);
+						Claim claim = searchHit.getSource();
+						submittedClaimsResult.add(claim);
+					}
+				}
+			}
+			
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+			
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+			
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+			
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+			
+		}
+		
+		return submittedClaimsResult;
+		
 	}
 	
 	/**
