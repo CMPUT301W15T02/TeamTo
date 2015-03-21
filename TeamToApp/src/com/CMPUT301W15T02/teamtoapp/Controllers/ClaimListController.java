@@ -94,6 +94,11 @@ public class ClaimListController {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public ArrayList<Claim> getSubmittedClaimsFromMainManager() {
+		return MainManager.getSubmittedClaims();
+		
+	}
 	
 	
 }

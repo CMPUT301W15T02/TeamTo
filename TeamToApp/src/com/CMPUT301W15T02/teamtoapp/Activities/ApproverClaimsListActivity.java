@@ -22,7 +22,9 @@ import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 import android.os.Bundle;
@@ -40,7 +42,7 @@ import android.widget.ListView;
  *
  */
 
-public class ApproverClaimsListActivity extends Activity {
+public class ApproverClaimsListActivity extends Activity implements Listener{
 
 	final Context context = this;
 	private ListView listView;
@@ -72,6 +74,7 @@ public class ApproverClaimsListActivity extends Activity {
 	 */
 	private void getModelObjects() {
 		claimListController = new ClaimListController();
+		claimListController.addListenerToClaimList(this);
 		// Need to modify once networking is completed
 		// submittedClaims = claimListController.getSubmittedClaims();
 		/*ElasticSearchManager.initializeContext(getApplicationContext());
@@ -108,6 +111,35 @@ public class ApproverClaimsListActivity extends Activity {
 	public void switchToClaimantOption(MenuItem menu) {
 		// Need to do other stuff
 		super.onBackPressed();
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		getModelObjects();
+		findViewsByIds();
+		setListeners();
+		setUpAdapter();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		submittedClaims = MainManager.getSubmittedClaims();
+		adapter.notifyDataSetChanged();
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		claimListController.removeListenerFromClaimList(this);
+	}
+
+	@Override
+	public void update() {
+		adapter.notifyDataSetChanged();
+		adapter.sort(new ClaimComparatorNewestFirst());
+		
 	}
 	
 	
