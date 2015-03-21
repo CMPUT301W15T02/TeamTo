@@ -52,13 +52,10 @@ public class ClaimListController {
 	public void addClaim(Claim claim) {
 		claim.setUserName(userName);
 		claims.addClaim(claim);
-		MainManager.addClaim(claim);
-		Log.i("CLAIMINFO", claim.getClaimId());
 	}
 	
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
-		MainManager.removeClaim(claim);
 	}
 	
 	public Claim getClaim(int position) {

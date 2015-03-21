@@ -65,17 +65,21 @@ public class MainManager {
 		LocalDataManager.saveClaims();
 	}
 	
-	public static void updateClaim(Claim claim) {
+	public static void updateClaim(final Claim claim) {
+		if (isNetworkAvailable(applicationContext)) {
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ElasticSearchManager.updateClaim(claim);
+				}
+			}).start();
+		}
 		LocalDataManager.saveClaims();
 	}
 	
 	public static void loadClaims() {
 		LocalDataManager.loadClaims();
-	}
-	
-	
-	public static void saveClaims() {
-		// TODO
 	}
 	
 	

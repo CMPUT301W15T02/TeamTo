@@ -196,4 +196,9 @@ public class ElasticSearchManager {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static void updateClaim(Claim claim) {
+		// Updating the claim is the same as adding the claim
+		addClaim(claim);
+	}
 }

@@ -21,10 +21,8 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
-import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.os.Bundle;

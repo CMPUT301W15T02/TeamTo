@@ -16,6 +16,9 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
@@ -89,8 +92,10 @@ public class ClaimList implements Listener {
 	public void addClaim(Claim claim) {
 		claim.addListener(this);
 		claims.add(claim);
-		// notify listeners that claim has been updated (addition)
+		// Notify listeners that claim has been added
 		notifyListeners();
+		MainManager.addClaim(claim);
+		Log.i("CLAIMINFO", claim.getClaimId());
 
 	}
 	
@@ -100,6 +105,7 @@ public class ClaimList implements Listener {
 		claims.remove(claim);
 		// notify listeners that claim has been updated (deleted)
 		notifyListeners();
+		MainManager.removeClaim(claim);
 
 	}
 
