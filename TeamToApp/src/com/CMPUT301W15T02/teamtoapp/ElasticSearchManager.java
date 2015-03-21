@@ -42,7 +42,7 @@ public class ElasticSearchManager {
 	/** Location of online server in which claims with their expenses will be saved. */
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/";
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/_search";
-	private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/";
+	private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/claims";
 	private static final String TAG = "ClaimSearch"; // used for logcat.
 	private static Context applicationContext;
 	
@@ -71,7 +71,7 @@ public class ElasticSearchManager {
 		
 		SearchHit<Claim> search_hit = null;
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(RESOURCE_URL + claimID);		
+		HttpGet httpGet = new HttpGet(TEST_URL + claimID);		
 		
 		HttpResponse response = null;
 		
@@ -120,7 +120,7 @@ public class ElasticSearchManager {
 		ArrayList<Claim> submittedClaimsResult = new ArrayList<Claim>();
 		Gson gson = new Gson();
 		
-		HttpPost searchRequest = new HttpPost(SEARCH_URL);
+		HttpPost searchRequest = new HttpPost(TEST_URL);
 		
 		if (searchString.equals(null) || searchString.equals("")) {
 			searchString = "*";
@@ -213,7 +213,7 @@ public class ElasticSearchManager {
 		try {
 			
 			// HttpPost for adding a claim
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + claim.getClaimId());
+			HttpPost addRequest = new HttpPost(TEST_URL + claim.getClaimId());
 			StringEntity stringEntity = new StringEntity(gson.toJson(claim));
 			addRequest.setEntity(stringEntity);
 			addRequest.setHeader("Accept", "application/json");
@@ -252,7 +252,7 @@ public class ElasticSearchManager {
 		try {
 			
 			// HTTP delete for deleting a claim
-			HttpDelete deleteRequest = new HttpDelete(RESOURCE_URL + claimId);
+			HttpDelete deleteRequest = new HttpDelete(TEST_URL + claimId);
 			deleteRequest.setHeader("Accept", "application/json");
 			
 			HttpResponse response = httpClient.execute(deleteRequest);
