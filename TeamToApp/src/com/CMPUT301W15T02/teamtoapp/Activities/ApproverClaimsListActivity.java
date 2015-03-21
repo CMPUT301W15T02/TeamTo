@@ -24,7 +24,10 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.os.StrictMode;
 import android.app.Activity;
 import android.content.Context;
@@ -45,7 +48,7 @@ public class ApproverClaimsListActivity extends Activity {
 	private ListView listView;
 	private ClaimListController claimListController;
 	private ApproverClaimListAdapter adapter;
-	private ArrayList<Claim> submittedClaims;
+	private ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +56,9 @@ public class ApproverClaimsListActivity extends Activity {
 		setContentView(R.layout.approver_claims_list);
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
-		getModelObjects();
 		findViewsByIds();
+		getModelObjects();
 		setListeners();
-		setUpAdapter();
 		
 	}
 
@@ -71,10 +73,16 @@ public class ApproverClaimsListActivity extends Activity {
 	 * Get references to the controller and model objects
 	 */
 	private void getModelObjects() {
-		submittedClaims = MainManager.getSubmittedClaims();
-		if (submittedClaims == null) {
-			submittedClaims = new ArrayList<Claim>();
-		}
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				submittedClaims = MainManager.getSubmittedClaims();
+				handler.sendEmptyMessage(0);
+				
+				
+			}
+		}).start();
 	}
 	
 	/**
@@ -88,14 +96,6 @@ public class ApproverClaimsListActivity extends Activity {
 		
 	}
 	
-	/**
-	 * Set up the adapter and bind it to the list view
-	 */
-	private void setUpAdapter() {
-		adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
-		adapter.sort(new ClaimComparatorOldestFirst());
-		listView.setAdapter(adapter);	
-	}
 	
 	/**
 	 * Switch back to claimant mode
@@ -106,6 +106,13 @@ public class ApproverClaimsListActivity extends Activity {
 		super.onBackPressed();
 	}
 	
-	
+	private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
+        	listView.setAdapter(adapter);
+        	adapter.notifyDataSetChanged();
+        }
+};
 	
 }
