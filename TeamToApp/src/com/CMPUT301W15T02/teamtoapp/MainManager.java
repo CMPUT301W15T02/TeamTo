@@ -1,5 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.util.ArrayList;
+
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 
@@ -98,4 +100,6 @@ public class MainManager {
 	public static void saveUser() {
 		// TODO
 	}
+	
+	
 }

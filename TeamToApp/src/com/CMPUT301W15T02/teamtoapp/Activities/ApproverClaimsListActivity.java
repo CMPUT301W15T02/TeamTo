@@ -17,6 +17,8 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
 
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
@@ -24,6 +26,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Menu;
@@ -54,6 +57,7 @@ public class ApproverClaimsListActivity extends Activity {
 		findViewsByIds();
 		setListeners();
 		setUpAdapter();
+		
 	}
 
 	@Override
@@ -69,7 +73,11 @@ public class ApproverClaimsListActivity extends Activity {
 	private void getModelObjects() {
 		claimListController = new ClaimListController();
 		// Need to modify once networking is completed
-		submittedClaims = claimListController.getSubmittedClaims();
+		// submittedClaims = claimListController.getSubmittedClaims();
+		/*ElasticSearchManager.initializeContext(getApplicationContext());
+		ElasticSearchManager elasticSearchManager = new ElasticSearchManager();
+		submittedClaims = elasticSearchManager.getSubmittedClaims();
+		*/
 	}
 	
 	/**
