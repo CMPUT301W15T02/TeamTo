@@ -2,7 +2,6 @@ package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 
 
-import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
@@ -20,7 +19,6 @@ public class NetworkTest extends AndroidTestCase{
 	
 	public void testAddClaimToNetwork() {
 		MainManager.initializeContext(mContext);
-		claim.setClaimName("NetworkTest.java");
 		MainManager.addClaim(claim);
 	}
 	
@@ -29,14 +27,14 @@ public class NetworkTest extends AndroidTestCase{
 		MainManager.removeClaim(claim);
 	}
 	
-	// Test still failing. For some reason submitted claims 
-	// are not being saved even though it was working before?
 	public void testGetSubmittedClaimsFromNetwork() {
 		MainManager.initializeContext(mContext);
 		claim.setStatus(Status.SUBMITTED);
 		MainManager.addClaim(claim);
+		MainManager.removeClaim(claim);
 		
-		//assertEquals(1, MainManager.getSubmittedClaims().size());
+		// This si going to change every time you run the test.
+		assertEquals(1, MainManager.getSubmittedClaims().size());
 	}
 
 }
