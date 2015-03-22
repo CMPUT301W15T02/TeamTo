@@ -14,11 +14,8 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
-import java.util.ArrayList;
-
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
-
 import junit.framework.TestCase;
 
 /**
@@ -28,7 +25,6 @@ import junit.framework.TestCase;
 public class UserTest extends TestCase {
 
 	public void testAddTag() {
-		String userName = "User1";
 		User user = User.getInstance();
 		assertTrue("Tag list not empty", user.getTags().size() == 4);
 		
@@ -49,23 +45,22 @@ public class UserTest extends TestCase {
 	}
 	
 	public void testRemoveTag() {
-		String userName = "User1";
 		User user = User.getInstance();
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
 		user.addTag(tag1);
-		assertTrue("Tag not added", user.getTags().size() == 5);
+		assertTrue("Tag not added", user.getTags().contains(tag1));
 		
 		// Test remove default tag (made in constructor)
 		user.removeTag(tag1);
-		assertTrue("tag1 wasn't removed", user.getTags().size() == 4);
-		ArrayList<Tag> tags = user.getTags();
+		assertFalse("tag1 wasn't removed", user.getTags().contains(tag1));
+		
+		int sizeBefore = user.getTags().size();
 		user.removeTag(user.getTags().get(1));
-		assertTrue("Default tag not removed", user.getTags().size() == 3);
+		assertTrue("Default tag not removed", user.getTags().size() == sizeBefore-1);
 	}
 	
 	public void testRenameTag() {
-		String userName = "User1";
 		User user = User.getInstance();
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
@@ -74,7 +69,6 @@ public class UserTest extends TestCase {
 		user.renameTag(tag1, newTagName1);
 		assertTrue("New tag name not changed", user.getTags().get(4).getTagName().equals(newTagName1));
 		
-		// WHY DOES THIS WORK
 		String newTagName3 = "Jello";
 		String newTagName2 = "Hello";
 		Tag newTag = new Tag(newTagName2);
