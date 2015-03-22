@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantDestinationsListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -41,6 +42,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -118,12 +120,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	
 	@Override
 	public void onBackPressed() {
-		// Makes sure a claim is deleted only when nothing entered.
-		if (claimController.getCurrentClaim().getClaimName().equals("") &&
-				claimController.getDestinations().size() == 0) {
-		} else if (!claimListController.getClaims().contains(claimController.getCurrentClaim())) {
-			claimListController.addClaim(claimController.getCurrentClaim());
-		}
+		claimListController.claimEditBackPressed(claimController.getCurrentClaim());
 		finish();
 	}
 	

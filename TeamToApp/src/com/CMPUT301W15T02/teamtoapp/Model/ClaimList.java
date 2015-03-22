@@ -94,8 +94,6 @@ public class ClaimList implements Listener {
 		claims.add(claim);
 		// Notify listeners that claim has been added
 		notifyListeners();
-		MainManager.addClaim(claim);
-		Log.i("CLAIMINFO", claim.getClaimId());
 
 	}
 	
@@ -105,7 +103,6 @@ public class ClaimList implements Listener {
 		claims.remove(claim);
 		// notify listeners that claim has been updated (deleted)
 		notifyListeners();
-		MainManager.removeClaim(claim);
 
 	}
 
