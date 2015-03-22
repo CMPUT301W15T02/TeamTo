@@ -69,7 +69,7 @@ public class ElasticSearchManager {
 	// Q: Not sure if it matters whether we have a String/Integer claimID?
 	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
 	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
-	public Claim getClaim(String claimID) {
+	public static Claim getClaim(String claimID) {
 		Gson gson = new Gson();
 		
 		SearchHit<Claim> search_hit = null;
@@ -80,6 +80,7 @@ public class ElasticSearchManager {
 		
 		try {
 			response = httpClient.execute(httpGet);
+			Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
 			
 		} catch (ClientProtocolException e1) {
 			throw new RuntimeException(e1);

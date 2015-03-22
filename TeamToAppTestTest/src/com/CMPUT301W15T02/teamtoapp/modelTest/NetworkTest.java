@@ -2,6 +2,7 @@ package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 
 
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
@@ -42,6 +43,20 @@ public class NetworkTest extends AndroidTestCase{
 		
 		// assert size stays the same (adding/deletinfg the same claim)
 		assertEquals(size, MainManager.getSubmittedClaims().size());
+	}
+	
+	public void testGetClaimFromNetwork() {
+		MainManager.initializeContext(mContext);
+		String claimID = claim.getClaimId();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		MainManager.addClaim(claim);
+		assertEquals(claim, ElasticSearchManager.getClaim(claimID));
+		MainManager.removeClaim(claim);
 	}
 
 }
