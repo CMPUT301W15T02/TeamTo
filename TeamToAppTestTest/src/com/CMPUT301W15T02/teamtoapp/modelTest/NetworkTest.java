@@ -30,11 +30,18 @@ public class NetworkTest extends AndroidTestCase{
 	public void testGetSubmittedClaimsFromNetwork() {
 		MainManager.initializeContext(mContext);
 		claim.setStatus(Status.SUBMITTED);
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		int size = MainManager.getSubmittedClaims().size(); // save initial size
 		MainManager.addClaim(claim);
 		MainManager.removeClaim(claim);
 		
-		// This si going to change every time you run the test.
-		assertEquals(1, MainManager.getSubmittedClaims().size());
+		// assert size stays the same (adding/deletinfg the same claim)
+		assertEquals(size, MainManager.getSubmittedClaims().size());
 	}
 
 }
