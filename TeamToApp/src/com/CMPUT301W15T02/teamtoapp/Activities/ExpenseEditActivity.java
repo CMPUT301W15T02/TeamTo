@@ -23,6 +23,7 @@ import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
@@ -125,7 +126,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	}
 	
 	/**
-	 * Sets up both the currency spinner and the catgeory spinner
+	 * Sets up both the currency spinner and the category spinner
 	 */
 	private void setUpAdapters() {
 		currencyAdapter = ArrayAdapter.createFromResource(this, R.array.currency_string,
@@ -181,8 +182,11 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	
 	@Override
 	public void onBackPressed() {
+		// TODO move this to controller
+		// Should only update if something has changed
 		ClaimController claimController = new ClaimController(claimID);
 		claimController.addExpense(expenseController.getExpense());
+		MainManager.updateClaim(claimController.getCurrentClaim());
 		super.onBackPressed();
 	}
 

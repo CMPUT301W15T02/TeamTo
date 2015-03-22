@@ -285,8 +285,6 @@ public class Claim implements Listener {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
-		// Something has changed, update the claim
-		MainManager.updateClaim(this);
 	}
 	
 	public void addListener(Listener listener) {

@@ -52,10 +52,12 @@ public class ClaimListController {
 	public void addClaim(Claim claim) {
 		claim.setUserName(userName);
 		claims.addClaim(claim);
+		MainManager.addClaim(claim);
 	}
 	
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
+		MainManager.removeClaim(claim);
 	}
 	
 	public Claim getClaim(int position) {
@@ -98,6 +100,19 @@ public class ClaimListController {
 	public ArrayList<Claim> getSubmittedClaimsFromMainManager() {
 		return MainManager.getSubmittedClaims();
 		
+	}
+	
+	public void claimEditBackPressed(Claim claim) {
+		if (claim.getClaimName().equals("") && claim.getDestinations().size() == 0) {
+			// do nothing
+		} else if (!getClaims().contains(claim)) {
+			addClaim(claim);
+			Log.i("CLAIMID",claim.getClaimId());
+			MainManager.addClaim(claim);
+		} else {
+			MainManager.updateClaim(claim);
+		}
+		return;
 	}
 	
 	
