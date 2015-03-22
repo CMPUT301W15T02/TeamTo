@@ -32,14 +32,24 @@ public class NetworkTest extends AndroidTestCase{
 		MainManager.initializeContext(mContext);
 		claim.setStatus(Status.SUBMITTED);
 
+		int size = MainManager.getSubmittedClaims().size(); // save initial size
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		int size = MainManager.getSubmittedClaims().size(); // save initial size
 		MainManager.addClaim(claim);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		MainManager.removeClaim(claim);
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		// assert size stays the same (adding/deletinfg the same claim)
 		assertEquals(size, MainManager.getSubmittedClaims().size());
@@ -48,14 +58,19 @@ public class NetworkTest extends AndroidTestCase{
 	public void testGetClaimFromNetwork() {
 		MainManager.initializeContext(mContext);
 		String claimID = claim.getClaimId();
+		
+		MainManager.addClaim(claim);
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-		MainManager.addClaim(claim);
-		assertEquals(claim, ElasticSearchManager.getClaim(claimID));
+		assertEquals(claim.getClaimId(), ElasticSearchManager.getClaim(claimID).getClaimId());
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		MainManager.removeClaim(claim);
 	}
 
