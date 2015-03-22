@@ -18,10 +18,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 
+import android.test.AndroidTestCase;
+
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
@@ -31,17 +35,20 @@ import junit.framework.TestCase;
  * Tests use cases 1.X
  */
 
-public class UseCase1Test extends TestCase {
+public class UseCase1Test extends AndroidTestCase {
 
 	// UC 1.0
 	/**
 	 * Tests adding a claim (i.e. though session controller)
 	 */
 	public void testAddClaim () {
+		MainManager.initializeContext(mContext);
+		// Need to set username first before dealing with any claims.
+		User.getInstance().setName("New name");
+		
 		ClaimListController claims = new ClaimListController();
 		Claim claim = new Claim();
-		claims.getUserName();
-		// added getUserName to ClaimListController just to see if username is the same - method only for testing.
+
 		assertEquals("New name", claims.getUserName());
 		claims.addClaim(claim);
 		
