@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
@@ -81,6 +82,7 @@ public class ClaimController {
 	 */
 	public void submitClaim() {
 		currentClaim.setStatus(Status.SUBMITTED);
+		MainManager.updateClaim(currentClaim);
 	}
 	
 	/**

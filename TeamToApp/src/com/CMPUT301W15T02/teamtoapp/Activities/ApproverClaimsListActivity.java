@@ -30,6 +30,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,12 +51,19 @@ public class ApproverClaimsListActivity extends Activity {
 	private ClaimListController claimListController;
 	private ApproverClaimListAdapter adapter;
 	private ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
+	ProgressDialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_claims_list);
 		findViewsByIds();
+		dialog = new ProgressDialog(ApproverClaimsListActivity.this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 		getModelObjects();
 		setListeners();
 		
@@ -110,6 +119,7 @@ public class ApproverClaimsListActivity extends Activity {
         	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
         	listView.setAdapter(adapter);
         	adapter.notifyDataSetChanged();
+        	dialog.dismiss();
         }
 };
 	

@@ -12,9 +12,8 @@ import android.test.AndroidTestCase;
 
 public class NetworkTest extends AndroidTestCase{
 	
-	public Claim claim = new Claim();
 	
-	public void testNetworkAvailable() {
+	/*public void testNetworkAvailable() {
 		MainManager.initializeContext(mContext);
 	}
 	
@@ -27,8 +26,10 @@ public class NetworkTest extends AndroidTestCase{
 		MainManager.initializeContext(mContext);
 		MainManager.removeClaim(claim);
 	}
+	*/
 	
 	public void testGetSubmittedClaimsFromNetwork() {
+		Claim claim = new Claim();
 		MainManager.initializeContext(mContext);
 		claim.setStatus(Status.SUBMITTED);
 
@@ -56,6 +57,7 @@ public class NetworkTest extends AndroidTestCase{
 	}
 	
 	public void testGetClaimFromNetwork() {
+		Claim claim = new Claim();
 		MainManager.initializeContext(mContext);
 		String claimID = claim.getClaimId();
 		
