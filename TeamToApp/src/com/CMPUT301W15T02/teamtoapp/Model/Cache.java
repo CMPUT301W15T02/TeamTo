@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,12 +43,18 @@ public class Cache {
 	
 	public void updateClaimsFromCache(Context context) {
 		for (Claim claim: claimsToUpdate) {
-			MainManager.addClaim(claim);
+			ElasticSearchManager.addClaim(claim);
 			claimsToUpdate.remove(claim);
 		}
 		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		for (Claim claim: claimsToRemove) {
-			MainManager.removeClaim(claim);
+			ElasticSearchManager.deleteClaim(claim.getClaimId());
 			claimsToRemove.remove(claim);
 		}
 	}

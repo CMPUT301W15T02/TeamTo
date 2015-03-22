@@ -210,35 +210,43 @@ public class ElasticSearchManager {
 	/*Source:
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
 	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
-	public static void addClaim(Claim claim) {
-		Gson gson = new Gson();
-		HttpClient httpClient = new DefaultHttpClient();
-		try {
+	public static void addClaim(final Claim claim) {
+		
+		new Thread(new Runnable() {
 			
-			// HttpPost for adding a claim
-			HttpPost addRequest = new HttpPost(RESOURCE_URL + claim.getClaimId());
-			StringEntity stringEntity = new StringEntity(gson.toJson(claim));
-			addRequest.setEntity(stringEntity);
-			addRequest.setHeader("Accept", "application/json");
-			
-			HttpResponse response = httpClient.execute(addRequest);
-			
-			// Can use TAG to check status via logcat.
-			String status = response.getStatusLine().toString();
-			Log.i(TAG, status);
-			
-		} catch (JsonIOException e) {
-			throw new RuntimeException(e);
-			
-		} catch (JsonSyntaxException e) {
-			throw new RuntimeException(e);
-			
-		} catch (IllegalStateException e) {
-			throw new RuntimeException(e);
-			
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+			@Override
+			public void run() {
+				Gson gson = new Gson();
+				HttpClient httpClient = new DefaultHttpClient();
+				try {
+					
+					// HttpPost for adding a claim
+					HttpPost addRequest = new HttpPost(RESOURCE_URL + claim.getClaimId());
+					StringEntity stringEntity = new StringEntity(gson.toJson(claim));
+					addRequest.setEntity(stringEntity);
+					addRequest.setHeader("Accept", "application/json");
+					
+					HttpResponse response = httpClient.execute(addRequest);
+					
+					// Can use TAG to check status via logcat.
+					String status = response.getStatusLine().toString();
+					Log.i(TAG, status);
+					
+				} catch (JsonIOException e) {
+					throw new RuntimeException(e);
+					
+				} catch (JsonSyntaxException e) {
+					throw new RuntimeException(e);
+					
+				} catch (IllegalStateException e) {
+					throw new RuntimeException(e);
+					
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				
+			}
+		}).start();
 	}
 	
 	/**
@@ -250,36 +258,47 @@ public class ElasticSearchManager {
 	/*Source:
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
 	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
-	public static void deleteClaim(String claimId) {
-		HttpClient httpClient = new DefaultHttpClient();
-		try {
+	public static void deleteClaim(final String claimId) {
+		
+		new Thread(new Runnable() {
 			
-			// HTTP delete for deleting a claim
-			HttpDelete deleteRequest = new HttpDelete(RESOURCE_URL + claimId);
-			deleteRequest.setHeader("Accept", "application/json");
-			
-			HttpResponse response = httpClient.execute(deleteRequest);
-			
-			// Can use TAG to check status via logcat.
-			String status = response.getStatusLine().toString();
-			Log.i(TAG, status);
-			
-		} catch (JsonIOException e) {
-			throw new RuntimeException(e);
-			
-		} catch (JsonSyntaxException e) {
-			throw new RuntimeException(e);
-			
-		} catch (IllegalStateException e) {
-			throw new RuntimeException(e);
-			
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+			@Override
+			public void run() {
+				
+				HttpClient httpClient = new DefaultHttpClient();
+				try {
+					
+					// HTTP delete for deleting a claim
+					HttpDelete deleteRequest = new HttpDelete(RESOURCE_URL + claimId);
+					deleteRequest.setHeader("Accept", "application/json");
+					
+					HttpResponse response = httpClient.execute(deleteRequest);
+					
+					// Can use TAG to check status via logcat.
+					String status = response.getStatusLine().toString();
+					Log.i(TAG, status);
+					
+				} catch (JsonIOException e) {
+					throw new RuntimeException(e);
+					
+				} catch (JsonSyntaxException e) {
+					throw new RuntimeException(e);
+					
+				} catch (IllegalStateException e) {
+					throw new RuntimeException(e);
+					
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				
+			}
+		}).start();
 	}
 	
 	public static void updateClaim(Claim claim) {
 		// Updating the claim is the same as adding the claim
 		addClaim(claim);
 	}
+	
+	
 }

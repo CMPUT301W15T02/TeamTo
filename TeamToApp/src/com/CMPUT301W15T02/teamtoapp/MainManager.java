@@ -40,16 +40,9 @@ public class MainManager {
 	
 	
 	public static void addClaim(final Claim claim) {
-		// TODO
 		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					ElasticSearchManager.addClaim(claim);
-					
-				}
-			}).start();
+			
+			ElasticSearchManager.addClaim(claim);
 		} else {
 			Cache.getInstance().addUpdateToCache(claim, applicationContext);
 		}
@@ -58,14 +51,8 @@ public class MainManager {
 	
 	public static void removeClaim(final Claim claim) {
 		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					ElasticSearchManager.deleteClaim(claim.getClaimId());
-					
-				}
-			}).start();
+			
+			ElasticSearchManager.deleteClaim(claim.getClaimId());
 		} else {
 			Cache.getInstance().addRemovalToCache(claim, applicationContext);
 		}
@@ -74,13 +61,7 @@ public class MainManager {
 	
 	public static void updateClaim(final Claim claim) {
 		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					ElasticSearchManager.updateClaim(claim);
-				}
-			}).start();
+			ElasticSearchManager.updateClaim(claim);
 		} else {
 			Cache.getInstance().addUpdateToCache(claim, applicationContext);
 		}
