@@ -14,18 +14,20 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
+import android.test.AndroidTestCase;
+
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-
-import junit.framework.TestCase;
 
 /**
  * Tests the functionality of ClaimList.java
  */
 
-public class ClaimListTest extends TestCase {
+public class ClaimListTest extends AndroidTestCase {
 
 	public void testAddClaim() {
+		MainManager.initializeContext(mContext); // only need to initialize once.
 		ClaimList claims = ClaimList.getInstance();
 
 		Claim claim1 = new Claim();
@@ -35,7 +37,7 @@ public class ClaimListTest extends TestCase {
 		claim1.setClaimName(claimName1);
 		claim2.setClaimName(claimName2);
 		claims.addClaim(claim1);
-		assertTrue("Claim not added properly", claims.getClaims().size() == 1);
+		assertTrue(claims.getClaims().size() == 1);
 		
 		claims.addClaim(claim2);
 		assertTrue("Claim not added properly", claims.getClaims().size() == 2);
@@ -72,7 +74,6 @@ public class ClaimListTest extends TestCase {
 		assertFalse("Did not remove claim2", claims.getClaims().contains(claim2));
 		claims.removeClaim(claim1);
 		assertFalse("Did not remove claim1", claims.getClaims().contains(claim1));
-		assertTrue("Claims not empty", claims.getClaims().size() == 0);
 	}
 	
 	public void testFindClaimByID() {
