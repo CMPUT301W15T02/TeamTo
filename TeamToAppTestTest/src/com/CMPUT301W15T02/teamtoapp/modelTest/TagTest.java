@@ -16,7 +16,6 @@ package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import junit.framework.TestCase;
 

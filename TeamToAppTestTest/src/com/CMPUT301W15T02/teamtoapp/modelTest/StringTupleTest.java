@@ -14,9 +14,9 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
+import junit.framework.TestCase;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 
-import junit.framework.TestCase;
 
 /**
  * Tests the functionality of StringTupleTest.java
@@ -53,7 +53,6 @@ public class StringTupleTest extends TestCase {
 
 		assertTrue("Reason not set", tuple.getReason().equals(newReason));
 
-		// WHY IS THIS FAILING? You are comparing a destination and a reason
 		assertEquals("Reason not set", newReason, tuple.getReason());
 
 	}

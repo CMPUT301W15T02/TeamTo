@@ -14,18 +14,20 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import android.test.AndroidTestCase;
 
-import junit.framework.TestCase;
+import com.CMPUT301W15T02.teamtoapp.MainManager;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 /**
  * Tests the functionality of Expense.java
  */
 
-public class ExpenseTest extends TestCase {
+public class ExpenseTest extends AndroidTestCase {
 
-	// TODO: Needs to be edited as addPhoto() functionality added
+	// TODO: Needs to be edited as addPhoto() functionality added (Nothing in it yet therefore not passing yet).
 	public void testAddPhoto() {
+		MainManager.initializeContext(mContext);
 		Expense expense = new Expense();
 		String photoPath = "";
 		expense.addPhoto(photoPath);
