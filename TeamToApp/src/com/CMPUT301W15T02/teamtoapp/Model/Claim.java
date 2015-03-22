@@ -95,7 +95,7 @@ public class Claim implements Listener {
 	
 
 	public GregorianCalendar getStartDate() {
-		return this.startDate;
+		return startDate;
 	}
 	
 	

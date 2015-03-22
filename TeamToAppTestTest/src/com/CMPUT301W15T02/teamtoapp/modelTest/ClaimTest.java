@@ -19,19 +19,22 @@ import java.util.Calendar;
 import java.util.Currency;
 import java.util.GregorianCalendar;
 
+import android.test.AndroidTestCase;
+
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 
-import junit.framework.TestCase;
 
 /**
  * Tests the functionality of Claim.java
  */
 
-public class ClaimTest extends TestCase {
+public class ClaimTest extends AndroidTestCase {
 
 	public void testAddClaim() {
+		MainManager.initializeContext(mContext);
 		String defaultClaimName = "";
 		Claim claim = new Claim();
 		assertTrue("Default claim name not ''", claim.getClaimName().equals(defaultClaimName));
