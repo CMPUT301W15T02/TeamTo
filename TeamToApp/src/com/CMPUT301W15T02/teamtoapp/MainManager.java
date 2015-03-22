@@ -41,7 +41,6 @@ public class MainManager {
 	
 	public static void addClaim(final Claim claim) {
 		if (isNetworkAvailable(applicationContext)) {
-			
 			ElasticSearchManager.addClaim(claim);
 		} else {
 			Cache.getInstance().addUpdateToCache(claim, applicationContext);
