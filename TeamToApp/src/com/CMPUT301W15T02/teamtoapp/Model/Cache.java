@@ -25,13 +25,12 @@ public class Cache {
 	private static String REMOVE_FILE_NAME = "remove_claims_cache_file.txt";
 	
 	private ArrayList<Claim> claimsToUpdate;
-	private ArrayList<Claim> claimsToRemove;
+	private ArrayList<Claim> claimsToRemove; 
 	
 	
 	private Cache() {
-		instance = new Cache();
 		claimsToUpdate = new ArrayList<Claim>();
-		claimsToRemove = new ArrayList<Claim>();
+		claimsToRemove = new ArrayList<Claim>(); 
 	}
 	
 	public static Cache getInstance() {
@@ -57,6 +56,10 @@ public class Cache {
 			ElasticSearchManager.deleteClaim(claim.getClaimId());
 			claimsToRemove.remove(claim);
 		}
+	}
+	
+	public boolean isCacheEmpty() {
+		return ((claimsToRemove.size() + claimsToUpdate.size()) == 0);
 	}
 	
 	public void addRemovalToCache(Claim claim, Context context) {
