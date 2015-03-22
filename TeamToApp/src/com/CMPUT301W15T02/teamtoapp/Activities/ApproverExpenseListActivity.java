@@ -15,10 +15,25 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+import java.util.ArrayList;
+
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverExpenseListAdapter;
+
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ListView;
+
 
 /**
  * 
@@ -28,10 +43,25 @@ import android.view.Menu;
 
 public class ApproverExpenseListActivity extends Activity {
 
+	private String claimID;
+	private ArrayList<Expense> expenses;
+	private ListView expenseListView;
+	private ApproverExpenseListAdapter adapter;
+	private Context context = this;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_expense_list);
+		
+		// getModelObjects not complete.
+		
+		//findViewsByIds();
+		//getModelObjects();
+		//setFieldValues();
+		//setListeners();
+		//setUpAdapter();
 	}
 
 	@Override
@@ -39,5 +69,61 @@ public class ApproverExpenseListActivity extends Activity {
 		getMenuInflater().inflate(R.menu.approver_expense_list, menu);
 		return true;
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		int id = item.getItemId();
+		if (id == R.id.approve_claim) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+		
+	}
 
+	/**
+	 * Gets the necessary objects and controllers
+	 */
+	private void getModelObjects() {
+		MainManager.initializeContext(context);
+		Intent intent = getIntent();
+		claimID = (String) intent.getSerializableExtra("claimID");
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				expenses = ElasticSearchManager.getClaim(claimID).getExpenses();
+			}
+		}).start();
+	}
+	
+	/**
+	 * Sets up claim list adapter and binds it to the current list view
+	 */
+	private void setUpAdapter() {
+		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);
+		expenseListView.setAdapter(adapter);
+	}
+	
+	/**
+	 * Finds the necessary views needed in this activity
+	 */
+	private void findViewsByIds() {
+		expenseListView = (ListView) findViewById(R.id.approverExpenseListView);
+
+	}
+	
+	/**
+	 * Set the default text of the fields
+	 */
+	private void setFieldValues() {
+		
+	}
+	
+	
+	/**
+	 * Sets up the listeners
+	 */
+	private void setListeners() {
+		
+	}
 }
