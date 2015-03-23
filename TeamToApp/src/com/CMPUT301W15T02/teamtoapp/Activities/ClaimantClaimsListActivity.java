@@ -25,6 +25,7 @@ import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
@@ -171,6 +172,13 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
 			intent.putExtra("claimID", "");
 			startActivity(intent);	
+		} else if (id == R.id.refreshClaims) {
+			if (MainManager.isNetworkAvailable(getApplicationContext())) {
+				Cache.getInstance().updateClaimsFromCache(context);
+				Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
+			} else {
+				Toast.makeText(context, "No network access", Toast.LENGTH_SHORT).show();
+			}
 		}
 		return super.onOptionsItemSelected(item);
 	}

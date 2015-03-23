@@ -14,6 +14,7 @@ import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import android.R.integer;
 import android.content.Context;
 
 public class Cache {
@@ -40,22 +41,33 @@ public class Cache {
 		return instance;
 	}
 	
-	public void updateClaimsFromCache(Context context) {
-		for (Claim claim: claimsToUpdate) {
+	public void updateClaimsFromCache(final Context context) {
+
+		ElasticSearchManager.initializeContext(context.getApplicationContext());
+		for (int i = 0; i < claimsToUpdate.size(); i ++) {
+			Claim claim = new Claim();
+			claim = claimsToUpdate.get(i);
 			ElasticSearchManager.addClaim(claim);
-			claimsToUpdate.remove(claim);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		
-		for (Claim claim: claimsToRemove) {
+		for (int i = 0; i < claimsToRemove.size(); i ++) {
+			Claim claim = new Claim();
+			claim = claimsToRemove.get(i);
 			ElasticSearchManager.deleteClaim(claim.getClaimId());
-			claimsToRemove.remove(claim);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+		
 	}
 	
 	public boolean isCacheEmpty() {
