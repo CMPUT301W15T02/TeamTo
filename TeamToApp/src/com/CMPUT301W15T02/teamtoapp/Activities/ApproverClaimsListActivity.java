@@ -20,21 +20,20 @@ import java.util.ArrayList;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.StrictMode;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 /**
@@ -48,7 +47,6 @@ public class ApproverClaimsListActivity extends Activity {
 
 	final Context context = this;
 	private ListView listView;
-	private ClaimListController claimListController;
 	private ApproverClaimListAdapter adapter;
 	private ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
 	ProgressDialog dialog;
@@ -100,7 +98,15 @@ public class ApproverClaimsListActivity extends Activity {
 	}
 	
 	private void setListeners() {
-		
+		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Claim claim = submittedClaims.get(position);
+				Intent intent = new Intent(ApproverClaimsListActivity.this, ApproverExpenseListActivity.class);
+				intent.putExtra("claimID", claim.getClaimId());
+				startActivity(intent);
+			}
+		});
 	}
 	
 	
@@ -118,9 +124,10 @@ public class ApproverClaimsListActivity extends Activity {
         public void handleMessage(Message msg) {
         	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
         	listView.setAdapter(adapter);
+        	adapter.sort(new ClaimComparatorNewestFirst());
         	adapter.notifyDataSetChanged();
         	dialog.dismiss();
         }
-};
+	};
 	
 }

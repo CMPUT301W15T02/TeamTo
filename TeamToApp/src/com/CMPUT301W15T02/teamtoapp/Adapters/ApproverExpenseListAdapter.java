@@ -85,6 +85,20 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 		
 		Expense expense = expenseList.get(position);
 		// TODO: do stuff here
+		if (expense.getDescription().trim().isEmpty()) {
+			holder.approverExpenseDescriptionTextView.setText("No Description");
+		} else {
+			holder.approverExpenseDescriptionTextView.setText(expense.getDescription());
+		}
+		
+		holder.approverExpenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
+		holder.approverCategoryTextView.setText(expense.getCategory());
+		holder.approverCurrencyTextView.setText(numformatter.format(expense.getAmount()).toString()+" "+expense.getCurrency());
+		if (expense.getPhoto() == null) {
+			holder.approverPhotoReceiptTextView.setText("Reciept? No");
+		} else {
+			holder.approverPhotoReceiptTextView.setText("Receipt? Yes");
+		}
 		
 		return row;
 	}
