@@ -28,6 +28,8 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+
+import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -175,7 +177,27 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				// TODO In progress
-				return null;
+				
+				String filterTag = constraint.toString();
+				FilterResults results = new FilterResults();
+				
+				final ArrayList<Claim> oldList = originalClaimList;
+				int count = oldList.size();
+				final ArrayList<Claim> newList = new ArrayList<Claim>(count);
+				
+				// Loop via claim's tag list
+				ArrayList<Tag> filterableTag;
+				for (int i = 0; i < count; i++) {
+					filterableTag = oldList.get(i).getTags();
+					for (int j = 0 ; i < filterableTag.size(); i++) {
+						if (filterableTag.contains(filterTag)) {
+							newList.add(oldList.get(i));
+						}
+					}
+				}
+				results.values = newList;
+				results.count = newList.size();
+				return results;
 			}
 
 	    }
