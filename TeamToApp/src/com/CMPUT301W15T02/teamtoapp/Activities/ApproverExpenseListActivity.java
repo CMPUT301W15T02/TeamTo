@@ -23,9 +23,12 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverExpenseListAdapter;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -55,13 +58,10 @@ public class ApproverExpenseListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_expense_list);
 		
-		// getModelObjects not complete.
-		
-		//findViewsByIds();
-		//getModelObjects();
-		//setFieldValues();
-		//setListeners();
-		//setUpAdapter();
+		findViewsByIds();
+		getModelObjects();
+		setFieldValues();
+		setListeners();
 	}
 
 	@Override
@@ -83,25 +83,18 @@ public class ApproverExpenseListActivity extends Activity {
 	/**
 	 * Gets the necessary objects and controllers
 	 */
-	private void getModelObjects() {
-		MainManager.initializeContext(context);
+	private void getModelObjects() {	
 		Intent intent = getIntent();
 		claimID = (String) intent.getSerializableExtra("claimID");
 		new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
+				MainManager.initializeContext(context);
 				expenses = ElasticSearchManager.getClaim(claimID).getExpenses();
+				handler.sendEmptyMessage(0);
 			}
 		}).start();
-	}
-	
-	/**
-	 * Sets up claim list adapter and binds it to the current list view
-	 */
-	private void setUpAdapter() {
-		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);
-		expenseListView.setAdapter(adapter);
 	}
 	
 	/**
@@ -121,9 +114,24 @@ public class ApproverExpenseListActivity extends Activity {
 	
 	
 	/**
-	 * Sets up the listeners
+	 * Sets up the listeners for the expense list view
 	 */
 	private void setListeners() {
 		
 	}
+	
+	/**
+	 * Handler sets up expense list adapter and binds it to the current expense list view
+	 */
+	private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+    		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);
+        	//adapter.sort(new ClaimComparatorNewestFirst());
+        	adapter.notifyDataSetChanged();    		
+        	expenseListView.setAdapter(adapter);
+        }
+	};
+	
+	
 }
