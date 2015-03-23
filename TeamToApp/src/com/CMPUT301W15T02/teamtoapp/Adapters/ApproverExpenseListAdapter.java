@@ -95,9 +95,9 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 		holder.approverCategoryTextView.setText(expense.getCategory());
 		holder.approverCurrencyTextView.setText(numformatter.format(expense.getAmount()).toString()+" "+expense.getCurrency());
 		if (expense.getPhoto() == null) {
-			holder.approverPhotoReceiptTextView.setText("Reciept? No");
+			holder.approverPhotoReceiptTextView.setText("Photo Receipt: No");
 		} else {
-			holder.approverPhotoReceiptTextView.setText("Receipt? Yes");
+			holder.approverPhotoReceiptTextView.setText("Photo Receipt: Yes");
 		}
 		
 		return row;
