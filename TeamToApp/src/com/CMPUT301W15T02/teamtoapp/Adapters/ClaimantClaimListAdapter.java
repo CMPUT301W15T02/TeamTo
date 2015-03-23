@@ -40,6 +40,7 @@ import android.widget.TextView;
  * A customized adapter for the claimant's list of claims.
  *
  */
+// GOING TO BE USING THIS: http://www.survivingwithandroid.com/2012/10/android-listview-custom-filter-and.html 2015-03-23
 public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;

@@ -13,20 +13,26 @@ import android.test.AndroidTestCase;
 public class NetworkTest extends AndroidTestCase{
 	
 	
-	/*public void testNetworkAvailable() {
+	public void testNetworkAvailable() {
 		MainManager.initializeContext(mContext);
 	}
 	
-	public void testAddClaimToNetwork() {
+	public void testAddAndRemoveClaimInNetwork() {
+		Claim claim = new Claim();
 		MainManager.initializeContext(mContext);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		MainManager.addClaim(claim);
-	}
-	
-	public void testDeleteClaimFromNetwork() {
-		MainManager.initializeContext(mContext);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		MainManager.removeClaim(claim);
 	}
-	*/
 	
 	public void testGetSubmittedClaimsFromNetwork() {
 		Claim claim = new Claim();
@@ -35,19 +41,19 @@ public class NetworkTest extends AndroidTestCase{
 
 		int size = MainManager.getSubmittedClaims().size(); // save initial size
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		MainManager.addClaim(claim);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		MainManager.removeClaim(claim);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -63,13 +69,13 @@ public class NetworkTest extends AndroidTestCase{
 		
 		MainManager.addClaim(claim);
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		assertEquals(claim.getClaimId(), ElasticSearchManager.getClaim(claimID).getClaimId());
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
