@@ -15,10 +15,12 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.R.integer;
 import android.content.Context;
 import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -114,8 +116,7 @@ public class ElasticSearchManager {
 	/**
 	 * Get all submitted claims for the approver (Approver mode)
 	 * If the search does not specify fields, it searches on all the fields.
-	 * 
-	 *  TODO: Needs testing
+
 	 */	
 	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
 	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
@@ -198,15 +199,33 @@ public class ElasticSearchManager {
 			
 		}
 		
-		return submittedClaimsResult;
+		return filterSubmittedClaims(submittedClaimsResult);
 		
 	}
 	
 	/**
-	* adds a claim to server (Claimant mode)
-	* @param claim - the claim to be added to the elastic search server
+	* Filters out any claims where the claimant name == approver name.
+	* @param submittedClaimsResult - the list of submitted claims to be filtered.
 	* 
 	*  TODO: Needs testing
+	*/
+	private static  ArrayList<Claim> filterSubmittedClaims(
+			ArrayList<Claim> submittedClaimsResult) {
+		// Filter out claims where claimant name == approver name
+		// TODO: Doesn't work!! :(
+		for (int i=0; i < submittedClaimsResult.size(); i++) {
+			if (submittedClaimsResult.get(i).getUserName() == User.getInstance().getName()) {
+				submittedClaimsResult.remove(i);
+			}
+		}
+		
+		return submittedClaimsResult;
+	}
+
+
+	/**
+	* adds a claim to server (Claimant mode)
+	* @param claim - the claim to be added to the elastic search server
 	*/
 	/*Source:
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
@@ -253,8 +272,6 @@ public class ElasticSearchManager {
 	/**
 	 * Deletes the claim with the specified ID
 	 *  @param claimId - the claimID that identifies claim to be deleted
-	 *  
-	 *   TODO: Needs testing
 	 */
 	/*Source:
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
@@ -296,6 +313,10 @@ public class ElasticSearchManager {
 		}).start();
 	}
 	
+	/**
+	 * Updates an existing claim by re-adding to server (overwrites old claim)
+	 *  @param claim - the claim to be updated
+	 */
 	public static void updateClaim(Claim claim) {
 		// Updating the claim is the same as adding the claim
 		addClaim(claim);
