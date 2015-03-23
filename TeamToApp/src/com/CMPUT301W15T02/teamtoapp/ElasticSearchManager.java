@@ -214,7 +214,7 @@ public class ElasticSearchManager {
 		// Filter out claims where claimant name == approver name
 		// TODO: Doesn't work!! :(
 		for (int i=0; i < submittedClaimsResult.size(); i++) {
-			if (submittedClaimsResult.get(i).getUserName() == User.getInstance().getName()) {
+			if (submittedClaimsResult.get(i).getUserName().equals(User.getInstance().getName())) {
 				submittedClaimsResult.remove(i);
 			}
 		}
