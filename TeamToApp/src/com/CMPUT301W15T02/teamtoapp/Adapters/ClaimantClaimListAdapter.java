@@ -34,18 +34,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 /**
  * 
  * A customized adapter for the claimant's list of claims.
  *
  */
-// GOING TO BE USING THIS: http://www.survivingwithandroid.com/2012/10/android-listview-custom-filter-and.html 2015-03-23
-public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
+// GOING TO BE USING THIS: http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23
+public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Filterable{
 
 	private Context context;
 	private int layoutId;
-	private ArrayList<Claim> claimsList;
+	private ArrayList<Claim> originalClaimList = null;
+	private ArrayList<Claim> filteredClaimList = null;
+	private TagFilter myFilter = new TagFilter();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
 
@@ -54,7 +58,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		super(context, textViewResourceId, items);
 		this.context = context;
 		this.layoutId = textViewResourceId;
-		this.claimsList  = items;
+		this.originalClaimList  = items;
+		this.filteredClaimList = items;
 
 	}
 	
@@ -68,6 +73,24 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView tagsTextView;
 		
 	}
+	
+    public int getCount() {
+        return filteredClaimList.size();
+    }
+    
+    public Claim getItem(int position) {
+        return filteredClaimList.get(position);
+    }
+    
+    public long getItemId(int position) {
+        return position;
+    }
+    
+    public Filter getFilter() {
+    	return myFilter;
+    }
+    
+    
 	/**
 	 * Updates the view of the Claims list of the claimant once created or shows the changes once they are edited
 	 */
@@ -93,7 +116,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		}
 		
 		// These holders update the data for the recently made or changed claim for the claimant claims
-		Claim claim = claimsList.get(position);
+		Claim claim = originalClaimList.get(position);
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
@@ -138,4 +161,23 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		return row;
 	}
+	
+	
+	   private class TagFilter extends Filter {
+
+	        @SuppressWarnings("unchecked")
+	        @Override
+	        protected void publishResults(CharSequence constraint, FilterResults results) {
+	            filteredClaimList = (ArrayList<Claim>) results.values;
+	            notifyDataSetChanged();
+	        }
+
+			@Override
+			protected FilterResults performFiltering(CharSequence constraint) {
+				// TODO In progress
+				return null;
+			}
+
+	    }
+
 }
