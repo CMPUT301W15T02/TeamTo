@@ -35,6 +35,7 @@ import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.annotations.JsonAdapter;
@@ -115,6 +116,13 @@ public class LocalDataManager {
 		}
 		if (claims == null) {
 			claims = new ArrayList<Claim>();
+		}
+		
+		for (Claim claim: claims) {
+			claim.addListener(ClaimList.getInstance());
+			for (Expense expense: claim.getExpenses()) {
+				expense.addListener(claim);
+			}
 		}
 		ClaimList.getInstance().setClaims(claims);
 	}
