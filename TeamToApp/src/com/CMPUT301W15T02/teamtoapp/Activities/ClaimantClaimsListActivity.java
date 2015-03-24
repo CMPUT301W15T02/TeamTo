@@ -19,6 +19,7 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
@@ -273,6 +274,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+		Arrays.fill(boolArray, Boolean.FALSE);
 		adapter.getFilter().filter("");
 	}
 
