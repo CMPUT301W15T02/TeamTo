@@ -164,15 +164,15 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	 */
 	private void filterByTags() {
 
-		
 		// going to be using this tomorrow: http://stackoverflow.com/questions/5122974/multiple-choice-searchable-listview
 		// 2015-03-24
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		// Get the list of available tags
 		
 		mSelectedItems = new ArrayList<String>();
-		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
+		builder.setMultiChoiceItems(strings, null, new DialogInterface.OnMultiChoiceClickListener() {
 			// Add or remove tags based on the boolean array
+			
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				if (isChecked) {
@@ -182,7 +182,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 				} else if (mSelectedItems.contains(strings[which])) {
 					mSelectedItems.remove(strings[which]);
 				}
-				boolArray[which] = isChecked;
 			}
 		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			
@@ -274,7 +273,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		Arrays.fill(boolArray, Boolean.FALSE);
 		adapter.getFilter().filter("");
 	}
 
