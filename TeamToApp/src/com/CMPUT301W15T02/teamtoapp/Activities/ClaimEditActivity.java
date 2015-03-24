@@ -405,9 +405,6 @@ public class ClaimEditActivity extends Activity implements Listener {
 		super.onDestroy();
 		claimController.removeListenerFromClaim(this);
 	}
-
-	
-	
 	
 	
 }

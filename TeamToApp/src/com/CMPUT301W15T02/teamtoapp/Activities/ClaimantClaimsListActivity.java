@@ -60,13 +60,22 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
 	private ArrayList<String> mSelectedItems;
+	boolean[] boolArray;
+	ArrayList<Tag> tags;
+	CharSequence[] strings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
+		tags = new UserController().getTags();
+		strings = new CharSequence[tags.size()];
+		boolArray = new boolean[tags.size()];
 		
-
+		for (int i = 0; i < tags.size(); i++) {
+			strings[i] = tags.get(i).toString();
+			boolArray[i] = false;
+		}
 		getModelObjects();
 		findViewsByIds();
 		setListeners();
@@ -159,21 +168,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// 2015-03-24
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		// Get the list of available tags
-		final ArrayList<Tag> tags = new UserController().getTags();
-		
-		// Make an array of the same size containing string representations of the tags
-		final CharSequence[] strings = new CharSequence[tags.size()];
-		
-		
-		// Create a boolean array of the same size
-		boolean[] boolArray = new boolean[tags.size()];
-		
-		// Add the tag from the user tags into the array of strings
-		for (int i = 0; i < tags.size(); i++) {
-			strings[i] = tags.get(i).toString();
-			// If the tag is in the list of tags then set true
-			boolArray[i] = false;
-		}
 		
 		mSelectedItems = new ArrayList<String>();
 		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
@@ -187,7 +181,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 				} else if (mSelectedItems.contains(strings[which])) {
 					mSelectedItems.remove(strings[which]);
 				}
-				//boolArray[which] = isChecked;
+				boolArray[which] = isChecked;
 			}
 		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			
