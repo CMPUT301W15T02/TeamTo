@@ -40,6 +40,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,6 +59,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	final Context context = this;
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
+	private ArrayList<String> mSelectedItems;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +157,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		final ArrayList<Tag> tags = new UserController().getTags();
 		
 		// Make an array of the same size containing string representations of the tags
-		CharSequence[] strings = new CharSequence[tags.size()];
+		final CharSequence[] strings = new CharSequence[tags.size()];
 		
 		
 		// Create a boolean array of the same size
@@ -171,13 +173,17 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// going to be using this tomorrow: http://stackoverflow.com/questions/5122974/multiple-choice-searchable-listview
 		// 2015-03-24
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
+		mSelectedItems = new ArrayList<String>();
 		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
 			// Add or remove tags based on the boolean array
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				if (isChecked) {
 					// TODO fix this to actually work
-					adapter.getFilter().filter(tags.get(which).toString());
+					mSelectedItems.add((String) strings[which]);
+					
+				} else if (mSelectedItems.contains(strings[which])) {
+					mSelectedItems.remove(strings[which]);
 				}
 			}
 		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -185,6 +191,15 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// Does nothing
+				String totalStrings = "";
+				for (int i = 0; i < mSelectedItems.size(); i++) {
+					totalStrings += mSelectedItems.get(i).trim();
+					totalStrings += "~";
+					Log.i("CONSTRAINT BEFORE FILTER", totalStrings);
+				}
+				
+				CharSequence totalCharSeq = totalStrings;
+				adapter.getFilter().filter(totalCharSeq);
 				
 			}
 		}).create().show();

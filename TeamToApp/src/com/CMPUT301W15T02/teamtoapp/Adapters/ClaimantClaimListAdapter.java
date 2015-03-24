@@ -22,6 +22,7 @@ package com.CMPUT301W15T02.teamtoapp.Adapters;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.SortedMap;
 import com.CMPUT301W15T02.teamtoapp.R;
@@ -32,6 +33,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -170,7 +172,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	        @SuppressWarnings("unchecked")
 	        @Override
 	        protected void publishResults(CharSequence constraint, FilterResults results) {
-	            filteredClaimList = (ArrayList<Claim>) results.values;
+	        	filteredClaimList.clear();
+	        	filteredClaimList.addAll( (ArrayList<Claim>) results.values);
 	            notifyDataSetChanged();
 	        }
 
@@ -178,23 +181,34 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			protected FilterResults performFiltering(CharSequence constraint) {
 				// TODO In progress
 				
-				Tag filterTag = new Tag(constraint.toString());
+				// Shows all tags selected by the user.
+				String filterTagString = constraint.toString();
+				Log.i("CONSTRAINT", filterTagString);
+				
+				ArrayList<String> filterTagList = new ArrayList<String>(Arrays.asList(filterTagString.split("~")));
+				
+				ArrayList<Claim> oldList = originalClaimList;
+				int count = oldList.size();
+				ArrayList<Claim> newList = new ArrayList<Claim>(count);
 				FilterResults results = new FilterResults();
 				
-				final ArrayList<Claim> oldList = originalClaimList;
-				int count = oldList.size();
-				final ArrayList<Claim> newList = new ArrayList<Claim>(count);
-				
-				// Loop via claim's tag list
-				ArrayList<Tag> filterableTag;
-				for (int i = 0; i < count; i++) {
-					filterableTag = oldList.get(i).getTags();
-					for (int j = 0 ; i < filterableTag.size(); i++) {
-						if (filterableTag.contains(filterTag)) {
-							newList.add(oldList.get(i));
+				for (int i = 0; i < filterTagList.size(); i++ ) {
+					
+					Tag filterTag = new Tag(filterTagList.get(i));
+					
+					// Loop via claim's tag list
+					ArrayList<Tag> filterableTag;
+					for (int j = 0; j < count; j++) {
+						filterableTag = oldList.get(j).getTags();
+						for (int k = 0 ; k < filterableTag.size(); k++) {
+							if (filterableTag.get(k).equals(filterTag) && !newList.contains(oldList.get(j))) {
+								newList.add(oldList.get(j));
+							}
 						}
 					}
 				}
+				
+				filterTagList.clear();
 				results.values = newList;
 				results.count = newList.size();
 				return results;
