@@ -153,6 +153,11 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	 * Filter by tags method
 	 */
 	private void filterByTags() {
+
+		
+		// going to be using this tomorrow: http://stackoverflow.com/questions/5122974/multiple-choice-searchable-listview
+		// 2015-03-24
+		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		// Get the list of available tags
 		final ArrayList<Tag> tags = new UserController().getTags();
 		
@@ -170,9 +175,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			boolArray[i] = false;
 		}
 		
-		// going to be using this tomorrow: http://stackoverflow.com/questions/5122974/multiple-choice-searchable-listview
-		// 2015-03-24
-		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		mSelectedItems = new ArrayList<String>();
 		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
 			// Add or remove tags based on the boolean array
@@ -185,6 +187,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 				} else if (mSelectedItems.contains(strings[which])) {
 					mSelectedItems.remove(strings[which]);
 				}
+				//boolArray[which] = isChecked;
 			}
 		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 			

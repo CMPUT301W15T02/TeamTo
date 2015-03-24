@@ -191,13 +191,12 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 				int count = oldList.size();
 				ArrayList<Claim> newList = new ArrayList<Claim>(count);
 				FilterResults results = new FilterResults();
-				
+				ArrayList<Tag> filterableTag = new ArrayList<Tag>();
 				for (int i = 0; i < filterTagList.size(); i++ ) {
 					
 					Tag filterTag = new Tag(filterTagList.get(i));
 					
 					// Loop via claim's tag list
-					ArrayList<Tag> filterableTag;
 					for (int j = 0; j < count; j++) {
 						filterableTag = oldList.get(j).getTags();
 						for (int k = 0 ; k < filterableTag.size(); k++) {
@@ -206,6 +205,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 							}
 						}
 					}
+					filterableTag.clear();
 				}
 				
 				filterTagList.clear();
