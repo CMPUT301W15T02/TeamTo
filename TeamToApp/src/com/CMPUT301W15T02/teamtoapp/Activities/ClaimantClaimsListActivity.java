@@ -18,15 +18,19 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 
+import java.util.ArrayList;
+
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 import android.app.Activity;
@@ -54,14 +58,13 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	final Context context = this;
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
-	LocalDataManager dataManager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
 		
-		dataManager = new LocalDataManager();
+
 		getModelObjects();
 		findViewsByIds();
 		setListeners();
@@ -145,6 +148,50 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	}
 	
 	/**
+	 * Filter by tags method
+	 */
+	private void filterByTags() {
+		// Get the list of available tags
+		final ArrayList<Tag> tags = new UserController().getTags();
+		
+		// Make an array of the same size containing string representations of the tags
+		CharSequence[] strings = new CharSequence[tags.size()];
+		
+		
+		// Create a boolean array of the same size
+		boolean[] boolArray = new boolean[tags.size()];
+		
+		// Add the tag from the user tags into the array of strings
+		for (int i = 0; i < tags.size(); i++) {
+			strings[i] = tags.get(i).toString();
+			// If the tag is in the list of tags then set true
+			boolArray[i] = false;
+		}
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
+		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
+			// Add or remove tags based on the boolean array
+			@Override
+			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+				if (isChecked) {
+					// TODO fix this to actually work
+					adapter.getFilter().filter(tags.get(which).toString());
+				}
+			}
+		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Does nothing
+				
+			}
+		}).create().show();
+		
+		
+	}
+
+	
+	/**
 	 * Sets up claim list adapter and binds it to the current list view
 	 */
 	private void setUpAdapter() {
@@ -179,6 +226,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			} else {
 				Toast.makeText(context, "No network access", Toast.LENGTH_SHORT).show();
 			}
+		} else if (id == R.id.filterByTags) {
+			filterByTags();
 		}
 		return super.onOptionsItemSelected(item);
 	}

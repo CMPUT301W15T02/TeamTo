@@ -4,6 +4,7 @@
 
 
     <item android:id="@+id/addClaimOp" android:title="Add claim" android:showAsAction="always"></item>
+    <item android:id="@+id/filterByTags" android:title="Filter" android:showAsAction="always"></item>
     <item android:id="@+id/switchToApprover" android:title="Switch To Approver Mode" android:onClick="switchToApproverOption" android:visible="true" android:showAsAction="withText|collapseActionView"></item>
     <item android:id="@+id/tagsManagerButton" android:title="Manage tags" android:showAsAction="never"></item>
     <item android:id="@+id/refreshClaims" android:title="Refresh" android:showAsAction="never"></item>
