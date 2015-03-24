@@ -214,7 +214,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 							}
 						}
 					}
-					filterableTag.clear();
 				}
 				
 				filterTagList.clear();
