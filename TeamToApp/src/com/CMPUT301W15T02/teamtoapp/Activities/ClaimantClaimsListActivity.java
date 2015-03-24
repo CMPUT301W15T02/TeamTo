@@ -168,6 +168,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			boolArray[i] = false;
 		}
 		
+		// going to be using this tomorrow: http://stackoverflow.com/questions/5122974/multiple-choice-searchable-listview
+		// 2015-03-24
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
 			// Add or remove tags based on the boolean array

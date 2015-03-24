@@ -178,7 +178,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			protected FilterResults performFiltering(CharSequence constraint) {
 				// TODO In progress
 				
-				String filterTag = constraint.toString();
+				Tag filterTag = new Tag(constraint.toString());
 				FilterResults results = new FilterResults();
 				
 				final ArrayList<Claim> oldList = originalClaimList;
