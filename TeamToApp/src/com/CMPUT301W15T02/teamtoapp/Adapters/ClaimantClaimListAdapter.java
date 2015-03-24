@@ -43,11 +43,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+import android.widget.Toast;
 /**
  * 
  * A customized adapter for the claimant's list of claims.
  *
  */
+
+// TODO Clean up this code, its kinda messy
+
 // GOING TO BE USING THIS: http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23
 public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Filterable{
 
@@ -176,13 +180,14 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	        	if (results.count == 0) {
 	        		filteredClaimList = originalClaimList;
 	                notifyDataSetInvalidated();
+	                if (constraint.length() != 0) {
+		        		Toast.makeText(getContext(), "No matches", Toast.LENGTH_SHORT).show();
+		        	}
 	        	} else {
 	                filteredClaimList = (ArrayList<Claim>) results.values;
-	                for (Claim claim: filteredClaimList) {
-	                	Log.i("FILTERCZ", claim.getClaimName());
-	                }
 	                notifyDataSetInvalidated();
 	            }
+	        	
 	        }
 
 			@Override
@@ -196,9 +201,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			    }
 				// Shows all tags selected by the user.
 				String filterTagString = constraint.toString();
-				Log.i("CONSTRAINT", filterTagString);
-				ArrayList<Tag> tagList = new ArrayList<Tag>();
 				ArrayList<String> filterTagList = new ArrayList<String>(Arrays.asList(filterTagString.split("~")));
+				ArrayList<Tag> tagList = new ArrayList<Tag>();
 				for  (String string: filterTagList) {
 					Tag tag = new Tag(string);
 					tagList.add(tag);
@@ -207,16 +211,11 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 				for (Claim claim: ClaimList.getInstance().getClaims()) {
 					for (Tag tag: tagList) {
 						if (claim.getTags().contains(tag)) {
-							Log.i("NAME", claim.getClaimName());
 							newList.add(claim);
 							break;
 						}
 					}
 				}
-				for (Claim claim: newList) {
-					Log.i("NEWLIST", claim.getClaimName());
-				}
-				//filterTagList.clear();
 				results.values = newList;
 				results.count = newList.size();
 				return results;

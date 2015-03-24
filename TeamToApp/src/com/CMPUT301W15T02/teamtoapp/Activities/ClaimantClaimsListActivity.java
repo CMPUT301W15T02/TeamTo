@@ -264,7 +264,17 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		}
 
 	}
+	
+	
+	
 
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		adapter.getFilter().filter("");
+	}
 
 	/**
 	 * Called when the activity is destroyed
