@@ -32,8 +32,10 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -61,22 +63,11 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
 	private ArrayList<String> mSelectedItems;
-	boolean[] boolArray;
-	ArrayList<Tag> tags;
-	CharSequence[] strings;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_claims_list);
-		tags = new UserController().getTags();
-		strings = new CharSequence[tags.size()];
-		boolArray = new boolean[tags.size()];
-		
-		for (int i = 0; i < tags.size(); i++) {
-			strings[i] = tags.get(i).toString();
-			boolArray[i] = false;
-		}
 		getModelObjects();
 		findViewsByIds();
 		setListeners();
@@ -168,8 +159,14 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// 2015-03-24
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		// Get the list of available tags
-		
 		mSelectedItems = new ArrayList<String>();
+		ArrayList<Tag> tags = User.getInstance().getTags();
+		final CharSequence[] strings = new CharSequence[tags.size()];
+		final boolean[] boolArray = new boolean[tags.size()];
+		for (int i = 0; i < tags.size(); i++) {
+			strings[i] = tags.get(i).toString();
+			boolArray[i] = false;
+		}
 		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
 			// Add or remove tags based on the boolean array
 			
@@ -276,7 +273,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		adapter.getFilter().filter("");
+		//adapter.getFilter().filter("");
 	}
 
 	/**

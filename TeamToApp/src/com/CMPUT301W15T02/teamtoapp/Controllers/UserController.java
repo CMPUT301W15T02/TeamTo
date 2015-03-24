@@ -94,8 +94,8 @@ public class UserController {
 		ArrayList<Tag> userTags = getTags(); // userTags
 		ClaimListController claimListController = new ClaimListController();
 		ArrayList<Claim> claims = claimListController.getClaims();
-		ArrayList<Tag> newTags = new ArrayList<Tag>();
 		for (Claim claim: claims) {
+			ArrayList<Tag> newTags = new ArrayList<Tag>();
 			for (Tag tag: claim.getTags()) {
 				if (userTags.contains(tag)) {
 					newTags.add(tag);

@@ -215,6 +215,7 @@ public class Claim implements Listener {
 	
 
 	public void setTags(ArrayList<Tag> tags) {
+		this.tags = null;
 		this.tags = tags;
 		notifyListeners();
 	}
