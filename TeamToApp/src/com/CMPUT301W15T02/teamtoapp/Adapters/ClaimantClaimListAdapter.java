@@ -54,7 +54,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	private Context context;
 	private int layoutId;
 	private ArrayList<Claim> originalClaimList = ClaimList.getInstance().getClaims();
-	private ArrayList<Claim> filteredClaimList = null;
+	private ArrayList<Claim> filteredClaimList = new ArrayList<Claim>();
 	private TagFilter myFilter = new TagFilter();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
@@ -121,7 +121,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 		}
 		
 		// These holders update the data for the recently made or changed claim for the claimant claims
-		Claim claim = originalClaimList.get(position);
+		Claim claim = getItem(position);
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
@@ -178,7 +178,10 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	                notifyDataSetInvalidated();
 	        	} else {
 	                filteredClaimList = (ArrayList<Claim>) results.values;
-	                notifyDataSetChanged();
+	                for (Claim claim: filteredClaimList) {
+	                	Log.i("FILTERCZ", claim.getClaimName());
+	                }
+	                notifyDataSetInvalidated();
 	            }
 	        }
 
@@ -194,32 +197,25 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 				// Shows all tags selected by the user.
 				String filterTagString = constraint.toString();
 				Log.i("CONSTRAINT", filterTagString);
-				
+				ArrayList<Tag> tagList = new ArrayList<Tag>();
 				ArrayList<String> filterTagList = new ArrayList<String>(Arrays.asList(filterTagString.split("~")));
-				
-				ArrayList<Claim> oldList = originalClaimList;
-				int count = oldList.size();
-				ArrayList<Claim> newList = new ArrayList<Claim>(count);
-				ArrayList<Tag> filterableTag = new ArrayList<Tag>();
-				for (int i = 0; i < filterTagList.size(); i++ ) {
-					
-					//filterTag: a tag from constraint.
-					Tag filterTag = new Tag(filterTagList.get(i));
-					Log.i("CURRENT TAG", filterTagList.get(i).toString());
-					// Loop via claim's tag list
-					for (int j = 0; j < count; j++) {
-						// filterableTag: list of tags from a claim
-						filterableTag = oldList.get(j).getTags();
-						for (int k = 0 ; k < filterableTag.size(); k++) {
-							if (filterableTag.get(k).equals(filterTag) && !newList.contains(oldList.get(j))) {
-								Log.i("FILTER TAG (SHOULD MATCH CURRENT TAG)", filterableTag.get(k).toString());
-								Log.i("OLD LIST TAG", oldList.get(j).toString());
-								newList.add(oldList.get(j));
-							}
+				for  (String string: filterTagList) {
+					Tag tag = new Tag(string);
+					tagList.add(tag);
+				}
+				ArrayList<Claim> newList = new ArrayList<Claim>();
+				for (Claim claim: ClaimList.getInstance().getClaims()) {
+					for (Tag tag: tagList) {
+						if (claim.getTags().contains(tag)) {
+							Log.i("NAME", claim.getClaimName());
+							newList.add(claim);
+							break;
 						}
 					}
 				}
-				
+				for (Claim claim: newList) {
+					Log.i("NEWLIST", claim.getClaimName());
+				}
 				//filterTagList.clear();
 				results.values = newList;
 				results.count = newList.size();
