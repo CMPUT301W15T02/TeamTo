@@ -170,7 +170,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// Get the list of available tags
 		
 		mSelectedItems = new ArrayList<String>();
-		builder.setMultiChoiceItems(strings, null, new DialogInterface.OnMultiChoiceClickListener() {
+		builder.setMultiChoiceItems(strings, boolArray, new DialogInterface.OnMultiChoiceClickListener() {
 			// Add or remove tags based on the boolean array
 			
 			@Override
@@ -181,6 +181,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 					
 				} else if (mSelectedItems.contains(strings[which])) {
 					mSelectedItems.remove(strings[which]);
+				}
+				for (int i = 0; i < boolArray.length; i++){
+					boolArray[i] = false;
 				}
 			}
 		}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
