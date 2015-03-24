@@ -189,19 +189,15 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			public void onClick(DialogInterface dialog, int which) {
 				// Does nothing
 				String totalStrings = "";
-				// keeping if statement for now.
-				if (mSelectedItems.size() > 0) {
-					for (int i = 0; i < mSelectedItems.size(); i++) {
-						totalStrings += mSelectedItems.get(i).trim();
-						totalStrings += "~";
-						Log.i("CONSTRAINT BEFORE FILTER", totalStrings);
-					}
-				
-					CharSequence totalCharSeq = totalStrings;
-					adapter.getFilter().filter(totalCharSeq);
+				for (int i = 0; i < mSelectedItems.size(); i++) {
+					totalStrings += mSelectedItems.get(i).trim();
+					totalStrings += "~";
+					Log.i("CONSTRAINT BEFORE FILTER", totalStrings);
 				}
-			
-				adapter.notifyDataSetInvalidated();
+				
+				CharSequence totalCharSeq = totalStrings;
+				adapter.getFilter().filter(totalCharSeq);
+				
 			}
 		}).create().show();
 		
