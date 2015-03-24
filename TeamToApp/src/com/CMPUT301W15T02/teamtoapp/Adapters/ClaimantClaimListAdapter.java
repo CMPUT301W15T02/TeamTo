@@ -25,8 +25,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.SortedMap;
+
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
@@ -51,7 +53,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 
 	private Context context;
 	private int layoutId;
-	private ArrayList<Claim> originalClaimList = null;
+	private ArrayList<Claim> originalClaimList = ClaimList.getInstance().getClaims();
 	private ArrayList<Claim> filteredClaimList = null;
 	private TagFilter myFilter = new TagFilter();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -62,7 +64,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 		super(context, textViewResourceId, items);
 		this.context = context;
 		this.layoutId = textViewResourceId;
-		this.originalClaimList  = items;
 		this.filteredClaimList = items;
 
 	}
@@ -172,15 +173,24 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	        @SuppressWarnings("unchecked")
 	        @Override
 	        protected void publishResults(CharSequence constraint, FilterResults results) {
-	        	filteredClaimList.clear();
-	        	filteredClaimList.addAll( (ArrayList<Claim>) results.values);
-	            notifyDataSetChanged();
+	        	if (results.count == 0) {
+	        		filteredClaimList = originalClaimList;
+	                notifyDataSetInvalidated();
+	        	} else {
+	                filteredClaimList = (ArrayList<Claim>) results.values;
+	                notifyDataSetChanged();
+	            }
 	        }
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				// TODO In progress
-				
+				FilterResults results = new FilterResults();
+				if (constraint == null || constraint.length() == 0) {
+			        // No filter implemented we return all the list
+			        results.values = filteredClaimList;
+			        results.count = filteredClaimList.size();
+			    }
 				// Shows all tags selected by the user.
 				String filterTagString = constraint.toString();
 				Log.i("CONSTRAINT", filterTagString);
@@ -190,7 +200,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 				ArrayList<Claim> oldList = originalClaimList;
 				int count = oldList.size();
 				ArrayList<Claim> newList = new ArrayList<Claim>(count);
-				FilterResults results = new FilterResults();
 				ArrayList<Tag> filterableTag = new ArrayList<Tag>();
 				for (int i = 0; i < filterTagList.size(); i++ ) {
 					
