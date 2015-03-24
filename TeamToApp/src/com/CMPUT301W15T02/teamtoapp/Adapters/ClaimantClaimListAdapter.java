@@ -203,20 +203,24 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 				ArrayList<Tag> filterableTag = new ArrayList<Tag>();
 				for (int i = 0; i < filterTagList.size(); i++ ) {
 					
+					//filterTag: a tag from constraint.
 					Tag filterTag = new Tag(filterTagList.get(i));
-					
+					Log.i("CURRENT TAG", filterTagList.get(i).toString());
 					// Loop via claim's tag list
 					for (int j = 0; j < count; j++) {
+						// filterableTag: list of tags from a claim
 						filterableTag = oldList.get(j).getTags();
 						for (int k = 0 ; k < filterableTag.size(); k++) {
 							if (filterableTag.get(k).equals(filterTag) && !newList.contains(oldList.get(j))) {
+								Log.i("FILTER TAG (SHOULD MATCH CURRENT TAG)", filterableTag.get(k).toString());
+								Log.i("OLD LIST TAG", oldList.get(j).toString());
 								newList.add(oldList.get(j));
 							}
 						}
 					}
 				}
 				
-				filterTagList.clear();
+				//filterTagList.clear();
 				results.values = newList;
 				results.count = newList.size();
 				return results;
