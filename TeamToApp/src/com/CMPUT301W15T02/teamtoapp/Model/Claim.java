@@ -21,6 +21,7 @@ import java.util.TreeMap;
 import java.util.UUID;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
@@ -57,7 +58,7 @@ public class Claim implements Listener {
 	private ArrayList<Expense> expenses;
 	private Status status;
 	private String comment;
-	private ArrayList<Tag> tags;
+	private ArrayList<String> tags;
 	private String userName;
 	private String claimdID;
 	private TreeMap<String, Double> currencyTotals;
@@ -72,7 +73,7 @@ public class Claim implements Listener {
 		this.destinations = new ArrayList<StringTuple>();
 		this.expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
-		this.tags = new ArrayList<Tag>();
+		this.tags = new ArrayList<String>();
 		this.comment = "";
 		this.userName = User.getInstance().getName();
 		this.claimdID = UUID.randomUUID().toString();
@@ -209,30 +210,18 @@ public class Claim implements Listener {
 	
 
 	public ArrayList<Tag> getTags() {
-		return tags;
+		ArrayList<Tag> newTags = new ArrayList<Tag>();
+		for (String tagID : tags) {
+			Tag tag = User.getInstance().getTagByID(tagID);
+			if (tag == null) {
+				tags.remove(tag);
+			} else {
+				newTags.add(tag);
+			}
+		}
+		return newTags;
 	}
 	
-	
-
-	public void setTags(ArrayList<Tag> tags) {
-		this.tags = null;
-		this.tags = tags;
-		notifyListeners();
-	}
-	
-	
-	
-	public void addTag(Tag tag) {
-		this.tags.add(tag);
-		notifyListeners();
-	}
-	
-	
-	
-	public void removeTag(Tag tag){
-		this.tags.remove(tag);
-		notifyListeners();
-	}
 	
 	
 	// Required for approver claim list
@@ -301,6 +290,22 @@ public class Claim implements Listener {
 
 	@Override
 	public void update() {
+		notifyListeners();
+		
+	}
+
+
+	public void removeTag(String tagID) {
+		if (tags.contains(tagID)) {
+			tags.remove(tagID);
+		}
+		notifyListeners();
+		
+	}
+
+
+	public void addTag(String tagID) {
+		tags.add(tagID);
 		notifyListeners();
 		
 	}

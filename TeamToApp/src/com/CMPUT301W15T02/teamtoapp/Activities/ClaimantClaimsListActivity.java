@@ -192,7 +192,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 				for (int i = 0; i < mSelectedItems.size(); i++) {
 					totalStrings += mSelectedItems.get(i).trim();
 					totalStrings += "~";
-					Log.i("CONSTRAINT BEFORE FILTER", totalStrings);
 				}
 				
 				CharSequence totalCharSeq = totalStrings;
@@ -273,7 +272,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		//adapter.getFilter().filter("");
+		adapter.getFilter().filter("");
 	}
 
 	/**

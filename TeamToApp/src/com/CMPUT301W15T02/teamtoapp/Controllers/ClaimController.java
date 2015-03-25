@@ -67,13 +67,6 @@ public class ClaimController {
 		currentClaim.removeExpense(expense);
 	}
 	
-	public void addTag(Tag tag) {
-		currentClaim.addTag(tag);
-	}
-	
-	public void removeTag(Tag tag) {
-		currentClaim.removeTag(tag);
-	}
 	
 	/**
 	 * Responsible for submitting a claim for approval
@@ -265,6 +258,16 @@ public class ClaimController {
 		} else  {
 			return "Claim already submitted.";
 		}
+	}
+
+	public void addTag(String tagID) {
+		currentClaim.addTag(tagID);
+		
+	}
+
+	public void removeTag(String tagID) {
+		currentClaim.removeTag(tagID);
+		
 	}
 	
 }

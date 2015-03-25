@@ -101,6 +101,17 @@ public class User {
 	}
 	
 	
+	public Tag getTagByID(String tagID) {
+		for (Tag tag : tags) {
+			if (tag.getTagID().equals(tagID)) {
+				return tag;
+			}
+				
+		}
+		return null;
+	}
+	
+	
 
 	public void setTags(ArrayList<Tag> tags) {
 		this.tags = tags;

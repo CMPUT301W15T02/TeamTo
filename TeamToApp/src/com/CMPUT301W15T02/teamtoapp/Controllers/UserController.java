@@ -17,8 +17,11 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -54,7 +57,6 @@ public class UserController {
 	 */
 	public void removeTag(Tag tag) {
 		user.removeTag(tag);
-		updateTags();
 	}
 	
 	/**
@@ -63,7 +65,6 @@ public class UserController {
 	 */
 	public void removeTag(int position) {
 		user.removeTag(user.getTags().get(position));
-		updateTags();
 	}
 	
 	public ArrayList<Tag> getTags() {
@@ -80,30 +81,13 @@ public class UserController {
 			return;
 		}
 		user.renameTag(tag, newText);
-		updateTags();
 	}
 	
 	public Tag getTag(int position) {
 		return user.getTags().get(position);
 	}
 	
-	/**
-	 * Updates all claims when a user updates one of their tags
-	 */
-	public void updateTags() {
-		ArrayList<Tag> userTags = getTags(); // userTags
-		ClaimListController claimListController = new ClaimListController();
-		ArrayList<Claim> claims = claimListController.getClaims();
-		for (Claim claim: claims) {
-			ArrayList<Tag> newTags = new ArrayList<Tag>();
-			for (Tag tag: claim.getTags()) {
-				if (userTags.contains(tag)) {
-					newTags.add(tag);
-				}
-			}
-			claim.setTags(newTags);
-		}
-	}
+
 	
 	/**
 	 * Adds a listener to the current user

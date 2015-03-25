@@ -14,6 +14,8 @@
 
 package com.CMPUT301W15T02.teamtoapp.Model;
 
+import java.util.UUID;
+
 /**
  * 
  * Tag is only composed of a string for now 
@@ -23,10 +25,12 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 public class Tag {
 
 	private String tagName;
+	private String tagID;
 	
 	
 	public Tag(String name) {
 		this.tagName = name;
+		this.tagID = UUID.randomUUID().toString();
 	}
 	
 	
@@ -42,6 +46,20 @@ public class Tag {
 	}
 	
 	
+	
+	
+
+	public String getTagID() {
+		return tagID;
+	}
+
+
+
+	public void setTagID(String tagID) {
+		this.tagID = tagID;
+	}
+
+
 
 	// Converts the tag into a string representation to make user of simple list adapters
 	@Override
@@ -57,7 +75,7 @@ public class Tag {
 	public boolean equals(Object o) {
 		if (o instanceof Tag) {
 			Tag tocompare = (Tag) o;
-			if (tocompare.getTagName().equals(this.getTagName())) {
+			if (tocompare.getTagID().equals(this.getTagID())) {
 				return true;
 			} else {
 				return false;

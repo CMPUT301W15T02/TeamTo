@@ -301,22 +301,22 @@ public class ClaimEditActivity extends Activity implements Listener {
 			@Override
 			public void onClick(View v) {
 				// Get the list of available tags
-				final ArrayList<Tag> tags = new UserController().getTags();
+				final ArrayList<Tag> userTags = new UserController().getTags();
 				
 				// Make an array of the same size containing string representations of the tags
-				CharSequence[] strings = new CharSequence[tags.size()];
+				CharSequence[] strings = new CharSequence[userTags.size()];
 				
 				// Get the current tags on the claim
 				ArrayList<Tag> claimTags = claimController.getTags();
 				
 				// Create a boolean array of the same size
-				boolean[] boolArray = new boolean[tags.size()];
+				boolean[] boolArray = new boolean[userTags.size()];
 				
 				// Add the tag from the user tags into the array of strings
-				for (int i = 0; i < tags.size(); i++) {
-					strings[i] = tags.get(i).toString();
+				for (int i = 0; i < userTags.size(); i++) {
+					strings[i] = userTags.get(i).toString();
 					// If the tag is in the list of tags then set true
-					if (claimTags.contains(tags.get(i))) {
+					if (claimTags.contains(userTags.get(i))) {
 						boolArray[i] = true;
 						// Otherwise set false
 					} else {
@@ -330,16 +330,16 @@ public class ClaimEditActivity extends Activity implements Listener {
 					@Override
 					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 						if (isChecked) {
-							claimController.addTag(tags.get(which));
-						} else if (claimController.getTags().contains(tags.get(which))){
-							claimController.removeTag(tags.get(which));
+							Log.i("GHJK", userTags.get(which).getTagID());
+							claimController.addTag(userTags.get(which).getTagID());
+						} else if (claimController.getTags().contains(userTags.get(which))){
+							claimController.removeTag(userTags.get(which).getTagID());
 						}
 					}
 				}).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 					
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// Does nothing
 						
 					}
 				}).create().show();
@@ -367,7 +367,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	 */
 	private void setFieldValues() {
 		updateValues();
-		if (claimController.getClaimName().equals("New Claim")) {
+		if (claimController.getClaimName().equals("")) {
 			claimNameEditText.setHint("Enter a claim name");
 		} else {
 			claimNameEditText.setText(claimController.getClaimName());
@@ -391,6 +391,8 @@ public class ClaimEditActivity extends Activity implements Listener {
 	public void update() {
 		updateValues();
 		destinationsAdapter.notifyDataSetChanged();
+		tagsAdapter = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, claimController.getTags());
+		tagListView.setAdapter(tagsAdapter);
 		tagsAdapter.notifyDataSetChanged();
 		
 	}

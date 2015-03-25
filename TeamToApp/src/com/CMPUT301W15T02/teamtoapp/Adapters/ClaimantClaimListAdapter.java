@@ -193,6 +193,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
 				// TODO In progress
+				Log.i("CONSTRAINT", constraint.toString());
 				FilterResults results = new FilterResults();
 				if (constraint == null || constraint.length() == 0) {
 			        // No filter implemented we return all the list
@@ -202,15 +203,12 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 				// Shows all tags selected by the user.
 				String filterTagString = constraint.toString();
 				ArrayList<String> filterTagList = new ArrayList<String>(Arrays.asList(filterTagString.split("~")));
-				ArrayList<Tag> tagList = new ArrayList<Tag>();
-				for  (String string: filterTagList) {
-					Tag tag = new Tag(string);
-					tagList.add(tag);
-				}
+				
 				ArrayList<Claim> newList = new ArrayList<Claim>();
 				for (Claim claim: ClaimList.getInstance().getClaims()) {
-					for (Tag tag: tagList) {
-						if (claim.getTags().contains(tag)) {
+					for (Tag tag : claim.getTags()) {
+						String tagString = tag.toString();
+						if (filterTagList.contains(tagString)) {
 							newList.add(claim);
 							break;
 						}
