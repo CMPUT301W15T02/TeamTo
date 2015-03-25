@@ -53,5 +53,4 @@
         android:textSize="12sp" 
         android:layout_below="@+id/currencyTextView"
         android:layout_alignParentRight="true"/>
-
 </RelativeLayout>

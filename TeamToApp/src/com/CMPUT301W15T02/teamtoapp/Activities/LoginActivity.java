@@ -13,10 +13,9 @@
  * limitations under the License.
 */
 
-
-// LoginActivity
-
-//Parses entered username to get specific claims and approvals
+/**
+*Parses entered username to get specific claims and approvals
+*/
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
