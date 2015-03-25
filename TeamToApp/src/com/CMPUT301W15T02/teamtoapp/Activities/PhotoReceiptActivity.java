@@ -15,9 +15,17 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+import com.CMPUT301W15T02.teamtoapp.R;
+
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
 public class PhotoReceiptActivity {
 
 	public void onCreate() {
+	}
+	
+	public void setPhotoReceipt() {
 		
 	}
 }

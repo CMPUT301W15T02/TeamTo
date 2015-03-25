@@ -58,6 +58,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		TextView categoryTextView;
 		TextView currencyTextView;
 		TextView incompletenessTextView;
+		TextView approverPhotoReceiptTextView; // Should say yes/or no if it exists.
 	}
 	/**
 	 * The method that update the Expense list of the claimant once an expense 
@@ -78,6 +79,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder.categoryTextView = (TextView) row.findViewById(R.id.categoryTextView);
 			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
 			holder.incompletenessTextView = (TextView) row.findViewById(R.id.incompletenessTextView);
+			holder.approverPhotoReceiptTextView = (TextView) row.findViewById(R.id.approverPhotoReceiptTextView);
 			row.setTag(holder);
 			
 		} else {
@@ -99,6 +101,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		} else {
 			holder.incompletenessTextView.setText("Complete");
 		}
+		
 		return row;
 	}
 	

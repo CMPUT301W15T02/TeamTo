@@ -118,17 +118,17 @@
             </LinearLayout>
 
     </LinearLayout>
-    
-    <ImageView
-        android:id="@+id/ExpenseImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
 
     <CheckBox
         android:id="@+id/ExpenseCompletedCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Expense Completed?" />
+
+    <ImageButton
+        android:id="@+id/ExpenseImageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
 
 </LinearLayout>
