@@ -16,6 +16,8 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 
+import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
@@ -44,10 +46,18 @@ public class User {
 		tags = new ArrayList<Tag>();
 		type = true;
 		// Default tags for now
-		tags.add(new Tag("Shopping"));
-		tags.add(new Tag("Business"));
-		tags.add(new Tag("Personal"));
-		tags.add(new Tag("Recreation"));
+		Tag tag1 = new Tag("Shopping");
+		tag1.setTagID("shopping");
+		tags.add(tag1);
+		Tag tag2 = new Tag("Business");
+		tag2.setTagID("business");
+		tags.add(tag2);
+		Tag tag3 = new Tag("Personal");
+		tag3.setTagID("personal");
+		tags.add(tag3);
+		Tag tag4 = new Tag("Recreation");
+		tag4.setTagID("recreation");
+		tags.add(tag4);
 		listeners = new ArrayList<Listener>();
 	}
 	
@@ -157,6 +167,7 @@ public class User {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
+		MainManager.saveUser();
 	}
 	
 	

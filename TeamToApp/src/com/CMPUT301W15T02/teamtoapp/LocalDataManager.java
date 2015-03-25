@@ -85,7 +85,7 @@ public class LocalDataManager {
 	
 	
 	
-	public void saveUser(User user){
+	public static void saveUser(User user){
 		Gson gson = new Gson();
 		try {
 			FileOutputStream fos = applicationContext.openFileOutput(USERFILE,_ERASE_FILE);
