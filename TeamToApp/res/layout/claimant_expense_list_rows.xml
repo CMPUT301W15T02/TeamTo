@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/claimantPhotoReceiptTextView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@id/claimantPhotoReceiptTextView"
+    <ImageView
+        android:id="@id/ExpenseImageView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:scaleType="@id/claimantPhotoReceiptTextView" />
+        android:layout_alignParentLeft="true" />
    
     <TextView
         android:id="@+id/expenseDateTextView"
@@ -18,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textSize="14sp" 
         android:textColor="@android:color/darker_gray"
-        android:layout_toRightOf="@id/claimantPhotoReceiptTextView"
+        android:layout_toRightOf="@id/ExpenseImageView"
         android:layout_below="@+id/expenseDescriptionTextView"/>
 
     <TextView
@@ -27,7 +25,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textStyle="bold" 
-        android:layout_toRightOf="@id/claimantPhotoReceiptTextView"
+        android:layout_toRightOf="@id/ExpenseImageView"
         android:layout_alignParentTop="true"/>
 
     <TextView
@@ -35,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12sp" 
-        android:layout_toRightOf="@+id/claimantPhotoReceiptTextView"
+        android:layout_toRightOf="@+id/ExpenseImageView"
         android:layout_below="@+id/expenseDateTextView"
         android:layout_alignParentLeft="true"/>
   
