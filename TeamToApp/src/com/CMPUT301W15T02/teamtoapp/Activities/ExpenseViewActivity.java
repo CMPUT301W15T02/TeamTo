@@ -98,7 +98,7 @@ public class ExpenseViewActivity extends Activity {
 		currencySpinner = (Spinner) findViewById(R.id.CurrencyExpenseSpinner);
 		categorySpinner  = (Spinner) findViewById(R.id.CategoryExpenseSpinner);
 		descriptionEditText = (EditText) findViewById(R.id.ExpenseDescriptionEditText);
-		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
+		receiptImageView = (ImageView) findViewById(R.id.claimantPhotoReceiptTextView);
 	}
 	
 	/**

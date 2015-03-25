@@ -140,7 +140,7 @@
     </LinearLayout>
     
     <ImageView
-        android:id="@+id/ExpenseImageView"
+        android:id="@+id/claimantPhotoReceiptTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_launcher" />

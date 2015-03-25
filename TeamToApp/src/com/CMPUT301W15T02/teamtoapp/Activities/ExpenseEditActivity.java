@@ -121,7 +121,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		currencySpinner = (Spinner) findViewById(R.id.CurrencyExpenseSpinner);
 		categorySpinner  = (Spinner) findViewById(R.id.CategoryExpenseSpinner);
 		descriptionEditText = (EditText) findViewById(R.id.ExpenseDescriptionEditText);
-		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
+		receiptImageView = (ImageView) findViewById(R.id.claimantPhotoReceiptTextView);
 		completedCheckBox = (CheckBox) findViewById(R.id.ExpenseCompletedCheckBox);
 	}
 	
