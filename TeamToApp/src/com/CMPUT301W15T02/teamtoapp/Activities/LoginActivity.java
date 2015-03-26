@@ -68,7 +68,7 @@ public class LoginActivity extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-	
+	// Comment
 	public void onLoginButtonClicked(View view) {
 		Intent intent = new Intent(LoginActivity.this, ClaimantClaimsListActivity.class);
 		EditText name = (EditText) findViewById(R.id.username);
