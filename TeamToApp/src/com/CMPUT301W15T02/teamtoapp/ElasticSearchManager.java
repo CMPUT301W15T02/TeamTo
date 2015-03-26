@@ -59,6 +59,7 @@ public class ElasticSearchManager {
 	/** Location of online server in which claims with their expenses will be saved. */
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/";
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/_search";
+	private static final String USER_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/user/";
 	
 	//private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/claims/";
 	//private static final String TEST_SEARCH_URL =  "http://cmput301.softwareprocess.es:8080/testing/claims/_search";
@@ -334,6 +335,87 @@ public class ElasticSearchManager {
 	public static void updateClaim(Claim claim) {
 		// Updating the claim is the same as adding the claim
 		addClaim(claim);
+	}
+	
+	public static void saveUser() {
+			new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				Gson gson = new Gson();
+				HttpClient httpClient = new DefaultHttpClient();
+				try {
+					
+					// HttpPost for adding a claim
+					HttpPost addRequest = new HttpPost(USER_URL + User.getInstance().getName());
+					StringEntity stringEntity = new StringEntity(gson.toJson(User.getInstance()));
+					addRequest.setEntity(stringEntity);
+					addRequest.setHeader("Accept", "application/json");
+					
+					HttpResponse response = httpClient.execute(addRequest);
+					
+					// Can use TAG to check status via logcat.
+					String status = response.getStatusLine().toString();
+					Log.i(TAG, status);
+					
+				} catch (JsonIOException e) {
+					throw new RuntimeException(e);
+					
+				} catch (JsonSyntaxException e) {
+					throw new RuntimeException(e);
+					
+				} catch (IllegalStateException e) {
+					throw new RuntimeException(e);
+					
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
+				
+			}
+		}).start();
+	}
+	
+	public static void loadUser() {
+		Gson gson = new Gson();
+
+		SearchHit<User> search_hit = null;
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(USER_URL + User.getInstance().getName());		
+
+		HttpResponse response = null;
+
+		try {
+			response = httpClient.execute(httpGet);
+			Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
+
+		} catch (ClientProtocolException e1) {
+			throw new RuntimeException(e1);
+
+		} catch (IOException e1) {
+			throw new RuntimeException(e1);
+		}
+
+		Type searchHitType = new TypeToken<SearchHit<User>>() {}.getType();
+
+		try {
+			search_hit = gson.fromJson(new InputStreamReader(response.getEntity().getContent()),
+					searchHitType);
+
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		User.getInstance().setUser(search_hit.getSource());
+
 	}
 	
 	

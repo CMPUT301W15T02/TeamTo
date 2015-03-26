@@ -167,7 +167,6 @@ public class User {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
-		MainManager.saveUser();
 	}
 	
 	

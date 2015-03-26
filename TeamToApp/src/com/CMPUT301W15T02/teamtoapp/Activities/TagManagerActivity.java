@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
@@ -176,6 +177,14 @@ public class TagManagerActivity extends Activity implements Listener {
 	}
 
 	
+	
+	
+
+	@Override
+	public void onBackPressed() {
+		MainManager.saveUser();
+		super.onBackPressed();
+	}
 
 	/**
 	 * onDestroy is called when the activity is about to be destroyed and thus we remove the observer

@@ -103,6 +103,9 @@ public class MainManager {
 	
 	
 	public static void saveUser() {
+		if (isNetworkAvailable(applicationContext)) {
+			ElasticSearchManager.saveUser();
+		}
 		LocalDataManager.saveUser(User.getInstance());
 	}
 	
