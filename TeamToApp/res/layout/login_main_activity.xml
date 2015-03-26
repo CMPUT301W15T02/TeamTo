@@ -14,23 +14,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="142dp"
+        android:layout_marginTop="126dp"
         android:ems="10"
         android:hint="Enter Username"
-        android:inputType="text" >
+        android:inputType="text" />
 
-        <requestFocus />
-    </EditText>
+    <Button
+        android:id="@+id/mapButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/username"
+        android:layout_below="@+id/username"
+        android:text="Choose Your Location" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
-        android:layout_alignRight="@+id/username"
-        android:layout_below="@+id/username"
-        android:layout_marginTop="28dp"
-        android:text="Login" 
-        android:onClick="onLoginButtonClicked"/>
+        android:layout_alignRight="@+id/mapButton"
+        android:layout_below="@+id/mapButton"
+        android:onClick="onLoginButtonClicked"
+        android:text="Login" />
 
 </RelativeLayout>
