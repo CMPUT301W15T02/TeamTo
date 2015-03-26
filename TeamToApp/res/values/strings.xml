@@ -13,5 +13,6 @@
     <string name="title_activity_expense_view">Expense Overview</string>
     <string name="title_activity_tag_manager">Tags</string>
     <string name="title_activity_approver_expense_list">Submitted Claim Overview</string>
+    <string name="title_activity_google_map">GoogleMapActivity</string>
 
 </resources>
