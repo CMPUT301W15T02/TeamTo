@@ -82,7 +82,7 @@
         Need to have both meta-data.
         -->
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
+            android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAAJArWE27b0xEaj6nja6KN21WRmD8fGyY" />
         <meta-data
             android:name="com.google.android.gms.version"
