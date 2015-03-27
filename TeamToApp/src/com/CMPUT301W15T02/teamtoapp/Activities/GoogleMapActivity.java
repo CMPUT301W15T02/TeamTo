@@ -16,7 +16,7 @@
  * 
  * Sources:
  * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
-// @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
+// @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
  * */
 package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.io.IOException;
@@ -107,7 +107,12 @@ public class GoogleMapActivity extends Activity {
 		
 	}
 	
-    // Called when getAddressButton is clicked
+	/**
+	 *  Called when getAddressButton is clicked
+	 *  newAddress: address obtained from addressEditText
+	 *  
+	 *  Executes the ChangeMarker Class
+	 * */
     public void showAddressMarker(View view) {
  
         // Get the street address entered
@@ -116,7 +121,7 @@ public class GoogleMapActivity extends Activity {
         if(newAddress != null){
  
             // Call for the AsyncTask to place a marker (PlaceMarker class made below)
-            new PlaceAMarker().execute(newAddress);
+            new ChangeMarker().execute(newAddress);
  
         }
  
@@ -143,13 +148,13 @@ public class GoogleMapActivity extends Activity {
 	
 	
 	/** 
-	 * PlaceMarker class: 
+	 * ChangeMarker class: 
 	 * 
 	 * Grabs new address along with 
 	 * latitude and longitude (via getLatLong method).
 	 * Then, post the marker on the screen of the new address.
 	*/
-    class PlaceAMarker extends AsyncTask<String, String, String> {
+    class ChangeMarker extends AsyncTask<String, String, String> {
     	 
 		@Override
         protected String doInBackground(String... params) {
@@ -166,7 +171,13 @@ public class GoogleMapActivity extends Activity {
  
             return null;
         }
- 
+		/**
+		 * onPostExecute:
+		 * 
+		 * when latitude and longitude obtained,
+		 * change the position of the marker,
+		 * and change the title to the address entered by the user.
+		 */
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -183,6 +194,16 @@ public class GoogleMapActivity extends Activity {
  
     }
     
+    /**
+     * getLatLong:
+     * 
+     * Obtains latitude and longitude from the address parameter
+     * by creating a uri based on the address and a JSON
+     * object to save the resulting string entity from the uri 
+     * 
+     * @param address -  the address entered by the user, which 
+     * 					is a part of the uri.
+     */
     protected void getLatLong(String address){
     	 
     	Log.i("CHECKING.","EVERYTHING OK HERE...");
