@@ -127,7 +127,6 @@ public class LoginActivity extends Activity {
 	public void onGoogleMapBtnClicked(View view) {
 		Intent intent = new Intent(LoginActivity.this, GoogleMapActivity.class);
 		startActivity(intent);
-		LoginActivity.this.finish();
 	}
 
 }
