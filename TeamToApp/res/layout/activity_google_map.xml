@@ -31,7 +31,7 @@
     <Button
         android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:text="Marker"
+        android:text="Find Location"
         android:id="@+id/getAddressButton"
         android:layout_alignBottom="@+id/addressEditText"
         android:layout_toRightOf="@+id/addressEditText"

@@ -1,5 +1,24 @@
-package com.CMPUT301W15T02.teamtoapp.Activities;
+/*Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
 
+/**
+ * GoogleMaps for user - saves default latitude longitude/ manually enter an address.
+ * 
+ * Sources:
+ * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
+// @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
+ * */
+package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -34,8 +53,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-// Source: http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
-// http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
 
 public class GoogleMapActivity extends Activity {
 
@@ -48,7 +65,7 @@ public class GoogleMapActivity extends Activity {
 	private EditText addressEditText;
 	
 	// Marker used when user chooses own address
-	private Marker addressMarker;
+	private Marker marker;
 
 	
 	@Override
@@ -77,7 +94,7 @@ public class GoogleMapActivity extends Activity {
             googleMap.getUiSettings().setZoomControlsEnabled(true);
             
             // Add marker to default location
-            Marker marker = googleMap.addMarker(new MarkerOptions().
+            marker = googleMap.addMarker(new MarkerOptions().
                     position(defaultLatLng).title("University of Alberta"));
             
             // Move camera to edmonton location and zoom in
@@ -154,12 +171,14 @@ public class GoogleMapActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
  
-            // Draw the marker on the screen
-            addressMarker = googleMap.addMarker(new MarkerOptions()
-                    .position(addressLatLng)
-                    .title("Address"));
+            // Change marker location on the screen
+            marker.setPosition(addressLatLng);
+            marker.setSnippet(addressEditText.getText().toString());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+            
+            // TODO: Need to save the latitude and longitude from here into geolocation object
+            // which will then be saved in the user.
         }
  
     }
