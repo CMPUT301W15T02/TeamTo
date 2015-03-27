@@ -35,6 +35,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -376,45 +377,146 @@ public class ElasticSearchManager {
 	}
 	
 	public static void loadUser() {
-		Gson gson = new Gson();
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				Gson gson = new Gson();
 
-		SearchHit<User> search_hit = null;
-		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(USER_URL + User.getInstance().getName());		
+				SearchHit<User> search_hit = null;
+				HttpClient httpClient = new DefaultHttpClient();
+				HttpGet httpGet = new HttpGet(USER_URL + User.getInstance().getName());		
 
-		HttpResponse response = null;
+				HttpResponse response = null;
 
-		try {
-			response = httpClient.execute(httpGet);
-			Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
+				try {
+					response = httpClient.execute(httpGet);
+					Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
 
-		} catch (ClientProtocolException e1) {
-			throw new RuntimeException(e1);
+				} catch (ClientProtocolException e1) {
+					throw new RuntimeException(e1);
 
-		} catch (IOException e1) {
-			throw new RuntimeException(e1);
-		}
+				} catch (IOException e1) {
+					throw new RuntimeException(e1);
+				}
 
-		Type searchHitType = new TypeToken<SearchHit<User>>() {}.getType();
+				Type searchHitType = new TypeToken<SearchHit<User>>() {}.getType();
 
-		try {
-			search_hit = gson.fromJson(new InputStreamReader(response.getEntity().getContent()),
-					searchHitType);
+				try {
+					search_hit = gson.fromJson(new InputStreamReader(response.getEntity().getContent()),
+							searchHitType);
 
-		} catch (JsonIOException e) {
-			throw new RuntimeException(e);
+				} catch (JsonIOException e) {
+					throw new RuntimeException(e);
 
-		} catch (JsonSyntaxException e) {
-			throw new RuntimeException(e);
+				} catch (JsonSyntaxException e) {
+					throw new RuntimeException(e);
 
-		} catch (IllegalStateException e) {
-			throw new RuntimeException(e);
+				} catch (IllegalStateException e) {
+					throw new RuntimeException(e);
 
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+				}
 
-		User.getInstance().setUser(search_hit.getSource());
+				User.getInstance().setUser(search_hit.getSource());
+				
+			}
+		}).start();
+		
+
+	}
+	
+	
+	public static void loadClaims() {
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				String searchString = User.getInstance().getName();
+				ArrayList<Claim> userClaims = new ArrayList<Claim>();
+				Gson gson = new Gson();
+
+				HttpPost searchRequest = new HttpPost(SEARCH_URL);
+
+				if (searchString.equals(null) || searchString.equals("")) {
+					searchString = "*";
+				}
+
+				SimpleSearchCommand command = new SimpleSearchCommand(searchString);
+				String query = gson.toJson(command);
+				Log.i(TAG, "JSON COMMAND: " + query);
+
+				StringEntity stringEntity = null;
+				try {
+					stringEntity = new StringEntity(query);
+				} catch (UnsupportedEncodingException e) {
+					throw new RuntimeException(e);
+				}
+
+				searchRequest.setHeader("Accept", "application/json");
+				searchRequest.setEntity(stringEntity);
+
+				HttpClient httpClient = new DefaultHttpClient();
+
+				HttpResponse response = null;
+				try
+				{
+					response = httpClient.execute(searchRequest);
+
+				} catch (UnsupportedEncodingException e) {
+					throw new RuntimeException(e);
+
+				} catch (ClientProtocolException e) {
+					throw new RuntimeException(e);
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				}
+
+				/**
+				 * Parse the response of the search, then extract claims from esResponse
+				 * and add them into submittedClaimsResult ArrayList.
+				 */
+				Type searchResponseType = new TypeToken<SearchResponse<Claim>>() {}.getType();
+				try {
+
+					SearchResponse<Claim> esResponse = gson.fromJson(
+							new InputStreamReader(response.getEntity().getContent()),
+							searchResponseType);
+
+					Hits<Claim> hits = esResponse.getHits();
+					if (hits != null) {
+						if (hits.getHits() != null) {
+							for (int i = 0; i < hits.getHits().size(); i++) {
+								SearchHit<Claim> searchHit = hits.getHits().get(i);
+								Claim claim = searchHit.getSource();
+								userClaims.add(claim);
+							}
+						}
+					}
+
+				} catch (JsonIOException e) {
+					throw new RuntimeException(e);
+
+				} catch (JsonSyntaxException e) {
+					throw new RuntimeException(e);
+
+				} catch (IllegalStateException e) {
+					throw new RuntimeException(e);
+
+				} catch (IOException e) {
+					throw new RuntimeException(e);
+
+				}
+
+				ClaimList.getInstance().setClaims(userClaims);
+				
+
+			}
+		}).start();
+		
 
 	}
 	

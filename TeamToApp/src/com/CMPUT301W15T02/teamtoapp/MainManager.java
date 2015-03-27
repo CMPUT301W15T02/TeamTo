@@ -93,12 +93,19 @@ public class MainManager {
 	}
 	
 	public static void loadClaims() {
+		if (isNetworkAvailable(applicationContext)) {
+			ElasticSearchManager.loadClaims();
+		}
 		LocalDataManager.loadClaims();
 	}
 	
 	
 	public static void loadUser() {
-		LocalDataManager.loadUser();
+		if (isNetworkAvailable(applicationContext)) {
+			ElasticSearchManager.loadUser();
+		} else {
+			LocalDataManager.loadUser();
+		}
 	}
 	
 	

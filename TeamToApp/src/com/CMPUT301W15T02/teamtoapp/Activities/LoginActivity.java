@@ -20,6 +20,7 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
@@ -53,9 +54,15 @@ public class LoginActivity extends Activity {
 
 		if (hasLoggedIn)  //Go directly to main activity
 		{
+			User.getInstance().setName(usernameString);
 			MainManager.loadUser();
 			MainManager.loadClaims();
-			User.getInstance().setName(usernameString);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		    Intent intent = new Intent();
 			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 			startActivity(intent);
