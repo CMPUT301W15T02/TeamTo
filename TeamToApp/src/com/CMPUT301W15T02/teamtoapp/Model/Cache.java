@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Commands.Command;
+import com.CMPUT301W15T02.teamtoapp.Commands.addCommand;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -35,8 +36,9 @@ import android.content.Context;
 
 public class Cache {
 
+	
+	private static final String CLAIMFILE = "claims.sav";
 	private static Cache instance = null;
-	private Context context;
 	private ArrayList<Command> commands;
 
 	
@@ -51,6 +53,31 @@ public class Cache {
 		}
 		return instance;
 	}
+	
+	public void addCommandToCache(Command command) {
+		commands.add(command);
+	}
+	
+	public void removeCommandFromCache(Command command) {
+		commands.remove(command);
+	}
+	
+	/*public void saveCache(Context context) {
+		context = context.getApplicationContext();
+		Gson gson = new Gson();
+		try {
+			FileOutputStream fos = context.openFileOutput(CLAIMFILE,0);
+			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			gson.toJson(ClaimList.getInstance().getClaims(), osw);
+			osw.flush();
+			osw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	*/
 	
 	
 	
