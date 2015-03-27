@@ -239,7 +239,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			startActivity(intent);	
 		} else if (id == R.id.refreshClaims) {
 			if (MainManager.isNetworkAvailable(getApplicationContext())) {
-				Cache.getInstance().updateClaimsFromCache(context);
+				// TODO
 				Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
 			} else {
 				Toast.makeText(context, "No network access", Toast.LENGTH_SHORT).show();

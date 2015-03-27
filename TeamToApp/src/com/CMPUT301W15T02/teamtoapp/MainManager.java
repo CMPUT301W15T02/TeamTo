@@ -59,7 +59,7 @@ public class MainManager {
 		if (isNetworkAvailable(applicationContext)) {
 			ElasticSearchManager.addClaim(claim);
 		} else {
-			Cache.getInstance().addUpdateToCache(claim, applicationContext);
+			// TODO
 		}
 		LocalDataManager.saveClaims();
 	}
@@ -69,7 +69,7 @@ public class MainManager {
 			
 			ElasticSearchManager.deleteClaim(claim.getClaimId());
 		} else {
-			Cache.getInstance().addRemovalToCache(claim, applicationContext);
+			// TODO
 		}
 		LocalDataManager.saveClaims();
 	}
@@ -78,7 +78,7 @@ public class MainManager {
 		if (isNetworkAvailable(applicationContext)) {
 			ElasticSearchManager.updateClaim(claim);
 		} else {
-			Cache.getInstance().addUpdateToCache(claim, applicationContext);
+			// TODO
 		}
 		LocalDataManager.saveClaims();
 	}
