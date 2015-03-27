@@ -92,20 +92,20 @@ public class MainManager {
 		return submittedClaims;
 	}
 	
-	public static void loadClaims() {
+	public static void loadClaims(String name) {
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.loadClaims();
+			ElasticSearchManager.loadClaims(name);
+		} else {
+			LocalDataManager.loadClaims();
 		}
-		LocalDataManager.loadClaims();
 	}
 	
 	
-	public static void loadUser() {
+	public static void loadUser(String name) {
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.loadUser();
-		} else {
-			LocalDataManager.loadUser();
+			ElasticSearchManager.loadUser(name);
 		}
+		LocalDataManager.loadUser();
 	}
 	
 	

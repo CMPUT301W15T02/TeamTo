@@ -42,6 +42,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
@@ -73,6 +76,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		setListeners();
 		setUpAdapter();
 	}
+	
+	
 	
 	/**
 	 * Initializes all of the model objects and controllers needed throughout the activity

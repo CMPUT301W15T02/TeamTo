@@ -26,6 +26,9 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,32 +44,44 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
+	private Handler handler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.login_main_activity);
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
-		String usernameString = settings.getString("username", null);
+		final String usernameString = settings.getString("username", null);
 		MainManager.initializeContext(getApplicationContext());
+		
+		handler = new Handler(Looper.getMainLooper()) {
+
+			@Override
+			public void handleMessage(Message msg) {
+				Intent intent = new Intent();
+				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
+				startActivity(intent);
+				LoginActivity.this.finish();
+			}
+			
+		};
 
 		if (hasLoggedIn)  //Go directly to main activity
 		{
-			User.getInstance().setName(usernameString);
-			MainManager.loadUser();
-			MainManager.loadClaims();
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    Intent intent = new Intent();
-			intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
-			startActivity(intent);
-			LoginActivity.this.finish();
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					MainManager.loadUser(usernameString);
+					MainManager.loadClaims(usernameString);
+					handler.sendEmptyMessage(0);
+					
+				}
+			}).start();
+			
+		} else {
+			setContentView(R.layout.login_main_activity);
 		}
 	}
 
@@ -79,9 +94,8 @@ public class LoginActivity extends Activity {
 	public void onLoginButtonClicked(View view) {
 		Intent intent = new Intent(LoginActivity.this, ClaimantClaimsListActivity.class);
 		EditText name = (EditText) findViewById(R.id.username);
-		String usernameString = name.getText().toString();
+		final String usernameString = name.getText().toString();
 		
-//TODO: Complete username session link
 		
 		//if username blank
 		if (usernameString.matches("")) {
@@ -95,14 +109,18 @@ public class LoginActivity extends Activity {
 			editor.putBoolean("hasLoggedIn", true);
 			editor.putString("username", usernameString);
 			editor.commit();
-			
-			MainManager.loadUser();
-			MainManager.loadClaims();
 			User.getInstance().setName(usernameString);
-			Toast.makeText(this, "Username:"+User.getInstance().getName(), Toast.LENGTH_SHORT).show();
-			intent.putExtra("claimantName", usernameString);
-			startActivity(intent);
-			LoginActivity.this.finish();
+			
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					MainManager.loadUser(usernameString);
+					MainManager.loadClaims(usernameString);
+					handler.sendEmptyMessage(0);
+					
+				}
+			}).start();
 		}
 	}
 	
