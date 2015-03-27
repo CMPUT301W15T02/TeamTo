@@ -16,7 +16,7 @@
  * 
  * Sources:
  * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
-// @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
+// @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
  * */
 package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.io.IOException;
