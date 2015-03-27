@@ -16,6 +16,8 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
@@ -42,7 +44,7 @@ public class User {
 	 * @param string	the name of the user
 	 */
 	private User() {
-		this.name = "";
+		name = "";
 		tags = new ArrayList<Tag>();
 		type = true;
 		// Default tags for now

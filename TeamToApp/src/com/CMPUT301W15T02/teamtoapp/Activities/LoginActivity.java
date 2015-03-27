@@ -109,7 +109,6 @@ public class LoginActivity extends Activity {
 			editor.putBoolean("hasLoggedIn", true);
 			editor.putString("username", usernameString);
 			editor.commit();
-			User.getInstance().setName(usernameString);
 			
 			new Thread(new Runnable() {
 				

@@ -247,7 +247,7 @@ public class ElasticSearchManager {
 	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
 	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
 	public static void addClaim(final Claim claim) {
-		
+		Log.i("CLAIMID", claim.getClaimId());
 		new Thread(new Runnable() {
 			
 			@Override

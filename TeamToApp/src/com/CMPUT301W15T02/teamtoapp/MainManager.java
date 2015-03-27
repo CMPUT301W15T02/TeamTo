@@ -104,8 +104,9 @@ public class MainManager {
 	public static void loadUser(String name) {
 		if (isNetworkAvailable(applicationContext)) {
 			ElasticSearchManager.loadUser(name);
+		} else {
+			LocalDataManager.loadUser();
 		}
-		LocalDataManager.loadUser();
 	}
 	
 	
