@@ -173,7 +173,7 @@ public class GoogleMapActivity extends Activity {
  
             // Change marker location on the screen
             marker.setPosition(addressLatLng);
-            marker.setSnippet(addressEditText.getText().toString());
+            marker.setTitle(addressEditText.getText().toString());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
             
