@@ -36,6 +36,7 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.R.id;
 import com.CMPUT301W15T02.teamtoapp.R.layout;
 import com.CMPUT301W15T02.teamtoapp.R.menu;
+import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -66,6 +67,7 @@ public class GoogleMapActivity extends Activity {
 	
 	// Marker used when user chooses own address
 	private Marker marker;
+	private GeoLocation geolocation = new GeoLocation();
 
 	
 	@Override
@@ -75,7 +77,9 @@ public class GoogleMapActivity extends Activity {
 		
 		// Initialize addressEditText
 		addressEditText = (EditText) findViewById(R.id.addressEditText);
-		
+		geolocation.setLatitude(defaultLatLng.latitude);
+		geolocation.setLongitude(defaultLatLng.longitude);
+		geolocation.setLocationName("Edmonton, AB, CA");
 		// Initialize googleMap
 		try {
             if (googleMap == null) {
@@ -190,6 +194,10 @@ public class GoogleMapActivity extends Activity {
             
             // TODO: Need to save the latitude and longitude from here into geolocation object
             // which will then be saved in the user.
+            // IN PROGRESS.
+            geolocation.setLatitude(addressLatLng.latitude);
+            geolocation.setLongitude(addressLatLng.longitude);
+            geolocation.setLocationName(addressEditText.getText().toString());
         }
  
     }
