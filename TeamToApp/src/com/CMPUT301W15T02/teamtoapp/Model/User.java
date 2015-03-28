@@ -184,6 +184,7 @@ public class User {
 	 */
 	public void setGeoLocation(GeoLocation geoLocation) {
 		this.userGeoLocation = geoLocation;
+		notifyListeners();
 	}
 	
 	

@@ -257,9 +257,11 @@ public class GoogleMapActivity extends Activity {
     public void onSaveUserLocation() {
 
     	if (addressLatLng != null) {
-            // TODO: Need to save the latitude and longitude from here into geolocation object
-            // which will then be saved in the user.
-            // IN PROGRESS.
+            /**Save the latitude and longitude from here into geoLocation object
+             * which will then be saved in the user.
+             * 
+             * TODO: Need to make sure geoLocation is saved - it's not working with notify listeners...
+            */
     		if (!addressEditText.getText().toString().isEmpty()) {
     			Log.i("AddressLAGLONG", addressLatLng.toString());
     			geolocation.setLatitude(addressLatLng.latitude);
