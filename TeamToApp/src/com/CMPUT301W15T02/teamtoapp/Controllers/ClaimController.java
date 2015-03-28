@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
@@ -76,7 +77,14 @@ public class ClaimController {
 	 */
 	public void submitClaim() {
 		currentClaim.setStatus(Status.SUBMITTED);
-		MainManager.updateClaim(currentClaim);
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				MainManager.updateClaim(currentClaim);
+				
+			}
+		}).start();
 	}
 	
 	/**
@@ -84,8 +92,18 @@ public class ClaimController {
 	 * Currently the functionality is incomplete
 	 * 
 	 */
-	public void returnClaim() {
+	public void returnClaim(String comment, String approver) {
 		currentClaim.setStatus(Status.RETURNED);
+		currentClaim.setComment(comment);
+		currentClaim.setApproverName(approver);
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				ElasticSearchManager.updateClaim(currentClaim);
+				
+			}
+		}).start();
 	}
 	
 	/**
@@ -93,8 +111,18 @@ public class ClaimController {
 	 * Currently the functionality is incomplete
 	 * 
 	 */
-	public void approvedClaim() {
+	public void approvedClaim(String comment, String approver) {
 		currentClaim.setStatus(Status.APPROVED);
+		currentClaim.setComment(comment);
+		currentClaim.setApproverName(approver);
+		new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				ElasticSearchManager.updateClaim(currentClaim);
+				
+			}
+		}).start();
 	}
 	
 	public void setStartDate(GregorianCalendar date) {

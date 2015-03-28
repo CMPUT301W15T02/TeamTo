@@ -59,24 +59,26 @@ public class Claim implements Listener {
 	private ArrayList<String> tags;
 	private String userName;
 	private String claimdID;
+	private String approverName;
 	private TreeMap<String, Double> currencyTotals;
 	
 	private transient ArrayList<Listener> listeners = null;
 	
 	
 	public Claim() {
-		this.claimName="";
-		this.startDate = new GregorianCalendar();
-		this.endDate = new GregorianCalendar();
-		this.destinations = new ArrayList<StringTuple>();
-		this.expenses = new ArrayList<Expense>();
+		claimName="";
+		startDate = new GregorianCalendar();
+		endDate = new GregorianCalendar();
+		destinations = new ArrayList<StringTuple>();
+		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
-		this.tags = new ArrayList<String>();
-		this.comment = "";
-		this.userName = User.getInstance().getName();
-		this.claimdID = UUID.randomUUID().toString();
+		tags = new ArrayList<String>();
+		comment = "";
+		userName = User.getInstance().getName();
+		claimdID = UUID.randomUUID().toString();
 		currencyTotals = new TreeMap<String, Double>();
 		listeners = new ArrayList<Listener>();
+		approverName = "";
 	}
 	
 	
@@ -308,6 +310,17 @@ public class Claim implements Listener {
 		
 	}
 
+
+	public String getApproverName() {
+		return approverName;
+	}
+
+
+	public void setApproverName(String approverName) {
+		this.approverName = approverName;
+	}
+
+	
 
 	
 	

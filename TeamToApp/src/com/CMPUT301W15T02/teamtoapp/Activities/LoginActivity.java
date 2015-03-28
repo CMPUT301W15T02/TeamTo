@@ -54,12 +54,6 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		dialog = new ProgressDialog(LoginActivity.this);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("Loading. Please wait...");
-        dialog.setIndeterminate(true);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
@@ -69,6 +63,13 @@ public class LoginActivity extends Activity {
 		
 		if (hasLoggedIn)  //Go directly to main activity
 		{
+			dialog = new ProgressDialog(LoginActivity.this);
+	        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+	        dialog.setMessage("Loading. Please wait...");
+	        dialog.setIndeterminate(true);
+	        dialog.setCanceledOnTouchOutside(false);
+	        dialog.show();
+	        
 			new Thread(new Runnable() {
 				
 				@Override
@@ -103,7 +104,9 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void handleMessage(Message msg) {
-				dialog.dismiss();
+				if (dialog != null) {
+					dialog.dismiss();
+				}
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 				startActivity(intent);
@@ -137,15 +140,13 @@ public class LoginActivity extends Activity {
 			editor.putBoolean("hasLoggedIn", true);
 			editor.putString("username", usernameString);
 			editor.commit();
-			LocalDataManager.saveUser(User.getInstance());
-			LocalDataManager.saveClaims();
 			
 			new Thread(new Runnable() {
 				
 				@Override
 				public void run() {
-					MainManager.loadUser(usernameString);
-					MainManager.loadClaims(usernameString);
+					ElasticSearchManager.loadUser(usernameString);
+					ElasticSearchManager.loadClaims(usernameString);
 					handler.sendEmptyMessage(0);
 					
 				}

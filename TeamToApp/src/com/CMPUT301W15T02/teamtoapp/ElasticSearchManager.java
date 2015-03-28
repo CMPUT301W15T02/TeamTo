@@ -396,7 +396,12 @@ public class ElasticSearchManager {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		User.setUser(search_hit.getSource());
+		User user = search_hit.getSource();
+		if (user == null) {
+			User.getInstance();
+		} else {
+			User.setUser(user);
+		}
 
 
 

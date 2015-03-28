@@ -18,17 +18,21 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
@@ -36,8 +40,10 @@ import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 /**
@@ -122,6 +128,45 @@ public class ApproverClaimsListActivity extends Activity {
 				Intent intent = new Intent(ApproverClaimsListActivity.this, ApproverExpenseListActivity.class);
 				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
+			}
+		});
+		
+		listView.setLongClickable(true);
+		listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				LayoutInflater inflater = LayoutInflater.from(getBaseContext());
+				final ClaimController claimController = new ClaimController(submittedClaims.get(position).getClaimId());
+				View ApproveReturnDialogView = inflater.inflate(R.layout.approve_return_claim_dialog, null);
+
+				final EditText approverComment = (EditText) ApproveReturnDialogView.findViewById(R.id.approverCommentEditText);
+
+				AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimsListActivity.this);
+				builder.setView(ApproveReturnDialogView);
+				builder.setPositiveButton("Approve", new DialogInterface.OnClickListener () {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						String comment = approverComment.getText().toString();
+						claimController.approvedClaim(comment, User.getInstance().getName());
+					}
+				})
+				.setNeutralButton("Return", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						String comment = approverComment.getText().toString();
+						claimController.returnClaim(comment, User.getInstance().getName());
+
+					}
+				})
+				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int id) {
+						// Do nothing
+					}
+				}).create().show();
+				return true;
 			}
 		});
 	}
