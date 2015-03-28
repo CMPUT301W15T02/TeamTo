@@ -85,6 +85,11 @@ public class LoginActivity extends Activity {
 						ElasticSearchManager.deleteClaim(claim.getClaimId());
 					}
 					Cache.getInstance().clearCache();
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					MainManager.loadUser(usernameString);
 					MainManager.loadClaims(usernameString);
 					handler.sendEmptyMessage(0);
