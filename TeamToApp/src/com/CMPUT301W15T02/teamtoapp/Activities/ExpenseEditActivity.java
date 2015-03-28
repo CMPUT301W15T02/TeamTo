@@ -15,6 +15,11 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,6 +30,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -320,6 +326,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			}
 		});
 	}
+	
 	
 	private void dispatchTakePictureIntent() {
 	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
