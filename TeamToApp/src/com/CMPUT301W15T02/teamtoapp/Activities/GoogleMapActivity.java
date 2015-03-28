@@ -44,6 +44,7 @@ import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -264,16 +265,13 @@ public class GoogleMapActivity extends Activity {
     			geolocation.setLatitude(addressLatLng.latitude);
     			geolocation.setLongitude(addressLatLng.longitude);
     			geolocation.setLocationName(addressEditText.getText().toString());
+    			User.getInstance().setGeoLocation(geolocation);
     		}
             
-    	} else {
-    		geolocation.setLatitude(defaultLatLng.latitude);
-    		geolocation.setLongitude(defaultLatLng.longitude);
-    		geolocation.setLocationName("Edmonton, AB, CA");
-    	}
+    	} // Else keep previous or default location in user.
     	
-    	Toast.makeText(getApplicationContext(), "Saved your location: "+geolocation.getLocationName(), 
-    			Toast.LENGTH_LONG).show();
+    	Toast.makeText(getApplicationContext(), "Saved your location: "+
+    			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
     }
     
     
