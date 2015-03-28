@@ -68,7 +68,7 @@ public class MainManager {
 				}
 			}).start();
 		} else {
-			Cache.getInstance().addUpate(claim);
+			Cache.getInstance().addUpdate(claim);
 		}
 		LocalDataManager.saveClaims();
 	}
@@ -99,7 +99,7 @@ public class MainManager {
 				}
 			}).start();
 		} else {
-			Cache.getInstance().addUpate(claim);
+			Cache.getInstance().addUpdate(claim);
 		}
 		LocalDataManager.saveClaims();
 	}

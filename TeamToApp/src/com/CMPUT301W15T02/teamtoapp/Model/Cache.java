@@ -58,21 +58,21 @@ public class Cache {
 		return instance;
 	}
  	
- 	public void addUpate(Claim claim) {
+ 	public void addUpdate(Claim claim) {
  		if (!claimsToUpdate.contains(claim)) {
  			claimsToUpdate.add(claim);
- 			saveUpates();
+ 			saveUpdates();
  		}
  	}
  	
  	public void addRemoval(Claim claim) {
- 		if (claimsToRemove.contains(claim)) {
+ 		if (!claimsToRemove.contains(claim)) {
  			claimsToRemove.add(claim);
  			saveRemovals();
  		}
  		if (claimsToUpdate.contains(claim)) {
  			claimsToUpdate.remove(claim);
- 			saveUpates();
+ 			saveUpdates();
  		}
  	}
  	
@@ -81,7 +81,7 @@ public class Cache {
  		claimsToRemove = new ArrayList<Claim>();
  	}
  	
- 	public void saveUpates() {
+ 	public void saveUpdates() {
  		Gson gson = new Gson();
  		try {
  			FileOutputStream fos = context.openFileOutput(UPDATE_FILE_NAME,0);
@@ -164,6 +164,9 @@ public class Cache {
 	}
 	
 
+	public static void tearDownForTesting() {
+		instance = null;
+	}
  	
 	
 }

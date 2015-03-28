@@ -129,5 +129,6 @@ public class NetworkTest extends AndroidTestCase{
 		}
 		assertEquals(2, ClaimList.getInstance().getClaims().size());
 	}
+	
 
 }
