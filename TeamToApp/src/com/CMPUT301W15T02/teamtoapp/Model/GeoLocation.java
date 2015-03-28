@@ -1,8 +1,11 @@
 package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 import android.content.Context;
 import android.location.Address;
@@ -21,16 +24,19 @@ import android.location.Geocoder;
  */
 public class GeoLocation {
 	
-	private double latitude;
-	private double longitude;
+	private double latitude = 0.0;
+	private double longitude = 0.0;
 	private String locationName = "None";
+	protected transient ArrayList<Listener> listeners = null;
 
 	public GeoLocation() {
+		listeners = new ArrayList<Listener>();
 	}
 
 	public GeoLocation(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+		listeners = new ArrayList<Listener>();
 	}
 	
 	public double getLatitude() {
@@ -39,6 +45,7 @@ public class GeoLocation {
 	
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+		notifyListeners();
 	}
 	
 	public double getLongitude() {
@@ -47,6 +54,7 @@ public class GeoLocation {
 	
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
+		notifyListeners();
 	}
 	
 	public String getLocationName() {
@@ -55,9 +63,26 @@ public class GeoLocation {
 	
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
+		notifyListeners();
 	}
 	
-
+	public void notifyListeners() {
+		for (Listener listener : listeners) {
+			listener.update();
+		}
+	}
+	
+	
+	public void addListener(Listener listener) {
+		listeners.add(listener);
+	}
+	
+	
+	public void removeListener(Listener listener) {
+		if (listeners.contains(listener)) {
+			listeners.remove(listener);
+		}
+	}
 
 	/**
 	 * Grab city name from longitude and latitude values.
@@ -66,6 +91,9 @@ public class GeoLocation {
 	 * 
 	 * TODO: Needs testing. Context is definitely required, don't know if we need other parameters later...
 	 */
+	
+	
+	// Need this for gps! Going to add gps feature in GoogleMapActivity.java
 	public String getCityNameFromLocation(Context context) {
 		String cityName = null;
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());

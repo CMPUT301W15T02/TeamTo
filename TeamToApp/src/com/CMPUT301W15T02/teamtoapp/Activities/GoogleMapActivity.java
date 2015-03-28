@@ -40,9 +40,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -50,7 +52,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
+// Will be using this source soon to get location services gpa to initialize instead of using a default location 
+// in google maps: http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location
 public class GoogleMapActivity extends Activity {
 
 	// Define default latitude and longitude for user (University of Alberta, Edmonton, CA)
@@ -73,9 +76,7 @@ public class GoogleMapActivity extends Activity {
 		
 		// Initialize addressEditText
 		addressEditText = (EditText) findViewById(R.id.addressEditText);
-		geolocation.setLatitude(defaultLatLng.latitude);
-		geolocation.setLongitude(defaultLatLng.longitude);
-		geolocation.setLocationName("Edmonton, AB, CA");
+
 		// Initialize googleMap
 		try {
             if (googleMap == null) {
@@ -118,33 +119,16 @@ public class GoogleMapActivity extends Activity {
         // Get the street address entered
         String newAddress = addressEditText.getText().toString();
  
-        if(newAddress != null){
+        if(!newAddress.isEmpty()){
  
-            // Call for the AsyncTask to place a marker (PlaceMarker class made below)
+            // Call for the AsyncTask to change location of the marker (ChangeMarker class made below)
             new ChangeMarker().execute(newAddress);
  
+        } else {
+        	Toast.makeText(getApplicationContext(), "Please enter location", Toast.LENGTH_SHORT).show();
         }
  
     }
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.google_map, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 	
 	
 	/** 
@@ -171,6 +155,7 @@ public class GoogleMapActivity extends Activity {
  
             return null;
         }
+		
 		/**
 		 * onPostExecute:
 		 * 
@@ -187,13 +172,6 @@ public class GoogleMapActivity extends Activity {
             marker.setTitle(addressEditText.getText().toString());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-            
-            // TODO: Need to save the latitude and longitude from here into geolocation object
-            // which will then be saved in the user.
-            // IN PROGRESS.
-            geolocation.setLatitude(addressLatLng.latitude);
-            geolocation.setLongitude(addressLatLng.longitude);
-            geolocation.setLocationName(addressEditText.getText().toString());
         }
  
     }
@@ -273,4 +251,51 @@ public class GoogleMapActivity extends Activity {
         }
  
     }
+    
+    /**
+     * When user clicks save on action bar, current location/ default location will be saved.
+     * */
+    public void onSaveUserLocation() {
+
+    	if (addressLatLng != null) {
+            /**Save the latitude and longitude from here into geoLocation object
+             * which will then be saved in the user.
+             * 
+             * TODO: Need to make sure geoLocation is saved - it's not working with notify listeners...
+            */
+    		if (!addressEditText.getText().toString().isEmpty()) {
+    			Log.i("AddressLAGLONG", addressLatLng.toString());
+    			geolocation.setLatitude(addressLatLng.latitude);
+    			geolocation.setLongitude(addressLatLng.longitude);
+    			geolocation.setLocationName(addressEditText.getText().toString());
+    			User.getInstance().setGeoLocation(geolocation);
+    		}
+            
+    	} // Else keep previous or default location in user.
+    	
+    	Toast.makeText(getApplicationContext(), "Saved your location: "+
+    			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
+    }
+    
+    
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.google_map, menu);
+		return true;
+	}
+
+	
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		int id = item.getItemId();
+		if (id == R.id.save_user_geolocation) {
+			onSaveUserLocation();
+		}
+		return super.onOptionsItemSelected(item);
+	}
 }

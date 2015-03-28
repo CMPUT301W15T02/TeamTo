@@ -20,21 +20,12 @@
         android:inputType="text" />
 
     <Button
-        android:id="@+id/mapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/username"
-        android:layout_below="@+id/username"
-        android:onClick="onGoogleMapBtnClicked"
-        android:text="Choose Your Location" />
-
-    <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/username"
-        android:layout_alignRight="@+id/mapButton"
-        android:layout_below="@+id/mapButton"
+        android:layout_alignRight="@+id/username"
+        android:layout_below="@+id/username"
         android:onClick="onLoginButtonClicked"
         android:text="Login" />
 

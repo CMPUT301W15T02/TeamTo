@@ -32,6 +32,7 @@ public class User {
 	
 	private static User instance = null;
 	protected transient ArrayList<Listener> listeners = null;
+	private GeoLocation userGeoLocation;
 	
 	
 	
@@ -56,6 +57,10 @@ public class User {
 		Tag tag4 = new Tag("Recreation");
 		tag4.setTagID("recreation");
 		tags.add(tag4);
+		userGeoLocation = new GeoLocation();
+		userGeoLocation.setLatitude(53.523218900000);
+		userGeoLocation.setLatitude(-113.526318599999970);
+		userGeoLocation.setLocationName("Edmonton, AB, CA");
 		listeners = new ArrayList<Listener>();
 	}
 	
@@ -159,6 +164,29 @@ public class User {
 			notifyListeners();
 		}
 	}
+	
+	
+	
+	/**
+	 * Returns geoLocation selected by the user via GoogleMaps/ default geoLocation.
+	 * 
+	 * @return userGeoLocation - geoLocation selected by user/ manually selected
+	 */
+	public GeoLocation getUserGeoLocation() {
+		return userGeoLocation;
+	}
+	
+	
+	
+	/**
+	 * Set a new geoLocation selected by the user via GoogleMaps
+	 * @param geoLocation
+	 */
+	public void setGeoLocation(GeoLocation geoLocation) {
+		this.userGeoLocation = geoLocation;
+		notifyListeners();
+	}
+	
 	
 	
 	public void notifyListeners() {
