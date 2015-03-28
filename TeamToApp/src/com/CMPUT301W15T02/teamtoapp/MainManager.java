@@ -23,6 +23,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.util.Log;
 
 /** 
  * Function: Save any changes offline/online.
@@ -40,6 +41,7 @@ public class MainManager {
 		applicationContext = context;
 		LocalDataManager.initializeContext(context);
 		ElasticSearchManager.initializeContext(context);
+		Cache.initializeContext(context);
 		
 	}
 	
@@ -56,29 +58,48 @@ public class MainManager {
 	
 	
 	public static void addClaim(final Claim claim) {
+		Log.i("CLAIMIDBAN", claim.getClaimId());
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.addClaim(claim);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ElasticSearchManager.addClaim(claim);
+				}
+			}).start();
 		} else {
-			// TODO
+			Cache.getInstance().addUpate(claim);
 		}
 		LocalDataManager.saveClaims();
 	}
 	
 	public static void removeClaim(final Claim claim) {
 		if (isNetworkAvailable(applicationContext)) {
-			
-			ElasticSearchManager.deleteClaim(claim.getClaimId());
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ElasticSearchManager.deleteClaim(claim.getClaimId());
+				}
+			}).start();
 		} else {
-			// TODO
+			Cache.getInstance().addRemoval(claim);
 		}
 		LocalDataManager.saveClaims();
 	}
 	
 	public static void updateClaim(final Claim claim) {
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.updateClaim(claim);
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					ElasticSearchManager.updateClaim(claim);
+					
+				}
+			}).start();
 		} else {
-			// TODO
+			Cache.getInstance().addUpate(claim);
 		}
 		LocalDataManager.saveClaims();
 	}
@@ -92,7 +113,7 @@ public class MainManager {
 		return submittedClaims;
 	}
 	
-	public static void loadClaims(String name) {
+	public static void loadClaims(final String name) {
 		if (isNetworkAvailable(applicationContext)) {
 			ElasticSearchManager.loadClaims(name);
 		} else {

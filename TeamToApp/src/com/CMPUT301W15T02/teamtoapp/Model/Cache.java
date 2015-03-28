@@ -24,51 +24,84 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
-import com.CMPUT301W15T02.teamtoapp.MainManager;
-import com.CMPUT301W15T02.teamtoapp.Commands.Command;
-import com.CMPUT301W15T02.teamtoapp.Commands.addCommand;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import android.R.integer;
 import android.content.Context;
 
 public class Cache {
 
-	
-	private static final String CLAIMFILE = "claims.sav";
 	private static Cache instance = null;
-	private ArrayList<Command> commands;
+ 	private static Context context;
 
+ 	private static String UPDATE_FILE_NAME = "update_claims_cache_file.txt";
+ 	private static String REMOVE_FILE_NAME = "remove_claims_cache_file.txt";
+ 	
+ 	private ArrayList<Claim> claimsToUpdate;
+ 	private ArrayList<Claim> claimsToRemove; 
+
+ 	
+ 	
+ 	private Cache() {
+		claimsToUpdate = new ArrayList<Claim>();
+		claimsToRemove = new ArrayList<Claim>(); 
+ 	}
+ 	
+ 	public static void initializeContext(Context appcontext) {
+ 		context = appcontext;
+ 	}
 	
-	
-	private Cache() {
-		commands = new ArrayList<Command>();
-	}
-	
-	public static Cache getInstance() {
+ 	public static Cache getInstance() {
 		if (instance == null) {
 			instance = new Cache();
 		}
 		return instance;
 	}
-	
-	public void addCommandToCache(Command command) {
-		commands.add(command);
-	}
-	
-	public void removeCommandFromCache(Command command) {
-		commands.remove(command);
-	}
-	
-	/*public void saveCache(Context context) {
-		context = context.getApplicationContext();
+ 	
+ 	public void addUpate(Claim claim) {
+ 		if (!claimsToUpdate.contains(claim)) {
+ 			claimsToUpdate.add(claim);
+ 			saveUpates();
+ 		}
+ 	}
+ 	
+ 	public void addRemoval(Claim claim) {
+ 		if (claimsToRemove.contains(claim)) {
+ 			claimsToRemove.add(claim);
+ 			saveRemovals();
+ 		}
+ 		if (claimsToUpdate.contains(claim)) {
+ 			claimsToUpdate.remove(claim);
+ 			saveUpates();
+ 		}
+ 	}
+ 	
+ 	public void clearCache() {
+ 		claimsToUpdate = new ArrayList<Claim>();
+ 		claimsToRemove = new ArrayList<Claim>();
+ 	}
+ 	
+ 	public void saveUpates() {
+ 		Gson gson = new Gson();
+ 		try {
+ 			FileOutputStream fos = context.openFileOutput(UPDATE_FILE_NAME,0);
+ 			OutputStreamWriter osw = new OutputStreamWriter(fos);
+ 			gson.toJson(claimsToUpdate, osw);
+ 			osw.flush();
+ 			osw.close();
+ 		} catch (FileNotFoundException e) {
+ 			e.printStackTrace();
+ 		} catch (IOException e) {
+ 			e.printStackTrace();
+ 		}
+ 	}
+
+	public void saveRemovals() {
 		Gson gson = new Gson();
 		try {
-			FileOutputStream fos = context.openFileOutput(CLAIMFILE,0);
+			FileOutputStream fos = context.openFileOutput(REMOVE_FILE_NAME,0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			gson.toJson(ClaimList.getInstance().getClaims(), osw);
+			gson.toJson(claimsToRemove, osw);
 			osw.flush();
 			osw.close();
 		} catch (FileNotFoundException e) {
@@ -77,8 +110,60 @@ public class Cache {
 			e.printStackTrace();
 		}
 	}
-	*/
 	
+	public void loadUpdates() {
+		Gson gson = new Gson();
+		ArrayList<Claim> claims = new ArrayList<Claim>();
+		try {
+			FileInputStream fis = context.openFileInput(UPDATE_FILE_NAME);
+			Type dataType = new TypeToken<ArrayList<Claim>>() {}.getType();
+			InputStreamReader isr = new InputStreamReader(fis);
+			 claims = gson.fromJson(isr, dataType);
+			fis.close();
+			
+		} catch (FileNotFoundException e) {
+			claims = null;
+		} catch (IOException e) {
+			claims = null;
+		}
+		if (claims == null) {
+			claims = new ArrayList<Claim>();
+		}
+		
+		claimsToUpdate = claims;
+	}
 	
+	public void loadRemovals() {
+		Gson gson = new Gson();
+		ArrayList<Claim> claims = new ArrayList<Claim>();
+		try {
+			FileInputStream fis = context.openFileInput(REMOVE_FILE_NAME);
+			Type dataType = new TypeToken<ArrayList<Claim>>() {}.getType();
+			InputStreamReader isr = new InputStreamReader(fis);
+			 claims = gson.fromJson(isr, dataType);
+			fis.close();
+			
+		} catch (FileNotFoundException e) {
+			claims = null;
+		} catch (IOException e) {
+			claims = null;
+		}
+		if (claims == null) {
+			claims = new ArrayList<Claim>();
+		}
+		
+		claimsToRemove = claims;
+	}
+	
+	public ArrayList<Claim> getUpdates() {
+		return claimsToUpdate;
+	}
+	
+	public ArrayList<Claim> getRemovals() {
+		return claimsToRemove;
+	}
+	
+
+ 	
 	
 }

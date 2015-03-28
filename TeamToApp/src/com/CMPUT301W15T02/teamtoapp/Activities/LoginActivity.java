@@ -21,8 +21,11 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
+import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.Cache;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 import android.os.Bundle;
@@ -73,6 +76,15 @@ public class LoginActivity extends Activity {
 				
 				@Override
 				public void run() {
+					Cache.getInstance().loadRemovals();
+					Cache.getInstance().loadUpdates();
+					for (Claim claim: Cache.getInstance().getUpdates()) {
+						ElasticSearchManager.updateClaim(claim);
+					}
+					for (Claim claim: Cache.getInstance().getRemovals()) {
+						ElasticSearchManager.deleteClaim(claim.getClaimId());
+					}
+					Cache.getInstance().clearCache();
 					MainManager.loadUser(usernameString);
 					MainManager.loadClaims(usernameString);
 					handler.sendEmptyMessage(0);
@@ -109,6 +121,8 @@ public class LoginActivity extends Activity {
 			editor.putBoolean("hasLoggedIn", true);
 			editor.putString("username", usernameString);
 			editor.commit();
+			LocalDataManager.saveUser(User.getInstance());
+			LocalDataManager.saveClaims();
 			
 			new Thread(new Runnable() {
 				
