@@ -299,4 +299,13 @@ public class ClaimController {
 		
 	}
 	
+	
+	public String getApproverName() {
+		return currentClaim.getApproverName();
+	}
+	
+	public String getApproverComment() {
+		 return currentClaim.getComment();
+	}
+	
 }

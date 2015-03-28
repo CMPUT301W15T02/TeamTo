@@ -107,6 +107,7 @@ public class LoginActivity extends Activity {
 				if (dialog != null) {
 					dialog.dismiss();
 				}
+				User.getInstance().setName(usernameString);
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 				startActivity(intent);

@@ -52,6 +52,8 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 	private TextView claimNameTextView;
 	private TextView claimStartDateTextView;
 	private TextView claimEndDateTextView;
+	private TextView approverNameTextView;
+	private TextView approverCommentTextView;
 	
 	private String claimID;
 	private ClaimController claimController;
@@ -120,6 +122,8 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimNameTextView = (TextView) findViewById(R.id.claimNameTextView);
 		claimStartDateTextView = (TextView) findViewById(R.id.claimStartDateTextView);
 		claimEndDateTextView = (TextView) findViewById(R.id.claimEndDateTextView);
+		approverNameTextView = (TextView) findViewById(R.id.approverNameTextView);
+		approverCommentTextView = (TextView) findViewById(R.id.approverCommentTextView);
 	}
 	
 	/**
@@ -129,6 +133,8 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimNameTextView.setText(claimController.getClaimName());
 		claimStartDateTextView.setText(claimController.getStartDateFormatted());
 		claimEndDateTextView.setText(claimController.getEndDateFormatted());
+		approverNameTextView.setText(claimController.getApproverName());
+		approverCommentTextView.setText(claimController.getApproverComment());
 	}
 	
 	/**
