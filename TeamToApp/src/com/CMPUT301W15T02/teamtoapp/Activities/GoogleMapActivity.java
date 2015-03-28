@@ -52,7 +52,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
+// Will be using this source soon to get location services gpa to initialize instead of using a default location 
+// in google maps: http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location
 public class GoogleMapActivity extends Activity {
 
 	// Define default latitude and longitude for user (University of Alberta, Edmonton, CA)

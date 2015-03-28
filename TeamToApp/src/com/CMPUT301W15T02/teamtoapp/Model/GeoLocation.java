@@ -92,8 +92,9 @@ public class GeoLocation {
 	 * TODO: Needs testing. Context is definitely required, don't know if we need other parameters later...
 	 */
 	
-/*	Don't think we really need this ...
- * public String getCityNameFromLocation(Context context) {
+	
+	// Need this for gps! Going to add gps feature in GoogleMapActivity.java
+	public String getCityNameFromLocation(Context context) {
 		String cityName = null;
 		Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 		List<Address> addresses;
@@ -105,5 +106,5 @@ public class GeoLocation {
 			e.printStackTrace();
 		}
 		return cityName;
-	}*/
+	}
 }
