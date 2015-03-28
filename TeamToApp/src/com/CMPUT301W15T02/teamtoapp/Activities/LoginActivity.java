@@ -20,6 +20,19 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
@@ -27,18 +40,6 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.view.Menu;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 /**
  * Activity that user will see upon first starting app,
@@ -48,10 +49,17 @@ public class LoginActivity extends Activity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";
 	private Handler handler;
+	ProgressDialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		dialog = new ProgressDialog(LoginActivity.this);
+        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setMessage("Loading. Please wait...");
+        dialog.setIndeterminate(true);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
 		
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
@@ -95,6 +103,7 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void handleMessage(Message msg) {
+				dialog.dismiss();
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 				startActivity(intent);
@@ -112,7 +121,6 @@ public class LoginActivity extends Activity {
 	}
 	// Comment
 	public void onLoginButtonClicked(View view) {
-		Intent intent = new Intent(LoginActivity.this, ClaimantClaimsListActivity.class);
 		EditText name = (EditText) findViewById(R.id.username);
 		final String usernameString = name.getText().toString();
 		

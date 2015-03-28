@@ -17,12 +17,6 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantExpenseListAdapter;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -37,6 +31,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantExpenseListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 /**
  * 

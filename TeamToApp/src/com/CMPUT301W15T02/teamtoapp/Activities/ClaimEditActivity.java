@@ -22,25 +22,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import com.CMPUT301W15T02.teamtoapp.MainManager;
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantDestinationsListAdapter;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
-import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
-import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
-
-import android.os.Bundle;
-import android.os.StrictMode;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -55,6 +43,15 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantDestinationsListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 /**
  * 

@@ -16,14 +16,6 @@
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
-import com.CMPUT301W15T02.teamtoapp.MainManager;
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
-import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -37,6 +29,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.CMPUT301W15T02.teamtoapp.MainManager;
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 
 /**

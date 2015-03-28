@@ -18,8 +18,6 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +28,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 
 /**
  * 

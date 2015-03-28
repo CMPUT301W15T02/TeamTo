@@ -17,13 +17,13 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.Model.Cache;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
+
+import com.CMPUT301W15T02.teamtoapp.Model.Cache;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 /** 
  * Function: Save any changes offline/online.

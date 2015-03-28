@@ -20,9 +20,6 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -30,6 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 /**
  * 
  * A customized adapter for the approver's list of expenses. 

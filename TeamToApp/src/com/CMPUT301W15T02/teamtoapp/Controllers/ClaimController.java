@@ -23,11 +23,11 @@ import java.util.GregorianCalendar;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
 /** 
  * 
@@ -38,13 +38,12 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
 public class ClaimController {
 	
-	private String claimID;
+
 	private Claim currentClaim;
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public ClaimController(String claimID) {
 		this.currentClaim = ClaimList.getInstance().findClaimByID(claimID);
-		this.claimID = claimID;
 	}
 	
 	public Claim getCurrentClaim() {

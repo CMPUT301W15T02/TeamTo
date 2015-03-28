@@ -30,7 +30,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import android.R.integer;
 import android.content.Context;
 import android.util.Log;
 

@@ -21,12 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.SortedMap;
 
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
-import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -34,6 +28,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
 /**
  * 
  * This adapter will provide a list of submitted claims for the approver. In progress.

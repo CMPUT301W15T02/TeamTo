@@ -19,40 +19,30 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
-import com.CMPUT301W15T02.teamtoapp.MainManager;
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
-import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.Cache;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
-import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
-
-import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.os.StrictMode;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.CMPUT301W15T02.teamtoapp.MainManager;
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
+import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 /**
  * The activity that the claimant will come to if they have already logged in.

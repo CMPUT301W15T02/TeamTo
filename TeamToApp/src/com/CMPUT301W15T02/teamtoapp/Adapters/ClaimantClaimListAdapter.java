@@ -26,13 +26,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.SortedMap;
 
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
-import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-
-import android.R.integer;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
@@ -44,6 +37,12 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 /**
  * 
  * A customized adapter for the claimant's list of claims.

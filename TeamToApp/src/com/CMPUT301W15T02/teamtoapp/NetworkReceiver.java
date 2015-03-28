@@ -1,12 +1,12 @@
 package com.CMPUT301W15T02.teamtoapp;
 
-import com.CMPUT301W15T02.teamtoapp.Model.Cache;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+
+import com.CMPUT301W15T02.teamtoapp.Model.Cache;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 
 public class NetworkReceiver extends BroadcastReceiver {
 

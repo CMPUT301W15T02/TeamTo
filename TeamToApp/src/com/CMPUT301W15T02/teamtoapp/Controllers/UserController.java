@@ -17,11 +17,7 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -36,11 +32,9 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 public class UserController {
 	
 	private User user;
-	private String userName;
 	
 	public UserController() {
 		user = User.getInstance();
-		userName = User.getInstance().getName();
 	}
 	
 	/**

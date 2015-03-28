@@ -20,8 +20,6 @@ import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.UUID;
 
-import com.CMPUT301W15T02.teamtoapp.MainManager;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**

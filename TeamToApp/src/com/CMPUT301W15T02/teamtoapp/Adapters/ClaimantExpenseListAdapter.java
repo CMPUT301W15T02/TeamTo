@@ -15,15 +15,10 @@
 
 package com.CMPUT301W15T02.teamtoapp.Adapters;
 
-import java.security.acl.Owner;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.R.id;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,6 +27,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 /**
  * 
  * A customized adapter for the claimant's list of expenses. 
