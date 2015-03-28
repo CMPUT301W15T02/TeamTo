@@ -182,5 +182,9 @@ public class User {
 			listeners.remove(listener);
 		}
 	}
+	
+	public static void tearDownForTesting() {
+		instance = null;
+	}
 
 }

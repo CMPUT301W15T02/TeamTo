@@ -28,33 +28,35 @@ import junit.framework.TestCase;
 
 public class UseCase3Test extends TestCase {
 
-	// UC 3.2, UC 3.3
-/*
+
 	public void testAddTags() {
-		User user = new User("Kent Brockman");
+		User user = User.getInstance();
 		Tag testTag = new Tag("test");
 		user.addTag(testTag);
 		assertTrue("Contains tag", user.getTags().contains(testTag));
+		User.tearDownForTesting();
 	}
 	
 	// UC 3.1
 	public void testRemoveTags() {
-		User user = new User("NAME");
+		User user = User.getInstance();
 		Tag testTag = new Tag("test");
 		user.addTag(testTag);
 		int initialSize = user.getTags().size();
 		user.removeTag(testTag);
 		assertEquals("Removed tag?", initialSize-1, user.getTags().size());
+		User.tearDownForTesting();
 	}
 	
 	// UC 3.0
 	public void testEditTags() {
-		User user = new User("NAME");
+		User user = User.getInstance();
 		Tag tag = new Tag("Tag name");
 		user.addTag(tag);
 		user.renameTag(tag, "New name");
 		
 		assertEquals("Rename tags working?", "New name", user.getTags().get(4).getTagName());
+		User.tearDownForTesting();
 	}
 	
 	// UC 3.3
@@ -64,31 +66,18 @@ public class UseCase3Test extends TestCase {
 		// User will add a new tag, then claim will be assigned the new tag 
 		Claim claim = new Claim();
 		Tag tag = new Tag("Tag name");
-		claim.addTag(tag);
+		claim.addTag(tag.getTagID());
 		assertTrue("Tag added to claims", claim.getTags().contains(tag));
 	}
 	
 	public void testRemoveTagFromClaim() {
 		Claim claim = new Claim();
 		Tag tag = new Tag("Tag name");
-		claim.addTag(tag);
-		claim.removeTag(tag);
+		claim.addTag(tag.getTagID());
+		claim.removeTag(tag.getTagID());
 		assertEquals("Tag actually removed?", 0, claim.getTags().size());
 		assertFalse("Tag not there", claim.getTags().contains(tag));
 	}
 	
-	
-	public void testFilterByTag() {
-		Claim claim1 = new Claim();
-		Claim claim2 = new Claim();
-		ClaimList claims = new ClaimList();
-		Tag tag = new Tag("Tag name");
-		claim2.addTag(tag);
-		claims.addClaim(claim1);
-		claims.addClaim(claim2);
-		ClaimListController claimListController = new ClaimListController();
-		assertTrue("Filter working", claimListController.getClaimsWithTags("Tag name").contains(claim1));
-		assertFalse("Tag filter working?", claimListController.getClaimsWithTags("Tag name").contains(claim2));
-	}
-*/
+
 }

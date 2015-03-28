@@ -71,11 +71,11 @@ public class UseCase1Test extends AndroidTestCase {
 		controller.addDestination(dest, reason);
 		
 		assertTrue("No destination and reason were added.", controller.getDestinations().size() != 0);
+		ClaimList.tearDownForTesting();
 	}
 	
-	// UC 1.1
-/*
-	public void testEditClaim() {
+	/*
+	 * public void testEditClaim() {
 		ClaimList claims = ClaimList.getInstance();
 		Claim claim = new Claim();
 		
@@ -83,7 +83,7 @@ public class UseCase1Test extends AndroidTestCase {
 		claims.addClaim(claim); // Has default values
 		
 		claim.setClaimName("in progress");
-		assertEquals("Name changed when in progress", "in progress", claims.getClaim(claim).getClaimName());
+		assertEquals("Name changed when in progress", "in progress", claims.getClaims().get(claim).getClaimName());
 		
 		claim.setStatus(Claim.Status.SUBMITTED);
 		claim.setClaimName("submitted name");
@@ -92,19 +92,21 @@ public class UseCase1Test extends AndroidTestCase {
 		claim.setStatus(Claim.Status.RETURNED);
 		claim.setClaimName("returned name");
 		assertEquals("Claim name changed when returned", "returned name", claims.getClaim(claim).getClaimName());
+		ClaimList.tearDownForTesting();
 	}
+	*/
 	
 	// UC 1.2
 	public void testDeleteClaim() {
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claims.addClaim(claim);
 		// Remove claim from manager
 		claims.removeClaim(claim);
-		assertNull("user still has this claim!", claims.getClaim(claim));
+		assertFalse("user still has this claim!", claims.getClaims().contains(claim));
+		ClaimList.tearDownForTesting();
 		
 	}
-*/
 	public void testClaimsSorted() {
 		ArrayList<Claim> claims = new ArrayList<Claim>();
 		Claim claim1 = new Claim();
@@ -121,6 +123,7 @@ public class UseCase1Test extends AndroidTestCase {
 		
 		Collections.sort(claims, new ClaimComparatorOldestFirst());
 		assertEquals("Sorting by oldest first?", claim2, claims.get(0));
+		ClaimList.tearDownForTesting();
 	}
 	
 }

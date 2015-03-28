@@ -103,9 +103,9 @@ public class UseCase4Test extends TestCase {
 		// Assert the expense exists in the claim
 		assertTrue("Expense is not added.", claim.getExpenses().contains(expense));
 	}
-/*	
+
 	public void testControllerAddExpense() {
-		ClaimList claimList = new ClaimList();
+		ClaimList claimList = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claimList.addClaim(claim);
 		ClaimController claimController = new ClaimController(claim.getClaimId());
@@ -114,11 +114,12 @@ public class UseCase4Test extends TestCase {
 		expense.setDescription("Some cool descriptuon");
 		claimController.addExpense(expense);
 		assertTrue("Controller adding expense", claimController.getExpenses().contains(expense));
+		ClaimList.tearDownForTesting();
 	}
 	
 	// US 04.04 (UC 4.1.2)
 	public void testCheckCompleteFlag() {
-		ClaimList claimList = new ClaimList();
+		ClaimList claimList = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claimList.addClaim(claim);
 		ClaimController claimController = new ClaimController(claim.getClaimId());
@@ -126,8 +127,8 @@ public class UseCase4Test extends TestCase {
 		claimController.setClaimName("Some name");
 		claimController.addDestination("some destination", "some reason");
 		assertTrue("Claim complete after description and destination entered", claimController.checkClaimInfoComplete());
+		ClaimList.tearDownForTesting();
 	}
-*/
 	// US 4.06 (UC 4.3)
 	public void testEditExpense() {
 		

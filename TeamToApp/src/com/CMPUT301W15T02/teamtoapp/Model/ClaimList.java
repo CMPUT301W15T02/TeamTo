@@ -146,6 +146,10 @@ public class ClaimList implements Listener {
 		notifyListeners();
 		
 	}
+	
+	public static void tearDownForTesting() {
+		instance = null;
+	}
 
 	
 	

@@ -28,10 +28,10 @@ import junit.framework.TestCase;
 public class UseCase8Test extends TestCase {
 	
 	// UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)
-/*
+
 	public void testClaimStatuses() {
 		Claim claim = new Claim();
-		ClaimList claims = new ClaimList();
+		ClaimList claims = ClaimList.getInstance();
 		claims.addClaim(claim);
 		ClaimController claimController = new ClaimController(claim.getClaimId());
 			
@@ -44,6 +44,7 @@ public class UseCase8Test extends TestCase {
 		claimController.submitClaim();
 		claimController.approvedClaim();
 		assertEquals("Claim approved?", Status.APPROVED, claimController.getCurrentClaim().getStatus());
+		ClaimList.tearDownForTesting();
 	}
-*/
+
 }
