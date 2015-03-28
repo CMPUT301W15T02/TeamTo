@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,10 +31,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
+import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 /**
@@ -48,8 +52,9 @@ public class ApproverClaimsListActivity extends Activity {
 	final Context context = this;
 	private ListView listView;
 	private ApproverClaimListAdapter adapter;
-	private ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
+	private ArrayList<Claim> submittedClaims;
 	ProgressDialog dialog;
+	Handler handler;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +69,18 @@ public class ApproverClaimsListActivity extends Activity {
         dialog.show();
 		getModelObjects();
 		setListeners();
+		
+		handler = new Handler(Looper.getMainLooper()) {
+	        @Override
+	        public void handleMessage(Message msg) {
+	        	ClaimList.getInstance().setClaims(submittedClaims);
+	        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, ClaimList.getInstance().getClaims());
+	        	listView.setAdapter(adapter);
+	        	adapter.sort(new ClaimComparatorNewestFirst());
+	        	adapter.notifyDataSetChanged();
+	        	dialog.dismiss();
+	        }
+		};
 		
 	}
 
@@ -82,7 +99,7 @@ public class ApproverClaimsListActivity extends Activity {
 			
 			@Override
 			public void run() {
-				submittedClaims = MainManager.getSubmittedClaims();
+				submittedClaims = ElasticSearchManager.getSubmittedClaims();
 				handler.sendEmptyMessage(0);
 				
 				
@@ -101,7 +118,7 @@ public class ApproverClaimsListActivity extends Activity {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Claim claim = submittedClaims.get(position);
+				Claim claim = ClaimList.getInstance().getClaims().get(position);
 				Intent intent = new Intent(ApproverClaimsListActivity.this, ApproverExpenseListActivity.class);
 				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
@@ -115,19 +132,9 @@ public class ApproverClaimsListActivity extends Activity {
 	 * @param menu
 	 */
 	public void switchToClaimantOption(MenuItem menu) {
-		// Need to do other stuff
+		LocalDataManager.loadClaims();
 		super.onBackPressed();
 	}
 	
-	private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, submittedClaims);
-        	listView.setAdapter(adapter);
-        	adapter.sort(new ClaimComparatorNewestFirst());
-        	adapter.notifyDataSetChanged();
-        	dialog.dismiss();
-        }
-	};
 	
 }

@@ -26,12 +26,15 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverExpenseListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 
@@ -48,6 +51,7 @@ public class ApproverExpenseListActivity extends Activity {
 	private ListView expenseListView;
 	private ApproverExpenseListAdapter adapter;
 	private Context context = this;
+	private ClaimController claimController;
 
 
 	@Override
@@ -59,6 +63,7 @@ public class ApproverExpenseListActivity extends Activity {
 		getModelObjects();
 		setFieldValues();
 		setListeners();
+		setUpAdapter();
 	}
 
 	@Override
@@ -83,15 +88,8 @@ public class ApproverExpenseListActivity extends Activity {
 	private void getModelObjects() {	
 		Intent intent = getIntent();
 		claimID = (String) intent.getSerializableExtra("claimID");
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				MainManager.initializeContext(context);
-				expenses = ElasticSearchManager.getClaim(claimID).getExpenses();
-				handler.sendEmptyMessage(0);
-			}
-		}).start();
+		claimController = new ClaimController(claimID);
+		expenses = claimController.getExpenses();
 	}
 	
 	/**
@@ -114,21 +112,27 @@ public class ApproverExpenseListActivity extends Activity {
 	 * Sets up the listeners for the expense list view
 	 */
 	private void setListeners() {
+		expenseListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Expense expense = claimController.getExpenses().get(position);
+				Intent intent = new Intent(context, ExpenseViewActivity.class);
+				intent.putExtra("expenseID", expense.getExpenseId());
+				startActivity(intent);
+				
+			}
+		});
 		
 	}
 	
-	/**
-	 * Handler sets up expense list adapter and binds it to the current expense list view
-	 */
-	@SuppressLint("HandlerLeak")
-	private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-    		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);
-        	adapter.notifyDataSetChanged();    		
-        	expenseListView.setAdapter(adapter);
-        }
-	};
+	private void setUpAdapter() {
+		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);
+    	adapter.notifyDataSetChanged();    		
+    	expenseListView.setAdapter(adapter);
+	}
+	
 	
 	
 }
