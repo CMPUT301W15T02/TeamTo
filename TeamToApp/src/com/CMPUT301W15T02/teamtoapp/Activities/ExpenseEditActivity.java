@@ -24,7 +24,9 @@ import java.util.GregorianCalendar;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -71,6 +73,8 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	
 	private DatePickerDialog datePickerDialog;
 	private String claimID;
+	
+	static final int REQUEST_IMAGE_CAPTURE = 1;
 	
 
 	@Override
@@ -307,6 +311,31 @@ public class ExpenseEditActivity extends Activity implements Listener {
 				expenseController.setComplete(isChecked);
 			}
 		});
+		
+		receiptImageButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				dispatchTakePictureIntent();
+			}
+		});
+	}
+	
+	private void dispatchTakePictureIntent() {
+	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+	        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+	    }
+	}
+	
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+	        Bundle extras = data.getExtras();
+	        Bitmap imageBitmap = (Bitmap) extras.get("data");
+	        receiptImageButton.setImageBitmap(imageBitmap);
+	    }
 	}
 
 	
