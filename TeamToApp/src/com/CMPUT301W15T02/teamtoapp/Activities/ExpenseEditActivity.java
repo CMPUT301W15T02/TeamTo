@@ -24,14 +24,19 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Currency;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -48,6 +53,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
@@ -73,6 +79,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	private EditText descriptionEditText;
 	private ImageButton receiptImageButton;
 	private CheckBox completedCheckBox;
+	Uri imageFileUri;
 	
 	private ArrayAdapter<CharSequence> currencyAdapter;
 	private ArrayAdapter<CharSequence> categoriesAdapter;
@@ -80,7 +87,6 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	private DatePickerDialog datePickerDialog;
 	private String claimID;
 	
-	static final int REQUEST_IMAGE_CAPTURE = 1;
 	
 
 	@Override
@@ -322,26 +328,46 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			
 			@Override
 			public void onClick(View v) {
-				dispatchTakePictureIntent();
+				takeAPhoto();
 			}
 		});
 	}
 	
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	
-	private void dispatchTakePictureIntent() {
-	    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-	    if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-	        startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-	    }
+	public void takeAPhoto() {
+
+		// Create a folder to store pictures
+		String folder = Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + "/tmp";
+		File folderF = new File(folder);
+		if (!folderF.exists()) {
+			folderF.mkdir();
+		}
+
+		// Create an URI for the picture file
+		String imageFilePath = folder + "/"
+				+ String.valueOf(System.currentTimeMillis()) + ".jpg";
+		File imageFile = new File(imageFilePath);
+		imageFileUri = Uri.fromFile(imageFile);
+		
+		Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, imageFileUri);
+		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 	}
+
 	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-	    if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-	        Bundle extras = data.getExtras();
-	        Bitmap imageBitmap = (Bitmap) extras.get("data");
-	        receiptImageButton.setImageBitmap(imageBitmap);
+	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+	    	Drawable photo = Drawable.createFromPath(imageFileUri.getPath());
+	    	Bitmap bitmap = ((BitmapDrawable) photo).getBitmap();
+	    	// Scale it to 50 x 50
+	    	Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 250, 250, true));
+	    	receiptImageButton.setImageDrawable(d);
+	    } else {
+	    	Toast.makeText(getApplicationContext(), "Something is not working", Toast.LENGTH_SHORT).show();
 	    }
 	}
 
