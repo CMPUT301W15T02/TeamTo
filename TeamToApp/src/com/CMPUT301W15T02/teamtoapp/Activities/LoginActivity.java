@@ -58,18 +58,7 @@ public class LoginActivity extends Activity {
 		final String usernameString = settings.getString("username", null);
 		MainManager.initializeContext(getApplicationContext());
 		
-		handler = new Handler(Looper.getMainLooper()) {
-
-			@Override
-			public void handleMessage(Message msg) {
-				Intent intent = new Intent();
-				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
-				startActivity(intent);
-				LoginActivity.this.finish();
-			}
-			
-		};
-
+		
 		if (hasLoggedIn)  //Go directly to main activity
 		{
 			new Thread(new Runnable() {
@@ -100,6 +89,20 @@ public class LoginActivity extends Activity {
 		} else {
 			setContentView(R.layout.login_main_activity);
 		}
+		
+		
+		handler = new Handler(Looper.getMainLooper()) {
+
+			@Override
+			public void handleMessage(Message msg) {
+				Intent intent = new Intent();
+				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
+				startActivity(intent);
+				LoginActivity.this.finish();
+			}
+			
+		};
+
 	}
 
 	@Override

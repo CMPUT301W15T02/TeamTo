@@ -51,6 +51,7 @@ public class ClaimListController {
 	// TODO clean this up
 	public void addClaim(Claim claim) {
 		claim.setUserName(userName);
+		Log.i("CLAIMID", claim.getClaimId());
 		claims.addClaim(claim);
 		MainManager.addClaim(claim);
 	}

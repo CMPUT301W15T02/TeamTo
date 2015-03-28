@@ -118,12 +118,6 @@ public class LocalDataManager {
 			claims = new ArrayList<Claim>();
 		}
 		
-		for (Claim claim: claims) {
-			claim.addListener(ClaimList.getInstance());
-			for (Expense expense: claim.getExpenses()) {
-				expense.addListener(claim);
-			}
-		}
 		ClaimList.getInstance().setClaims(claims);
 	}
 	

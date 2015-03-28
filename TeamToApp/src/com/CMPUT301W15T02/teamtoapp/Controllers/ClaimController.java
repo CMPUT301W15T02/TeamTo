@@ -61,10 +61,12 @@ public class ClaimController {
 	
 	public void addExpense(Expense expense) {
 		currentClaim.addExpense(expense);
+		MainManager.updateClaim(currentClaim);
 	}
 	
 	public void removeExpense(Expense expense) {
 		currentClaim.removeExpense(expense);
+		MainManager.updateClaim(currentClaim);
 	}
 	
 	

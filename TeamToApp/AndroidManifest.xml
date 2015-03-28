@@ -92,6 +92,15 @@
             android:name="com.CMPUT301W15T02.teamtoapp.Activities.GoogleMapActivity"
             android:label="@string/title_activity_google_map" >
         </activity>
+        
+        <receiver android:name=".NetworkReceiver" >
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+        </intent-filter>
+    </receiver>
+        
+        
     </application>
+    
 
 </manifest>

@@ -83,6 +83,12 @@ public class ClaimList implements Listener {
 
 	public void setClaims(ArrayList<Claim> claims) {
 		this.claims = claims;
+		for (Claim claim: claims) {
+			claim.addListener(ClaimList.getInstance());
+			for (Expense expense: claim.getExpenses()) {
+				expense.addListener(claim);
+			}
+		}
 		notifyListeners();
 
 	}
