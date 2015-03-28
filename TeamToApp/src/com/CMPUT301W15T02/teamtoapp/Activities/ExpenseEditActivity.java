@@ -36,6 +36,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -62,7 +63,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	private Spinner currencySpinner;
 	private Spinner categorySpinner;
 	private EditText descriptionEditText;
-	private ImageView receiptImageView;
+	private ImageButton receiptImageButton;
 	private CheckBox completedCheckBox;
 	
 	private ArrayAdapter<CharSequence> currencyAdapter;
@@ -119,7 +120,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		currencySpinner = (Spinner) findViewById(R.id.CurrencyExpenseSpinner);
 		categorySpinner  = (Spinner) findViewById(R.id.CategoryExpenseSpinner);
 		descriptionEditText = (EditText) findViewById(R.id.ExpenseDescriptionEditText);
-		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
+		receiptImageButton = (ImageButton) findViewById(R.id.ExpenseImageButton);
 		completedCheckBox = (CheckBox) findViewById(R.id.ExpenseCompletedCheckBox);
 	}
 	
