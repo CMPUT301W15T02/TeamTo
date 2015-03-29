@@ -41,6 +41,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
@@ -138,6 +139,9 @@ public class ExpenseViewActivity extends Activity {
 		categorySpinner.setSelection(categoriesAdapter.getPosition(expenseController.getCategory()));
 		amountEditText.setText(df.format(expenseController.getAmount()));
 		descriptionEditText.setText(expenseController.getDescription());
+		if (expenseController.getPhoto() == null) {
+			receiptImageButton.setVisibility(View.GONE);
+		}
 	}
 	
 	private void setListeners() {
@@ -145,7 +149,9 @@ public class ExpenseViewActivity extends Activity {
 			// http://stackoverflow.com/questions/7693633/android-image-dialog-popup
 			@Override
 			public void onClick(View v) {
-				showImage();
+				if (expenseController.getPhoto() != null) {
+					showImage();
+				}
 			}
 				
 			
