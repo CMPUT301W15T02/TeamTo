@@ -363,8 +363,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			}
 		});
 	}
-	
-	// http://stackoverflow.com/questions/7693633/android-image-dialog-popup
+
 	public void showImage() {
 	    LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 		View viewPhotoLayout = inflater.inflate(R.layout.photo_display_dialog, null);

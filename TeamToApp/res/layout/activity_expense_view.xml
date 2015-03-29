@@ -139,11 +139,11 @@
 
     </LinearLayout>
     
-    <ImageView
-        android:id="@+id/ExpenseImageView"
+    <Button
+        android:id="@+id/ExpenseImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+        android:text="View Receipt" />
 
 
 </LinearLayout>
