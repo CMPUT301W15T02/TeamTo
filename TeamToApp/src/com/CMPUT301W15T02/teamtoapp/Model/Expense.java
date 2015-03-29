@@ -35,7 +35,7 @@ public class Expense {
 	private String category;
 	private Double amount;
 	private boolean complete;
-	private String photo;
+	private String photo = null;
 	private String expenseId;
 	protected transient ArrayList<Listener> listeners = null;
 	
@@ -148,8 +148,7 @@ public class Expense {
 	
 
 	public String getPhoto() {
-		// TODO Incomplete.
-		return null;
+		return photo;
 	}
 	
 	

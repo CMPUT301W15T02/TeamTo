@@ -173,6 +173,13 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		} else {
 			descriptionEditText.setText(expenseController.getDescription());
 		}
+		if (expenseController.getPhoto() != null) {
+			byte[] decodedString = Base64.decode(expenseController.getPhoto(), Base64.DEFAULT);
+			Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+			Drawable d = new BitmapDrawable(getResources(),bitmap);
+	    	receiptImageButton.setImageDrawable(d);
+			
+		}
 	}
 	
 	
@@ -375,9 +382,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    	} else {
 	    		expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));
 	    	}
-	    	// Scale it to 50 x 50
-	    	Drawable d = new BitmapDrawable(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
-	    	//Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 250, 250, true));
+	    	Drawable d = new BitmapDrawable(getResources(),bitmap);
 	    	receiptImageButton.setImageDrawable(d);
 	    } else {
 	    	Toast.makeText(getApplicationContext(), "Something is not working", Toast.LENGTH_SHORT).show();

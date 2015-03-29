@@ -108,6 +108,14 @@ public class ExpenseController {
 		currentExpense.removePhoto();
 	}
 	
+	
+	
+	public String getPhoto() {
+		return currentExpense.getPhoto();
+	}
+	
+	
+	
 	public Expense getExpense() {
 		return currentExpense;
 	}
