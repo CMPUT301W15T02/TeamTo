@@ -41,7 +41,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;

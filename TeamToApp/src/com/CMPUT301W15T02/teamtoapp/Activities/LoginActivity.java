@@ -34,11 +34,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
-import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.Cache;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 /**

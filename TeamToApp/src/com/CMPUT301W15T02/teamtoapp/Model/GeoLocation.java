@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+
+import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * 

@@ -37,7 +37,6 @@ import android.widget.ListView;
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
-import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
