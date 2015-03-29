@@ -104,7 +104,7 @@ public class ExpenseController {
 	 * Removes a photo from the current expense
 	 * @param photoPath
 	 */
-	public void removePhoto(String photoPath) {
+	public void removePhoto() {
 		currentExpense.removePhoto();
 	}
 	

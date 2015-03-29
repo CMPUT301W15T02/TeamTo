@@ -155,7 +155,8 @@ public class Expense {
 	
 
 	public void removePhoto() {
-		// TODO Incomplete - make sure claim is editable before removing photo.
+		this.photo = null;
+		notifyListeners();
 		
 	}
 	
