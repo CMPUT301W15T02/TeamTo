@@ -33,8 +33,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,9 +51,15 @@ import android.widget.Toast;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import android.location.LocationListener;
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -67,6 +79,8 @@ public class GoogleMapActivity extends Activity {
 	// Marker used when user chooses own address
 	private Marker marker;
 	private GeoLocation geolocation = new GeoLocation();
+	
+	private Context context = this;
 
 	
 	@Override
@@ -76,37 +90,90 @@ public class GoogleMapActivity extends Activity {
 		
 		// Initialize addressEditText
 		addressEditText = (EditText) findViewById(R.id.addressEditText);
-
-		// Initialize googleMap
-		try {
-            if (googleMap == null) {
-                googleMap = ((MapFragment) getFragmentManager().
-                        findFragmentById(R.id.map)).getMap();
-            }
-            
-            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            // Place dot on current location, add visible features
-            googleMap.setMyLocationEnabled(true);
-            googleMap.setTrafficEnabled(true);
-            googleMap.setIndoorEnabled(true);
-            googleMap.setBuildingsEnabled(true);
-            
-            // Show zoom buttons
-            googleMap.getUiSettings().setZoomControlsEnabled(true);
-            
-            // Add marker to default location
-            marker = googleMap.addMarker(new MarkerOptions().
-                    position(defaultLatLng).title("University of Alberta"));
-            
-            // Move camera to edmonton location and zoom in
-            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 15));
-            googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-            
-		} catch (Exception e) {
-                e.printStackTrace();
-        }
 		
+		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+		
+		// Showing status
+        if (status != ConnectionResult.SUCCESS) { 
+        	
+        	// Google Play Services are not available
+            int requestCode = 10;
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
+            dialog.show();
+ 
+        } else { 
+        	
+        	// Google Play Services are available
+    		try {
+    			
+    			// Initialize GoogleMaps
+    			if (googleMap == null) {
+    				googleMap = ((MapFragment) getFragmentManager().
+    				findFragmentById(R.id.map)).getMap();
+    			}     
+    			 
+                // Getting GoogleMap object from the fragment
+                googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                // Place dot on current location, add visible features
+                googleMap.setMyLocationEnabled(true);
+                googleMap.setTrafficEnabled(true);
+                googleMap.setIndoorEnabled(true);
+                googleMap.setBuildingsEnabled(true);
+                
+                // Show zoom buttons
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+                
+             // Getting LocationManager object from System Service LOCATION_SERVICE
+                LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                // Creating a criteria object to retrieve provider
+                Criteria criteria = new Criteria();
+
+                // Getting the name of the best provider
+                String provider = locationManager.getBestProvider(criteria, true);
+
+                // Getting Current Location
+                Location location = locationManager.getLastKnownLocation(provider);
+                
+                if (location != null) {
+                	addressLatLng = new LatLng (location.getLatitude(), location.getLongitude());
+                	googleMap.clear();
+                	marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title("Current Location"));
+                	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
+                	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                	
+                } else {
+                	// Had to initialize marker here, otherwise it's null and then the app crashes whenever
+                	// you try to find a location on it. For some reason the actual location of the user
+                	// does not show up.
+                	marker = googleMap.addMarker(new MarkerOptions().
+                			position(defaultLatLng).title("Default Location"));
+                	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 15));
+                	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                	
+                	Toast.makeText(context, "Cannot find location for some reason.", Toast.LENGTH_LONG).show();
+                }
+    			// If current location of user changes, myLocationChangeListener is called.
+                googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
+                
+    		} catch (Exception e) {
+                    e.printStackTrace();
+            }
+    		
+        }	
 	}
+	
+	private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
+	    @Override
+	    public void onMyLocationChange(Location location) {
+	        addressLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+	        marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title(addressEditText.toString()));
+	        if(googleMap != null){
+	            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 16.0f));
+	        }
+	    }
+	};
+		
 	
 	/**
 	 *  Called when getAddressButton is clicked
@@ -166,7 +233,6 @@ public class GoogleMapActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
- 
             // Change marker location on the screen
             marker.setPosition(addressLatLng);
             marker.setTitle(addressEditText.getText().toString());
@@ -298,4 +364,6 @@ public class GoogleMapActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
 }
