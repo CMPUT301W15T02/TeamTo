@@ -126,14 +126,8 @@ public class GoogleMapActivity extends Activity {
              // Getting LocationManager object from System Service LOCATION_SERVICE
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-                // Creating a criteria object to retrieve provider
-                Criteria criteria = new Criteria();
-
-                // Getting the name of the best provider
-                String provider = locationManager.getBestProvider(criteria, true);
-
                 // Getting Current Location
-                Location location = locationManager.getLastKnownLocation(provider);
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 
                 if (location != null) {
                 	addressLatLng = new LatLng (location.getLatitude(), location.getLongitude());
