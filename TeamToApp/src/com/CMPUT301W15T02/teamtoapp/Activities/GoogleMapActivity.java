@@ -125,9 +125,11 @@ public class GoogleMapActivity extends Activity {
                 // Getting Current Location
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 
+                // Clear any existing markers
+                googleMap.clear();
+                
                 if (location != null) {
                 	addressLatLng = new LatLng (location.getLatitude(), location.getLongitude());
-                	googleMap.clear();
                 	marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title("Current Location"));
                 	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
                 	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
@@ -157,6 +159,7 @@ public class GoogleMapActivity extends Activity {
 	private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
 	    @Override
 	    public void onMyLocationChange(Location location) {
+	    	googleMap.clear();
 	        addressLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 	        marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title(addressEditText.toString()));
 	        if(googleMap != null){
