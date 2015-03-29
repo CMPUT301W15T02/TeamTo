@@ -143,6 +143,7 @@ public class Expense {
 
 	public void addPhoto(String photo) {
 		this.photo = photo;
+		notifyListeners();
 	}
 	
 	

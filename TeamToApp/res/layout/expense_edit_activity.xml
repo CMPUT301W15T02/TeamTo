@@ -119,11 +119,11 @@
 
     </LinearLayout>
     
-    <ImageButton
+    <Button
         android:id="@+id/ExpenseImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"/>
+        android:text="Receipt"/>
 
     <CheckBox
         android:id="@+id/ExpenseCompletedCheckBox"
