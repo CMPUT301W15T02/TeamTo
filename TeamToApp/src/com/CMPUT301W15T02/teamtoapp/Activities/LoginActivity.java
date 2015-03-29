@@ -74,20 +74,6 @@ public class LoginActivity extends Activity {
 				
 				@Override
 				public void run() {
-					Cache.getInstance().loadRemovals();
-					Cache.getInstance().loadUpdates();
-					for (Claim claim: Cache.getInstance().getUpdates()) {
-						ElasticSearchManager.updateClaim(claim);
-					}
-					for (Claim claim: Cache.getInstance().getRemovals()) {
-						ElasticSearchManager.deleteClaim(claim.getClaimId());
-					}
-					Cache.getInstance().clearCache();
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
 					MainManager.loadUser(usernameString);
 					MainManager.loadClaims(usernameString);
 					handler.sendEmptyMessage(0);

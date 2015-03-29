@@ -468,6 +468,7 @@ public class ElasticSearchManager {
 					for (int i = 0; i < hits.getHits().size(); i++) {
 						SearchHit<Claim> searchHit = hits.getHits().get(i);
 						Claim claim = searchHit.getSource();
+						Log.i("HIMAN", claim.getClaimId());
 						userClaims.add(claim);
 					}
 				}

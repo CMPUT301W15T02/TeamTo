@@ -48,6 +48,7 @@ import android.provider.MediaStore.Files;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,6 +74,7 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 /**
  * 
@@ -213,8 +215,12 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		// TODO move this to controller
 		// Should only update if something has changed
 		ClaimController claimController = new ClaimController(claimID);
+		Log.i("EXPENSECLAIM", claimController.getCurrentClaim().getClaimId());
+		for (Expense expense: claimController.getExpenses()) {
+			Log.i("EXPENSEID", expense.getExpenseId());
+		}
+		Log.i("EXPENSECONTROLLER", expenseController.getExpense().getExpenseId());
 		claimController.addExpense(expenseController.getExpense());
-		MainManager.updateClaim(claimController.getCurrentClaim());
 		super.onBackPressed();
 	}
 
@@ -404,7 +410,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    	Drawable photo = Drawable.createFromPath(imageFileUri.getPath());
 	    	Bitmap bitmap = ((BitmapDrawable) photo).getBitmap();
 	    	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
-	    	bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream);
+	    	bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
 	    	byte[] byteArray = byteArrayOutputStream.toByteArray();
 	    	
 	    	expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));

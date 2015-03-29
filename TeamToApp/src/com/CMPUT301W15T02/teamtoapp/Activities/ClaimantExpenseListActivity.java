@@ -159,6 +159,7 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 				}
 				// Pass in the expense that was clicked
 				intent.putExtra("expenseID", expense.getExpenseId());
+				intent.putExtra("claimID", claimController.getCurrentClaim().getClaimId());
 				startActivity(intent);
 			}
 			
