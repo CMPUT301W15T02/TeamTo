@@ -201,6 +201,11 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		} else {
 			completedCheckBox.setChecked(false);
 		}
+		if (expenseController.getPhoto() == null) {
+			receiptImageButton.setText("Attach Receipt");
+		} else {
+			receiptImageButton.setText("View receipt");
+		}
 	}
 	
 	/**
@@ -350,15 +355,11 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			
 			@Override
 			public void onClick(View v) {
-				takeAPhoto();
-			}
-		});
-		receiptImageButton.setOnLongClickListener(new View.OnLongClickListener() {
-			
-			@Override
-			public boolean onLongClick(View v) {
-				showImage();
-				return true;
+				if (expenseController.getPhoto() == null) {
+					takeAPhoto();
+				} else {
+					showImage();
+				}
 			}
 		});
 	}
@@ -377,7 +378,30 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		}
 		AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseEditActivity.this);
 		builder.setView(viewPhotoLayout);
-	    builder.create().show();
+		builder.setPositiveButton("Retake", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				takeAPhoto();
+				
+			}
+		})
+		.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				expenseController.removePhoto();
+				
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing
+				
+			}
+		}).create().show();
 	}
 	
 	
