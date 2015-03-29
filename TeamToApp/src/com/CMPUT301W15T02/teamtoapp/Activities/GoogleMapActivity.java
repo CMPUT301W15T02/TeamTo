@@ -17,6 +17,7 @@
  * Sources:
  * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
 // @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
+ * @see http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location 2015-03-29
  * */
 package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.io.IOException;
@@ -47,7 +48,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.android.gms.common.ConnectionResult;
@@ -59,23 +59,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-// Will be using this source soon to get location services gpa to initialize instead of using a default location 
-// in google maps: http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location
+
 public class GoogleMapActivity extends Activity {
 
-	// Define default latitude and longitude for user (University of Alberta, Edmonton, CA)
-	static final LatLng defaultLatLng = new LatLng(53.523218900000, -113.526318599999970);
-	
-	// Store lat and long for address entered by user
-	LatLng addressLatLng;
+	static final LatLng defaultLatLng = new LatLng(53.523218900000, -113.526318599999970); // default when location N/A
+	LatLng addressLatLng; // Store latitude and longitude for address entered by user
 	private GoogleMap googleMap;
-	private EditText addressEditText;
-	
-	// Marker used when user chooses own address
-	private Marker marker;
-
-	GeoLocation currentGeoLocation = User.getInstance().getUserGeoLocation();
-	
+	private EditText addressEditText; // Address/marker entered by user
+	private Marker marker; // Displays user location
+	GeoLocation currentGeoLocation = User.getInstance().getUserGeoLocation(); // Saves geoLocation changes by user
 	private Context context = this;
 
 	
@@ -84,15 +76,14 @@ public class GoogleMapActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_google_map);
 		
-		// Initialize addressEditText
 		addressEditText = (EditText) findViewById(R.id.addressEditText);
 		
+		// Check status of Google play services
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 		
-		// Showing status
         if (status != ConnectionResult.SUCCESS) { 
         	
-        	// Google Play Services are not available
+        	// Google Play Services are not available - display dialog
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
             dialog.show();
@@ -102,15 +93,14 @@ public class GoogleMapActivity extends Activity {
         	// Google Play Services are available
     		try {
     			
-    			// Initialize GoogleMaps
+    			// Initialize GoogleMap, grab from map fragment
     			if (googleMap == null) {
     				googleMap = ((MapFragment) getFragmentManager().
     				findFragmentById(R.id.map)).getMap();
     			}     
-    			 
-                // Getting GoogleMap object from the fragment
+    			
+    			// Place dot on current location and add visible features
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                // Place dot on current location, add visible features
                 googleMap.setMyLocationEnabled(true);
                 googleMap.setTrafficEnabled(true);
                 googleMap.setIndoorEnabled(true);
@@ -119,34 +109,38 @@ public class GoogleMapActivity extends Activity {
                 // Show zoom buttons
                 googleMap.getUiSettings().setZoomControlsEnabled(true);
                 
-             // Getting LocationManager object from System Service LOCATION_SERVICE
+                // Getting LocationManager object from System Service LOCATION_SERVICE
                 LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-                // Getting Current Location
+                // Getting Current Location using GPS_PROVIDER
                 Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 
                 // Clear any existing markers
                 googleMap.clear();
                 
+                /**
+                 * If location available, display marker for location, otherwise display marker for default location
+                 */
                 if (location != null) {
+                	
                 	addressLatLng = new LatLng (location.getLatitude(), location.getLongitude());
                 	marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title("Current Location"));
                 	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
                 	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
                 	
                 } else {
-                	// Had to initialize marker here, otherwise it's null and then the app crashes whenever
-                	// you try to find a location on it. For some reason the actual location of the user
-                	// does not show up.
+                	
                 	marker = googleMap.addMarker(new MarkerOptions().
                 			position(defaultLatLng).title("Default Location"));
                 	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 15));
                 	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
                 	
-                	Toast.makeText(context, "Cannot find location for some reason.", Toast.LENGTH_LONG).show();
+                	Toast.makeText(context, "Cannot Find Current Location.", Toast.LENGTH_LONG).show();
+                
                 }
-    			// If current location of user changes, myLocationChangeListener is called.
-                // So don't really need location listener (onLocationChanged).
+    			/** 
+    			 * If current location of user changes, myLocationChangeListener is called.
+                */
                 googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
                 
     		} catch (Exception e) {
@@ -156,6 +150,10 @@ public class GoogleMapActivity extends Activity {
         }	
 	}
 	
+	/**
+	 * This listener finds out whether location of current user has changed and if so 
+	 * will automatically reset the current location of the user.
+	 */
 	private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
 	    @Override
 	    public void onMyLocationChange(Location location) {
@@ -249,7 +247,6 @@ public class GoogleMapActivity extends Activity {
      */
     protected void getLatLong(String address){
     	 
-    	Log.i("CHECKING.","EVERYTHING OK HERE...");
         // Define the uri that is used to get lat and long for our address
         String uri = "http://maps.google.com/maps/api/geocode/json?address=" +
                 address + "&sensor=false";
@@ -304,7 +301,7 @@ public class GoogleMapActivity extends Activity {
                     .getJSONObject("geometry").getJSONObject("location")
                     .getDouble("lat");
  
-            // Change the lat and long in the address 
+            // Change the latitude and longitude in the address 
             addressLatLng = new LatLng(lat, lng);
  
         } catch (JSONException e) {
@@ -322,7 +319,7 @@ public class GoogleMapActivity extends Activity {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
              * 
-             * TODO: Need to make sure geoLocation is saved - it's not working with notify listeners...
+             * TODO: Need to make sure GeoLocation is saved.
             */
     		if (!addressEditText.getText().toString().isEmpty()) {
     			Log.i("AddressLAGLONG", addressLatLng.toString());
@@ -331,8 +328,9 @@ public class GoogleMapActivity extends Activity {
     			currentGeoLocation.setLocationName(addressEditText.getText().toString());
     		}
             
-    	} // Else keep previous or default location in user.
+    	} 
     	
+    	// Else keep previous or default location in user.
     	Toast.makeText(getApplicationContext(), "Saved your location: "+
     			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
     }
@@ -340,7 +338,6 @@ public class GoogleMapActivity extends Activity {
     
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.google_map, menu);
 		return true;
 	}
@@ -349,9 +346,6 @@ public class GoogleMapActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.save_user_geolocation) {
 			onSaveUserLocation();
