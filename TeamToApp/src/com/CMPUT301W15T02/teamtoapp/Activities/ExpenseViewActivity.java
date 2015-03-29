@@ -19,13 +19,26 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -49,7 +62,7 @@ public class ExpenseViewActivity extends Activity {
 	private Spinner currencySpinner;
 	private Spinner categorySpinner;
 	private EditText descriptionEditText;
-	private ImageView receiptImageView;
+	private Button receiptImageButton;
 	
 	private ArrayAdapter<CharSequence> currencyAdapter;
 	private ArrayAdapter<CharSequence> categoriesAdapter;
@@ -62,6 +75,7 @@ public class ExpenseViewActivity extends Activity {
 		findViewsByIds();
 		setUpAdapters();
 		setFieldValues();
+		setListeners();
 	}
 
 	@Override
@@ -99,7 +113,7 @@ public class ExpenseViewActivity extends Activity {
 		currencySpinner = (Spinner) findViewById(R.id.CurrencyExpenseSpinner);
 		categorySpinner  = (Spinner) findViewById(R.id.CategoryExpenseSpinner);
 		descriptionEditText = (EditText) findViewById(R.id.ExpenseDescriptionEditText);
-		receiptImageView = (ImageView) findViewById(R.id.ExpenseImageView);
+		receiptImageButton = (Button) findViewById(R.id.ExpenseImageButton);
 	}
 	
 	/**
@@ -124,6 +138,47 @@ public class ExpenseViewActivity extends Activity {
 		categorySpinner.setSelection(categoriesAdapter.getPosition(expenseController.getCategory()));
 		amountEditText.setText(df.format(expenseController.getAmount()));
 		descriptionEditText.setText(expenseController.getDescription());
+		if (expenseController.getPhoto() == null) {
+			receiptImageButton.setVisibility(View.GONE);
+		}
+	}
+	
+	private void setListeners() {
+		receiptImageButton.setOnClickListener(new View.OnClickListener() {
+			// http://stackoverflow.com/questions/7693633/android-image-dialog-popup
+			@Override
+			public void onClick(View v) {
+				if (expenseController.getPhoto() != null) {
+					showImage();
+				}
+			}
+				
+			
+		});
+	}
+	
+	public void showImage() {
+	    Dialog builder = new Dialog(this);
+	    builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    builder.getWindow().setBackgroundDrawable(
+	        new ColorDrawable(android.graphics.Color.TRANSPARENT));
+	    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+	        @Override
+	        public void onDismiss(DialogInterface dialogInterface) {
+	            //nothing;
+	        }
+	    });
+	    ImageView imageView = new ImageView(this);
+	    if (expenseController.getPhoto() != null) {
+			byte[] decodedString = Base64.decode(expenseController.getPhoto(), Base64.DEFAULT);
+			Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+			Drawable drawable = new BitmapDrawable(getResources(),bitmap);
+			imageView.setImageDrawable(drawable);
+		builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+	            ViewGroup.LayoutParams.MATCH_PARENT, 
+	            ViewGroup.LayoutParams.MATCH_PARENT));
+	    builder.show();
+	    }
 	}
 	
 	
