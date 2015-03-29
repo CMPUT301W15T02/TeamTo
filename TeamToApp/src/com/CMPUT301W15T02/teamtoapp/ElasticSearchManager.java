@@ -321,41 +321,35 @@ public class ElasticSearchManager {
 	}
 	
 	public static void saveUser() {
-			new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				Gson gson = new Gson();
-				HttpClient httpClient = new DefaultHttpClient();
-				try {
-					
-					// HttpPost for adding a claim
-					HttpPost addRequest = new HttpPost(USER_URL + User.getInstance().getName());
-					StringEntity stringEntity = new StringEntity(gson.toJson(User.getInstance()));
-					addRequest.setEntity(stringEntity);
-					addRequest.setHeader("Accept", "application/json");
-					
-					HttpResponse response = httpClient.execute(addRequest);
-					
-					// Can use TAG to check status via logcat.
-					String status = response.getStatusLine().toString();
-					Log.i(TAG, status);
-					
-				} catch (JsonIOException e) {
-					throw new RuntimeException(e);
-					
-				} catch (JsonSyntaxException e) {
-					throw new RuntimeException(e);
-					
-				} catch (IllegalStateException e) {
-					throw new RuntimeException(e);
-					
-				} catch (IOException e) {
-					throw new RuntimeException(e);
-				}
-				
-			}
-		}).start();
+		Gson gson = new Gson();
+		HttpClient httpClient = new DefaultHttpClient();
+		try {
+
+			// HttpPost for adding a claim
+			HttpPost addRequest = new HttpPost(USER_URL + User.getInstance().getName());
+			StringEntity stringEntity = new StringEntity(gson.toJson(User.getInstance()));
+			addRequest.setEntity(stringEntity);
+			addRequest.setHeader("Accept", "application/json");
+
+			HttpResponse response = httpClient.execute(addRequest);
+
+			// Can use TAG to check status via logcat.
+			String status = response.getStatusLine().toString();
+			Log.i(TAG, status);
+
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 	
 	public static void loadUser(String name) {

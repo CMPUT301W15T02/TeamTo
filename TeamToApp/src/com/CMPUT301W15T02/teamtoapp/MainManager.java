@@ -133,7 +133,12 @@ public class MainManager {
 	
 	public static void saveUser() {
 		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.saveUser();
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					ElasticSearchManager.saveUser();
+				}
+			}).start();
 		}
 		LocalDataManager.saveUser(User.getInstance());
 	}

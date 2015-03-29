@@ -95,6 +95,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	private Button receiptImageButton;
 	private CheckBox completedCheckBox;
 	Uri imageFileUri = null;
+	private boolean hasChanged;
 	
 	private ArrayAdapter<CharSequence> currencyAdapter;
 	private ArrayAdapter<CharSequence> categoriesAdapter;
@@ -134,6 +135,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	 * Gets the model objects that are needed (expense) and any controllers, also binds the observers to the model
 	 */
 	private void getModelObjects() {
+		hasChanged = false;
 		Intent intent = getIntent();
 		expenseID = (String) intent.getSerializableExtra("expenseID");
 		claimID = (String) intent.getSerializableExtra("claimID");
@@ -215,12 +217,13 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		// TODO move this to controller
 		// Should only update if something has changed
 		ClaimController claimController = new ClaimController(claimID);
-		Log.i("EXPENSECLAIM", claimController.getCurrentClaim().getClaimId());
-		for (Expense expense: claimController.getExpenses()) {
-			Log.i("EXPENSEID", expense.getExpenseId());
+		if (!claimController.getExpenses().contains(expenseController.getExpense())) {
+			claimController.addExpense(expenseController.getExpense());
 		}
-		Log.i("EXPENSECONTROLLER", expenseController.getExpense().getExpenseId());
-		claimController.addExpense(expenseController.getExpense());
+		if (hasChanged) {
+			MainManager.updateClaim(claimController.getCurrentClaim());
+		}
+		hasChanged = false;
 		super.onBackPressed();
 	}
 
@@ -407,12 +410,12 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+	    	// Convert photo to Base64 String
 	    	Drawable photo = Drawable.createFromPath(imageFileUri.getPath());
 	    	Bitmap bitmap = ((BitmapDrawable) photo).getBitmap();
 	    	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
 	    	bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
 	    	byte[] byteArray = byteArrayOutputStream.toByteArray();
-	    	
 	    	expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));
 	    } else {
 	    	Toast.makeText(getApplicationContext(), "Something is not working", Toast.LENGTH_SHORT).show();
@@ -438,6 +441,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	@Override
 	public void update() {
 		updateValues();
+		hasChanged = true;
 		
 	}
 	
