@@ -18,6 +18,7 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 import java.util.ArrayList;
 
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
+import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -61,6 +62,7 @@ public class UserController {
 		user.removeTag(user.getTags().get(position));
 	}
 	
+	
 	public ArrayList<Tag> getTags() {
 		return user.getTags();
 	}
@@ -77,11 +79,29 @@ public class UserController {
 		user.renameTag(tag, newText);
 	}
 	
+	
 	public Tag getTag(int position) {
 		return user.getTags().get(position);
 	}
 	
 
+	public GeoLocation getGeoLocation() {
+		return user.getUserGeoLocation();
+	}
+	
+	/**
+	 * Gets location name from the GeoLocation of the user.
+	 * @return
+	 */
+	public String getLocationName() {
+		return user.getUserGeoLocation().getLocationName();
+	}
+	
+	
+	public void setGeoLocation(GeoLocation geoLocation) {
+		user.setGeoLocation(geoLocation);
+	}
+	
 	
 	/**
 	 * Adds a listener to the current user

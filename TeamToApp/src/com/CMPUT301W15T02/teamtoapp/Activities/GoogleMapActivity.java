@@ -47,6 +47,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.android.gms.common.ConnectionResult;
@@ -312,6 +313,7 @@ public class GoogleMapActivity extends Activity {
      * */
     public void onSaveUserLocation() {
 
+    	UserController userController = new UserController();
     	if (addressLatLng != null) {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
@@ -323,13 +325,13 @@ public class GoogleMapActivity extends Activity {
     			geolocation.setLatitude(addressLatLng.latitude);
     			geolocation.setLongitude(addressLatLng.longitude);
     			geolocation.setLocationName(addressEditText.getText().toString());
-    			User.getInstance().setGeoLocation(geolocation);
+    			userController.setGeoLocation(geolocation);
     		}
             
     	} // Else keep previous or default location in user.
     	
     	Toast.makeText(getApplicationContext(), "Saved your location: "+
-    			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
+    			userController.getLocationName(), Toast.LENGTH_LONG).show();
     }
     
     
