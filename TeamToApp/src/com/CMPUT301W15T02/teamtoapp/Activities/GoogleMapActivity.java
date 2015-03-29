@@ -124,7 +124,7 @@ public class GoogleMapActivity extends Activity {
                 googleMap.getUiSettings().setZoomControlsEnabled(true);
                 
              // Getting LocationManager object from System Service LOCATION_SERVICE
-                LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
                 // Creating a criteria object to retrieve provider
                 Criteria criteria = new Criteria();
@@ -154,6 +154,7 @@ public class GoogleMapActivity extends Activity {
                 	Toast.makeText(context, "Cannot find location for some reason.", Toast.LENGTH_LONG).show();
                 }
     			// If current location of user changes, myLocationChangeListener is called.
+                // So don't really need location listener (onLocationChanged).
                 googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
                 
     		} catch (Exception e) {
