@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -47,6 +48,7 @@ import android.provider.MediaStore.Files;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -354,18 +356,9 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	
 	// http://stackoverflow.com/questions/7693633/android-image-dialog-popup
 	public void showImage() {
-	    Dialog builder = new Dialog(this);
-	    builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
-	    builder.getWindow().setBackgroundDrawable(
-	        new ColorDrawable(android.graphics.Color.TRANSPARENT));
-	    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-	        @Override
-	        public void onDismiss(DialogInterface dialogInterface) {
-	            //nothing;
-	        }
-	    });
-
-	    ImageView imageView = new ImageView(this);
+	    LayoutInflater inflater = LayoutInflater.from(getBaseContext());
+		View viewPhotoLayout = inflater.inflate(R.layout.photo_display_dialog, null);
+	    final ImageView imageView = (ImageView) viewPhotoLayout.findViewById(R.id.dialogPhotoImageView);
 		if (expenseController.getPhoto() != null) {
 			byte[] decodedString = Base64.decode(expenseController.getPhoto(), Base64.DEFAULT);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
@@ -373,10 +366,9 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    	imageView.setImageDrawable(d);
 			
 		}
-	    builder.addContentView(imageView, new RelativeLayout.LayoutParams(
-	            ViewGroup.LayoutParams.MATCH_PARENT, 
-	            ViewGroup.LayoutParams.MATCH_PARENT));
-	    builder.show();
+		AlertDialog.Builder builder = new AlertDialog.Builder(ExpenseEditActivity.this);
+		builder.setView(viewPhotoLayout);
+	    builder.create().show();
 	}
 	
 	
