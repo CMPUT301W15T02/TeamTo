@@ -15,6 +15,7 @@
 
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -31,6 +32,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
@@ -38,8 +40,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Files;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -363,8 +367,17 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
 	    	Drawable photo = Drawable.createFromPath(imageFileUri.getPath());
 	    	Bitmap bitmap = ((BitmapDrawable) photo).getBitmap();
+	    	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
+	    	bitmap.compress(Bitmap.CompressFormat.JPEG, 0, byteArrayOutputStream);
+	    	byte[] byteArray = byteArrayOutputStream.toByteArray();
+	    	if (byteArray.length > 100000) {
+	    		Toast.makeText(getApplicationContext(), "Image too large", Toast.LENGTH_SHORT).show();
+	    	} else {
+	    		expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));
+	    	}
 	    	// Scale it to 50 x 50
-	    	Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 250, 250, true));
+	    	Drawable d = new BitmapDrawable(BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length));
+	    	//Drawable d = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 250, 250, true));
 	    	receiptImageButton.setImageDrawable(d);
 	    } else {
 	    	Toast.makeText(getApplicationContext(), "Something is not working", Toast.LENGTH_SHORT).show();

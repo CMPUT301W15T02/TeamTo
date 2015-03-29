@@ -96,8 +96,8 @@ public class ExpenseController {
 	 * Adds a photo to the current expense
 	 * @param photoPath
 	 */
-	public void addPhoto(String photoPath) {
-		currentExpense.addPhoto(photoPath);
+	public void addPhoto(String photo) {
+		currentExpense.addPhoto(photo);
 	}
 	
 	/**

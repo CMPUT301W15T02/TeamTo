@@ -35,7 +35,7 @@ public class Expense {
 	private String category;
 	private Double amount;
 	private boolean complete;
-	public String photo_uri;
+	private String photo;
 	private String expenseId;
 	protected transient ArrayList<Listener> listeners = null;
 	
@@ -141,8 +141,8 @@ public class Expense {
 	
 	
 
-	public void addPhoto(String photoPath) {
-		// TODO: Not sure how to add photos
+	public void addPhoto(String photo) {
+		this.photo = photo;
 	}
 	
 	
