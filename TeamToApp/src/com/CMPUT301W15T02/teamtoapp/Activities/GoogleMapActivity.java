@@ -161,7 +161,8 @@ public class GoogleMapActivity extends Activity {
 	    public void onMyLocationChange(Location location) {
 	    	googleMap.clear();
 	        addressLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-	        marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title(addressEditText.toString()));
+	        marker.setPosition(addressLatLng);
+	        marker.setTitle(addressEditText.toString());
 	        if(googleMap != null){
 	            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 16.0f));
 	        }
