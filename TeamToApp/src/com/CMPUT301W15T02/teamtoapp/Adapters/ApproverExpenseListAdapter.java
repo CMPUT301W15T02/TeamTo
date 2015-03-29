@@ -94,10 +94,8 @@ public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 		holder.approverExpenseDateTextView.setText(formatter.format(expense.getDate().getTime()));
 		holder.approverCategoryTextView.setText(expense.getCategory());
 		holder.approverCurrencyTextView.setText(numformatter.format(expense.getAmount()).toString()+" "+expense.getCurrency());
-		if (expense.getPhoto() == null) {
-			holder.approverPhotoReceiptTextView.setText("Photo Receipt: No");
-		} else {
-			holder.approverPhotoReceiptTextView.setText("Photo Receipt: Yes");
+		if (expense.getPhoto() != null) {
+			holder.approverPhotoReceiptTextView.setText("Photo");
 		}
 		
 		return row;
