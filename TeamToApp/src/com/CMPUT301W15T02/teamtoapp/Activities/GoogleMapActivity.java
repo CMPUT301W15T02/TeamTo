@@ -73,7 +73,8 @@ public class GoogleMapActivity extends Activity {
 	
 	// Marker used when user chooses own address
 	private Marker marker;
-	private GeoLocation geolocation = new GeoLocation();
+
+	GeoLocation currentGeoLocation = User.getInstance().getUserGeoLocation();
 	
 	private Context context = this;
 
@@ -313,7 +314,6 @@ public class GoogleMapActivity extends Activity {
      * */
     public void onSaveUserLocation() {
 
-    	UserController userController = new UserController();
     	if (addressLatLng != null) {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
@@ -322,16 +322,15 @@ public class GoogleMapActivity extends Activity {
             */
     		if (!addressEditText.getText().toString().isEmpty()) {
     			Log.i("AddressLAGLONG", addressLatLng.toString());
-    			geolocation.setLatitude(addressLatLng.latitude);
-    			geolocation.setLongitude(addressLatLng.longitude);
-    			geolocation.setLocationName(addressEditText.getText().toString());
-    			userController.setGeoLocation(geolocation);
+    			currentGeoLocation.setLatitude(addressLatLng.latitude);
+    			currentGeoLocation.setLongitude(addressLatLng.longitude);
+    			currentGeoLocation.setLocationName(addressEditText.getText().toString());
     		}
             
     	} // Else keep previous or default location in user.
     	
     	Toast.makeText(getApplicationContext(), "Saved your location: "+
-    			userController.getLocationName(), Toast.LENGTH_LONG).show();
+    			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
     }
     
     
