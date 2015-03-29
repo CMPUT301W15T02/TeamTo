@@ -73,7 +73,7 @@ public class Claim implements Listener {
 		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
 		tags = new ArrayList<String>();
-		comment = "";
+		comment = null;
 		userName = User.getInstance().getName();
 		claimdID = UUID.randomUUID().toString();
 		currencyTotals = new TreeMap<String, Double>();
@@ -203,7 +203,12 @@ public class Claim implements Listener {
 	
 
 	public void setComment(String comment) {
-		this.comment = comment;
+		if (this.comment == null) {
+			this.comment = "";
+			this.comment += comment;
+		} else {
+			this.comment = this.comment + "\n" + comment;
+		}
 		notifyListeners();
 	}
 	

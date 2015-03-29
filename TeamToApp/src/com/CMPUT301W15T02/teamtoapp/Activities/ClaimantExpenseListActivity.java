@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +55,7 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 	private TextView claimEndDateTextView;
 	private TextView approverNameTextView;
 	private TextView approverCommentTextView;
+	private LinearLayout approverInfoLinearLayout;
 	
 	private String claimID;
 	private ClaimController claimController;
@@ -124,6 +126,7 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimEndDateTextView = (TextView) findViewById(R.id.claimEndDateTextView);
 		approverNameTextView = (TextView) findViewById(R.id.approverNameTextView);
 		approverCommentTextView = (TextView) findViewById(R.id.approverCommentTextView);
+		approverInfoLinearLayout = (LinearLayout) findViewById(R.id.approverNameCommentLinearLayout);
 	}
 	
 	/**
@@ -133,8 +136,12 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimNameTextView.setText(claimController.getClaimName());
 		claimStartDateTextView.setText(claimController.getStartDateFormatted());
 		claimEndDateTextView.setText(claimController.getEndDateFormatted());
-		approverNameTextView.setText(claimController.getApproverName());
-		approverCommentTextView.setText(claimController.getApproverComment());
+		if (claimController.getApproverComment() == null) {
+			approverInfoLinearLayout.setVisibility(LinearLayout.GONE);
+		} else {
+			approverNameTextView.setText(claimController.getApproverName());
+			approverCommentTextView.setText(claimController.getApproverComment());
+		}
 	}
 	
 	/**
