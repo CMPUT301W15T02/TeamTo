@@ -58,9 +58,6 @@ public class User {
 		tag4.setTagID("recreation");
 		tags.add(tag4);
 		userGeoLocation = new GeoLocation();
-		userGeoLocation.setLatitude(53.523218900000);
-		userGeoLocation.setLatitude(-113.526318599999970);
-		userGeoLocation.setLocationName("Edmonton, AB, CA");
 		listeners = new ArrayList<Listener>();
 	}
 	

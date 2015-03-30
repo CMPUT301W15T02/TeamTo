@@ -130,12 +130,34 @@ public class GoogleMapActivity extends Activity {
                 	
                 } else {
                 	
-                	marker = googleMap.addMarker(new MarkerOptions().
-                			position(defaultLatLng).title("Default Location"));
-                	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 15));
-                	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-                	
-                	Toast.makeText(context, "Cannot Find Current Location.", Toast.LENGTH_LONG).show();
+                	/**
+                	 * If no GeoLocation is saved by the user, set marker on default location (defaultLatLng),
+                	 * and save default location into currentGeoLocation of user.
+                	 */
+                	if (currentGeoLocation == null) {
+                		currentGeoLocation.setLatitude(defaultLatLng.latitude);
+                		currentGeoLocation.setLongitude(defaultLatLng.longitude);
+                		currentGeoLocation.setLocationName("Edmonton, AB");
+                		marker = googleMap.addMarker(new MarkerOptions().
+                				position(defaultLatLng).title("Default Location").snippet(currentGeoLocation.getLocationName()));
+                		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 15));
+                		googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                		Toast.makeText(context, "Cannot Find Current Location.", Toast.LENGTH_LONG).show();
+                		
+                	} else {
+                		/**
+                		 * Set marker on location saved by the user
+                		 */
+                		double lat = currentGeoLocation.getLatitude();
+                		double lng = currentGeoLocation.getLongitude();
+                		addressLatLng = new LatLng(lat, lng);
+                		marker = googleMap.addMarker(new MarkerOptions().
+                				position(addressLatLng).title(currentGeoLocation.getLocationName()));
+                		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
+                		googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+                		Toast.makeText(context, "Found Saved Location: "+currentGeoLocation.getLocationName(), Toast.LENGTH_LONG).show();
+                        
+                	}
                 
                 }
     			/** 
@@ -319,7 +341,7 @@ public class GoogleMapActivity extends Activity {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
              * 
-             * TODO: Need to make sure GeoLocation is saved.
+             * TODO: Need to make sure GeoLocation is saved properly.
             */
     		if (!addressEditText.getText().toString().isEmpty()) {
     			Log.i("AddressLAGLONG", addressLatLng.toString());
