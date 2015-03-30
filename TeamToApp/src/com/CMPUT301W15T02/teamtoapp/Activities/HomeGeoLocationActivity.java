@@ -60,7 +60,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-public class GoogleMapActivity extends Activity {
+public class HomeGeoLocationActivity extends Activity {
 
 	static final LatLng defaultLatLng = new LatLng(53.523218900000, -113.526318599999970); // default when location N/A
 	LatLng addressLatLng; // Store latitude and longitude for address entered by user

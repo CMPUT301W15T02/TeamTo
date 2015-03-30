@@ -260,7 +260,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	}
 	
 	public void onGoogleMapBtnClicked(View view) {
-		Intent intent = new Intent(ClaimantClaimsListActivity.this, GoogleMapActivity.class);
+		Intent intent = new Intent(ClaimantClaimsListActivity.this, HomeGeoLocationActivity.class);
 		startActivity(intent);
 	}
 	
