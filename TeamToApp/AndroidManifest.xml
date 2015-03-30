@@ -89,7 +89,7 @@
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.Activities.GoogleMapActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.Activities.HomeGeoLocationActivity"
             android:label="@string/title_activity_google_map" >
         </activity>
         

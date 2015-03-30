@@ -102,8 +102,8 @@ public class HomeGeoLocationActivity extends Activity {
     			// Place dot on current location and add visible features
                 googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 googleMap.setMyLocationEnabled(true);
-                googleMap.setTrafficEnabled(true);
-                googleMap.setIndoorEnabled(true);
+                googleMap.setTrafficEnabled(false);
+                googleMap.setIndoorEnabled(false);
                 googleMap.setBuildingsEnabled(true);
                 
                 // Show zoom buttons
