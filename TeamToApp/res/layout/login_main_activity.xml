@@ -27,6 +27,7 @@
         android:layout_alignRight="@+id/username"
         android:layout_below="@+id/username"
         android:onClick="onLoginButtonClicked"
-        android:text="Login" />
+        android:text="Login"
+        android:background="@drawable/rounded_button" />
 
 </RelativeLayout>

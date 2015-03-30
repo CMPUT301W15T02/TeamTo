@@ -37,6 +37,7 @@
         android:layout_toRightOf="@+id/addressEditText"
         android:layout_toEndOf="@+id/addressEditText"
         android:layout_marginRight="10dp"
+        android:background="@drawable/rounded_button"
         android:onClick="showAddressMarker"/>   
 
 </RelativeLayout>

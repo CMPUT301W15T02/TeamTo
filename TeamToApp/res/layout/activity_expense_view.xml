@@ -143,7 +143,8 @@
         android:id="@+id/ExpenseImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Receipt" />
+        android:text="View Receipt"
+        android:background="@drawable/rounded_button" />
 
 
 </LinearLayout>

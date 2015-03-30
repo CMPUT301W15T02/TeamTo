@@ -105,6 +105,7 @@
 		android:layout_height="wrap_content"
 		android:onClick="addDestinationOption"
 		android:text="Add Destination"
+		android:background="@drawable/rounded_button"
 		android:textAppearance="?android:attr/textAppearanceSmallInverse" />
            		
     <LinearLayout
@@ -135,6 +136,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/rounded_button"
         android:text="Add Tags" />	
     	
 </LinearLayout>
