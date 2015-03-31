@@ -29,11 +29,11 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +41,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -299,7 +297,7 @@ public class HomeGeoLocationActivity extends Activity {
      * When user clicks save on action bar, current location/ default location will be saved.
      * */
     public void onSaveUserLocation() {
-
+    	Intent returnIntent = new Intent();
     	if (marker != null) {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
@@ -308,10 +306,13 @@ public class HomeGeoLocationActivity extends Activity {
             */
     		double latitude = marker.getPosition().latitude;
     		double longitude = marker.getPosition().longitude;
-    		// TODO Save in extra
-            
+    		returnIntent.putExtra("latitude", latitude);
+    		returnIntent.putExtra("longitude", longitude);
+            setResult(RESULT_OK, returnIntent);
+    	} else {
+    		setResult(RESULT_CANCELED, returnIntent);
     	}
-    	
+    	finish();
     }
     
     
@@ -332,5 +333,13 @@ public class HomeGeoLocationActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	@Override
+	public void onBackPressed() {
+		onSaveUserLocation();
+	}
+	
+	
 
 }

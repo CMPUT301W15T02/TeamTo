@@ -139,4 +139,25 @@ public class ExpenseController {
 	}
 	
 	
+	
+	public void setLatitude(double latitude) {
+		currentExpense.setLatitude(latitude);
+	}
+	
+	
+	public void setLongitude(double longitude) {
+		currentExpense.setLongitude(longitude);
+	}
+	
+	
+	public double getLatitude() {
+		return currentExpense.getLatitude();
+	}
+	
+	
+	public double getLongitude() {
+		return currentExpense.getLongitude();
+	}
+	
+	
 }

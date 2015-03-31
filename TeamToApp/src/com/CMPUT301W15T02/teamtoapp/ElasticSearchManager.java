@@ -29,6 +29,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.content.Context;
 import android.util.Log;
@@ -353,10 +356,19 @@ public class ElasticSearchManager {
 	}
 	
 	public static void loadUser(String name) {
+		HttpParams httpParameters = new BasicHttpParams();
+		// Set the timeout in milliseconds until a connection is established.
+		// The default value is zero, that means the timeout is not used. 
+		int timeoutConnection = 3000;
+		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		// Set the default socket timeout (SO_TIMEOUT) 
+		// in milliseconds which is the timeout for waiting for data.
+		int timeoutSocket = 5000;
+		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 		Gson gson = new Gson();
 
 		SearchHit<User> search_hit = null;
-		HttpClient httpClient = new DefaultHttpClient();
+		HttpClient httpClient = new DefaultHttpClient(httpParameters);
 		HttpGet httpGet = new HttpGet(USER_URL + name);		
 
 		HttpResponse response = null;
@@ -366,10 +378,12 @@ public class ElasticSearchManager {
 			Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
 
 		} catch (ClientProtocolException e1) {
-			throw new RuntimeException(e1);
+			LocalDataManager.loadUser();
+			return;
 
 		} catch (IOException e1) {
-			throw new RuntimeException(e1);
+			LocalDataManager.loadUser();
+			return;
 		}
 
 		Type searchHitType = new TypeToken<SearchHit<User>>() {}.getType();
@@ -403,6 +417,15 @@ public class ElasticSearchManager {
 	
 	
 	public static void loadClaims(String username) {
+		HttpParams httpParameters = new BasicHttpParams();
+		// Set the timeout in milliseconds until a connection is established.
+		// The default value is zero, that means the timeout is not used. 
+		int timeoutConnection = 3000;
+		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		// Set the default socket timeout (SO_TIMEOUT) 
+		// in milliseconds which is the timeout for waiting for data.
+		int timeoutSocket = 5000;
+		HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 		String searchString = username;
 		ArrayList<Claim> userClaims = new ArrayList<Claim>();
 		Gson gson = new Gson();
@@ -427,7 +450,7 @@ public class ElasticSearchManager {
 		searchRequest.setHeader("Accept", "application/json");
 		searchRequest.setEntity(stringEntity);
 
-		HttpClient httpClient = new DefaultHttpClient();
+		HttpClient httpClient = new DefaultHttpClient(httpParameters);
 
 		HttpResponse response = null;
 		try
@@ -438,10 +461,12 @@ public class ElasticSearchManager {
 			throw new RuntimeException(e);
 
 		} catch (ClientProtocolException e) {
-			throw new RuntimeException(e);
+			LocalDataManager.loadClaims();
+			return;
 
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			LocalDataManager.loadClaims();
+			return;
 
 		}
 

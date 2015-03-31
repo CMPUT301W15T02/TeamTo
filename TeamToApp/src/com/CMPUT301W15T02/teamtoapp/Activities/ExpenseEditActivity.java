@@ -39,6 +39,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,7 +54,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
@@ -79,8 +79,11 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	private EditText descriptionEditText;
 	private Button receiptImageButton;
 	private CheckBox completedCheckBox;
+	private Button expenseGeolocationButton;
 	Uri imageFileUri = null;
 	private boolean hasChanged;
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private static final int GET_GEOLOCATION_REQUEST_CODE = 112;
 	
 	private ArrayAdapter<CharSequence> currencyAdapter;
 	private ArrayAdapter<CharSequence> categoriesAdapter;
@@ -140,6 +143,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		descriptionEditText = (EditText) findViewById(R.id.ExpenseDescriptionEditText);
 		receiptImageButton = (Button) findViewById(R.id.ExpenseImageButton);
 		completedCheckBox = (CheckBox) findViewById(R.id.ExpenseCompletedCheckBox);
+		expenseGeolocationButton = (Button) findViewById(R.id.expenseGeolocationButton);
 	}
 	
 	/**
@@ -347,6 +351,16 @@ public class ExpenseEditActivity extends Activity implements Listener {
 				}
 			}
 		});
+		
+		expenseGeolocationButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(ExpenseEditActivity.this, HomeGeoLocationActivity.class);
+				startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
+				
+			}
+		});
 	}
 
 	public void showImage() {
@@ -390,7 +404,6 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	
 	
 	
-	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	
 	public void takeAPhoto() {
 
@@ -425,8 +438,14 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    	bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
 	    	byte[] byteArray = byteArrayOutputStream.toByteArray();
 	    	expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));
-	    } else {
-	    	Toast.makeText(getApplicationContext(), "Something is not working", Toast.LENGTH_SHORT).show();
+	    }
+	    if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {
+	    	double latitude = data.getDoubleExtra("latitude", 0.0);
+	    	double longitude = data.getDoubleExtra("longitude", 0.0);
+	    	Log.i("LATITUDE", String.valueOf(latitude));
+	    	Log.i("LONGITUDE", String.valueOf(longitude));
+	    	expenseController.setLatitude(latitude);
+	    	expenseController.setLongitude(longitude);
 	    }
 	}
 

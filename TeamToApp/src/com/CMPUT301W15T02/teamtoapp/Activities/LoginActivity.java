@@ -33,7 +33,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
@@ -129,8 +128,8 @@ public class LoginActivity extends Activity {
 				
 				@Override
 				public void run() {
-					ElasticSearchManager.loadUser(usernameString);
-					ElasticSearchManager.loadClaims(usernameString);
+					MainManager.loadUser(usernameString);
+					MainManager.loadClaims(usernameString);
 					handler.sendEmptyMessage(0);
 					
 				}
