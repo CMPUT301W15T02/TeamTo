@@ -24,6 +24,8 @@ public class Destination {
 	
 	public String destination;
 	public String reason;
+	public double latitude;
+	public double longitude;
 	
 	
 	public Destination(String a, String b) {
