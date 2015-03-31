@@ -37,6 +37,7 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
  * 			-coordinates-in-google-maps      2015-03-25
  * 
  */
+
 public class GeoLocation {
 	
 	private double latitude = 0.0;

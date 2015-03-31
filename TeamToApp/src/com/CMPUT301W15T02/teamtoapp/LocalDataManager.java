@@ -15,10 +15,6 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
-/**
- * Controls link between local storage and elastic search server
- */
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,6 +32,10 @@ import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+/**
+ * Controls link between local storage and elastic search server
+ */
 
 public class LocalDataManager {
 

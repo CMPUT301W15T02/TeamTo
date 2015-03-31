@@ -66,6 +66,7 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
  * Activity for editing an expense
  *
  */
+
 public class ExpenseEditActivity extends Activity implements Listener {
 	
 	private ExpenseController expenseController;

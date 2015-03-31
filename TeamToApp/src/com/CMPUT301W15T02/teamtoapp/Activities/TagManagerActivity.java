@@ -42,6 +42,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
  * Activity where a user can view a list of their tags and also edit, delete, or add new tags
  *
  */
+
 public class TagManagerActivity extends Activity implements Listener {
 
 	private UserController userController;

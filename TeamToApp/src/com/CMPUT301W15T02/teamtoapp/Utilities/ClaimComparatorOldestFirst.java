@@ -23,7 +23,6 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
  *
  */
 
-
 public class ClaimComparatorOldestFirst implements Comparator<Claim> {
 
 	@Override

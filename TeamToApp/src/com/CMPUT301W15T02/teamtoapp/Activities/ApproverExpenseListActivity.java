@@ -32,7 +32,6 @@ import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverExpenseListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
-
 /**
  * 
  * Activity to allow the approver to look at the different expenses of a submitted claim

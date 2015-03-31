@@ -34,6 +34,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
  * for the Create/Edit Claim interface (ClaimEditActivity.java)
  *
  */
+
 public class ClaimantDestinationsListAdapter extends ArrayAdapter<StringTuple> {
 
 	private Context context;

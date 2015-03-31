@@ -36,6 +36,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * A customized adapter for the claimant's list of expenses. 
  *
  */
+
 public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 
 	private Context context;

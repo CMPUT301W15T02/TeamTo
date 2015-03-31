@@ -38,6 +38,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
  * This adapter will provide a list of submitted claims for the approver. In progress.
  *
  */
+
 public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 	
 	private Context context;

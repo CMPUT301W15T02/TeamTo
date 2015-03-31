@@ -43,6 +43,7 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
  * Contains a list of their claims and has the ability to add new claims, manage tags,
  * and switch to approver mode
  */
+
 public class ClaimantClaimsListActivity extends Activity implements Listener {
 	
 	private ClaimListController claimListController;
