@@ -357,6 +357,8 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ExpenseEditActivity.this, HomeGeoLocationActivity.class);
+				intent.putExtra("latitude", expenseController.getLatitude());
+				intent.putExtra("longitude", expenseController.getLongitude());
 				startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
 				
 			}

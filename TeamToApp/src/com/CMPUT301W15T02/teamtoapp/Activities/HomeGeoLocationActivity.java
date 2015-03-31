@@ -92,6 +92,7 @@ public class HomeGeoLocationActivity extends Activity {
             return;
  
         }
+        
 
         // Google Play Services are available
         try {
@@ -120,6 +121,14 @@ public class HomeGeoLocationActivity extends Activity {
 
         } catch (Exception e) {
         	e.printStackTrace();
+        }
+        
+        Intent intent = getIntent();
+        double latitude = intent.getDoubleExtra("latitude", 0.0);
+        double longitude = intent.getDoubleExtra("longitude", 0.0);
+        if (latitude != 0.0 || longitude != 0.0) {
+        	LatLng passedLocation = new LatLng(latitude, longitude);
+        	marker = googleMap.addMarker(new MarkerOptions().position(passedLocation));
         }
         
         googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
