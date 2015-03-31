@@ -1,6 +1,4 @@
-/* ClaimantClaimListActivity displays list of claims
- * 
- * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+/* Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,8 +10,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
 */
-
-
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
 

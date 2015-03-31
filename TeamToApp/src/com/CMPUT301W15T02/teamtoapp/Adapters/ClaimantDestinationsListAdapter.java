@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+
 /**
  * 
  * A customized adapter for the claimant's destination list view

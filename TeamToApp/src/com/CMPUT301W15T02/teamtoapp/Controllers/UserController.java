@@ -22,7 +22,6 @@ import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
-
 /**
  * 
  * Responsible for communicating between any associated views and the user object

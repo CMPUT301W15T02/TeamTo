@@ -29,6 +29,12 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ *  Handles updating and removal of claims
+ *  when an internet connection is established
+ * 
+ *
+ */
 public class Cache {
 
 	private static Cache instance = null;

@@ -18,7 +18,7 @@ import java.util.UUID;
 
 /**
  * 
- * Tag is only composed of a string for now 
+ * Stores a name and a tag ID 
  *
  */
 

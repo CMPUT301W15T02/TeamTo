@@ -11,15 +11,8 @@
  * limitations under the License.
 */
 
-/**
- * GoogleMaps for user - saves default latitude longitude/ manually enter an address.
- * 
- * Sources:
- * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
-// @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
- * @see http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location 2015-03-29
- * */
 package com.CMPUT301W15T02.teamtoapp.Activities;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -59,6 +52,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * GoogleMaps for user - saves default latitude longitude/ manually enter an address.
+ * 
+ * Sources:
+ * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
+// @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
+ * @see http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location 2015-03-29
+ * */
 
 public class HomeGeoLocationActivity extends Activity {
 
