@@ -12,8 +12,6 @@
 */
 package com.CMPUT301W15T02.teamtoapp.Activities;
 
-
-
 import java.util.ArrayList;
 
 import android.app.Activity;

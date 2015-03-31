@@ -29,8 +29,6 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 
-import junit.framework.TestCase;
-
 /**
  * Tests use cases 1.X
  */
