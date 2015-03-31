@@ -69,6 +69,7 @@ public class HomeGeoLocationActivity extends Activity {
 	private EditText addressEditText; // Address/marker entered by user
 	private Marker marker = null; // Displays user location
 	private Context context = this;
+	Location location = null;
 
 	
 	@Override
@@ -115,7 +116,7 @@ public class HomeGeoLocationActivity extends Activity {
         	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         	// Getting Current Location using GPS_PROVIDER
-        	Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        	location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         	// Clear any existing markers
 
@@ -133,6 +134,20 @@ public class HomeGeoLocationActivity extends Activity {
 				} else {
 					marker.setPosition(arg0);
 				}
+			}
+		});
+        
+        googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+			
+			@Override
+			public boolean onMyLocationButtonClick() {
+				if (location != null) {
+					addressLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+					googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
+		            googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+					
+				}
+				return false;
 			}
 		});
         
@@ -155,7 +170,7 @@ public class HomeGeoLocationActivity extends Activity {
         if(!newAddress.isEmpty()){
  
             // Call for the AsyncTask to change location of the marker (ChangeMarker class made below)
-            new ChangeMarker().execute(newAddress);
+            new ChangePosition().execute(newAddress);
  
         } else {
         	Toast.makeText(getApplicationContext(), "Please enter location", Toast.LENGTH_SHORT).show();
@@ -171,7 +186,7 @@ public class HomeGeoLocationActivity extends Activity {
 	 * latitude and longitude (via getLatLong method).
 	 * Then, post the marker on the screen of the new address.
 	*/
-    class ChangeMarker extends AsyncTask<String, String, String> {
+    class ChangePosition extends AsyncTask<String, String, String> {
     	 
 		@Override
         protected String doInBackground(String... params) {
@@ -203,7 +218,6 @@ public class HomeGeoLocationActivity extends Activity {
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
         }
- 
     }
     
     /**
@@ -286,21 +300,18 @@ public class HomeGeoLocationActivity extends Activity {
      * */
     public void onSaveUserLocation() {
 
-    	if (addressLatLng != null) {
+    	if (marker != null) {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
              * 
              * TODO: Need to make sure GeoLocation is saved properly.
             */
-    		if (!addressEditText.getText().toString().isEmpty()) {
-    			Log.i("AddressLAGLONG", addressLatLng.toString());
-    		}
+    		double latitude = marker.getPosition().latitude;
+    		double longitude = marker.getPosition().longitude;
+    		// TODO Save in extra
             
-    	} 
+    	}
     	
-    	// Else keep previous or default location in user.
-    	Toast.makeText(getApplicationContext(), "Saved your location: "+
-    			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
     }
     
     
