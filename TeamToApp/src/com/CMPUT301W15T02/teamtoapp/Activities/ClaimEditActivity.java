@@ -50,7 +50,7 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 /**
@@ -75,8 +75,8 @@ public class ClaimEditActivity extends Activity implements Listener {
 	
 	private ClaimController claimController;
 	
-	private ArrayList<StringTuple> destinations;
-	private ArrayAdapter<StringTuple> destinationsAdapter;
+	private ArrayList<Destination> destinations;
+	private ArrayAdapter<Destination> destinationsAdapter;
 	private ArrayAdapter<Tag> tagsAdapter;
 	
 
@@ -276,7 +276,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						StringTuple destination = claimController.getDestinations().get(position);
+						Destination destination = claimController.getDestinations().get(position);
 						claimController.removeDestination(destination);
 					}
 				})

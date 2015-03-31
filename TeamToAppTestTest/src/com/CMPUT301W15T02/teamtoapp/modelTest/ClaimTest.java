@@ -24,7 +24,7 @@ import android.test.AndroidTestCase;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 
 /**
@@ -64,21 +64,21 @@ public class ClaimTest extends AndroidTestCase {
 	
 	public void testGetDestinations() {
 		// Test with empty list
-		ArrayList<StringTuple> destinationsList = new ArrayList<StringTuple>();
+		ArrayList<Destination> destinationsList = new ArrayList<Destination>();
 		Claim claim = new Claim();
 		assertTrue("List of destinations not equal", claim.getDestinations().equals(destinationsList));
 		
 		// Test adding one destination
 		String destination = "Hawaii";
 		String reason = "business";
-		StringTuple newDestination = new StringTuple(destination, reason);
+		Destination newDestination = new Destination(destination, reason);
 		claim.addDestination(newDestination);
 		assertTrue("StringTuples not equal", claim.getDestinations().get(0).equals(newDestination));
 		
 		// Test replacing entire destination list
-		StringTuple dest1 = new StringTuple("SanFran", "Business1");
-		StringTuple dest2 = new StringTuple("Chicago", "Business2");
-		ArrayList<StringTuple> newDestinationsList = new ArrayList<StringTuple>();
+		Destination dest1 = new Destination("SanFran", "Business1");
+		Destination dest2 = new Destination("Chicago", "Business2");
+		ArrayList<Destination> newDestinationsList = new ArrayList<Destination>();
 		newDestinationsList.add(dest1);
 		newDestinationsList.add(dest2);
 		claim.setDestinations(newDestinationsList);

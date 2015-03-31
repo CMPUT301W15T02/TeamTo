@@ -15,7 +15,7 @@
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 import junit.framework.TestCase;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 
 /**
@@ -27,7 +27,7 @@ public class StringTupleTest extends TestCase {
 	public void testCreateTuple() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
-		StringTuple tuple = new StringTuple(string1, string2);
+		Destination tuple = new Destination(string1, string2);
 		
 		assertTrue("destination not initialized correctly", tuple.getDestination().equals(string1));
 		assertTrue("reason not initialized correctly", tuple.getReason().equals(string2));
@@ -36,7 +36,7 @@ public class StringTupleTest extends TestCase {
 	public void testSetDestination() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
-		StringTuple tuple = new StringTuple(string1, string2);
+		Destination tuple = new Destination(string1, string2);
 		
 		String newDest = "newDestination";
 		tuple.setDestination(newDest);
@@ -46,7 +46,7 @@ public class StringTupleTest extends TestCase {
 	public void testSetReason() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
-		StringTuple tuple = new StringTuple(string1, string2);
+		Destination tuple = new Destination(string1, string2);
 		
 		String newReason = "newReason";
 		tuple.setReason(newReason);

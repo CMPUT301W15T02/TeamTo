@@ -26,7 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 /**
  * 
@@ -34,13 +34,13 @@ import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
  * for the Create/Edit Claim interface (ClaimEditActivity.java)
  *
  */
-public class ClaimantDestinationsListAdapter extends ArrayAdapter<StringTuple> {
+public class ClaimantDestinationsListAdapter extends ArrayAdapter<Destination> {
 
 	private Context context;
 	private int layoutID;
-	private ArrayList<StringTuple> destinationsList;
+	private ArrayList<Destination> destinationsList;
 	
-	public ClaimantDestinationsListAdapter(Context context, int textViewResourceId, ArrayList<StringTuple> items) {
+	public ClaimantDestinationsListAdapter(Context context, int textViewResourceId, ArrayList<Destination> items) {
 		
 		super(context, textViewResourceId, items);
 		this.context = context;
@@ -76,7 +76,7 @@ public class ClaimantDestinationsListAdapter extends ArrayAdapter<StringTuple> {
 			holder = (ViewHolder) row.getTag();
 		}
 		
-		StringTuple destination_reason = destinationsList.get(position);
+		Destination destination_reason = destinationsList.get(position);
 		holder.destinationTextView.setText(destination_reason.destination);
 		holder.reasonTextView.setText(destination_reason.reason);
 		
