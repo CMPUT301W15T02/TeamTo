@@ -62,8 +62,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		setContentView(R.layout.claimant_claims_list);
 		getModelObjects();
 		findViewsByIds();
-		setListeners();
 		setUpAdapter();
+		setListeners();
 	}
 	
 	
@@ -96,7 +96,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Claim claim = claimListController.getClaim(position);
+				Claim claim = adapter.getItem(position);
 				Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimantExpenseListActivity.class);
 				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
@@ -111,7 +111,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 				// Get the current claim
-				ClaimController claimController = new ClaimController(claimListController.getClaim(position).getClaimId());
+				ClaimController claimController = new ClaimController(adapter.getItem(position).getClaimId());
 				// Check if it is editable, if it is then show the edit/delete dialog
 				if (claimController.isEditable()) {
 					AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
@@ -121,7 +121,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
 							// When edit is clicked add an extra to the intent and start the ClaimEditActivity
-							Claim claim = claimListController.getClaim(position);
+							Claim claim = adapter.getItem(position);
 							Intent intent = new Intent(ClaimantClaimsListActivity.this, ClaimEditActivity.class);
 							intent.putExtra("claimID", claim.getClaimId());
 							startActivity(intent);
@@ -131,8 +131,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 						@Override
 						public void onClick(DialogInterface dialog, int id) {
 							// When delete is clicked remove the current claim
-							Claim claim = claimListController.getClaim(position);
+							Claim claim = adapter.getItem(position);
 							claimListController.removeClaim(claim);
+							adapter.getFilter().filter("");
 						}
 					}).create().show();
 				} else {
@@ -313,7 +314,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	public void update() {
 		adapter.notifyDataSetChanged();
 		adapter.sort(new ClaimComparatorNewestFirst());
-		
 	}
 	
 	
