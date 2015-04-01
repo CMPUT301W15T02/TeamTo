@@ -41,6 +41,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
  * Activity that user will see upon first starting app,
  * prompts for login and saves username for next session
  */
+
 public class LoginActivity extends Activity {
 	
 	public static final String PREFS_NAME = "MyPrefsFile";

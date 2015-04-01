@@ -35,6 +35,7 @@ import com.google.gson.reflect.TypeToken;
  * 
  *
  */
+
 public class Cache {
 
 	private static Cache instance = null;

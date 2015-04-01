@@ -27,7 +27,6 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
  *
  */
 
-
 public class UserController {
 	
 	private User user;

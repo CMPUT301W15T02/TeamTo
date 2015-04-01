@@ -31,6 +31,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
  * depending on whether offline/online state.
  *
  */
+
 public class MainManager {
 
 	private static Context applicationContext;

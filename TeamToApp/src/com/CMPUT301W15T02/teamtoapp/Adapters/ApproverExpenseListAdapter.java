@@ -36,6 +36,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * A customized adapter for the approver's list of expenses. 
  *
  */
+
 public class ApproverExpenseListAdapter extends ArrayAdapter<Expense>{
 
 	private Context context;
