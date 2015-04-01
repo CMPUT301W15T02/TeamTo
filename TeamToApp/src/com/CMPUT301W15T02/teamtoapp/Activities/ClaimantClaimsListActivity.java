@@ -133,7 +133,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 							// When delete is clicked remove the current claim
 							Claim claim = claimListController.getClaim(position);
 							claimListController.removeClaim(claim);
-							adapter.notifyDataSetChanged();
 						}
 					}).create().show();
 				} else {
@@ -263,6 +262,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	
 	public void onGoogleMapBtnClicked() {
 		Intent intent = new Intent(ClaimantClaimsListActivity.this, HomeGeoLocationActivity.class);
+		intent.putExtra("latitude", userController.getHomeLatitude());
+		intent.putExtra("longitude", userController.getHomeLongitude());
 		startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
 	}
 	

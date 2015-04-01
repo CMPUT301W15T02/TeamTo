@@ -32,8 +32,8 @@ public class User {
 	
 	private static User instance = null;
 	protected transient ArrayList<Listener> listeners = null;
-	private double homeLatitude;
-	private double homeLongitude;
+	private double homeLatitude = 0.0;
+	private double homeLongitude = 0.0;
 	
 	
 	

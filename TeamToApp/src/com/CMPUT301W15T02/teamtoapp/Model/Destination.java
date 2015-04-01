@@ -49,4 +49,9 @@ public class Destination {
 		this.reason = newReason;
 	}
 	
+	public void addGeolocation(double latitude, double longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+	}
+	
 }
