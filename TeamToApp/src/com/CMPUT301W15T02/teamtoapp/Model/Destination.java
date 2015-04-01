@@ -20,13 +20,15 @@ package com.CMPUT301W15T02.teamtoapp.Model;
  *
  */
 
-public class StringTuple {
+public class Destination {
 	
 	public String destination;
 	public String reason;
+	public double latitude;
+	public double longitude;
 	
 	
-	public StringTuple(String a, String b) {
+	public Destination(String a, String b) {
 		this.destination = a;
 		this.reason = b;
 	}
@@ -45,6 +47,11 @@ public class StringTuple {
 	
 	public void setReason(String newReason) {
 		this.reason = newReason;
+	}
+	
+	public void addGeolocation(double latitude, double longitude) {
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 	
 }

@@ -32,7 +32,8 @@ public class User {
 	
 	private static User instance = null;
 	protected transient ArrayList<Listener> listeners = null;
-	private GeoLocation userGeoLocation;
+	private double homeLatitude = 0.0;
+	private double homeLongitude = 0.0;
 	
 	
 	
@@ -57,7 +58,6 @@ public class User {
 		Tag tag4 = new Tag("Recreation");
 		tag4.setTagID("recreation");
 		tags.add(tag4);
-		userGeoLocation = new GeoLocation();
 		listeners = new ArrayList<Listener>();
 	}
 	
@@ -164,28 +164,29 @@ public class User {
 	
 	
 	
-	/**
-	 * Returns geoLocation selected by the user via GoogleMaps/ default geoLocation.
-	 * 
-	 * @return userGeoLocation - geoLocation selected by user/ manually selected
-	 */
-	public GeoLocation getUserGeoLocation() {
-		return userGeoLocation;
+	
+	public double getHomeLatitude() {
+		return homeLatitude;
 	}
-	
-	
-	
-	/**
-	 * Set a new geoLocation selected by the user via GoogleMaps
-	 * @param geoLocation
-	 */
-	public void setGeoLocation(GeoLocation geoLocation) {
-		this.userGeoLocation = geoLocation;
+
+
+	public void setHomeLatitude(double homeLatitude) {
+		this.homeLatitude = homeLatitude;
 		notifyListeners();
 	}
-	
-	
-	
+
+
+	public double getHomeLongitude() {
+		return homeLongitude;
+	}
+
+
+	public void setHomeLongitude(double homeLongitude) {
+		this.homeLongitude = homeLongitude;
+		notifyListeners();
+	}
+
+
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();

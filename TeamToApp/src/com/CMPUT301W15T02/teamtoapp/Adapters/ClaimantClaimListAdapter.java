@@ -41,7 +41,7 @@ import android.widget.Toast;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 /**
@@ -131,7 +131,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 		
 		// This part of the code takes the updates from the destinations list view from the make a claim 
 		// from the claimant and puts the new information to the claimants list view 
-		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
+		ArrayList<Destination> destStringTuple = claim.getDestinations();
 		String allDest = "";
 		int i;
 		for (i = 0; i < destStringTuple.size()-1 ; i++) {           

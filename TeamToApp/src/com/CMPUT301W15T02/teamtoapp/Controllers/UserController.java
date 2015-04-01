@@ -18,7 +18,6 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 import java.util.ArrayList;
 
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 
@@ -83,22 +82,25 @@ public class UserController {
 	}
 	
 
-	public GeoLocation getGeoLocation() {
-		return user.getUserGeoLocation();
+	
+	public double getHomeLatitude() {
+		return user.getHomeLatitude();
 	}
 	
-	/**
-	 * Gets location name from the GeoLocation of the user.
-	 * @return
-	 */
-	public String getLocationName() {
-		return user.getUserGeoLocation().getLocationName();
+	public double getHomeLongitude() {
+		return user.getHomeLongitude();
 	}
 	
 	
-	public void setGeoLocation(GeoLocation geoLocation) {
-		user.setGeoLocation(geoLocation);
+	public void setHomeLatitude(double latitude) {
+		user.setHomeLatitude(latitude);
 	}
+	
+	
+	public void setHomeLongitude(double longitude) {
+		user.setHomeLongitude(longitude);
+	}
+	
 	
 	
 	/**

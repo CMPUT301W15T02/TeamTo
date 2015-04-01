@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 /**
  * 
@@ -97,7 +97,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
 		// Format destinations
-		ArrayList<StringTuple> destStringTuple = claim.getDestinations();
+		ArrayList<Destination> destStringTuple = claim.getDestinations();
 		String allDest = "";
 		int i;
 		for (i = 0; i < destStringTuple.size()-1 ; i++) {           

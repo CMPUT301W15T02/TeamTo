@@ -124,6 +124,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Receipt"/>
+    
+    <Button
+        android:id="@+id/expenseGeolocationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Geolocation"/>
 
     <CheckBox
         android:id="@+id/ExpenseCompletedCheckBox"

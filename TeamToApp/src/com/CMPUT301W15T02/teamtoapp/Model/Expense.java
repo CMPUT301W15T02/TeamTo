@@ -37,6 +37,8 @@ public class Expense {
 	private boolean complete;
 	private String photo = null;
 	private String expenseId;
+	private double latitude;
+	private double longitude;
 	protected transient ArrayList<Listener> listeners = null;
 	
 	public Expense() {
@@ -178,5 +180,33 @@ public class Expense {
 			listeners.remove(listener);
 		}
 	}
+
+
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+		notifyListeners();
+	}
+
+
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+		notifyListeners();
+	}
+	
+	
 
 }

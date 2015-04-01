@@ -52,7 +52,7 @@ public class Claim implements Listener {
 	private String claimName;
 	private GregorianCalendar startDate;
 	private GregorianCalendar endDate;
-	private ArrayList<StringTuple> destinations;
+	private ArrayList<Destination> destinations;
 	private ArrayList<Expense> expenses;
 	private Status status;
 	private String comment;
@@ -69,7 +69,7 @@ public class Claim implements Listener {
 		claimName="";
 		startDate = new GregorianCalendar();
 		endDate = new GregorianCalendar();
-		destinations = new ArrayList<StringTuple>();
+		destinations = new ArrayList<Destination>();
 		expenses = new ArrayList<Expense>();
 		status = Status.IN_PROGRESS;
 		tags = new ArrayList<String>();
@@ -121,27 +121,27 @@ public class Claim implements Listener {
 	
 	
 
-	public ArrayList<StringTuple> getDestinations() {
+	public ArrayList<Destination> getDestinations() {
 		return destinations;
 	}
 	
 	
 
-	public void setDestinations(ArrayList<StringTuple> destinations) {
+	public void setDestinations(ArrayList<Destination> destinations) {
 		this.destinations = destinations;
 		notifyListeners();
 	}
 	
 	
 	
-	public void addDestination(StringTuple new_tuple) {
+	public void addDestination(Destination new_tuple) {
 		this.destinations.add(new_tuple);
 		notifyListeners();
 	}
 	
 	
 	
-	public void removeDestination(StringTuple destination) {
+	public void removeDestination(Destination destination) {
 		this.destinations.remove(destination);
 		notifyListeners();
 	}

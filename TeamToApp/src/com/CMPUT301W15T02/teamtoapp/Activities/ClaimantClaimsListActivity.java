@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
@@ -51,6 +53,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	private ListView listView;
 	private ClaimantClaimListAdapter adapter;
 	private ArrayList<String> mSelectedItems;
+	private UserController userController;
+	
+	private static final int GET_GEOLOCATION_REQUEST_CODE = 112;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +77,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// Set the current user so it can be added to claims
 		claimListController = new ClaimListController();
 		claimListController.addListenerToClaimList(this);
+		userController = new UserController();
 	}
 	
 	/**
@@ -128,7 +134,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 							// When delete is clicked remove the current claim
 							Claim claim = claimListController.getClaim(position);
 							claimListController.removeClaim(claim);
-							adapter.notifyDataSetChanged();
 						}
 					}).create().show();
 				} else {
@@ -231,6 +236,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			}
 		} else if (id == R.id.filterByTags) {
 			filterByTags();
+		} else if (id == R.id.setHomeLocation) {
+			onGoogleMapBtnClicked();
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -254,11 +261,30 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 
 	}
 	
-	public void onGoogleMapBtnClicked(View view) {
+	public void onGoogleMapBtnClicked() {
 		Intent intent = new Intent(ClaimantClaimsListActivity.this, HomeGeoLocationActivity.class);
-		startActivity(intent);
+		intent.putExtra("latitude", userController.getHomeLatitude());
+		intent.putExtra("longitude", userController.getHomeLongitude());
+		startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
 	}
 	
+	
+	
+
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		 if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {
+		    	double latitude = data.getDoubleExtra("latitude", 0.0);
+		    	double longitude = data.getDoubleExtra("longitude", 0.0);
+		    	Log.i("LATITUDE", String.valueOf(latitude));
+		    	Log.i("LONGITUDE", String.valueOf(longitude));
+		    	userController.setHomeLatitude(latitude);
+		    	userController.setHomeLongitude(longitude);
+		    	MainManager.saveUser();
+		    }
+	}
+
 
 
 	@Override

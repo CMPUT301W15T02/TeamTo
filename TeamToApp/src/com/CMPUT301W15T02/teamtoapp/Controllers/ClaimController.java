@@ -27,7 +27,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.StringTuple;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 /** 
@@ -192,15 +192,15 @@ public class ClaimController {
 	 * @param reason		String representing the reason for visiting the destination
 	 */
 	public void addDestination(String destination, String reason) {
-		StringTuple newDestination = new StringTuple(destination, reason);
+		Destination newDestination = new Destination(destination, reason);
 		currentClaim.addDestination(newDestination);
 	}
 	
-	public ArrayList<StringTuple> getDestinations() {
+	public ArrayList<Destination> getDestinations() {
 		return currentClaim.getDestinations();
 	}
 	
-	public void removeDestination(StringTuple destination) {
+	public void removeDestination(Destination destination) {
 		if (currentClaim.getDestinations().contains(destination)) {
 			currentClaim.getDestinations().remove(destination);
 		}

@@ -29,11 +29,11 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +41,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Model.GeoLocation;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -67,15 +65,18 @@ public class HomeGeoLocationActivity extends Activity {
 	LatLng addressLatLng; // Store latitude and longitude for address entered by user
 	private GoogleMap googleMap;
 	private EditText addressEditText; // Address/marker entered by user
-	private Marker marker; // Displays user location
-	GeoLocation currentGeoLocation = User.getInstance().getUserGeoLocation(); // Saves geoLocation changes by user
+	private Marker marker = null; // Displays user location
 	private Context context = this;
+	Location location = null;
 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_google_map);
+		// TODO get extra from intent
+		// have it be one of homelocation, expenselocation, or destinationlocation
+		// or something like that
 		
 		addressEditText = (EditText) findViewById(R.id.addressEditText);
 		
@@ -88,107 +89,78 @@ public class HomeGeoLocationActivity extends Activity {
             int requestCode = 10;
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
             dialog.show();
+            return;
  
-        } else { 
-        	
-        	// Google Play Services are available
-    		try {
-    			
-    			// Initialize GoogleMap, grab from map fragment
-    			if (googleMap == null) {
-    				googleMap = ((MapFragment) getFragmentManager().
-    				findFragmentById(R.id.map)).getMap();
-    			}     
-    			
-    			// Place dot on current location and add visible features
-                googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                googleMap.setMyLocationEnabled(true);
-                googleMap.setTrafficEnabled(false);
-                googleMap.setIndoorEnabled(false);
-                googleMap.setBuildingsEnabled(true);
-                
-                // Show zoom buttons
-                googleMap.getUiSettings().setZoomControlsEnabled(true);
-                
-                // Getting LocationManager object from System Service LOCATION_SERVICE
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        }
+        
 
-                // Getting Current Location using GPS_PROVIDER
-                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                
-                // Clear any existing markers
-                googleMap.clear();
-                
-                /**
-                 * If location available, display marker for location, otherwise display marker for default location
-                 */
-                if (location != null) {
-                	
-                	addressLatLng = new LatLng (location.getLatitude(), location.getLongitude());
-                	marker = googleMap.addMarker(new MarkerOptions().position(addressLatLng).title("Current Location"));
-                	googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
-                	googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-                	
-                } else {
-                	
-                	/**
-                	 * If no GeoLocation is saved by the user, set marker on default location (defaultLatLng),
-                	 * and save default location into currentGeoLocation of user.
-                	 */
-                	if (currentGeoLocation == null) {
-                		currentGeoLocation.setLatitude(defaultLatLng.latitude);
-                		currentGeoLocation.setLongitude(defaultLatLng.longitude);
-                		currentGeoLocation.setLocationName("Edmonton, AB");
-                		marker = googleMap.addMarker(new MarkerOptions().
-                				position(defaultLatLng).title("Default Location").snippet(currentGeoLocation.getLocationName()));
-                		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLatLng, 15));
-                		googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-                		Toast.makeText(context, "Cannot Find Current Location.", Toast.LENGTH_LONG).show();
-                		
-                	} else {
-                		/**
-                		 * Set marker on location saved by the user
-                		 */
-                		double lat = currentGeoLocation.getLatitude();
-                		double lng = currentGeoLocation.getLongitude();
-                		addressLatLng = new LatLng(lat, lng);
-                		marker = googleMap.addMarker(new MarkerOptions().
-                				position(addressLatLng).title(currentGeoLocation.getLocationName()));
-                		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
-                		googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-                		Toast.makeText(context, "Found Saved Location: "+currentGeoLocation.getLocationName(), Toast.LENGTH_LONG).show();
-                        
-                	}
-                
-                }
-    			/** 
-    			 * If current location of user changes, myLocationChangeListener is called.
-                */
-                googleMap.setOnMyLocationChangeListener(myLocationChangeListener);
-                
-    		} catch (Exception e) {
-                    e.printStackTrace();
-            }
-    		
-        }	
+        // Google Play Services are available
+        try {
+
+        	// Initialize GoogleMap, grab from map fragment
+        	if (googleMap == null) {
+        		googleMap = ((MapFragment) getFragmentManager().
+        				findFragmentById(R.id.map)).getMap();
+        	}     
+
+        	// Place dot on current location and add visible features
+        	googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        	googleMap.setMyLocationEnabled(true);
+        	googleMap.setBuildingsEnabled(true);
+
+        	// Show zoom buttons
+        	googleMap.getUiSettings().setZoomControlsEnabled(true);
+
+        	// Getting LocationManager object from System Service LOCATION_SERVICE
+        	LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        	// Getting Current Location using GPS_PROVIDER
+        	location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        	// Clear any existing markers
+
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+        
+        Intent intent = getIntent();
+        double latitude = intent.getDoubleExtra("latitude", 0.0);
+        double longitude = intent.getDoubleExtra("longitude", 0.0);
+        if (latitude != 0.0 || longitude != 0.0) {
+        	LatLng passedLocation = new LatLng(latitude, longitude);
+        	marker = googleMap.addMarker(new MarkerOptions().position(passedLocation));
+        }
+        
+        googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+			
+			@Override
+			public void onMapLongClick(LatLng arg0) {
+				if (marker == null) {
+					marker = googleMap.addMarker(new MarkerOptions().position(arg0));
+					marker.setDraggable(true);
+				} else {
+					marker.setPosition(arg0);
+				}
+			}
+		});
+        
+        googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
+			
+			@Override
+			public boolean onMyLocationButtonClick() {
+				if (location != null) {
+					addressLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+					googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
+		            googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
+					
+				}
+				return false;
+			}
+		});
+        
+
+
 	}
-	
-	/**
-	 * This listener finds out whether location of current user has changed and if so 
-	 * will automatically reset the current location of the user.
-	 */
-	private GoogleMap.OnMyLocationChangeListener myLocationChangeListener = new GoogleMap.OnMyLocationChangeListener() {
-	    @Override
-	    public void onMyLocationChange(Location location) {
-	    	googleMap.clear();
-	        addressLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-	        marker.setPosition(addressLatLng);
-	        marker.setTitle(addressEditText.toString());
-	        if(googleMap != null){
-	            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 16.0f));
-	        }
-	    }
-	};
 		
 	
 	/**
@@ -205,7 +177,7 @@ public class HomeGeoLocationActivity extends Activity {
         if(!newAddress.isEmpty()){
  
             // Call for the AsyncTask to change location of the marker (ChangeMarker class made below)
-            new ChangeMarker().execute(newAddress);
+            new ChangePosition().execute(newAddress);
  
         } else {
         	Toast.makeText(getApplicationContext(), "Please enter location", Toast.LENGTH_SHORT).show();
@@ -221,7 +193,7 @@ public class HomeGeoLocationActivity extends Activity {
 	 * latitude and longitude (via getLatLong method).
 	 * Then, post the marker on the screen of the new address.
 	*/
-    class ChangeMarker extends AsyncTask<String, String, String> {
+    class ChangePosition extends AsyncTask<String, String, String> {
     	 
 		@Override
         protected String doInBackground(String... params) {
@@ -250,12 +222,9 @@ public class HomeGeoLocationActivity extends Activity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             // Change marker location on the screen
-            marker.setPosition(addressLatLng);
-            marker.setTitle(addressEditText.getText().toString());
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(addressLatLng, 15));
             googleMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
         }
- 
     }
     
     /**
@@ -337,26 +306,24 @@ public class HomeGeoLocationActivity extends Activity {
      * When user clicks save on action bar, current location/ default location will be saved.
      * */
     public void onSaveUserLocation() {
-
-    	if (addressLatLng != null) {
+    	Intent returnIntent = new Intent();
+    	if (marker != null) {
             /**Save the latitude and longitude from here into geoLocation object
              * which will then be saved in the user.
              * 
              * TODO: Need to make sure GeoLocation is saved properly.
             */
-    		if (!addressEditText.getText().toString().isEmpty()) {
-    			Log.i("AddressLAGLONG", addressLatLng.toString());
-    			currentGeoLocation.setLatitude(addressLatLng.latitude);
-    			currentGeoLocation.setLongitude(addressLatLng.longitude);
-    			currentGeoLocation.setLocationName(addressEditText.getText().toString());
-    		}
-            
-    	} 
-    	
-    	// Else keep previous or default location in user.
-    	Toast.makeText(getApplicationContext(), "Saved your location: "+
-    			User.getInstance().getUserGeoLocation().getLocationName(), Toast.LENGTH_LONG).show();
+    		double latitude = marker.getPosition().latitude;
+    		double longitude = marker.getPosition().longitude;
+    		returnIntent.putExtra("latitude", latitude);
+    		returnIntent.putExtra("longitude", longitude);
+            setResult(RESULT_OK, returnIntent);
+    	} else {
+    		setResult(RESULT_CANCELED, returnIntent);
+    	}
+    	finish();
     }
+    
     
     
 	@Override
@@ -376,5 +343,12 @@ public class HomeGeoLocationActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+
+	@Override
+	public void onBackPressed() {
+		onSaveUserLocation();
+	}
+	
+	
 
 }
