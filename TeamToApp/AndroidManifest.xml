@@ -84,24 +84,25 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAAJArWE27b0xEaj6nja6KN21WRmD8fGyY" />
-        
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <activity
-            android:name="com.CMPUT301W15T02.teamtoapp.Activities.HomeGeoLocationActivity"
+            android:name=".Activities.HomeGeoLocationActivity"
             android:label="@string/title_activity_google_map" >
         </activity>
-        
+
         <receiver android:name=".NetworkReceiver" >
-        <intent-filter>
-            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-        </intent-filter>
-    </receiver>
-        
-        
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".DestinationGeoLocationActivity"
+            android:label="@string/title_activity_destination_geo_location" >
+        </activity>
     </application>
-    
 
 </manifest>
