@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -184,14 +185,14 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// Does nothing
-				String totalStrings = "";
-				for (int i = 0; i < mSelectedItems.size(); i++) {
-					totalStrings += mSelectedItems.get(i).trim();
-					totalStrings += "~";
+				if (mSelectedItems.size() > 0) {
+					adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getFilteredClaims(mSelectedItems));
+				} else {
+					adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getClaims());
 				}
-				
-				CharSequence totalCharSeq = totalStrings;
-				adapter.getFilter().filter(totalCharSeq);
+				adapter.sort(new ClaimComparatorNewestFirst());
+				adapter.notifyDataSetChanged();
+				listView.setAdapter(adapter);
 				
 			}
 		}).create().show();
@@ -292,7 +293,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		adapter.getFilter().filter("");
+		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getClaims());
+		adapter.sort(new ClaimComparatorNewestFirst());
+		listView.setAdapter(adapter);
 	}
 
 	/**

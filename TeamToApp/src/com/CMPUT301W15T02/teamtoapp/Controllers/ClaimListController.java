@@ -116,5 +116,18 @@ public class ClaimListController {
 		return;
 	}
 	
+	public ArrayList<Claim> getFilteredClaims(ArrayList<String> filterTags) {
+		ArrayList<Claim> newClaims = new ArrayList<Claim>();
+		for (Claim claim: ClaimList.getInstance().getClaims()) {
+			for (Tag tag : claim.getTags()) {
+				if (filterTags.contains(tag.getTagName())) {
+					newClaims.add(claim);
+					break;
+				}
+			}
+		}
+		return newClaims;
+	}
+	
 	
 }

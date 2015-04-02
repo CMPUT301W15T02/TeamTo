@@ -57,13 +57,13 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 // TODO Clean up this code, its kinda messy
 
 
-public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Filterable{
+public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;
 	private int layoutId;
 	private ArrayList<Claim> originalClaimList = ClaimList.getInstance().getClaims();
 	private ArrayList<Claim> filteredClaimList = new ArrayList<Claim>();
-	private TagFilter myFilter = new TagFilter();
+	//private TagFilter myFilter = new TagFilter();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
 	
@@ -102,9 +102,10 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
         return position;
     }
     
-    public Filter getFilter() {
+    /*public Filter getFilter() {
     	return myFilter;
     }
+    */
     
     
 	/**
@@ -181,6 +182,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 		
 		// TODO: Need to calculate distance between FIRST destination and home location.
 		// FOR SOME REASON ITS NOT SHOWING ALL CLAIMS?
+		Log.i("DESTSIZE", String.valueOf(claim.getDestinations().size()));
 		if (claim.getDestinations().size() > 0) {
 			double lat = claim.getDestinations().get(0).latitude;
 			double lon = claim.getDestinations().get(0).longitude;
@@ -188,7 +190,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			destLocation.setLongitude(lon);
 			
 			double distanceBetween = userLocation.distanceTo(destLocation);
-			if (distanceBetween > 100) {
+			if (distanceBetween > 100000) {
 				row.setBackgroundResource(R.drawable.listview_selector_distant);
 			} else {
 				row.setBackgroundResource(R.drawable.listview_selector_nearby);
@@ -199,53 +201,5 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	}
 	
 	
-	   private class TagFilter extends Filter {
-
-	        @SuppressWarnings("unchecked")
-	        @Override
-	        protected void publishResults(CharSequence constraint, FilterResults results) {
-	        	if (results.count == 0) {
-	        		filteredClaimList = originalClaimList;
-	                notifyDataSetInvalidated();
-	                if (constraint.length() != 0) {
-		        		Toast.makeText(getContext(), "No matches", Toast.LENGTH_SHORT).show();
-		        	}
-	        	} else {
-	                filteredClaimList = (ArrayList<Claim>) results.values;
-	                notifyDataSetInvalidated();
-	            }
-	        	
-	        }
-
-			@Override
-			protected FilterResults performFiltering(CharSequence constraint) {
-				// TODO In progress
-				Log.i("CONSTRAINT", constraint.toString());
-				FilterResults results = new FilterResults();
-				if (constraint == null || constraint.length() == 0) {
-			        // No filter implemented we return all the list
-			        results.values = filteredClaimList;
-			        results.count = filteredClaimList.size();
-			    }
-				// Shows all tags selected by the user.
-				String filterTagString = constraint.toString();
-				ArrayList<String> filterTagList = new ArrayList<String>(Arrays.asList(filterTagString.split("~")));
-				
-				ArrayList<Claim> newList = new ArrayList<Claim>();
-				for (Claim claim: ClaimList.getInstance().getClaims()) {
-					for (Tag tag : claim.getTags()) {
-						String tagString = tag.toString();
-						if (filterTagList.contains(tagString)) {
-							newList.add(claim);
-							break;
-						}
-					}
-				}
-				results.values = newList;
-				results.count = newList.size();
-				return results;
-			}
-
-	    }
 
 }
