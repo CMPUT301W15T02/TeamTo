@@ -145,4 +145,16 @@ public class MainManager {
 	}
 	
 	
+	public static void ApproveClaim(final Claim claim) {
+		if (isNetworkAvailable(applicationContext)) {
+			new Thread(new Runnable() {
+				@Override
+				public void run() {
+					ElasticSearchManager.updateClaim(claim);
+				}
+			}).start();
+		}
+	}
+	
+	
 }

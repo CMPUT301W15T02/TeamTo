@@ -89,45 +89,6 @@ public class ClaimController {
 		}).start();
 	}
 	
-	/**
-	 * Responsible for returning a claim that was submitted
-	 * Currently the functionality is incomplete
-	 * 
-	 */
-	public void returnClaim(String comment, String approver) {
-		currentClaim.setStatus(Status.RETURNED);
-		currentClaim.setComment(comment);
-		currentClaim.setApproverName(approver);
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				ElasticSearchManager.updateClaim(currentClaim);
-				
-			}
-		}).start();
-	}
-	
-	/**
-	 * Responsible for approving a claim that was submitted
-	 * Currently the functionality is incomplete
-	 * 
-	 */
-	public void approvedClaim(String comment, String approver) {
-		currentClaim.setStatus(Status.APPROVED);
-		currentClaim.setComment(comment);
-		currentClaim.setApproverName(approver);
-		Log.i("APPROVER", currentClaim.getClaimId());
-		Log.i("APPROVER", approver);
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				ElasticSearchManager.updateClaim(currentClaim);
-				
-			}
-		}).start();
-	}
 	
 	public void setStartDate(GregorianCalendar date) {
 		currentClaim.setStartDate(date);
