@@ -1,7 +1,5 @@
 package com.CMPUT301W15T02.teamtoapp;
 
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,7 +16,6 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -34,13 +31,12 @@ public class DestinationGeoLocationActivity extends Activity {
 	private EditText destinationEditText;
 	private EditText reasonEditText;
 	private LatLng addressLatLng;
-	private ClaimController claimController;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_destination_geo_location);
-		
 		
 		destinationEditText = (EditText) findViewById(R.id.destinationSelectEditText);
 		reasonEditText = (EditText) findViewById(R.id.reasonDestinationEditText);
@@ -137,13 +133,17 @@ public class DestinationGeoLocationActivity extends Activity {
 		} else if (marker == null) {
 			Toast.makeText(context, "Select location by pressing on map", Toast.LENGTH_SHORT).show();
 		} else {
+			if (reason == null) {
+				reason = "";
+			}
 			double latitude = marker.getPosition().latitude;
     		double longitude = marker.getPosition().longitude;
-    		Log.i("DESTINFO", destination);
-    		Log.i("DESTINFO", reason);
-    		Log.i("DESTINFO", String.valueOf(latitude));
-    		Log.i("DESTINFO", String.valueOf(longitude));
-    		//claimController.addDestination(destination, reason, latitude, longitude);
+    		Intent returnIntent = new Intent();
+    		returnIntent.putExtra("latitude", latitude);
+        	returnIntent.putExtra("longitude", longitude);
+        	returnIntent.putExtra("reason", reason);
+        	returnIntent.putExtra("destination", destination);
+            setResult(RESULT_OK, returnIntent);
     		finish();
 		}
 	}
@@ -169,4 +169,12 @@ public class DestinationGeoLocationActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+	}
+	
+	
 }

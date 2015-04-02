@@ -80,6 +80,8 @@ public class ClaimEditActivity extends Activity implements Listener {
 	private ArrayAdapter<Destination> destinationsAdapter;
 	private ArrayAdapter<Tag> tagsAdapter;
 	
+	private static final int GET_GEOLOCATION_REQUEST_CODE = 112;
+	
 
 	
 	@Override
@@ -128,7 +130,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	 */
 	private void addDestination() {
 		Intent intent = new Intent(ClaimEditActivity.this, DestinationGeoLocationActivity.class);
-		startActivity(intent);
+		startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
 	}
 	
 	/**
@@ -374,6 +376,20 @@ public class ClaimEditActivity extends Activity implements Listener {
 		super.onDestroy();
 		claimController.removeListenerFromClaim(this);
 	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {
+	    	double latitude = data.getDoubleExtra("latitude", 0.0);
+	    	double longitude = data.getDoubleExtra("longitude", 0.0);
+	    	String destination = data.getStringExtra("destination");
+	    	String reason = data.getStringExtra("reason");
+	    	claimController.addDestination(destination, reason, latitude, longitude);
+	    }
+	}
+	
+	
+	
 	
 	
 }
