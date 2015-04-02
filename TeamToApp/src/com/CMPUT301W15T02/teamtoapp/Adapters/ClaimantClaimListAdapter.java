@@ -28,6 +28,7 @@ import java.util.SortedMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,12 +48,15 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 /**
  * 
  * A customized adapter for the claimant's list of claims.
+ * Sources:
+ * http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23 
+ * http://stackoverflow.com/questions/5936912/how-to-find-the-distance-between-two-geopoints 2015-04-02
  *
  */
 
 // TODO Clean up this code, its kinda messy
 
-// GOING TO BE USING THIS: http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23
+
 public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Filterable{
 
 	private Context context;
@@ -62,6 +66,9 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 	private TagFilter myFilter = new TagFilter();
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
+	
+	Location destLocation = new Location(Context.LOCATION_SERVICE);
+	Location userLocation = new Location(Context.LOCATION_SERVICE);
 
 	public ClaimantClaimListAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
 
@@ -119,6 +126,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			holder.statusTextView = (TextView) row.findViewById(R.id.claimantStatusView);
 			holder.totalCurrencyView = (TextView) row.findViewById(R.id.claimantTotalCurrencyView);
 			holder.tagsTextView = (TextView) row.findViewById(R.id.claimantTagsListView); 
+			
 			row.setTag(holder);
 		} else {
 			holder = (ViewHolder) row.getTag();
@@ -126,6 +134,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 		
 		// These holders update the data for the recently made or changed claim for the claimant claims
 		Claim claim = getItem(position);
+		
+		
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
@@ -167,6 +177,23 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim> implements Fil
 			totalCurrencyOuput = totalCurrencyOuput.substring(0, totalCurrencyOuput.length()-2);
 		}
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
+		
+		
+		// TODO: Need to calculate distance between FIRST destination and home location.
+		// FOR SOME REASON ITS NOT SHOWING ALL CLAIMS?
+		if (claim.getDestinations().size() > 0) {
+			double lat = claim.getDestinations().get(0).latitude;
+			double lon = claim.getDestinations().get(0).longitude;
+			destLocation.setLatitude(lat);
+			destLocation.setLongitude(lon);
+			
+			double distanceBetween = userLocation.distanceTo(destLocation);
+			if (distanceBetween > 100) {
+				row.setBackgroundResource(R.drawable.listview_selector_distant);
+			} else {
+				row.setBackgroundResource(R.drawable.listview_selector_nearby);
+			}
+		}
 		
 		return row;
 	}
