@@ -20,6 +20,10 @@ import java.util.GregorianCalendar;
 import java.util.TreeMap;
 import java.util.UUID;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.CMPUT301W15T02.teamtoapp.Activities.ClaimEditActivity;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**

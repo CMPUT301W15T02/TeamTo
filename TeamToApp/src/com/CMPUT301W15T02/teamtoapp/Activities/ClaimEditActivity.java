@@ -204,7 +204,7 @@ public class ClaimEditActivity extends Activity implements Listener {
         });
         
 		/**
-		 * Sets up a listener that will show a date picke dialog on click
+		 * Sets up a listener that will show a date picker dialog on click
 		 */
         endDateTextView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -230,7 +230,13 @@ public class ClaimEditActivity extends Activity implements Listener {
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				GregorianCalendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
+				Calendar start = claimController.getStartDate();
+				if (start.after(calendar)){
+					//toast error
+					Toast.makeText(getApplicationContext(), "End date must be after start date!", Toast.LENGTH_LONG).show();
+				} else {
 				claimController.setEndDate(calendar);
+				}
 			}
 			// Set the default date in the dialog
 		}, endDate.get(Calendar.YEAR), endDate.get(Calendar.MONTH), endDate.get(Calendar.DAY_OF_MONTH));
