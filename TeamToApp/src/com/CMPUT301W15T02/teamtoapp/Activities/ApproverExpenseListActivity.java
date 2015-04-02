@@ -29,7 +29,7 @@ import android.widget.ListView;
 
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverExpenseListAdapter;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 /**
@@ -45,7 +45,6 @@ public class ApproverExpenseListActivity extends Activity {
 	private ListView expenseListView;
 	private ApproverExpenseListAdapter adapter;
 	private Context context = this;
-	private ClaimController claimController;
 
 
 	@Override
@@ -55,7 +54,6 @@ public class ApproverExpenseListActivity extends Activity {
 		
 		findViewsByIds();
 		getModelObjects();
-		setFieldValues();
 		setListeners();
 		setUpAdapter();
 	}
@@ -69,9 +67,6 @@ public class ApproverExpenseListActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.approve_claim) {
-			return true;
-		}
 		return super.onOptionsItemSelected(item);
 		
 	}
@@ -82,8 +77,7 @@ public class ApproverExpenseListActivity extends Activity {
 	private void getModelObjects() {	
 		Intent intent = getIntent();
 		claimID = (String) intent.getSerializableExtra("claimID");
-		claimController = new ClaimController(claimID);
-		expenses = claimController.getExpenses();
+		expenses = ApproverClaims.getInstance().findClaimByID(claimID).getExpenses();
 	}
 	
 	/**
@@ -92,13 +86,6 @@ public class ApproverExpenseListActivity extends Activity {
 	private void findViewsByIds() {
 		expenseListView = (ListView) findViewById(R.id.approverExpenseListView);
 
-	}
-	
-	/**
-	 * Set the default text of the fields
-	 */
-	private void setFieldValues() {
-		
 	}
 	
 	
@@ -111,8 +98,8 @@ public class ApproverExpenseListActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Expense expense = claimController.getExpenses().get(position);
-				Intent intent = new Intent(context, ExpenseViewActivity.class);
+				Expense expense = expenses.get(position);
+				Intent intent = new Intent(context, ApproverExpenseViewActivity.class);
 				intent.putExtra("expenseID", expense.getExpenseId());
 				startActivity(intent);
 				
