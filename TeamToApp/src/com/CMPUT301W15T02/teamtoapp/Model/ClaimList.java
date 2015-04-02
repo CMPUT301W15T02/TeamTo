@@ -16,6 +16,8 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
@@ -87,6 +89,9 @@ public class ClaimList implements Listener {
 			}
 		}
 		notifyListeners();
+		for (Claim claim: claims) {
+			Log.i("NAMEOF", claim.getUserName());
+		}
 
 	}
 	

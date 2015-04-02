@@ -26,7 +26,6 @@ public class ApproverClaims {
 	
 	public void setClaims(ArrayList<Claim> claims) {
 		this.claims = claims;
-		Log.i("CLAIMSSET", "blah");
 
 	}
 	
