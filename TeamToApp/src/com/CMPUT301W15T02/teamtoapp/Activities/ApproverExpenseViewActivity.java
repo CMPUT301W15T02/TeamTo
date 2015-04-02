@@ -3,14 +3,6 @@ package com.CMPUT301W15T02.teamtoapp.Activities;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
-import com.CMPUT301W15T02.teamtoapp.R;
-import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
-import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.R.id;
-import com.CMPUT301W15T02.teamtoapp.R.layout;
-import com.CMPUT301W15T02.teamtoapp.R.menu;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -34,6 +26,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 public class ApproverExpenseViewActivity extends Activity {
 
