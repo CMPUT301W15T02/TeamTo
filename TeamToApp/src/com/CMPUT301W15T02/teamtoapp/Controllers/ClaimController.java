@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import android.util.Log;
+
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
@@ -115,6 +117,8 @@ public class ClaimController {
 		currentClaim.setStatus(Status.APPROVED);
 		currentClaim.setComment(comment);
 		currentClaim.setApproverName(approver);
+		Log.i("APPROVER", currentClaim.getClaimId());
+		Log.i("APPROVER", approver);
 		new Thread(new Runnable() {
 			
 			@Override
