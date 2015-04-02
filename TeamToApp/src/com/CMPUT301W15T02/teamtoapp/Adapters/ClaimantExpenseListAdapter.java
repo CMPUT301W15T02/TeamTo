@@ -59,6 +59,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 		TextView currencyTextView;
 		TextView incompletenessTextView;
 		TextView photoTextView;
+		TextView expenseGeoLocationTextView;
 	}
 	/**
 	 * The method that update the Expense list of the claimant once an expense 
@@ -80,6 +81,7 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder.currencyTextView = (TextView) row.findViewById(R.id.currencyTextView);
 			holder.incompletenessTextView = (TextView) row.findViewById(R.id.incompletenessTextView);
 			holder.photoTextView = (TextView) row.findViewById(R.id.photoTextView);
+			holder.expenseGeoLocationTextView = (TextView) row.findViewById(R.id.expenseGeoLocationTextView);
 			row.setTag(holder);
 			
 		} else {
@@ -102,8 +104,16 @@ public class ClaimantExpenseListAdapter extends ArrayAdapter<Expense> {
 			holder.incompletenessTextView.setText("Complete");
 		}
 		if (expense.getPhoto() != null) {
-			holder.photoTextView.setText("Photo");
+			holder.photoTextView.setText("Photo Saved, ");
+		} else {
+			holder.photoTextView.setText("No Photo, ");
 		}
+		if (expense.getLatitude() == 0 && expense.getLongitude() == 0) {
+			holder.expenseGeoLocationTextView.setText("No Location");
+		} else {
+			holder.expenseGeoLocationTextView.setText("Location Saved");
+		}
+		
 		return row;
 	}
 	
