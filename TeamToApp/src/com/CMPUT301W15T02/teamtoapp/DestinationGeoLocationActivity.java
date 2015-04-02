@@ -80,20 +80,11 @@ public class DestinationGeoLocationActivity extends Activity {
 			// Getting Current Location using GPS_PROVIDER
 			location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-			// Clear any existing markers
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		/*Intent intent = getIntent();
-		double latitude = intent.getDoubleExtra("latitude", 0.0);
-		double longitude = intent.getDoubleExtra("longitude", 0.0);
-		if (latitude != 0.0 || longitude != 0.0) {
-			LatLng passedLocation = new LatLng(latitude, longitude);
-			marker = googleMap.addMarker(new MarkerOptions().position(passedLocation));
-		}
-		*/
 
 		googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 

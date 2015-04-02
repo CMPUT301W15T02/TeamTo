@@ -4,8 +4,8 @@
     android:id="@+id/ClaimsTagsListView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
     android:orientation="vertical"
     tools:context=".ClaimantClaimsListActivity" >
 
@@ -20,9 +20,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         style="?android:listSeparatorTextViewStyle">
         
@@ -45,9 +45,9 @@
 	<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal"
         style="?android:listSeparatorTextViewStyle">
         
@@ -73,9 +73,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="5dp"
         style="?android:listSeparatorTextViewStyle">
         
     	<TextView
@@ -95,7 +95,7 @@
     <ListView
        	android:id="@+id/destinationListView"
         android:layout_width="wrap_content"
-        android:layout_height="100dp" >
+        android:layout_height="95dp" >
    	 </ListView>
    	     
     <Button
@@ -111,9 +111,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="5dp"
         android:orientation="vertical"
         style="?android:listSeparatorTextViewStyle">      
     
