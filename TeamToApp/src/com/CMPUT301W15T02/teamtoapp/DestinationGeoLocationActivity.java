@@ -1,5 +1,7 @@
 package com.CMPUT301W15T02.teamtoapp;
 
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -16,9 +18,11 @@ import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class DestinationGeoLocationActivity extends Activity {
 
@@ -30,6 +34,7 @@ public class DestinationGeoLocationActivity extends Activity {
 	private EditText destinationEditText;
 	private EditText reasonEditText;
 	private LatLng addressLatLng;
+	private ClaimController claimController;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,13 +90,14 @@ public class DestinationGeoLocationActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		Intent intent = getIntent();
+		/*Intent intent = getIntent();
 		double latitude = intent.getDoubleExtra("latitude", 0.0);
 		double longitude = intent.getDoubleExtra("longitude", 0.0);
 		if (latitude != 0.0 || longitude != 0.0) {
 			LatLng passedLocation = new LatLng(latitude, longitude);
 			marker = googleMap.addMarker(new MarkerOptions().position(passedLocation));
 		}
+		*/
 
 		googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 
@@ -119,16 +125,27 @@ public class DestinationGeoLocationActivity extends Activity {
 				return false;
 			}
 		});
-
-
-
-	
 		
 	}
 	
 	
 	private void saveDestination() {
-		
+		String destination = destinationEditText.getText().toString();
+		String reason = reasonEditText.getText().toString();
+		if (destination.length() == 0) {
+			Toast.makeText(context, "Need to enter a destination", Toast.LENGTH_SHORT).show();
+		} else if (marker == null) {
+			Toast.makeText(context, "Select location by pressing on map", Toast.LENGTH_SHORT).show();
+		} else {
+			double latitude = marker.getPosition().latitude;
+    		double longitude = marker.getPosition().longitude;
+    		Log.i("DESTINFO", destination);
+    		Log.i("DESTINFO", reason);
+    		Log.i("DESTINFO", String.valueOf(latitude));
+    		Log.i("DESTINFO", String.valueOf(longitude));
+    		//claimController.addDestination(destination, reason, latitude, longitude);
+    		finish();
+		}
 	}
 	
 	
