@@ -129,9 +129,9 @@ public class DestinationGeoLocationActivity extends Activity {
 		String destination = destinationEditText.getText().toString();
 		String reason = reasonEditText.getText().toString();
 		if (destination.length() == 0) {
-			Toast.makeText(context, "Need to enter a destination", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Please enter a destination.", Toast.LENGTH_SHORT).show();
 		} else if (marker == null) {
-			Toast.makeText(context, "Select location by pressing on map", Toast.LENGTH_SHORT).show();
+			Toast.makeText(context, "Please select location by long-clicking on map.", Toast.LENGTH_SHORT).show();
 		} else {
 			if (reason == null) {
 				reason = "";
