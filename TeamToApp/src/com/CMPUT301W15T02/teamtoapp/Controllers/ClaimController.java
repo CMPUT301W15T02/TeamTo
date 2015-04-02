@@ -20,11 +20,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import android.widget.Toast;
-
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
-import com.CMPUT301W15T02.teamtoapp.Activities.ClaimEditActivity;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
