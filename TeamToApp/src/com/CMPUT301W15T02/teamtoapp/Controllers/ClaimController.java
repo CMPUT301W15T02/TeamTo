@@ -133,7 +133,8 @@ public class ClaimController {
 	}
 	
 	/**
-	 * Checks the number of expenses that are complete
+	 * Checks the number of expenses that are complete.
+	 * Makes sure to count fields with missing values.
 	 * @return	Number of incomplete expenses
 	 */
 	public int checkExpensesComplete() {
@@ -142,7 +143,8 @@ public class ClaimController {
 			return 0;
 		} else {
 			for (Expense expense : currentClaim.getExpenses()) {
-				if (expense.getComplete() == false) { numIncomplete++; }
+				if (expense.getComplete() == false || expense.getAmount() == 0.0
+						|| expense.getDescription().length() == 0) { numIncomplete++; }
 			}
 		}
 		return numIncomplete;
