@@ -103,6 +103,10 @@
             android:name=".DestinationGeoLocationActivity"
             android:label="@string/title_activity_destination_geo_location" >
         </activity>
+        <activity
+            android:name="com.CMPUT301W15T02.teamtoapp.Activities.ApproverExpenseViewActivity"
+            android:label="@string/title_activity_approver_expense_view" >
+        </activity>
     </application>
 
 </manifest>

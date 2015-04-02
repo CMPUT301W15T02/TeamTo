@@ -1,9 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:id="@+id/approve_claim"
-        android:orderInCategory="100"
-        android:showAsAction="collapseActionView"
-        android:title="Approve Claim" android:enabled="true"/>
 
 </menu>

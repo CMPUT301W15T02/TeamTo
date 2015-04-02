@@ -15,5 +15,6 @@
     <string name="title_activity_approver_expense_list">Submitted Claim Overview</string>
     <string name="title_activity_google_map">Home GeoLocation</string>
     <string name="title_activity_destination_geo_location">Select destination</string>
+    <string name="title_activity_approver_expense_view">Expense</string>
 
 </resources>
