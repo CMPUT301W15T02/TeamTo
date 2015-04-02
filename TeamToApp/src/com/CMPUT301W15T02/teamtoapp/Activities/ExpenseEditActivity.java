@@ -54,14 +54,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 
 /**
  * 
@@ -244,15 +242,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 				// When the date is set then set the date of the expense
 				Calendar calendar = new GregorianCalendar(year, monthOfYear, dayOfMonth);
-				
-				Calendar start = ClaimList.getInstance().findClaimByID(claimID).getStartDate();
-				Calendar end = ClaimList.getInstance().findClaimByID(claimID).getEndDate();
-				if (start.after(calendar) || end.before(calendar)) {
-					//toast error
-					Toast.makeText(getApplicationContext(), "Expense date must be within claim date range!", Toast.LENGTH_LONG).show();
-				} else {
 				expenseController.setDate(calendar);
-				}
 			}
 		// Set the expenses current date as a default
 		}, date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
