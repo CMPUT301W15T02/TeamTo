@@ -34,6 +34,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
@@ -148,15 +149,22 @@ public class ApproverClaimsListActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
-						claimController.approvedClaim(comment, User.getInstance().getName());
+						if (comment.length() != 0) {
+							claimController.approvedClaim(comment, User.getInstance().getName());
+						} else {
+							Toast.makeText(context, "Must add comment.", Toast.LENGTH_LONG).show();
+						}
 					}
 				})
 				.setNeutralButton("Return", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
-						claimController.returnClaim(comment, User.getInstance().getName());
-
+						if (comment.length() != 0 ) {
+							claimController.returnClaim(comment, User.getInstance().getName());
+						} else {
+							Toast.makeText(context, "Must add comment.", Toast.LENGTH_LONG).show();
+						}
 					}
 				})
 				.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
