@@ -44,6 +44,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.CMPUT301W15T02.teamtoapp.DestinationGeoLocationActivity;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantDestinationsListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
@@ -126,40 +127,8 @@ public class ClaimEditActivity extends Activity implements Listener {
 	 * Add destination will show a dialog that will allow a user to add a new destination and associated reason
 	 */
 	private void addDestination() {
-		LayoutInflater inflater = LayoutInflater.from(getBaseContext());
-		View addDestView = inflater.inflate(R.layout.add_destination_dialog, null);
-		final EditText destinationEditText = (EditText) addDestView
-				.findViewById(R.id.destinationEditText);
-		final EditText reasonEditText = (EditText) addDestView
-				.findViewById(R.id.reasonEditText);
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
-		builder.setView(addDestView);
-		// Saves the destination and adds it to the claim
-		builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
-			@Override
-			public void onClick(DialogInterface dialog, int id) {
-				String destination = destinationEditText.getText().toString();
-				String reason = reasonEditText.getText().toString();
-				destination.trim();
-				reason.trim();
-				
-				// Assumption: Destination must be filled in before adding, adding reason is optional for now...
-				if (destination.length() != 0) {
-					claimController.addDestination(destination, reason);
-					
-				} else {
-					Toast.makeText(context, "Must enter destination!", Toast.LENGTH_SHORT).show();
-				}
-			}
-		})
-		// Does nothing
-		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int id) {
-				// Do nothing
-			}
-		}).create().show();
+		Intent intent = new Intent(ClaimEditActivity.this, DestinationGeoLocationActivity.class);
+		startActivity(intent);
 	}
 	
 	/**

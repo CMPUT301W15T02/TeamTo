@@ -191,8 +191,8 @@ public class ClaimController {
 	 * @param destination	String representing the destination
 	 * @param reason		String representing the reason for visiting the destination
 	 */
-	public void addDestination(String destination, String reason) {
-		Destination newDestination = new Destination(destination, reason);
+	public void addDestination(String destination, String reason, double latitude, double longitude) {
+		Destination newDestination = new Destination(destination, reason, latitude, longitude);
 		currentClaim.addDestination(newDestination);
 	}
 	

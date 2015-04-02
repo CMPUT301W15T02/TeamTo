@@ -28,9 +28,11 @@ public class Destination {
 	public double longitude;
 	
 	
-	public Destination(String a, String b) {
-		this.destination = a;
-		this.reason = b;
+	public Destination(String dest, String reason, double latitude, double longitude) {
+		this.destination = dest;
+		this.reason = reason;
+		this.latitude = latitude;
+		this.longitude = longitude;
 	}
 	
 	public String getDestination() {
