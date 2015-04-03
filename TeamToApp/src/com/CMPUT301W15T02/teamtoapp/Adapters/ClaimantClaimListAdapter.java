@@ -178,7 +178,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		// TODO: Need to calculate distance between FIRST destination and home location.
 		// FOR SOME REASON ITS NOT SHOWING ALL CLAIMS?
-		Log.i("DESTSIZE", String.valueOf(claim.getDestinations().size()));
 		if (claim.getDestinations().size() > 0) {
 			double lat = claim.getDestinations().get(0).latitude;
 			double lon = claim.getDestinations().get(0).longitude;
@@ -186,7 +185,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			destLocation.setLongitude(lon);
 			
 			double distanceBetween = userLocation.distanceTo(destLocation);
-			if (distanceBetween > 100000) {
+			Log.i("DESTSIZE", String.valueOf(distanceBetween));
+			if (distanceBetween > 5000000) {
 				row.setBackgroundResource(R.drawable.listview_selector_distant);
 			} else {
 				row.setBackgroundResource(R.drawable.listview_selector_nearby);
