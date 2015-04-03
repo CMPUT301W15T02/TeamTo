@@ -24,25 +24,22 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * Stores all of the data related to a claim including any associated expenses.
- * 
  * Claim watches its expenses and must be updated when an expense updates
- * 
  */
 
 public class Claim implements Listener {
 
 	/**
-	 * 
 	 * Enumerated type for the different Statuses of a claim
-	 *
 	 */
 	public enum Status {IN_PROGRESS ("In Progress"), SUBMITTED ("Submitted"), RETURNED ("Returned"), APPROVED ("Approved");
 	
 		private final String name;
-		
+	
 		private Status(String s) {
 			name = s;
 		}
+		
 		@Override
 		public String toString() {
 			return name;
@@ -81,25 +78,19 @@ public class Claim implements Listener {
 		approverName = "";
 	}
 	
-	
 	public String getClaimName() {
 		return claimName;
 	}
-	
-	
 
+	/** Sets claimName to string other than default "" */
 	public void setClaimName(String claimName) {
 		this.claimName = claimName;
 		notifyListeners();
 	}
-	
-	
 
 	public GregorianCalendar getStartDate() {
 		return startDate;
 	}
-	
-	
 
 	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
@@ -109,14 +100,10 @@ public class Claim implements Listener {
 		notifyListeners();
 	}
 	
-	
-
 	public Calendar getEndDate() {
 		return endDate;
 	}
 	
-	
-
 	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
 		if (endDate.before(startDate)) {
@@ -125,89 +112,68 @@ public class Claim implements Listener {
 		notifyListeners();
 	}
 	
-	
-
 	public ArrayList<Destination> getDestinations() {
 		return destinations;
 	}
 	
-	
-
 	public void setDestinations(ArrayList<Destination> destinations) {
 		this.destinations = destinations;
 		notifyListeners();
 	}
 	
-	
-	
+	/** Adds Destination object to destinations array for claim */
 	public void addDestination(Destination new_tuple) {
 		this.destinations.add(new_tuple);
 		notifyListeners();
 	}
 	
-	
-	
+	/** Removes Destination object to destinations array for claim */
 	public void removeDestination(Destination destination) {
 		this.destinations.remove(destination);
 		notifyListeners();
 	}
-	
-	
-
 
 	public ArrayList<Expense> getExpenses() {
 		return expenses;
 	}
 	
-	
-
 	public void setExpenses(ArrayList<Expense> expenses) {
 		this.expenses = expenses;
 		notifyListeners();
 	}
 	
-	// TODO
+	/** Adds Expense object to expenses array for claim */
 	public void addExpense(Expense expense) {
 		expense.addListener(this);
 		this.expenses.add(expense);
 		notifyListeners();
 	}
 	
-	
-	// TODO
+	/** Adds Expense object to expenses array for claim */
 	public void removeExpense(Expense expense) {
 		expense.removeListener(this);
 		this.expenses.remove(expense);
 		notifyListeners();
 	}	
 	
-	
-	
+	/** Checks if given Expense object is in claim */
 	public boolean verifyExpense(Expense expense) {
 		return this.expenses.contains(expense);
 	}
 	
-	
-
 	public Status getStatus() {
 		return status;
 	}
 	
-	
-
 	public void setStatus(Status status) {
 		this.status = status;
 		notifyListeners();
 	}
 	
-	
-
 	public String getComment() {
 		return comment;
 	}
 	
-	
-
 	public void setComment(String comment) {
 		if (this.comment == null) {
 			this.comment = "";
@@ -218,8 +184,6 @@ public class Claim implements Listener {
 		notifyListeners();
 	}
 	
-	
-
 	public ArrayList<Tag> getTags() {
 		ArrayList<Tag> newTags = new ArrayList<Tag>();
 		for (String tagID : tags) {
@@ -233,32 +197,23 @@ public class Claim implements Listener {
 		return newTags;
 	}
 	
-	
-	
 	// Required for approver claim list
 	public String getUserName() {
 		return userName;
 	}
-	
-	
 	
 	public void setUserName(String userName) {
 		this.userName = userName;
 		notifyListeners();
 	}
 	
-	
-	
-	
 	public String getClaimId() {
 		return claimdID;
 	}
 	
-	
-	
 	/**
-	 *  Compiles the total currencies of all associated expenses into a TreeMap
-	 *  The treemap consists of a string representing the currency code and the amount
+	 *  Compiles the total currencies of all associated expenses into a TreeMap.
+	 *  The TreeMap consists of a string representing the currency code and the amount
 	 */
 	public void setTotalCurrencies() {
 		// Clear the current currencyTotals
@@ -298,41 +253,32 @@ public class Claim implements Listener {
 		}
 	}
 
-
 	@Override
 	public void update() {
 		notifyListeners();
-		
 	}
 
-
+	/** Removes an existing tag from tags array */
 	public void removeTag(String tagID) {
 		if (tags.contains(tagID)) {
 			tags.remove(tagID);
 		}
-		notifyListeners();
 		
+		notifyListeners();
 	}
 
-
+	/** Adds tag to tags array */
 	public void addTag(String tagID) {
 		tags.add(tagID);
 		notifyListeners();
-		
 	}
-
 
 	public String getApproverName() {
 		return approverName;
 	}
 
-
 	public void setApproverName(String approverName) {
 		this.approverName = approverName;
 	}
-
-	
-
-	
 	
 }
