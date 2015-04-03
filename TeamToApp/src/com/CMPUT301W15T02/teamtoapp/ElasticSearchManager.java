@@ -233,6 +233,7 @@ public class ElasticSearchManager {
 		// Filter out claims where claimant name == approver name
 		for (int i=0; i < submittedClaimsResult.size(); i++) {
 			if (submittedClaimsResult.get(i).getUserName().equals(User.getInstance().getName())) {
+				Log.i("UNWANTED USER",submittedClaimsResult.get(i).getUserName());
 				submittedClaimsResult.remove(i);
 			}
 		}

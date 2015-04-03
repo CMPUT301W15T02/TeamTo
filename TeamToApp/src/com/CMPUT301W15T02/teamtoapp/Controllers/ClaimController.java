@@ -236,7 +236,7 @@ public class ClaimController {
 		
 		if (currentClaim.getStatus() == Status.IN_PROGRESS) {
 			if (numExpensesIncomplete > 0) {
-				return "Expenses are incomplete.";
+				return String.valueOf(numExpensesIncomplete)+" expense(s) incomplete.";
 			} else {
 				submitClaim();
 				return "Claim successfully submitted";
