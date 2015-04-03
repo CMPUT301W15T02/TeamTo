@@ -103,6 +103,9 @@ public class Claim implements Listener {
 
 	public void setStartDate(GregorianCalendar startDate) {
 		this.startDate = startDate;
+		if (startDate.after(endDate)) {
+			endDate = startDate;
+		}
 		notifyListeners();
 	}
 	
@@ -116,6 +119,9 @@ public class Claim implements Listener {
 
 	public void setEndDate(GregorianCalendar endDate) {
 		this.endDate = endDate;
+		if (endDate.before(startDate)) {
+			startDate = endDate;
+		}
 		notifyListeners();
 	}
 	

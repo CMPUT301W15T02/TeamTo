@@ -361,6 +361,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 		tagsAdapter = new ArrayAdapter<Tag>(this, android.R.layout.simple_list_item_1, claimController.getTags());
 		tagListView.setAdapter(tagsAdapter);
 		tagsAdapter.notifyDataSetChanged();
+		setListeners();
 		
 	}
 	
