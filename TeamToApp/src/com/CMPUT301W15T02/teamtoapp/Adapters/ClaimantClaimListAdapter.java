@@ -102,10 +102,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
         return position;
     }
     
-    /*public Filter getFilter() {
-    	return myFilter;
-    }
-    */
     
     
 	/**
