@@ -125,7 +125,7 @@ public class UseCase4Test extends TestCase {
 		ClaimController claimController = new ClaimController(claim.getClaimId());
 		assertFalse("Claim intially incomplete", claimController.checkClaimInfoComplete());
 		claimController.setClaimName("Some name");
-		claimController.addDestination("some destination", "some reason");
+//		claimController.addDestination("some destination", "some reason");
 		assertTrue("Claim complete after description and destination entered", claimController.checkClaimInfoComplete());
 		ClaimList.tearDownForTesting();
 	}

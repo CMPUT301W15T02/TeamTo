@@ -14,7 +14,6 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Currency;
 import java.util.GregorianCalendar;
@@ -24,8 +23,6 @@ import android.test.AndroidTestCase;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-import com.CMPUT301W15T02.teamtoapp.Model.Destination;
-
 
 /**
  * Tests the functionality of Claim.java
@@ -61,7 +58,8 @@ public class ClaimTest extends AndroidTestCase {
 		claim.setEndDate(futureDate2);
 		assertTrue("End date not updated", claim.getEndDate().equals(futureDate2));
 	}
-	
+
+/*	
 	public void testGetDestinations() {
 		// Test with empty list
 		ArrayList<Destination> destinationsList = new ArrayList<Destination>();
@@ -90,7 +88,8 @@ public class ClaimTest extends AndroidTestCase {
 		claim.removeDestination(dest1);
 		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(dest1));
 	}
-	
+*/
+
 	public void testTotalExpenses() {
 		Claim claim = new Claim();
 		

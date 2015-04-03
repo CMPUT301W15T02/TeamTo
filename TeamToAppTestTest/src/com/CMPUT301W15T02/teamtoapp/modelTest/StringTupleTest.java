@@ -23,7 +23,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
  */
 
 public class StringTupleTest extends TestCase {
-	
+/*
 	public void testCreateTuple() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
@@ -56,7 +56,7 @@ public class StringTupleTest extends TestCase {
 		assertEquals("Reason not set", newReason, tuple.getReason());
 
 	}
-	
+*/
 }
 
 

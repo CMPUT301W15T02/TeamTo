@@ -19,6 +19,10 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 
 import android.test.AndroidTestCase;
 
+/**
+ * Tests the functionality of Cache.java
+ */
+
 public class CacheTest extends AndroidTestCase {
 	
 	public void testAddUpdateToCache() {
@@ -29,7 +33,6 @@ public class CacheTest extends AndroidTestCase {
 		Cache.tearDownForTesting();
 	}
 	
-	
 	public void testAddRemovalToCache() {
 		Cache.initializeContext(mContext);
 		Claim claim = new Claim();
@@ -37,7 +40,6 @@ public class CacheTest extends AndroidTestCase {
 		assertEquals("Added correctly", 1, Cache.getInstance().getRemovals().size());
 		Cache.tearDownForTesting();
 	}
-	
 	
 	public void testDeleteFromUpdate() {
 		Cache.initializeContext(mContext);
@@ -57,7 +59,6 @@ public class CacheTest extends AndroidTestCase {
 		assertEquals("Saving updates working?", 1, Cache.getInstance().getUpdates().size());
 		Cache.tearDownForTesting();
 	}
-	
 	
 	public void testRemovalSaving() {
 		Cache.initializeContext(mContext);
