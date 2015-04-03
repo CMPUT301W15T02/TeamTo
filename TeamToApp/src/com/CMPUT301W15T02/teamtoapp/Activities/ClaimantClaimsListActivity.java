@@ -135,14 +135,16 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 							// When delete is clicked remove the current claim
 							Claim claim = adapter.getItem(position);
 							claimListController.removeClaim(claim);
-							if (mSelectedItems.size() > 0) {
+							
+							// This code would crash app when deleting a claim.
+							/*if (mSelectedItems.size() > 0) {
 								setUpFilteredAdapter();
-							}
+							}*/
 						}
 					}).create().show();
 				} else {
 					// If the expense is not editable then alert the user
-					Toast.makeText(context, "Cannot currently edit/delete claims", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "Cannot edit/delete this claim", Toast.LENGTH_SHORT).show();
 				}
 				return true;
 			}
