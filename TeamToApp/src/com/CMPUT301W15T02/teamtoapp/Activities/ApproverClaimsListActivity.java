@@ -101,7 +101,9 @@ public class ApproverClaimsListActivity extends Activity {
 			
 			@Override
 			public void run() {
-				ApproverClaims.getInstance().setClaims(ElasticSearchManager.getSubmittedClaims());
+				if (MainManager.isConnectedToServer()) {
+					ApproverClaims.getInstance().setClaims(ElasticSearchManager.getSubmittedClaims());
+				}
 				handler.sendEmptyMessage(0);
 				
 				
