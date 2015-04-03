@@ -47,9 +47,12 @@ public class ClaimTest extends AndroidTestCase {
 	
 	public void testClaimDates() {
 		Claim claim = new Claim();
-		GregorianCalendar currentDate = new GregorianCalendar();
-		assertTrue("Claim not instantiated with default start date", claim.getStartDate().equals(currentDate));
-		assertTrue("Claim not instantiated with default end date", claim.getEndDate().equals(currentDate));
+		GregorianCalendar startDate = new GregorianCalendar(2015, 1, 22);
+		claim.setStartDate(startDate);
+		GregorianCalendar endDate = new GregorianCalendar(2015, 1, 23);
+		claim.setEndDate(endDate);
+		assertTrue("Start date is not saved", claim.getStartDate() == startDate);
+		assertTrue("End date is not saved", claim.getEndDate() == endDate);
 		
 		GregorianCalendar futureDate1 = new GregorianCalendar(2015, 3, 22);
 		GregorianCalendar futureDate2 = new GregorianCalendar(2015, 3, 24);
