@@ -30,10 +30,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
- *  Handles updating and removal of claims
- *  when an internet connection is established
- * 
- *
+ *  Handles updating and removal of claims when an internet connection is established
  */
 
 public class Cache {
@@ -47,7 +44,6 @@ public class Cache {
  	private ArrayList<Claim> claimsToUpdate;
  	private ArrayList<Claim> claimsToRemove; 
 
- 	
  	
  	private Cache() {
 		claimsToUpdate = new ArrayList<Claim>();
@@ -65,6 +61,7 @@ public class Cache {
 		return instance;
 	}
  	
+ 	/** Adds claim to claimsToUpdate array only if claim is NOT already in claimsToUpdate array */
  	public void addUpdate(Claim claim) {
  		if (!claimsToUpdate.contains(claim)) {
  			claimsToUpdate.add(claim);
@@ -72,22 +69,29 @@ public class Cache {
  		}
  	}
  	
+ 	/** 
+ 	 * Adds claim to claimsToRemove array only if claim is NOT already in claimsToRemove array & then
+ 	 * removes it from claimsToUpdate array.
+ 	 */
  	public void addRemoval(Claim claim) {
  		if (!claimsToRemove.contains(claim)) {
  			claimsToRemove.add(claim);
  			saveRemovals();
  		}
+ 		
  		if (claimsToUpdate.contains(claim)) {
  			claimsToUpdate.remove(claim);
  			saveUpdates();
  		}
  	}
  	
+ 	/** Clears both arrays */
  	public void clearCache() {
  		claimsToUpdate = new ArrayList<Claim>();
  		claimsToRemove = new ArrayList<Claim>();
  	}
  	
+ 	/** Saves claims to update */
  	public void saveUpdates() {
  		Gson gson = new Gson();
  		try {
@@ -103,6 +107,7 @@ public class Cache {
  		}
  	}
 
+ 	/** Saves claims to remove */
 	public void saveRemovals() {
 		Gson gson = new Gson();
 		try {
@@ -118,6 +123,7 @@ public class Cache {
 		}
 	}
 	
+	/** Loads updates from save; Initializes empty claimsToUpdate array if there are none. */
 	public void loadUpdates() {
 		Gson gson = new Gson();
 		ArrayList<Claim> claims = new ArrayList<Claim>();
@@ -127,12 +133,12 @@ public class Cache {
 			InputStreamReader isr = new InputStreamReader(fis);
 			 claims = gson.fromJson(isr, dataType);
 			fis.close();
-			
 		} catch (FileNotFoundException e) {
 			claims = null;
 		} catch (IOException e) {
 			claims = null;
 		}
+		
 		if (claims == null) {
 			claims = new ArrayList<Claim>();
 		}
@@ -140,21 +146,23 @@ public class Cache {
 		claimsToUpdate = claims;
 	}
 	
+	/** Loads removals from save; Initializes empty claimsToRemove array if there are none. */
 	public void loadRemovals() {
 		Gson gson = new Gson();
 		ArrayList<Claim> claims = new ArrayList<Claim>();
+		
 		try {
 			FileInputStream fis = context.openFileInput(REMOVE_FILE_NAME);
 			Type dataType = new TypeToken<ArrayList<Claim>>() {}.getType();
 			InputStreamReader isr = new InputStreamReader(fis);
-			 claims = gson.fromJson(isr, dataType);
+			claims = gson.fromJson(isr, dataType);
 			fis.close();
-			
 		} catch (FileNotFoundException e) {
 			claims = null;
 		} catch (IOException e) {
 			claims = null;
 		}
+		
 		if (claims == null) {
 			claims = new ArrayList<Claim>();
 		}
@@ -169,11 +177,9 @@ public class Cache {
 	public ArrayList<Claim> getRemovals() {
 		return claimsToRemove;
 	}
-	
 
 	public static void tearDownForTesting() {
 		instance = null;
 	}
- 	
-	
+ 		
 }
