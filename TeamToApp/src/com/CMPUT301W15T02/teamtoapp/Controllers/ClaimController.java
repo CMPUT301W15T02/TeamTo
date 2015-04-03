@@ -165,9 +165,7 @@ public class ClaimController {
 	}
 	
 	public void removeDestination(Destination destination) {
-		if (currentClaim.getDestinations().contains(destination)) {
-			currentClaim.getDestinations().remove(destination);
-		}
+		currentClaim.removeDestination(destination);
 	}
 	
 	
