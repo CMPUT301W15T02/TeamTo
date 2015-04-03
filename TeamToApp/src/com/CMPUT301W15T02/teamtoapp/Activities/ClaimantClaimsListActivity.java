@@ -41,6 +41,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
+
 /**
  * The activity that the claimant will come to if they have already logged in.
  * Contains a list of their claims and has the ability to add new claims, manage tags,
@@ -76,6 +77,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	private void getModelObjects() {
 		// Initialize objects
 		// Set the current user so it can be added to claims
+		mSelectedItems = new ArrayList<String>();
 		claimListController = new ClaimListController();
 		claimListController.addListenerToClaimList(this);
 		userController = new UserController();
@@ -136,10 +138,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 							Claim claim = adapter.getItem(position);
 							claimListController.removeClaim(claim);
 							
-							// This code would crash app when deleting a claim.
-							/*if (mSelectedItems.size() > 0) {
+							if (mSelectedItems.size() > 0) {
 								setUpFilteredAdapter();
-							}*/
+							}
 						}
 					}).create().show();
 				} else {
@@ -160,7 +161,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		// 2015-03-24
 		AlertDialog.Builder builder = new AlertDialog.Builder(ClaimantClaimsListActivity.this);
 		// Get the list of available tags
-		mSelectedItems = new ArrayList<String>();
+		mSelectedItems.clear();
 		ArrayList<Tag> tags = User.getInstance().getTags();
 		final CharSequence[] strings = new CharSequence[tags.size()];
 		final boolean[] boolArray = new boolean[tags.size()];
