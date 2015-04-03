@@ -33,6 +33,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.CMPUT301W15T02.teamtoapp.LocalDataManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
@@ -71,8 +72,13 @@ public class LoginActivity extends Activity {
 				
 				@Override
 				public void run() {
-					MainManager.loadUser(usernameString);
-					MainManager.loadClaims(usernameString);
+					if (MainManager.isConnectedToServer()) {
+						MainManager.loadUser(usernameString);
+						MainManager.loadClaims(usernameString);
+					} else {
+						LocalDataManager.loadClaims();
+						LocalDataManager.loadUser();
+					}
 					handler.sendEmptyMessage(0);
 					
 				}
@@ -129,8 +135,13 @@ public class LoginActivity extends Activity {
 				
 				@Override
 				public void run() {
-					MainManager.loadUser(usernameString);
-					MainManager.loadClaims(usernameString);
+					if (MainManager.isConnectedToServer()) {
+						MainManager.loadUser(usernameString);
+						MainManager.loadClaims(usernameString);
+					} else {
+						LocalDataManager.loadClaims();
+						LocalDataManager.loadUser();
+					}
 					handler.sendEmptyMessage(0);
 					
 				}

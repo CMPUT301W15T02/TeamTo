@@ -15,6 +15,8 @@
 
 package com.CMPUT301W15T02.teamtoapp;
 
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -57,6 +59,19 @@ public class MainManager {
 		return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
 	}
 	
+	public static boolean isConnectedToServer() {
+		int timeout = 500;
+	    try{
+	        URL myUrl = new URL("http://cmput301.softwareprocess.es:8080/cmput301w15t02");
+	        URLConnection connection = myUrl.openConnection();
+	        connection.setConnectTimeout(timeout);
+	        connection.connect();
+	        return true;
+	    } catch (Exception e) {
+	        return false;
+	    }
+	}
+	
 	
 	public static void addClaim(final Claim claim) {
 		Log.i("CLAIMIDBAN", claim.getClaimId());
@@ -65,7 +80,11 @@ public class MainManager {
 				
 				@Override
 				public void run() {
-					ElasticSearchManager.addClaim(claim);
+					if (isConnectedToServer()) {
+						ElasticSearchManager.addClaim(claim);
+					} else {
+						Cache.getInstance().addUpdate(claim);
+					}
 				}
 			}).start();
 		} else {
@@ -80,7 +99,11 @@ public class MainManager {
 				
 				@Override
 				public void run() {
-					ElasticSearchManager.deleteClaim(claim.getClaimId());
+					if (isConnectedToServer()) {
+						ElasticSearchManager.deleteClaim(claim.getClaimId());
+					} else {
+						Cache.getInstance().addRemoval(claim);
+					}
 				}
 			}).start();
 		} else {
@@ -95,7 +118,12 @@ public class MainManager {
 				
 				@Override
 				public void run() {
-					ElasticSearchManager.updateClaim(claim);
+					if (isConnectedToServer()) {
+						ElasticSearchManager.updateClaim(claim);
+					} else {
+						Cache.getInstance().addUpdate(claim);
+					}
+					
 					
 				}
 			}).start();
@@ -137,7 +165,9 @@ public class MainManager {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					ElasticSearchManager.saveUser();
+					if (isConnectedToServer()) {
+						ElasticSearchManager.saveUser();
+					}
 				}
 			}).start();
 		}
@@ -150,7 +180,9 @@ public class MainManager {
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
-					ElasticSearchManager.updateClaim(claim);
+					if (isConnectedToServer()) {
+						ElasticSearchManager.updateClaim(claim);
+					}
 				}
 			}).start();
 		}
