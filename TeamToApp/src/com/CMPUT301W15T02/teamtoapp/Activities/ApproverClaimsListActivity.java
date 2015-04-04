@@ -70,10 +70,7 @@ public class ApproverClaimsListActivity extends Activity {
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
-		getModelObjects();
-		setListeners();
-		
-		handler = new Handler(Looper.getMainLooper()) {
+        handler = new Handler(Looper.getMainLooper()) {
 	        @Override
 	        public void handleMessage(Message msg) {
 	        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, ApproverClaims.getInstance().getClaims());
@@ -83,6 +80,9 @@ public class ApproverClaimsListActivity extends Activity {
 	        	dialog.dismiss();
 	        }
 		};
+		getModelObjects();
+		setListeners();
+		
 		
 	}
 
@@ -97,18 +97,7 @@ public class ApproverClaimsListActivity extends Activity {
 	 * Get references to the controller and model objects
 	 */
 	private void getModelObjects() {
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				if (MainManager.isConnectedToServer()) {
-					ApproverClaims.getInstance().setClaims(ElasticSearchManager.getSubmittedClaims());
-				}
-				handler.sendEmptyMessage(0);
-				
-				
-			}
-		}).start();
+		MainManager.getSubmittedClaims(handler);
 	}
 	
 	/**

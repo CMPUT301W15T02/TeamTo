@@ -98,10 +98,6 @@ public class ClaimListController {
 		return null;
 	}
 
-	public ArrayList<Claim> getSubmittedClaimsFromMainManager() {
-		return MainManager.getSubmittedClaims();
-		
-	}
 	
 	public void claimEditBackPressed(Claim claim) {
 		if (claim.getClaimName().equals("") && claim.getDestinations().size() == 0) {

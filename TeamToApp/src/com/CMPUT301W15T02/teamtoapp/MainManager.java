@@ -117,13 +117,17 @@ public class MainManager {
 		}).start();
 	}
 	
-	public static ArrayList<Claim> getSubmittedClaims() {
+	public static void getSubmittedClaims(final Handler handler) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.getSubmittedClaims();
+					handler.sendEmptyMessage(0);
+				}
+			}
+		}).start();
 		
-		ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
-		if (isNetworkAvailable(applicationContext)) {
-			submittedClaims = ElasticSearchManager.getSubmittedClaims();
-		} 
-		return submittedClaims;
 	}
 	
 	
