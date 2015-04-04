@@ -37,12 +37,12 @@ public class UseCase8Test extends TestCase {
 			
 		// UC 8.0 return claim
 		claimController.submitClaim();
-//		claimController.returnClaim("Blsa", "John");
+		claim.setStatus(Status.RETURNED);
 		assertEquals("Claim returned?", Status.RETURNED, claimController.getCurrentClaim().getStatus());
 		
 		// UC 8.1 approve claim
 		claimController.submitClaim();
-//		claimController.approvedClaim("hdfkjdsh", "Joe");
+		claim.setStatus(Status.APPROVED);
 		assertEquals("Claim approved?", Status.APPROVED, claimController.getCurrentClaim().getStatus());
 		ClaimList.tearDownForTesting();
 	}

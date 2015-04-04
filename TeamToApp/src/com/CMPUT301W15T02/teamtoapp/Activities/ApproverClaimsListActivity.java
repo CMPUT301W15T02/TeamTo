@@ -147,6 +147,7 @@ public class ApproverClaimsListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
 						if (comment.length() != 0) {
+							//TODO: We should use claim controller to change status, just like how we did for Submitted.
 							Claim claim = ApproverClaims.getInstance().getClaims().get(position);
 							claim.setApproverName(User.getInstance().getName());
 							claim.setComment(comment);
