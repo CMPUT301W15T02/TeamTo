@@ -32,6 +32,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
  * 
  * A customized adapter for the claimant's destination list view
  * for the Create/Edit Claim interface (ClaimEditActivity.java)
+ * 
+ *  @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
 
@@ -41,6 +43,13 @@ public class ClaimantDestinationsListAdapter extends ArrayAdapter<Destination> {
 	private int layoutID;
 	private ArrayList<Destination> destinationsList;
 	
+	/**
+	 * ClaimantDestinationListAdapter constructor
+	 * 
+	 * @param context - context of application
+	 * @param textViewResourceId - ID of textview resource
+	 * @param items - list of destination from the claim
+	 */
 	public ClaimantDestinationsListAdapter(Context context, int textViewResourceId, ArrayList<Destination> items) {
 		
 		super(context, textViewResourceId, items);
@@ -50,6 +59,11 @@ public class ClaimantDestinationsListAdapter extends ArrayAdapter<Destination> {
 		
 	}
 	
+	/**
+	 * ViewHolder class that contains TextViews
+	 * for the custom destination list view
+	 *
+	 */
 	private class ViewHolder {
 		
 		TextView destinationTextView;
@@ -57,7 +71,12 @@ public class ClaimantDestinationsListAdapter extends ArrayAdapter<Destination> {
 		
 	}
 	/**
-	 * A method that updates the list view within the claim creation of the claimant once a claim is either edited or first created
+	 * A method that updates the list view within the claim creation of the 
+	 * claimant once a claim is either edited or first created
+	 * 
+	 * @param position - row of list view (destination, reason)
+	 * @param convertView - row to be converted
+	 * @param parent - parent of View
 	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -69,16 +88,23 @@ public class ClaimantDestinationsListAdapter extends ArrayAdapter<Destination> {
 			row = inflater.inflate(layoutID, parent, false);
 			holder = new ViewHolder();
 			
+			// Initialize textview holders to textview id's from claimant_destination_rows.xml
 			holder.destinationTextView = (TextView) row.findViewById(R.id.claimantDestsView);
 			holder.reasonTextView = (TextView) row.findViewById(R.id.claimantReasonView);
 			
+			// Set tag for holder
 			row.setTag(holder);
+			
 		} else {
 			holder = (ViewHolder) row.getTag();
 		}
 		
 		Destination destination_reason = destinationsList.get(position);
+		
+		// Set text for destination
 		holder.destinationTextView.setText(destination_reason.destination);
+		
+		// Set text for reason
 		holder.reasonTextView.setText(destination_reason.reason);
 		
 		

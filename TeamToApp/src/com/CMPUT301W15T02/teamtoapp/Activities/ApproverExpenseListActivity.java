@@ -113,6 +113,10 @@ public class ApproverExpenseListActivity extends Activity {
 		
 	}
 	
+	/**
+	 * Set up the approver expense list adapter using
+	 * custom adapter.
+	 */
 	private void setUpAdapter() {
 		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);
     	adapter.notifyDataSetChanged();    		
