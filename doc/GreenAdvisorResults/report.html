@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head><title>Report</title><style>body {background-color:white}h1   {color:black}p    {color:green}div.top {min-height: 40px;padding-left: 20px;padding-right: 20px;background-color: #fafafa;background-image: -moz-linear-gradient(top, #00CC00, #66FF33);background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#00CC00), to(#66FF33));background-image: -webkit-linear-gradient(top, #00CC00, #66FF33);background-image: -o-linear-gradient(top, #00CC00, #66FF33);background-image: linear-gradient(to bottom, #00CC00, #66FF33);background-repeat: repeat-x;border: 1px solid #d4d4d4;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);text-align:center}table {width:80%;  margin-left:10%;     margin-right:10%; }table, th, td {border: 1px solid black;border-collapse: collapse;}th, td {padding: 5px;text-align: left; font-family: 'Inconsolata', sans-serif;}table#t tr:nth-child(even) {background-color:white;}table#t tr:nth-child(odd) {background-color:#f9f9f9;}table#t th {background-color: #f9f9f9;color: #3399FF;}div.dot {border:2px solid grey;margin: 10px auto;border-radius: 5px;width: 1100px;padding:8px;-moz-box-shadow: 0 0 5px 5px #888;-webkit-box-shadow: 0 0 5px 5px#888;box-shadow: 0 0 5px 5px #888;}.dot{font-size:12pt;font-family:sans-serif;color:#660066;}.dot {background:#CCFF99;/*background-image: -moz-linear-gradient(to right, #FFFFCC, #CCFF99); /* FF3.6 */background-image: -webkit-gradient(linear,left,right,color-stop(0, #FFFFCC),color-stop(1, #CCFF99));}#list { background-color: aqua; }.horizontal { display: inline; border-left: 2px solid; border-color: #ff0000; padding-left: 0.3em; }.first { border-left: none; padding-left: 0; }hr.big {height: 12px;border: 0;box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);}hr.small {border: 0;height: 1px;background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image:    -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image:     -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); background-image:      -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); }pre {font-family:  "Droid Sans Mono",Constantia,"Segoe UI","DejaVu Sans Mono";}h2 {text-align: center;}div.energy{background-color: #fafafa;border:2px solid grey;margin: 10px auto;border-radius: 5px;width: 1100px;padding:8px;-moz-box-shadow: 0 0 5px 5px #888;-webkit-box-shadow: 0 0 5px 5px#888;box-shadow: 0 0 5px 5px #888;background-image: -moz-linear-gradient(top, #99CCFF, #9999FF);background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#99CCFF), to(#9999FF));background-image: -webkit-linear-gradient(top, #99CCFF, #9999FF);background-image: -o-linear-gradient(top, #99CCFF, #9999FF);background-image: linear-gradient(to bottom, #99CCFF, #9999FF);background-repeat: repeat-x;filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff99CCFF', endColorstr='#ff9999FF', GradientType=0);border: 1px solid #d4d4d4;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);text-align:center}h2 {    color: white;    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;     text-shadow: 0 0 15px rgba(255, 255, 255, 1);}h3 {    color: black;    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;}</style></head></head><body><div class="top"><h2>Green Advisor<h2></div><br><br><center><h3>System Call Change Data and recommendation</h3></center><table id="t">
+<tr>
+<th>System Call</th>
+<th>Significance rating</th>
+<th>%Change(in no of Calls)</th>
+<th>Description</th>
+</tr>
+<tr>
+<td><a href="#bind">bind</a></td>
+<td>**</td>
+<td>-32.38</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#cacheflush">cacheflush</a></td>
+<td>**</td>
+<td>Absent in prior version</td>
+<td>Performing more calculations or using more memory than the previous version</td>
+</tr>
+<tr>
+<td><a href="#chmod">chmod</a></td>
+<td>**</td>
+<td>118.18</td>
+<td>Probably accessing more files than the previous version</td>
+</tr>
+<tr>
+<td><a href="#clone">clone</a></td>
+<td>**</td>
+<td>7.69</td>
+<td>Using more threads than the previous version</td>
+</tr>
+<tr>
+<td><a href="#close">close</a></td>
+<td>***</td>
+<td>8.63</td>
+<td>Doing more number of file operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#connect">connect</a></td>
+<td>**</td>
+<td>-38.89</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#fcntl64">fcntl64</a></td>
+<td>***</td>
+<td>-21.03</td>
+<td>Doing less number of file operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#fork">fork</a></td>
+<td>***</td>
+<td>Absent in prior version</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#fstat64">fstat64</a></td>
+<td>**</td>
+<td>17.95</td>
+<td>Doing more number of file operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#getpid">getpid</a></td>
+<td>***</td>
+<td>-12.22</td>
+<td>Using less number of threads than the previous version</td>
+</tr>
+<tr>
+<td><a href="#getpriority">getpriority</a></td>
+<td>***</td>
+<td>-93.33</td>
+<td>Pprobably doing less CPU intensive operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#getsockname">getsockname</a></td>
+<td>**</td>
+<td>-56.94</td>
+<td>Doing lesser network related operations using Database/Web than the previous version</td>
+</tr>
+<tr>
+<td><a href="#getsockopt">getsockopt</a></td>
+<td>**</td>
+<td>-26.12</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#gettimeofday">gettimeofday</a></td>
+<td>***</td>
+<td>-31.10</td>
+<td>Using less calculations or accessing systime less than the previous version</td>
+</tr>
+<tr>
+<td><a href="#ioctl">ioctl</a></td>
+<td>***</td>
+<td>-16.33</td>
+<td>Probably using less file operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#madvise">madvise</a></td>
+<td>**</td>
+<td>13.00</td>
+<td>Probably using more file/memory operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#mprotect">mprotect</a></td>
+<td>***</td>
+<td>-94.06</td>
+<td>Using fewer memory operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#munmap">munmap</a></td>
+<td>**</td>
+<td>2.39</td>
+<td>Using more memory operations than the previous version</td>
+</tr>
+<tr>
+<td><a href="#nanosleep">nanosleep</a></td>
+<td>***</td>
+<td>-40.59</td>
+<td>Using fewer sleep operations/synchronization than the previous version</td>
+</tr>
+<tr>
+<td><a href="#poll">poll</a></td>
+<td>***</td>
+<td>-22.64</td>
+<td>Performing lesser I/O communication than the previous version</td>
+</tr>
+<tr>
+<td><a href="#prctl">prctl</a></td>
+<td>*</td>
+<td>6.06</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#recvfrom">recvfrom</a></td>
+<td>***</td>
+<td>-80.65</td>
+<td>Doing fewer network related operations using 		Web than the previous version</td>
+</tr>
+<tr>
+<td><a href="#restart_syscall">restart_syscall</a></td>
+<td>***</td>
+<td>Absent in prior version</td>
+<td>Using more threads than the previous version</td>
+</tr>
+<tr>
+<td><a href="#sched_yield">sched_yield</a></td>
+<td>**</td>
+<td>-82.35</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#sendto">sendto</a></td>
+<td>**</td>
+<td>-78.89</td>
+<td>Doing fewer network related operations using 		Database/Web than the previous version</td>
+</tr>
+<tr>
+<td><a href="#set_thread_area">set_thread_area</a></td>
+<td>***</td>
+<td>Absent in prior version</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#set_tls">set_tls</a></td>
+<td>***</td>
+<td>Absent in prior version</td>
+<td>No information available than the previous version</td>
+</tr>
+<tr>
+<td><a href="#setpriority">setpriority</a></td>
+<td>***</td>
+<td>-92.86</td>
+<td>No information about the call</td>
+</tr>
+<tr>
+<td><a href="#setsockopt">setsockopt</a></td>
+<td>**</td>
+<td>-79.57</td>
+<td>Doing fewer network related operations using 		Database/Web than the previous version</td>
+</tr>
+<tr>
+<td><a href="#sigprocmask">sigprocmask</a></td>
+<td>***</td>
+<td>-99.06</td>
+<td>Possibly using fewer threads than the previous version</td>
+</tr>
+<tr>
+<td><a href="#socket">socket</a></td>
+<td>**</td>
+<td>-38.58</td>
+<td>Doing fewer network related operations using 		Database/Web than the previous version</td>
+</tr>
+<tr>
+<td><a href="#write">write</a></td>
+<td>**</td>
+<td>77.50</td>
+<td>Writing more often than the previous version</td>
+</tr>
+<tr>
+<td><a href="#writev">writev</a></td>
+<td>***</td>
+<td>-9.28</td>
+<td>Writing less often than the previous version</td>
+</tr>
+</table><div style="background-color:white; color:black; margin:20px; padding:20px;font-family:sans-serif"> <h4>Significance of * rating:</h4>*&nbsp;&nbsp;&nbsp;&nbsp;Significantly Different (0.05 &le; p-value < 0.10)<br>**&nbsp;&nbsp;&nbsp;Moderately Significantly Different (0.01 < p-value &le; 0.05)<br>***&nbsp;Highly Significantly Different (p-value &le; 0.01)<br><br>&nbsp;&nbsp;%<div style="float:left;"><sup>+</sup>&nbsp;&nbsp;&nbsp; Calculated as:&nbsp;&nbsp;</div><div style="float:left"><div style="border-bottom:1px solid;font-size:small;text-align:center;">(Number of invocations in Current Commit - Number of invocations in Previous Commit)&nbsp;&nbsp;</div><div style="font-size:small;text-align:center;">Invocations in Previous commit</div></div></div><br><br><div class="energy"><h3>Energy consumption Prediction:</h3><h3>Your application's energy consumption seems to <font color="white"><b>have changed significantly</b></font> since the last recorded commit<br></h3></div><br><br> <div class="dot"><pre><center><h3>Code Change Associated with System calls between Commits</h3>209c3ad0fd8bcdbb468756b82378fea8051609c9<font color="black"><b> and </b></font>ad79dee89d8c7aa126ca9f56f62e6fae64b65f2a :</center><br><br>Change inducing lines are highlighted<br><hr class="big"><br><b><a name="getsockname"><h3>getsockname:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="cacheflush"><h3>cacheflush:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="connect"><h3>connect:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="sendto"><h3>sendto:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="close"><h3>close:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="setsockopt"><h3>setsockopt:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="poll"><h3>poll:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="ioctl"><h3>ioctl:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="write"><h3>write:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="writev"><h3>writev:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="socket"><h3>socket:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="clone"><h3>clone:</h3></a></b><br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/Activities/ApproverClaimsListActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index a89bd10..b3c80cc 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/ApproverClaimsListActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/ApproverClaimsListActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -70,10 +70,7 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>22&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;@@&nbsp;-97,18&nbsp;+97,7&nbsp;@@<br>23&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	&nbsp;*&nbsp;Get&nbsp;references&nbsp;to&nbsp;the&nbsp;controller&nbsp;and&nbsp;model&nbsp;objects<br>24&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	&nbsp;*/<br>25&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	private&nbsp;void&nbsp;getModelObjects()&nbsp;{<br>26&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;-		new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>27&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			<br>28&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			@Override<br>29&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			public&nbsp;void&nbsp;run()&nbsp;{<br>30&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				if&nbsp;(MainManager.isConnectedToServer())&nbsp;{<br>31&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-					ApproverClaims.getInstance().setClaims(ElasticSearchManager.getSubmittedClaims());<br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/Activities/LoginActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index 443a94e..b84dedf 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/LoginActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/LoginActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -59,43 +59,10 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>9&nbsp;&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog.setIndeterminate(true);<br>10&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog.setCanceledOnTouchOutside(false);<br>11&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog.show();<br>12&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>13&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;-			new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>14&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				<br>15&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				@Override<br>16&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				public&nbsp;void&nbsp;run()&nbsp;{<br>17&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-					if&nbsp;(MainManager.isConnectedToServer())&nbsp;{<br>18&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-						MainManager.loadUser(usernameString);<br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>61&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;@@&nbsp;-131,21&nbsp;+108,7&nbsp;@@<br>62&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			editor.putString("username",&nbsp;usernameString);<br>63&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			editor.commit();<br>64&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			<br>65&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;-			new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>66&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				<br>67&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				@Override<br>68&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				public&nbsp;void&nbsp;run()&nbsp;{<br>69&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-					if&nbsp;(MainManager.isConnectedToServer())&nbsp;{<br>70&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-						MainManager.loadUser(usernameString);<br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/MainManager.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index 115495f..6d40040 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/MainManager.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/MainManager.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -21,7 +21,7 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>11&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	}<br>12&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	<br>13&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	public&nbsp;static&nbsp;ArrayList<Claim>&nbsp;getSubmittedClaims()&nbsp;{<br>14&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+	public&nbsp;static&nbsp;void&nbsp;getSubmittedClaims(final&nbsp;Handler&nbsp;handler)&nbsp;{<br>15&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;+		new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>16&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			@Override<br>17&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			public&nbsp;void&nbsp;run()&nbsp;{<br>18&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+				if&nbsp;(isNetworkAvailable(applicationContext)&nbsp;&&&nbsp;isConnectedToServer())&nbsp;{<br>19&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					ElasticSearchManager.getSubmittedClaims();<br>20&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					handler.sendEmptyMessage(0);<br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>45&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			LocalDataManager.loadUser();<br>46&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-		}<br>47&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+	<br>48&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+	public&nbsp;static&nbsp;void&nbsp;loadUserAndClaims(final&nbsp;String&nbsp;name,&nbsp;final&nbsp;Handler&nbsp;handler)&nbsp;{<br>49&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;+		new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>50&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			@Override<br>51&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			public&nbsp;void&nbsp;run()&nbsp;{<br>52&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+				if&nbsp;(isNetworkAvailable(applicationContext)&nbsp;&&&nbsp;isConnectedToServer())&nbsp;{<br>53&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					ElasticSearchManager.loadUser(name);<br>54&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					ElasticSearchManager.loadClaims(name);<br><hr class="big"><br><b><a name="set_thread_area"><h3>set_thread_area:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="fork"><h3>fork:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="mprotect"><h3>mprotect:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="fstat64"><h3>fstat64:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="prctl"><h3>prctl:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="nanosleep"><h3>nanosleep:</h3></a></b><br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/modelTest/NetworkTest.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index f32ef3b..829e93e 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToAppTestTest/src/com/CMPUT301W15T02/teamtoapp/modelTest/NetworkTest.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToAppTestTest/src/com/CMPUT301W15T02/teamtoapp/modelTest/NetworkTest.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -79,7 +79,8 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>13&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;		}<br>14&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-		assertEquals(claim.getClaimId(),&nbsp;ElasticSearchManager.getClaim(claimID).getClaimId());<br>15&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+		assertNotNull(ElasticSearchManager.getClaim(claimID));<br>16&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;		try&nbsp;{<br>17&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;&nbsp;			Thread.sleep(100);</span><br>18&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;		}&nbsp;catch&nbsp;(InterruptedException&nbsp;e)&nbsp;{<br>19&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			e.printStackTrace();<br>20&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;		}<br>21&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;		MainManager.removeClaim(claim);<br>22&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	}<br><hr class="big"><br><b><a name="set_tls"><h3>set_tls:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="recvfrom"><h3>recvfrom:</h3></a></b><br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/Activities/ApproverClaimsListActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index a89bd10..b3c80cc 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/ApproverClaimsListActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/ApproverClaimsListActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -70,10 +70,7 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>22&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;@@&nbsp;-97,18&nbsp;+97,7&nbsp;@@<br>23&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	&nbsp;*&nbsp;Get&nbsp;references&nbsp;to&nbsp;the&nbsp;controller&nbsp;and&nbsp;model&nbsp;objects<br>24&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	&nbsp;*/<br>25&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	private&nbsp;void&nbsp;getModelObjects()&nbsp;{<br>26&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;-		new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>27&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			<br>28&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			@Override<br>29&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			public&nbsp;void&nbsp;run()&nbsp;{<br>30&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				if&nbsp;(MainManager.isConnectedToServer())&nbsp;{<br>31&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-					ApproverClaims.getInstance().setClaims(ElasticSearchManager.getSubmittedClaims());<br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/Activities/LoginActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index 443a94e..b84dedf 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/LoginActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/Activities/LoginActivity.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -59,43 +59,10 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>9&nbsp;&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog.setIndeterminate(true);<br>10&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog.setCanceledOnTouchOutside(false);<br>11&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dialog.show();<br>12&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>13&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;-			new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>14&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				<br>15&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				@Override<br>16&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				public&nbsp;void&nbsp;run()&nbsp;{<br>17&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-					if&nbsp;(MainManager.isConnectedToServer())&nbsp;{<br>18&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-						MainManager.loadUser(usernameString);<br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>61&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;@@&nbsp;-131,21&nbsp;+108,7&nbsp;@@<br>62&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			editor.putString("username",&nbsp;usernameString);<br>63&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			editor.commit();<br>64&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;			<br>65&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;-			new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>66&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				<br>67&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				@Override<br>68&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-				public&nbsp;void&nbsp;run()&nbsp;{<br>69&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-					if&nbsp;(MainManager.isConnectedToServer())&nbsp;{<br>70&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-						MainManager.loadUser(usernameString);<br><hr class="small"><br><br><b> &emsp;&emsp;&emsp;&emsp;Git Diff for File: src/com/CMPUT301W15T02/teamtoapp/MainManager.java</b><br><b>&emsp;&emsp;&emsp;&emsp;index 115495f..6d40040 100644</b><br><b>&emsp;&emsp;&emsp;&emsp;--- a/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/MainManager.java</b><br><b>&emsp;&emsp;&emsp;&emsp;+++ b/TeamToApp/src/com/CMPUT301W15T02/teamtoapp/MainManager.java</b><br><b>&emsp;&emsp;&emsp;&emsp;@@ -21,7 +21,7 @@</b><br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>11&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	}<br>12&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;&nbsp;	<br>13&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-	public&nbsp;static&nbsp;ArrayList<Claim>&nbsp;getSubmittedClaims()&nbsp;{<br>14&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+	public&nbsp;static&nbsp;void&nbsp;getSubmittedClaims(final&nbsp;Handler&nbsp;handler)&nbsp;{<br>15&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;+		new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>16&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			@Override<br>17&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			public&nbsp;void&nbsp;run()&nbsp;{<br>18&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+				if&nbsp;(isNetworkAvailable(applicationContext)&nbsp;&&&nbsp;isConnectedToServer())&nbsp;{<br>19&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					ElasticSearchManager.getSubmittedClaims();<br>20&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					handler.sendEmptyMessage(0);<br><br><br>&emsp;&emsp;&emsp;..<br>&emsp;&emsp;&emsp;..<br><br>45&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-			LocalDataManager.loadUser();<br>46&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;-		}<br>47&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+	<br>48&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+	public&nbsp;static&nbsp;void&nbsp;loadUserAndClaims(final&nbsp;String&nbsp;name,&nbsp;final&nbsp;Handler&nbsp;handler)&nbsp;{<br>49&nbsp;&nbsp;<li class="horizontal"></li><span style="background-color:#FFCC99;">&nbsp;&nbsp;+		new&nbsp;Thread(new&nbsp;Runnable()&nbsp;{</span><br>50&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			@Override<br>51&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+			public&nbsp;void&nbsp;run()&nbsp;{<br>52&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+				if&nbsp;(isNetworkAvailable(applicationContext)&nbsp;&&&nbsp;isConnectedToServer())&nbsp;{<br>53&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					ElasticSearchManager.loadUser(name);<br>54&nbsp;&nbsp;<li class="horizontal"></li>&nbsp;&nbsp;+					ElasticSearchManager.loadClaims(name);<br><hr class="big"><br><b><a name="getpid"><h3>getpid:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="madvise"><h3>madvise:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="restart_syscall"><h3>restart_syscall:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="getsockopt"><h3>getsockopt:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="getpriority"><h3>getpriority:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="setpriority"><h3>setpriority:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="gettimeofday"><h3>gettimeofday:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="sched_yield"><h3>sched_yield:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="sigprocmask"><h3>sigprocmask:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="fcntl64"><h3>fcntl64:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="chmod"><h3>chmod:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="bind"><h3>bind:</h3></a></b><br>Unable to locate the associated code<br><hr class="big"><br><b><a name="munmap"><h3>munmap:</h3></a></b><br>Unable to locate the associated code<br></pre></div></body></html>
