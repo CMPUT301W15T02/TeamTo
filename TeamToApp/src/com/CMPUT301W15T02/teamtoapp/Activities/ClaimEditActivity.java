@@ -76,7 +76,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	private ArrayList<Destination> destinations;
 	private ArrayAdapter<Destination> destinationsAdapter;
 	private ArrayAdapter<Tag> tagsAdapter;
-	
+	private String claimName;
 	private static final int GET_GEOLOCATION_REQUEST_CODE = 112;
 	
 
@@ -118,6 +118,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	
 	@Override
 	public void onBackPressed() {
+		claimController.setClaimName(claimName);
 		claimListController.claimEditBackPressed(claimController.getCurrentClaim());
 		finish();
 	}
@@ -222,8 +223,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 			
 			@Override
 			public void afterTextChanged(Editable s) {
-				claimController.setClaimName(s.toString());
-				
+				claimName = s.toString();
 			}
 		});
 		
