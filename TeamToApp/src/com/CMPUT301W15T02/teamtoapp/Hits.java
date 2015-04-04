@@ -24,8 +24,6 @@ import java.util.List;
 * @see https://github.com/joshua2ua/AndroidElasticSearch
 *
 *
-* @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
-*
 * @param <T>
 */
 

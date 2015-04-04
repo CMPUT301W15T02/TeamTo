@@ -25,7 +25,6 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
@@ -34,39 +33,60 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Controls link between local storage and elastic search server
+ * Controls link between local storage and elastic search server.
+ * LocalDataManager checks whether there is connectivity before manipulating data via server/local storage.
+ * 
+ * @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  */
 
 public class LocalDataManager {
 
 	
-	private static final int _ERASE_FILE = 0;
+	private static final int _ERASE_FILE = 0; // Erase a file if not empty
 	private static Context applicationContext;
 	private static final String CLAIMFILE = "claims.sav";
 	private static final String USERFILE = "user.sav";
 	
-	
+	/**
+	 * Constructor
+	 */
 	public LocalDataManager() {
 		
 	}
 	
+	
+	/**
+	 * Initialize context - required for manipulating data
+	 * 
+	 * @param context - Context of application
+	 */
 	public static void initializeContext(Context context) {
 		applicationContext = context.getApplicationContext();
 	}
 	
 	
-	
+	/**
+	 * Set claims for user
+	 * 
+	 * @param claims - ArrayList of claims originally created by the user
+	 */
 	public void setClaims(ArrayList<Claim> claims) {
 		ClaimList.getInstance().setClaims(claims);
 	}
 	
 	
+	/**
+	 * Load user from local data storage from the USERFILE file
+	 */
+	@SuppressWarnings("static-access")
 	public static void loadUser() {
 		Gson gson = new Gson();
 		User user;
 		try {
 			FileInputStream fis = applicationContext.openFileInput(USERFILE);
 			Type dataType = new TypeToken<User>() {}.getType();
+			
+			// Read from USERFILE and close when done
 			InputStreamReader isr = new InputStreamReader(fis);
 			user = gson.fromJson(isr, dataType);
 			fis.close();
@@ -80,12 +100,16 @@ public class LocalDataManager {
 	}
 	
 	
-	
+	/**
+	 * Save user in local data storage in the USERFILE file
+	 */
 	public static void saveUser(User user){
 		Gson gson = new Gson();
 		try {
 			FileOutputStream fos = applicationContext.openFileOutput(USERFILE,_ERASE_FILE);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			
+			// Write from USERFILE, flush, and close when done
 			gson.toJson(user, osw);
 			osw.close();
 		} catch (FileNotFoundException e) {
@@ -95,12 +119,18 @@ public class LocalDataManager {
 		}
 	}
 	
+	
+	/**
+	 * Load list of claims from local data storage from the CLAIMFILE file
+	 */
 	public static void loadClaims() {
 		Gson gson = new Gson();
 		ArrayList<Claim> claims;
 		try {
 			FileInputStream fis = applicationContext.openFileInput(CLAIMFILE);
 			Type dataType = new TypeToken<ArrayList<Claim>>() {}.getType();
+			
+			// Read from CLAIMFILE and close when done
 			InputStreamReader isr = new InputStreamReader(fis);
 			claims = gson.fromJson(isr, dataType);
 			fis.close();
@@ -110,21 +140,31 @@ public class LocalDataManager {
 		} catch (IOException e) {
 			claims = null;
 		}
+		
+		// If no claims exist, create new empty list of claims
 		if (claims == null) {
 			claims = new ArrayList<Claim>();
 		}
 		
+		// Set claim list for user
 		ClaimList.getInstance().setClaims(claims);
 	}
 	
+	
+	/**
+	 * Save list of claims in local data storage in the CLAIMFILE file
+	 */
 	public static void saveClaims() {
 		Gson gson = new Gson();
 		try {
 			FileOutputStream fos = applicationContext.openFileOutput(CLAIMFILE,_ERASE_FILE);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			
+			// Write from CLAIMFILE, flush, and close when done
 			gson.toJson(ClaimList.getInstance().getClaims(), osw);
 			osw.flush();
 			osw.close();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -132,11 +172,4 @@ public class LocalDataManager {
 		}
 	}
 	
-	public static void logClaim() {
-		Gson gson = new Gson();
-		Claim claim = new Claim();
-		claim.setUserName("Kyle");
-		String json = gson.toJson(claim);
-		Log.i("GSON STUFF", json);
-	}
 }
