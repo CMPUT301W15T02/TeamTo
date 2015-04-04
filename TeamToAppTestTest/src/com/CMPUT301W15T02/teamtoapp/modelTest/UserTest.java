@@ -41,7 +41,7 @@ public class UserTest extends TestCase {
 		String tag3Name = "Shopping";
 		Tag tag3 = new Tag(tag3Name);
 		user.addTag(tag3);
-		assertFalse("Tag3 was added and it was already in the list", user.getTags().size() == 7);
+		assertEquals("Tag3 was added and it was already in the list", 7, user.getTags().size());
 	}
 	
 	public void testRemoveTag() {
@@ -65,14 +65,15 @@ public class UserTest extends TestCase {
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
 		user.addTag(tag1);
+		assertTrue("Tag exists", user.getTags().contains(tag1));
+		
+		// Rename tag
 		String newTagName1 = "newTag";
 		user.renameTag(tag1, newTagName1);
-		assertTrue("New tag name not changed", user.getTags().get(4).getTagName().equals(newTagName1));
+		int index = user.getTags().indexOf(tag1);
+		assertEquals("Tag name didn't change", newTagName1, user.getTags().get(index).getTagName());
 		
-		String newTagName3 = "Jello";
-		String newTagName2 = "Hello";
-		Tag newTag = new Tag(newTagName2);
-		user.renameTag(newTag, newTagName3);
+		
 	}
 	
 }
