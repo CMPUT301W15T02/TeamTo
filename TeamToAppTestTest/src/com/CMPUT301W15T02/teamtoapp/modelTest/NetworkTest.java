@@ -124,6 +124,8 @@ public class NetworkTest extends AndroidTestCase{
 	
 	
 	public void testGetUserClaims() {
+		int after = ClaimList.getInstance().getClaims().size();
+		int before;
 		String user = "Iggy";
 		Claim claim1 = new Claim();
 		claim1.setUserName(user);
@@ -135,13 +137,16 @@ public class NetworkTest extends AndroidTestCase{
 		ElasticSearchManager.addClaim(claim2);
 		ElasticSearchManager.addClaim(claim3);
 		ElasticSearchManager.loadClaims(user);
+		after = ClaimList.getInstance().getClaims().size();
+		before = after - 3;
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		assertEquals(2, ClaimList.getInstance().getClaims().size());
+		
+		assertEquals(before, ClaimList.getInstance().getClaims().size() - 3);
 	}
 	
 

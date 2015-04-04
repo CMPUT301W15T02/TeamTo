@@ -23,11 +23,11 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
  */
 
 public class StringTupleTest extends TestCase {
-/*
+
 	public void testCreateTuple() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
-		Destination tuple = new Destination(string1, string2);
+		Destination tuple = new Destination(string1, string2, 51.0, -113.0);
 		
 		assertTrue("destination not initialized correctly", tuple.getDestination().equals(string1));
 		assertTrue("reason not initialized correctly", tuple.getReason().equals(string2));
@@ -36,7 +36,7 @@ public class StringTupleTest extends TestCase {
 	public void testSetDestination() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
-		Destination tuple = new Destination(string1, string2);
+		Destination tuple = new Destination(string1, string2, 51.0, -113.0);
 		
 		String newDest = "newDestination";
 		tuple.setDestination(newDest);
@@ -46,7 +46,7 @@ public class StringTupleTest extends TestCase {
 	public void testSetReason() {
 		String string1 = new String("destination");
 		String string2 = new String("reason");
-		Destination tuple = new Destination(string1, string2);
+		Destination tuple = new Destination(string1, string2, 51.0, -113.0);
 		
 		String newReason = "newReason";
 		tuple.setReason(newReason);
@@ -56,7 +56,21 @@ public class StringTupleTest extends TestCase {
 		assertEquals("Reason not set", newReason, tuple.getReason());
 
 	}
-*/
+	
+	public void testSaveLatLng() {
+		String string1 = new String("destination");
+		String string2 = new String("reason");
+		
+		// Must save as double
+		double latitude = 51;
+		double longitude = -113;
+		Destination tuple = new Destination(string1, string2, latitude, longitude);
+		
+		assertEquals("Latitude not saved", latitude, tuple.latitude);
+
+		assertEquals("Longitude not saved", longitude, tuple.longitude);
+	}
+
 }
 
 

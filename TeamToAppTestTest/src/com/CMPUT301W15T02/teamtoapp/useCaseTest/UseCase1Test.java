@@ -66,9 +66,9 @@ public class UseCase1Test extends AndroidTestCase {
 		
 		String dest = "some destination";
 		String reason = "some reason";
-//		controller.addDestination(dest, reason);
+		controller.addDestination(dest, reason, 53.0, -113.0);
 		
-		assertTrue("No destination and reason were added.", controller.getDestinations().size() != 0);
+		assertTrue("Destination and reason were not added.", controller.getDestinations().size() == 1);
 		ClaimList.tearDownForTesting();
 	}
 	

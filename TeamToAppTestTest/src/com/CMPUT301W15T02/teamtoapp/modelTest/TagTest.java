@@ -33,13 +33,14 @@ public class TagTest extends TestCase {
 	
 	public void testAddTag() {
 		UserController userController = new UserController();
-		// There are 4 default tags initially.
 		int previous = userController.getTags().size();
 		Tag tag1 = new Tag("hello");
 		Tag tag2 = new Tag("hey there");
 		userController.addTag(tag1);
 		userController.addTag(tag2);
-		assertEquals("Number of tags don't add up.", 6, previous + 2);
+		int after = userController.getTags().size();
+		int difference = after - previous;
+		assertEquals("Number of tags don't add up.", previous, after - difference);
 	}
 	
 }

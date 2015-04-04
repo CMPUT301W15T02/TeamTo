@@ -64,6 +64,7 @@ public class UseCase3Test extends TestCase {
 		// User will add a new tag, then claim will be assigned the new tag 
 		Claim claim = new Claim();
 		Tag tag = new Tag("Tag name");
+		User.getInstance().addTag(tag);
 		claim.addTag(tag.getTagID());
 		assertTrue("Tag added to claims", claim.getTags().contains(tag));
 	}
