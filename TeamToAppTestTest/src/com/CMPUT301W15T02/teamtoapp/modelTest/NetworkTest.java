@@ -38,13 +38,13 @@ public class NetworkTest extends AndroidTestCase{
 		Claim claim = new Claim();
 		MainManager.initializeContext(mContext);
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		MainManager.addClaim(claim);
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -59,19 +59,19 @@ public class NetworkTest extends AndroidTestCase{
 
 		//int size = MainManager.getSubmittedClaims().size(); // save initial size ----> need to fix.
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		MainManager.addClaim(claim);
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		MainManager.removeClaim(claim);
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -88,13 +88,13 @@ public class NetworkTest extends AndroidTestCase{
 		
 		MainManager.addClaim(claim);
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		//assertNotNull(ElasticSearchManager.getClaim(claimID));
 		try {
-			Thread.sleep(100);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -108,7 +108,7 @@ public class NetworkTest extends AndroidTestCase{
 		user.addTag(new Tag("TESTING"));
 		ElasticSearchManager.saveUser();
 		try {
-			Thread.sleep(200);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class NetworkTest extends AndroidTestCase{
 		User.getInstance().setName("Joe");
 		ElasticSearchManager.loadUser("Bob");
 		try {
-			Thread.sleep(200);
+			Thread.sleep(250);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
