@@ -265,9 +265,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
 		if (MainManager.isNetworkAvailable(this)) {
-				Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
-				startActivity(intent);
-			}
+			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
+			startActivity(intent);
+			
 		}
 		else {
 			// Alert the user that there is no internet access
