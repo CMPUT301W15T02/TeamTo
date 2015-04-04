@@ -1,5 +1,8 @@
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
+import java.util.ArrayList;
+
+import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 /* 
@@ -60,6 +63,7 @@ public class UseCase3Test extends TestCase {
 	// UC 3.3
 	//As a claimant, I want to filter the list of expense claims by tags, 
 	//to show only those claims that have at least one tag matching any of a given set of one or more filter tags.
+	
 	public void testAddTagToClaim() {
 		// User will add a new tag, then claim will be assigned the new tag 
 		Claim claim = new Claim();
@@ -76,6 +80,17 @@ public class UseCase3Test extends TestCase {
 		claim.removeTag(tag.getTagID());
 		assertEquals("Tag actually removed?", 0, claim.getTags().size());
 		assertFalse("Tag not there", claim.getTags().contains(tag));
+	}
+	
+	public void testFilterClaimsByTags() {
+		ClaimListController claimListController = new ClaimListController();
+		Claim claim1 = new Claim();
+		Claim claim2 = new Claim();
+		claimListController.addClaim(claim1);
+		claimListController.addClaim(claim2);
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("FAKETAG");
+		assertEquals(0, claimListController.getFilteredClaims(tags).size());
 	}
 	
 

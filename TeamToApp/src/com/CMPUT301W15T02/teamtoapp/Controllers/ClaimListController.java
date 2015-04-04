@@ -82,21 +82,6 @@ public class ClaimListController {
 		claims.removeListener(listener);
 	}
 	
-	// DUMMY METHOD won't need this when the networking is working
-	public ArrayList<Claim> getSubmittedClaims() {
-		ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
-		for (Claim claim : claims.getClaims()) {
-			if (claim.getStatus() == Status.SUBMITTED) {
-				submittedClaims.add(claim);
-			}
-		}
-		return submittedClaims;
-	}
-
-	public ArrayList<Tag> getClaimsWithTags(String string) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 	public void claimEditBackPressed(Claim claim) {
