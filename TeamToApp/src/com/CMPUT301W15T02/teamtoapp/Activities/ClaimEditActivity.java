@@ -42,7 +42,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.CMPUT301W15T02.teamtoapp.DestinationGeoLocationActivity;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ClaimantDestinationsListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;

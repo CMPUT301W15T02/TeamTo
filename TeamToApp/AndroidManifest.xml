@@ -100,7 +100,7 @@
         </receiver>
 
         <activity
-            android:name=".DestinationGeoLocationActivity"
+            android:name="com.CMPUT301W15T02.teamtoapp.Activities.DestinationGeoLocationActivity"
             android:label="@string/title_activity_destination_geo_location" >
         </activity>
         <activity
