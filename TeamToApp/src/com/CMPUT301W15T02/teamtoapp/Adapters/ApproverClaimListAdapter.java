@@ -30,12 +30,15 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 /**
  * 
- * This adapter will provide a list of submitted claims for the approver. In progress.
+ * This adapter will provide a list of submitted claims for the approver. -In progress
+ * 
+ * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
 
@@ -55,12 +58,17 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		this.approverClaimList  = items;
 	}
 
+	/**
+	 * ViewHolder class that contains TextViews
+	 * for the custom list view
+	 *
+	 */
 	private class ViewHolder {
 		
 		TextView claimantNameTextView;
 		TextView startDateTextView;
 		TextView destinationsTextView;
-		TextView statusTextView; // Should show submitted only
+		TextView statusTextView; 
 		TextView totalCurrencyView;
 		TextView approverNameTextView;
 		
@@ -79,6 +87,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			row = inflater.inflate(layoutId, parent, false);
 			holder = new ViewHolder();
 			
+			// Initialize textview holders to textview id's from approver_claims_list_rows.xml
 			holder.claimantNameTextView = (TextView) row.findViewById(R.id.claimantNameTextView);
 			holder.startDateTextView = (TextView) row.findViewById(R.id.approverStartDateTextView);
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.approverDestsTextView);
@@ -125,8 +134,9 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		}
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
-		//TODO: Still need to do approver name
-		
+		ApproverController approverController = new ApproverController();
+		String approverName = approverController.getApproverName();
+		holder.approverNameTextView.setText("Approver: "+ approverName);
 		return row;
 	}
 	

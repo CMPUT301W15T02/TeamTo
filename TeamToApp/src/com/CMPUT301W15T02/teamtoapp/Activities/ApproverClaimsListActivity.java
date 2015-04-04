@@ -34,21 +34,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
-import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 /**
  * 
  * Activity that allows a user to look at all the different submitted claims
  * Not finished
+ * 
+ * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
 
@@ -61,25 +59,35 @@ public class ApproverClaimsListActivity extends Activity {
 	Handler handler;
 	ApproverController approverController;
 	
+	/**
+	 * Set up all required ID's, model objects, and listeners in onCreate
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_claims_list);
 		findViewsByIds();
+		
+		// Progress Dialog displayed for user
 		dialog = new ProgressDialog(ApproverClaimsListActivity.this);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        dialog.setMessage("Loading. Please wait...");
+        dialog.setMessage("Loading submitted claims. Please wait...");
         dialog.setIndeterminate(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
+        
+        // Initialize handler
         handler = new Handler(Looper.getMainLooper()) {
 	        @Override
 	        public void handleMessage(Message msg) {
+	        	// Set up approver claim list adapter with submitted claims from the approverController.
 	        	approverController = new ApproverController();
 	        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, approverController.getClaims());
 	        	listView.setAdapter(adapter);
 	        	adapter.sort(new ClaimComparatorNewestFirst());
 	        	adapter.notifyDataSetChanged();
+	        	
+	        	// Dismiss dialog once adapter is up-to-date
 	        	dialog.dismiss();
 	        }
 		};
@@ -103,6 +111,7 @@ public class ApproverClaimsListActivity extends Activity {
 		MainManager.getSubmittedClaims(handler);
 	}
 	
+	
 	/**
 	 * Find the different views
 	 */
@@ -110,11 +119,23 @@ public class ApproverClaimsListActivity extends Activity {
 		listView = (ListView) findViewById(R.id.approverClaimListView);
 	}
 	
+	
+	/**
+	 * Set up Listeners for clicks/long-clicks on the listView
+	 * 
+	 * onItemClick: Switch to ApproverExpenseListActivity to 
+	 * 				see list of expense of selected claim
+	 * onItemLongClick: Display alertDialog to allow approver the 
+	 * 					option to add a comment and approve/return selected claim 
+	 */
 	private void setListeners() {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// Grab claim position
 				Claim claim = approverController.getClaim(position);
+				
+				// Set up intent to next activity and attach claimID of selected claim
 				Intent intent = new Intent(ApproverClaimsListActivity.this, ApproverExpenseListActivity.class);
 				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
@@ -130,14 +151,18 @@ public class ApproverClaimsListActivity extends Activity {
 				LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 				View ApproveReturnDialogView = inflater.inflate(R.layout.approve_return_claim_dialog, null);
 
+				// Initialize EditText for approverComment
 				final EditText approverComment = (EditText) ApproveReturnDialogView.findViewById(R.id.approverCommentEditText);
 
+				// Set up alertDialog
 				AlertDialog.Builder builder = new AlertDialog.Builder(ApproverClaimsListActivity.this);
 				builder.setView(ApproveReturnDialogView);
 				builder.setPositiveButton("Approve", new DialogInterface.OnClickListener () {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
+						
+						// Ensure Approver has entered a comment before approving
 						if (comment.length() != 0) {
 							Claim claim = approverController.getClaim(position);
 							approverController.approveClaim(claim, comment);
@@ -151,6 +176,8 @@ public class ApproverClaimsListActivity extends Activity {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
+						
+						// Ensure Approver has entered a comment before returning
 						if (comment.length() != 0 ) {
 							Claim claim = approverController.getClaim(position);
 							approverController.returnClaim(claim, comment);
@@ -174,7 +201,8 @@ public class ApproverClaimsListActivity extends Activity {
 	
 	/**
 	 * Switch back to claimant mode
-	 * @param menu
+	 * @param menu - menuItem that allows switching 
+	 * 				  back to ClaimantClaimsListActivity
 	 */
 	public void switchToClaimantOption(MenuItem menu) {
 		super.onBackPressed();

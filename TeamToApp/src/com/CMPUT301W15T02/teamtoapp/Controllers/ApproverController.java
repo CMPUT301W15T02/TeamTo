@@ -47,6 +47,10 @@ public class ApproverController {
 		claim.setStatus(Status.RETURNED);
 		MainManager.ApproveClaim(claim);
 	}
+
+	public String getApproverName() {
+		return approverName;
+	}
 	
 	
 	
