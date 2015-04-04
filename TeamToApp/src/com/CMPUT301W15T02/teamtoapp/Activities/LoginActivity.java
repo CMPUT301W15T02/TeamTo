@@ -59,43 +59,10 @@ public class LoginActivity extends Activity {
 		MainManager.initializeContext(getApplicationContext());
 		
 		
-		if (hasLoggedIn)  //Go directly to main activity
-		{
-			dialog = new ProgressDialog(LoginActivity.this);
-	        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-	        dialog.setMessage("Loading. Please wait...");
-	        dialog.setIndeterminate(true);
-	        dialog.setCanceledOnTouchOutside(false);
-	        dialog.show();
-	        
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					if (MainManager.isConnectedToServer()) {
-						MainManager.loadUser(usernameString);
-						MainManager.loadClaims(usernameString);
-					} else {
-						LocalDataManager.loadClaims();
-						LocalDataManager.loadUser();
-					}
-					handler.sendEmptyMessage(0);
-					
-				}
-			}).start();
-			
-		} else {
-			setContentView(R.layout.login_main_activity);
-		}
-		
-		
 		handler = new Handler(Looper.getMainLooper()) {
 
 			@Override
 			public void handleMessage(Message msg) {
-				if (dialog != null) {
-					dialog.dismiss();
-				}
 				User.getInstance().setName(usernameString);
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
@@ -104,6 +71,16 @@ public class LoginActivity extends Activity {
 			}
 			
 		};
+		
+		if (hasLoggedIn)  //Go directly to main activity
+		{
+	        MainManager.loadUserAndClaims(usernameString, handler);
+			
+		} else {
+			setContentView(R.layout.login_main_activity);
+		}
+		
+		
 
 	}
 
@@ -131,21 +108,7 @@ public class LoginActivity extends Activity {
 			editor.putString("username", usernameString);
 			editor.commit();
 			
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					if (MainManager.isConnectedToServer()) {
-						MainManager.loadUser(usernameString);
-						MainManager.loadClaims(usernameString);
-					} else {
-						LocalDataManager.loadClaims();
-						LocalDataManager.loadUser();
-					}
-					handler.sendEmptyMessage(0);
-					
-				}
-			}).start();
+			MainManager.loadUserAndClaims(usernameString, handler);
 		}
 	}
 
