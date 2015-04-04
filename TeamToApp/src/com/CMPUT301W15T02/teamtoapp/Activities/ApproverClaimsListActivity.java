@@ -38,6 +38,7 @@ import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
@@ -58,6 +59,7 @@ public class ApproverClaimsListActivity extends Activity {
 	private ApproverClaimListAdapter adapter;
 	ProgressDialog dialog;
 	Handler handler;
+	ApproverController approverController;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,8 @@ public class ApproverClaimsListActivity extends Activity {
         handler = new Handler(Looper.getMainLooper()) {
 	        @Override
 	        public void handleMessage(Message msg) {
-	        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, ApproverClaims.getInstance().getClaims());
+	        	approverController = new ApproverController();
+	        	adapter = new ApproverClaimListAdapter(context, R.layout.approver_claims_list_rows, approverController.getClaims());
 	        	listView.setAdapter(adapter);
 	        	adapter.sort(new ClaimComparatorNewestFirst());
 	        	adapter.notifyDataSetChanged();
@@ -111,7 +114,7 @@ public class ApproverClaimsListActivity extends Activity {
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				Claim claim = ApproverClaims.getInstance().getClaims().get(position);
+				Claim claim = approverController.getClaim(position);
 				Intent intent = new Intent(ApproverClaimsListActivity.this, ApproverExpenseListActivity.class);
 				intent.putExtra("claimID", claim.getClaimId());
 				startActivity(intent);
@@ -136,16 +139,11 @@ public class ApproverClaimsListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
 						if (comment.length() != 0) {
-							//TODO: We should use claim controller to change status, just like how we did for Submitted.
-							Claim claim = ApproverClaims.getInstance().getClaims().get(position);
-							claim.setApproverName(User.getInstance().getName());
-							claim.setComment(comment);
-							claim.setStatus(Status.APPROVED);
-							MainManager.ApproveClaim(claim);
+							Claim claim = approverController.getClaim(position);
+							approverController.approveClaim(claim, comment);
 							adapter.notifyDataSetChanged();
-							Toast.makeText(getBaseContext(), User.getInstance().getName(), Toast.LENGTH_SHORT).show();
 						} else {
-							Toast.makeText(context, "Must add comment.", Toast.LENGTH_LONG).show();
+							Toast.makeText(context, "Must add comment", Toast.LENGTH_LONG).show();
 						}
 					}
 				})
@@ -154,15 +152,11 @@ public class ApproverClaimsListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int id) {
 						String comment = approverComment.getText().toString();
 						if (comment.length() != 0 ) {
-							Claim claim = ApproverClaims.getInstance().getClaims().get(position);
-							claim.setApproverName(User.getInstance().getName());
-							claim.setComment(comment);
-							claim.setStatus(Status.RETURNED);
-							MainManager.ApproveClaim(claim);
+							Claim claim = approverController.getClaim(position);
+							approverController.returnClaim(claim, comment);
 							adapter.notifyDataSetChanged();
-							Toast.makeText(getBaseContext(), User.getInstance().getName(), Toast.LENGTH_SHORT).show();
 						} else {
-							Toast.makeText(context, "Must add comment.", Toast.LENGTH_LONG).show();
+							Toast.makeText(context, "Must add comment", Toast.LENGTH_LONG).show();
 						}
 					}
 				})
