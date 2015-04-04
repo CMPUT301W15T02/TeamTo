@@ -65,14 +65,7 @@ public class LocalDataManager {
 	}
 	
 	
-	/**
-	 * Set claims for user
-	 * 
-	 * @param claims - ArrayList of claims originally created by the user
-	 */
-	public void setClaims(ArrayList<Claim> claims) {
-		ClaimList.getInstance().setClaims(claims);
-	}
+
 	
 	
 	/**
