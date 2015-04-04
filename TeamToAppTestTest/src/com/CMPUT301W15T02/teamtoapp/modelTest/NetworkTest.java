@@ -18,6 +18,7 @@ package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
+import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
@@ -51,13 +52,13 @@ public class NetworkTest extends AndroidTestCase{
 		MainManager.removeClaim(claim);
 	}
 	
-	// TODO: Need another to obtain list of submitted claims.
+
 	public void testGetSubmittedClaimsFromNetwork() {
 		Claim claim = new Claim();
 		MainManager.initializeContext(mContext);
 		claim.setStatus(Status.SUBMITTED);
 
-		//int size = MainManager.getSubmittedClaims().size(); // save initial size ----> need to fix.
+		int size  = ApproverClaims.getInstance().getClaims().size();
 		try {
 			Thread.sleep(250);
 		} catch (InterruptedException e) {
@@ -77,7 +78,7 @@ public class NetworkTest extends AndroidTestCase{
 		}
 		
 		// assert size stays the same (adding/deleting the same claim)
-		//assertEquals(size, MainManager.getSubmittedClaims().size()); ----> need to fix.
+		assertEquals(size, ApproverClaims.getInstance().getClaims().size());
 	}
 	
 	//TODO: Keeps giving null...

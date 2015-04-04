@@ -22,8 +22,6 @@ package com.CMPUT301W15T02.teamtoapp;
 * @see https://github.com/joshua2ua/AndroidElasticSearch
 *
 *
-* @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
-*
 */
 
 public class SimpleSearchCommand {

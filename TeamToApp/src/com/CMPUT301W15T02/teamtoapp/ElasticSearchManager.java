@@ -1,6 +1,4 @@
-/* 
- * 
- * Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+/* Copyright 2015 Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +52,7 @@ import com.google.gson.reflect.TypeToken;
  *
  * @see https://github.com/joshua2ua/AndroidElasticSearch
  * 
- *  @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
 
@@ -64,10 +62,6 @@ public class ElasticSearchManager {
 	private static final String RESOURCE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/";
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/_search";
 	private static final String USER_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/user/";
-	
-	//private static final String TEST_URL = "http://cmput301.softwareprocess.es:8080/testing/claims/";
-	//private static final String TEST_SEARCH_URL =  "http://cmput301.softwareprocess.es:8080/testing/claims/_search";
-	
 	private static final String TAG = "ClaimSearch"; // used for logcat.
 	private static Context applicationContext;
 	
@@ -85,24 +79,25 @@ public class ElasticSearchManager {
 	 *
 	 * @param claimID helps search for matching Claim object by claim ID.
 	 * @return Claim object retrieved (if it exists).
-	 * TODO: Needs testing
+	 * Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
+	 			master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18
 	 */
-
-	// Q: Not sure if it matters whether we have a String/Integer claimID?
-	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
-	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
 	public static Claim getClaim(String claimID) {
 		Gson gson = new Gson();
 		
 		SearchHit<Claim> search_hit = null;
+		
+		// Create HttpClient to obtain URL based on claim ID
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpGet = new HttpGet(RESOURCE_URL + claimID);		
 		
 		HttpResponse response = null;
 		
 		try {
+			
+			// Try to get URL
 			response = httpClient.execute(httpGet);
-			Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
+			Log.i("RESPONSE", response.getStatusLine().toString());
 			
 		} catch (ClientProtocolException e1) {
 			throw new RuntimeException(e1);
@@ -111,6 +106,7 @@ public class ElasticSearchManager {
 			throw new RuntimeException(e1);
 		}
 		
+		// Create searchHitType Object to save result from search
 		Type searchHitType = new TypeToken<SearchHit<Claim>>() {}.getType();
 		
 		try {
@@ -130,28 +126,34 @@ public class ElasticSearchManager {
 			throw new RuntimeException(e);
 		}
 		
+		// Return resulting claim (if any)
 		return search_hit.getSource();
 	}
 
 	/**
 	 * Get all submitted claims for the approver (Approver mode)
 	 * If the search does not specify fields, it searches on all the fields.
-
+	 * 
+	 * @see Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
+	 	master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18
 	 */	
-	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
-	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
 	public static void getSubmittedClaims() {
 		String searchString = "SUBMITTED";
 		ArrayList<Claim> submittedClaimsResult = new ArrayList<Claim>();
 		Gson gson = new Gson();
 		
+		// Create HttpPost object to search for claims
 		HttpPost searchRequest = new HttpPost(SEARCH_URL);
 		
 		if (searchString.equals(null) || searchString.equals("")) {
+			// Default search = search all
 			searchString = "*";
 		}
 		
+		// Command object takes in claim status search string
 		SimpleSearchCommand command = new SimpleSearchCommand(searchString);
+		
+		// Create query based on command
 		String query = gson.toJson(command);
 		Log.i(TAG, "JSON COMMAND: " + query);
 		
@@ -170,6 +172,7 @@ public class ElasticSearchManager {
 		HttpResponse response = null;
 		try
 		{
+			// Search for claims that match the searchString (Status == "SUBMITTED")
 			response = httpClient.execute(searchRequest);
 		
 		} catch (UnsupportedEncodingException e) {
@@ -197,6 +200,7 @@ public class ElasticSearchManager {
 			Hits<Claim> hits = esResponse.getHits();
 			if (hits != null) {
 				if (hits.getHits() != null) {
+					// Add each submitted claim to submittedClaimsResult ArrayList
 					for (int i = 0; i < hits.getHits().size(); i++) {
 						SearchHit<Claim> searchHit = hits.getHits().get(i);
 						Claim claim = searchHit.getSource();
@@ -219,18 +223,19 @@ public class ElasticSearchManager {
 			
 		}
 		
+		/* Call filterSubmittedClaims method to remove claims
+		where claimant name == approver name */
 		filterSubmittedClaims(submittedClaimsResult);
 		
 	}
 	
 	/**
-	* Filters out any claims where the claimant name == approver name.
-	* @param submittedClaimsResult - the list of submitted claims to be filtered.
-	* 
-	*  TODO: Needs testing
+	 * Filters out any claims where the claimant name == approver name.
+	 * @param submittedClaimsResult - the list of submitted claims to be filtered.
 	*/
 	private static  void filterSubmittedClaims(
 			ArrayList<Claim> submittedClaimsResult) {
+		
 		// Filter out claims where claimant name == approver name
 		for (int i=0; i < submittedClaimsResult.size(); i++) {
 			if (submittedClaimsResult.get(i).getUserName().equals(User.getInstance().getName())) {
@@ -243,12 +248,12 @@ public class ElasticSearchManager {
 
 
 	/**
-	* adds a claim to server (Claimant mode)
-	* @param claim - the claim to be added to the elastic search server
+	 * Adds a claim to server (Claimant mode)
+	 * 
+	 * @param claim - the claim to be added to the elastic search server
+	 * @see Source: https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
+	 * 		cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19
 	*/
-	/*Source:
-	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
-	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
 	public static void addClaim(final Claim claim) {
 		Gson gson = new Gson();
 		HttpClient httpClient = new DefaultHttpClient();
@@ -260,9 +265,10 @@ public class ElasticSearchManager {
 			addRequest.setEntity(stringEntity);
 			addRequest.setHeader("Accept", "application/json");
 
+			// Create response object to add claim
 			HttpResponse response = httpClient.execute(addRequest);
 
-			// Can use TAG to check status via logcat.
+			// Check Status
 			String status = response.getStatusLine().toString();
 			Log.i(TAG, status);
 
@@ -281,12 +287,11 @@ public class ElasticSearchManager {
 	}
 	
 	/**
-	 * Deletes the claim with the specified ID
+	 * 	Deletes the claim with the specified ID
 	 *  @param claimId - the claimID that identifies claim to be deleted
+	 *  @see Source: https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
+	 *				 cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19
 	 */
-	/*Source:
-	 * https://github.com/CMPUT301F14T03/lotsofcodingkitty/blob/master/
-	 * cmput301t03app/src/ca/ualberta/cs/cmput301t03app/datamanagers/ServerDataManager.java 2015-03-19*/
 	public static void deleteClaim(final String claimId) {
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
@@ -295,9 +300,10 @@ public class ElasticSearchManager {
 			HttpDelete deleteRequest = new HttpDelete(RESOURCE_URL + claimId);
 			deleteRequest.setHeader("Accept", "application/json");
 
+			// Create response object to delete claim
 			HttpResponse response = httpClient.execute(deleteRequest);
 
-			// Can use TAG to check status via logcat.
+			// Check Status
 			String status = response.getStatusLine().toString();
 			Log.i(TAG, status);
 
@@ -315,15 +321,20 @@ public class ElasticSearchManager {
 		}
 	}
 	
+	
 	/**
 	 * Updates an existing claim by re-adding to server (overwrites old claim)
 	 *  @param claim - the claim to be updated
 	 */
 	public static void updateClaim(Claim claim) {
-		// Updating the claim is the same as adding the claim
 		addClaim(claim);
 	}
 	
+	
+	/**
+	 *  Save local user to the server (Claimant mode)
+	 *  
+	 */
 	public static void saveUser() {
 		Gson gson = new Gson();
 		HttpClient httpClient = new DefaultHttpClient();
@@ -335,6 +346,7 @@ public class ElasticSearchManager {
 			addRequest.setEntity(stringEntity);
 			addRequest.setHeader("Accept", "application/json");
 
+			// Create response object to save user
 			HttpResponse response = httpClient.execute(addRequest);
 
 			// Can use TAG to check status via logcat.
@@ -356,12 +368,19 @@ public class ElasticSearchManager {
 
 	}
 	
+	/**
+	 *  Load local user from the server (Claimant mode)
+	 *  @param name - name of user required to load user
+	 *  
+	 */
 	public static void loadUser(String name) {
 		HttpParams httpParameters = new BasicHttpParams();
+		
 		// Set the timeout in milliseconds until a connection is established.
 		// The default value is zero, that means the timeout is not used. 
 		int timeoutConnection = 3000;
 		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		
 		// Set the default socket timeout (SO_TIMEOUT) 
 		// in milliseconds which is the timeout for waiting for data.
 		int timeoutSocket = 5000;
@@ -375,8 +394,9 @@ public class ElasticSearchManager {
 		HttpResponse response = null;
 
 		try {
+			// Create response object to load user
 			response = httpClient.execute(httpGet);
-			Log.i("RESPONSE", response.getStatusLine().toString()); // Says 404 Not Found...
+			Log.i("RESPONSE", response.getStatusLine().toString());
 
 		} catch (ClientProtocolException e1) {
 			LocalDataManager.loadUser();
@@ -405,6 +425,8 @@ public class ElasticSearchManager {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		
+		// Save result into User object
 		User user = search_hit.getSource();
 		if (user == null) {
 			User.getInstance();
@@ -416,13 +438,19 @@ public class ElasticSearchManager {
 
 	}
 	
-	
+	/**
+	 *  Load user claims from the server (Claimant mode)
+	 *  @param name - name of user required to load user's claims
+	 *  
+	 */
 	public static void loadClaims(String username) {
 		HttpParams httpParameters = new BasicHttpParams();
+		
 		// Set the timeout in milliseconds until a connection is established.
 		// The default value is zero, that means the timeout is not used. 
 		int timeoutConnection = 3000;
 		HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+		
 		// Set the default socket timeout (SO_TIMEOUT) 
 		// in milliseconds which is the timeout for waiting for data.
 		int timeoutSocket = 5000;
@@ -431,13 +459,18 @@ public class ElasticSearchManager {
 		ArrayList<Claim> userClaims = new ArrayList<Claim>();
 		Gson gson = new Gson();
 
+		// Create response object to load list of claims
 		HttpPost searchRequest = new HttpPost(SEARCH_URL);
 
 		if (searchString.equals(null) || searchString.equals("")) {
+			// Default search: search all claims
 			searchString = "*";
 		}
 
+		// Command object takes in username search string
 		SimpleSearchCommand command = new SimpleSearchCommand(searchString);
+		
+		// Create query from command
 		String query = gson.toJson(command);
 		Log.i(TAG, "JSON COMMAND: " + query);
 
@@ -456,6 +489,7 @@ public class ElasticSearchManager {
 		HttpResponse response = null;
 		try
 		{
+			// Create response object to load claims
 			response = httpClient.execute(searchRequest);
 
 		} catch (UnsupportedEncodingException e) {
@@ -485,9 +519,11 @@ public class ElasticSearchManager {
 			Hits<Claim> hits = esResponse.getHits();
 			if (hits != null) {
 				if (hits.getHits() != null) {
+					// Add each submitted claim to userClaims ArrayList
 					for (int i = 0; i < hits.getHits().size(); i++) {
 						SearchHit<Claim> searchHit = hits.getHits().get(i);
 						Claim claim = searchHit.getSource();
+						// Make username matches
 						if (claim.getUserName().equals(username)) {
 							userClaims.add(claim);
 						}
@@ -509,6 +545,7 @@ public class ElasticSearchManager {
 
 		}
 
+		// Set ClaimList of user as the user claims
 		ClaimList.getInstance().setClaims(userClaims);
 
 

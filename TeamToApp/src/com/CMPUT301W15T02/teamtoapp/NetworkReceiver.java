@@ -22,24 +22,45 @@ import android.content.Intent;
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 
+/**
+ * 
+ * Network Reciever extends a BroadcastReciever in order to recieve a broadcast.
+ * Once recieved, the cache will complete requests of removing unwanted claims and 
+ * loading claim updates from the user to the elastic search server.
+ * 
+ * @author Kyle Carlstrom
+ *
+ */
 public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
     	final Context appContext = context.getApplicationContext();
+    	
+    	// Initialize context in MainManager
     	MainManager.initializeContext(appContext);
+    	
+    	// Run separate thread
     	new Thread(new Runnable() {
     		@Override
     		public void run() {
+    			
+    			// If network and ElasticSearch server is available, load removals and updates to cache
     			if (MainManager.isNetworkAvailable(appContext) && MainManager.isConnectedToServer()) {
     				Cache.getInstance().loadRemovals();
     				Cache.getInstance().loadUpdates();
+    				
+    				// Save updated claims to ElasticSearch
     				for (Claim claim: Cache.getInstance().getUpdates()) {
     					ElasticSearchManager.updateClaim(claim);
     				}
+    				
+    				// Delete unwanted claims from ElasticSearch
     				for (Claim claim: Cache.getInstance().getRemovals()) {
     					ElasticSearchManager.deleteClaim(claim.getClaimId());
     				}
+    				
+    				// Clear cache once done with updating and removing claims from cache
     				Cache.getInstance().clearCache();
     			}
     		}
