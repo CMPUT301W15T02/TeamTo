@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
@@ -74,63 +75,46 @@ public class MainManager {
 	
 	
 	public static void addClaim(final Claim claim) {
-		Log.i("CLAIMIDBAN", claim.getClaimId());
-		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					if (isConnectedToServer()) {
-						ElasticSearchManager.addClaim(claim);
-					} else {
-						Cache.getInstance().addUpdate(claim);
-					}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.addClaim(claim);
+				} else {
+					Cache.getInstance().addUpdate(claim);
 				}
-			}).start();
-		} else {
-			Cache.getInstance().addUpdate(claim);
-		}
-		LocalDataManager.saveClaims();
+				LocalDataManager.saveClaims();
+			}
+		}).start();
 	}
 	
 	public static void removeClaim(final Claim claim) {
-		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					if (isConnectedToServer()) {
-						ElasticSearchManager.deleteClaim(claim.getClaimId());
-					} else {
-						Cache.getInstance().addRemoval(claim);
-					}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.deleteClaim(claim.getClaimId());
+				} else {
+					Cache.getInstance().addRemoval(claim);
+					LocalDataManager.saveClaims();
 				}
-			}).start();
-		} else {
-			Cache.getInstance().addRemoval(claim);
-		}
-		LocalDataManager.saveClaims();
+			}
+		}).start();
+		
 	}
 	
 	public static void updateClaim(final Claim claim) {
-		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					if (isConnectedToServer()) {
-						ElasticSearchManager.updateClaim(claim);
-					} else {
-						Cache.getInstance().addUpdate(claim);
-					}
-					
-					
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.updateClaim(claim);
+				} else {
+					Cache.getInstance().addUpdate(claim);
 				}
-			}).start();
-		} else {
-			Cache.getInstance().addUpdate(claim);
-		}
-		LocalDataManager.saveClaims();
+				LocalDataManager.saveClaims();
+			}
+		}).start();
 	}
 	
 	public static ArrayList<Claim> getSubmittedClaims() {
@@ -161,31 +145,29 @@ public class MainManager {
 	
 	
 	public static void saveUser() {
-		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					if (isConnectedToServer()) {
-						ElasticSearchManager.saveUser();
-					}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.saveUser();
 				}
-			}).start();
-		}
-		LocalDataManager.saveUser(User.getInstance());
+				LocalDataManager.saveUser(User.getInstance());
+			}
+		}).start();
 	}
 	
 	
 	public static void ApproveClaim(final Claim claim) {
-		if (isNetworkAvailable(applicationContext)) {
-			new Thread(new Runnable() {
-				@Override
-				public void run() {
-					if (isConnectedToServer()) {
-						ElasticSearchManager.updateClaim(claim);
-					}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.updateClaim(claim);
+				} else {
+					Toast.makeText(applicationContext, "Can't connect", Toast.LENGTH_SHORT).show();
 				}
-			}).start();
-		}
+			}
+		}).start();
 	}
 	
 	
