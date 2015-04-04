@@ -30,6 +30,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.CMPUT301W15T02.teamtoapp.R;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
@@ -60,8 +61,6 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 	/**
 	 * ViewHolder class that contains TextViews
 	 * for the custom list view
-	 * 
-	 * @author rkdhatt
 	 *
 	 */
 	private class ViewHolder {
@@ -88,6 +87,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			row = inflater.inflate(layoutId, parent, false);
 			holder = new ViewHolder();
 			
+			// Initialize textview holders to textview id's from approver_claims_list_rows.xml
 			holder.claimantNameTextView = (TextView) row.findViewById(R.id.claimantNameTextView);
 			holder.startDateTextView = (TextView) row.findViewById(R.id.approverStartDateTextView);
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.approverDestsTextView);
@@ -134,8 +134,9 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		}
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
-		//TODO: Still need to do approver name
-		
+		ApproverController approverController = new ApproverController();
+		String approverName = approverController.getApproverName();
+		holder.approverNameTextView.setText("Approver: "+ approverName);
 		return row;
 	}
 	

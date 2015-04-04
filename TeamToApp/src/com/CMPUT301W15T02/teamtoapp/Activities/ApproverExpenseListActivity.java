@@ -54,7 +54,8 @@ public class ApproverExpenseListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_expense_list);
 		
-		// Set up all IDs, model objects, listeners, and approver expense list adapter
+		/* Set up all IDs, model objects, listeners, 
+		and approver expense list adapter */
 		findViewsByIds();
 		getModelObjects();
 		setListeners();
@@ -69,7 +70,6 @@ public class ApproverExpenseListActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		int id = item.getItemId();
 		return super.onOptionsItemSelected(item);
 		
 	}
