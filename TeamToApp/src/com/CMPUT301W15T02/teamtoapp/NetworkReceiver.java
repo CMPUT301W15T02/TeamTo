@@ -36,16 +36,17 @@ public class NetworkReceiver extends BroadcastReceiver {
 				
 				@Override
 				public void run() {
-					Cache.getInstance().loadRemovals();
-					Cache.getInstance().loadUpdates();
-					for (Claim claim: Cache.getInstance().getUpdates()) {
-						ElasticSearchManager.updateClaim(claim);
+					if (MainManager.isConnectedToServer()) {
+						Cache.getInstance().loadRemovals();
+						Cache.getInstance().loadUpdates();
+						for (Claim claim: Cache.getInstance().getUpdates()) {
+							ElasticSearchManager.updateClaim(claim);
+						}
+						for (Claim claim: Cache.getInstance().getRemovals()) {
+							ElasticSearchManager.deleteClaim(claim.getClaimId());
+						}
+						Cache.getInstance().clearCache();
 					}
-					for (Claim claim: Cache.getInstance().getRemovals()) {
-						ElasticSearchManager.deleteClaim(claim.getClaimId());
-					}
-					Cache.getInstance().clearCache();
-					
 				}
 			}).start();
         }
