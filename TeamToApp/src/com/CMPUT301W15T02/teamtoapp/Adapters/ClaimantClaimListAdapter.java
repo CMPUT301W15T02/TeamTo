@@ -22,54 +22,56 @@ package com.CMPUT301W15T02.teamtoapp.Adapters;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.SortedMap;
 
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 /**
  * 
  * A customized adapter for the claimant's list of claims.
- * Sources:
- * http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23 
- * http://stackoverflow.com/questions/5936912/how-to-find-the-distance-between-two-geopoints 2015-04-02
+ * 
+ * @see http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23 
+ * @see http://stackoverflow.com/questions/5936912/how-to-find-the-distance-between-two-geopoints 2015-04-02
+ * 
+ * @authors  Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
-
-// TODO Clean up this code, its kinda messy
-
 
 public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	private Context context;
 	private int layoutId;
-	private ArrayList<Claim> originalClaimList = ClaimList.getInstance().getClaims();
-	private ArrayList<Claim> filteredClaimList = new ArrayList<Claim>();
-	//private TagFilter myFilter = new TagFilter();
+	// Filtered claim list for filtering tags
+	private ArrayList<Claim> filteredClaimList = new ArrayList<Claim>(); 
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
 	
+	// Location for user's home location 
 	Location destLocation = new Location(Context.LOCATION_SERVICE);
+	
+	// Location for first destination of user's claim
 	Location userLocation = new Location(Context.LOCATION_SERVICE);
 
+	
+	/**
+	 * ClaimantClaimListAdapter constructor 
+	 * 
+	 * @param context - context of application
+	 * @param textViewResourceId - ID of textview resource
+	 * @param items - list of claimant's claims
+	 */
 	public ClaimantClaimListAdapter(Context context, int textViewResourceId, ArrayList<Claim> items) {
 
 		super(context, textViewResourceId, items);
@@ -79,6 +81,11 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 
 	}
 	
+	/**
+	 * ViewHolder class that contains TextViews
+	 * for the claimant's claim list view
+	 *
+	 */
 	private class ViewHolder {
 		
 		TextView claimNameTextView;
@@ -87,7 +94,6 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		TextView statusTextView;
 		TextView totalCurrencyView;
 		TextView tagsTextView;
-		
 	}
 	
     public int getCount() {
@@ -105,7 +111,12 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
     
     
 	/**
-	 * Updates the view of the Claims list of the claimant once created or shows the changes once they are edited
+	 * getView method updates the view of the Claims list of the claimant once 
+	 * created or shows the changes once they are edited
+	 * 
+	 * @param position - row of list view (claim)
+	 * @param convertView - row to be converted
+	 * @param parent - parent of View
 	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -117,6 +128,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			row = inflater.inflate(layoutId, parent, false);
 			holder = new ViewHolder();
 			
+			// Initialize textview holders to textview id's from claimant_claims_list_rows.xml
 			holder.claimNameTextView = (TextView) row.findViewById(R.id.claimantClaimNameView);
 			holder.startDateTextView = (TextView) row.findViewById(R.id.claimantStartDateView);
 			holder.destinationsTextView = (TextView) row.findViewById(R.id.claimantListDestsView);
@@ -124,6 +136,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			holder.totalCurrencyView = (TextView) row.findViewById(R.id.claimantTotalCurrencyView);
 			holder.tagsTextView = (TextView) row.findViewById(R.id.claimantTagsListView); 
 			
+			// Set tag for holder
 			row.setTag(holder);
 		} else {
 			holder = (ViewHolder) row.getTag();
@@ -136,8 +149,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		holder.claimNameTextView.setText(claim.getClaimName());
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
-		// This part of the code takes the updates from the destinations list view from the make a claim 
-		// from the claimant and puts the new information to the claimants list view 
+		// Format destinations for output
 		ArrayList<Destination> destStringTuple = claim.getDestinations();
 		String allDest = "";
 		int i;
@@ -148,8 +160,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		if (destStringTuple.size() != 0) {
 			allDest += destStringTuple.get(i).destination;
 		}
-		// This part of the code takes the updates from the tags list view from the claimant claims 
-		// and puts the new information to the claimants list view 
+		
+		// Format tags for output
 		ArrayList<Tag> tags = claim.getTags();
 		String allTags = "";
 		for (Tag tag: tags)
@@ -157,11 +169,16 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			allTags += ""+ tag.getTagName()+ "  ";
 		}
 		
+		// Set text for destinations fo claim
 		holder.destinationsTextView.setText(allDest);
+		
+		// Set text for claim status
 		holder.statusTextView.setText(claim.getStatus().toString());
+		
+		// Set text for tags of claim
 		holder.tagsTextView.setText(allTags);
 		
-		// Set the total currencies first, then display currencies with amount > 0.
+		// Obtain total currencies and display currencies with amount > 0.
 		claim.setTotalCurrencies();
 		SortedMap<String, Double> map = Collections.synchronizedSortedMap(claim.getTotalCurrencies());
 		
@@ -173,22 +190,27 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		if (totalCurrencyOuput.length() > 3) {
 			totalCurrencyOuput = totalCurrencyOuput.substring(0, totalCurrencyOuput.length()-2);
 		}
+		
+		// Set text of total currencies
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
 		
-		// TODO: Need to calculate distance between FIRST destination and home location.
-		// FOR SOME REASON ITS NOT SHOWING ALL CLAIMS?
 		if (claim.getDestinations().size() > 0) {
+			// If destinations exist, obtain the latitidue and longitude for the first destination
 			double lat = claim.getDestinations().get(0).latitude;
 			double lon = claim.getDestinations().get(0).longitude;
+			
 			destLocation.setLatitude(lat);
 			destLocation.setLongitude(lon);
 			
+			// Obtain the distance between home location and destination location
 			double distanceBetween = userLocation.distanceTo(destLocation);
-			Log.i("DESTSIZE", String.valueOf(distanceBetween));
 			if (distanceBetween > 5000000) {
+				// display distant row colour
 				row.setBackgroundResource(R.drawable.listview_selector_distant);
 			} else {
+				
+				// display nearby row colour
 				row.setBackgroundResource(R.drawable.listview_selector_nearby);
 			}
 		}

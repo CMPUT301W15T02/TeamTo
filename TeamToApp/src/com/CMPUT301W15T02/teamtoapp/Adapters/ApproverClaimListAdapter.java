@@ -36,7 +36,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 /**
  * 
- * This adapter will provide a list of submitted claims for the approver. -In progress
+ * This adapter will provide a list of submitted claims for the approver. 
  * 
  * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
@@ -67,7 +67,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 
 	/**
 	 * ViewHolder class that contains TextViews
-	 * for the custom list view
+	 * for the custom submitted claim list view
 	 *
 	 */
 	private class ViewHolder {
@@ -105,7 +105,7 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			holder.totalCurrencyView = (TextView) row.findViewById(R.id.approverTotalCurrencyTextView);
 			holder.approverNameTextView = (TextView) row.findViewById(R.id.approverNameTextView);
 			
-			// Set Tag for holder
+			// Set tag for holder
 			row.setTag(holder);
 			
 		} else {
