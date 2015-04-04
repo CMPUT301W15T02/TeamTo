@@ -36,6 +36,7 @@ import org.apache.http.params.HttpParams;
 import android.content.Context;
 import android.util.Log;
 
+import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
@@ -139,7 +140,7 @@ public class ElasticSearchManager {
 	 */	
 	/* Source: https://github.com/joshua2ua/AndroidElasticSearch/blob/
 	 master/src/ca/ualberta/ssrg/movies/es/ESMovieManager.java 2015-03-18*/
-	public static ArrayList<Claim> getSubmittedClaims() {
+	public static void getSubmittedClaims() {
 		String searchString = "SUBMITTED";
 		ArrayList<Claim> submittedClaimsResult = new ArrayList<Claim>();
 		Gson gson = new Gson();
@@ -218,7 +219,7 @@ public class ElasticSearchManager {
 			
 		}
 		
-		return filterSubmittedClaims(submittedClaimsResult);
+		filterSubmittedClaims(submittedClaimsResult);
 		
 	}
 	
@@ -228,7 +229,7 @@ public class ElasticSearchManager {
 	* 
 	*  TODO: Needs testing
 	*/
-	private static  ArrayList<Claim> filterSubmittedClaims(
+	private static  void filterSubmittedClaims(
 			ArrayList<Claim> submittedClaimsResult) {
 		// Filter out claims where claimant name == approver name
 		for (int i=0; i < submittedClaimsResult.size(); i++) {
@@ -237,8 +238,7 @@ public class ElasticSearchManager {
 				submittedClaimsResult.remove(i);
 			}
 		}
-		
-		return submittedClaimsResult;
+		ApproverClaims.getInstance().setClaims(submittedClaimsResult);
 	}
 
 

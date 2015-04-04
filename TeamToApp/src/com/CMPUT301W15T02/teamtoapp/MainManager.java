@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
-import android.util.Log;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
@@ -117,30 +117,35 @@ public class MainManager {
 		}).start();
 	}
 	
-	public static ArrayList<Claim> getSubmittedClaims() {
+	public static void getSubmittedClaims(final Handler handler) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.getSubmittedClaims();
+					handler.sendEmptyMessage(0);
+				}
+			}
+		}).start();
 		
-		ArrayList<Claim> submittedClaims = new ArrayList<Claim>();
-		if (isNetworkAvailable(applicationContext)) {
-			submittedClaims = ElasticSearchManager.getSubmittedClaims();
-		} 
-		return submittedClaims;
-	}
-	
-	public static void loadClaims(final String name) {
-		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.loadClaims(name);
-		} else {
-			LocalDataManager.loadClaims();
-		}
 	}
 	
 	
-	public static void loadUser(String name) {
-		if (isNetworkAvailable(applicationContext)) {
-			ElasticSearchManager.loadUser(name);
-		} else {
-			LocalDataManager.loadUser();
-		}
+	
+	public static void loadUserAndClaims(final String name, final Handler handler) {
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (isNetworkAvailable(applicationContext) && isConnectedToServer()) {
+					ElasticSearchManager.loadUser(name);
+					ElasticSearchManager.loadClaims(name);
+				} else {
+					LocalDataManager.loadUser();
+					LocalDataManager.loadClaims();
+				}
+				handler.sendEmptyMessage(0);
+			}
+		}).start();
 	}
 	
 	
