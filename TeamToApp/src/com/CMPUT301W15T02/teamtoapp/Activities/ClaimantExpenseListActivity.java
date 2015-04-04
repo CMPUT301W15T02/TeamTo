@@ -113,7 +113,6 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimController = new ClaimController(claimID);
 		expenses = claimController.getExpenses();
 		claimController.addListenerToClaim(this);
-		Log.i("CLAIMID", claimController.getCurrentClaim().getClaimId());
 	}
 	
 	/**
@@ -136,6 +135,7 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimNameTextView.setText(claimController.getClaimName());
 		claimStartDateTextView.setText(claimController.getStartDateFormatted());
 		claimEndDateTextView.setText(claimController.getEndDateFormatted());
+		// If no comment was added then hide the approver comment view
 		if (claimController.getApproverComment() == null) {
 			approverInfoLinearLayout.setVisibility(LinearLayout.GONE);
 		} else {

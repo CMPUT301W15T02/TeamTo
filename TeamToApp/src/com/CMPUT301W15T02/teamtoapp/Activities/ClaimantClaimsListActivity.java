@@ -175,7 +175,6 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
 				if (isChecked) {
-					// TODO fix this to actually work
 					mSelectedItems.add((String) strings[which]);
 					
 				} else if (mSelectedItems.contains(strings[which])) {
@@ -213,6 +212,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 		listView.setAdapter(adapter);
 	}
 	
+	/**
+	 * Sets up claim list adapter for filtered claims. Originally had filter but that no longer works
+	 */
 	private void setUpFilteredAdapter() {
 		adapter = new ClaimantClaimListAdapter(context, R.layout.claimant_claims_list_rows, claimListController.getFilteredClaims(mSelectedItems));
 		adapter.sort(new ClaimComparatorNewestFirst());
@@ -262,9 +264,13 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	 */
 	public void switchToApproverOption(MenuItem menu) {
 		// Switch to ApproverClaimListActivity.class if online
-		if (MainManager.isNetworkAvailable(this)){
-			Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
-			startActivity(intent);
+		if (MainManager.isNetworkAvailable(this)) {
+			if (MainManager.isConnectedToServer()) {
+				Intent intent = new Intent(ClaimantClaimsListActivity.this, ApproverClaimsListActivity.class);
+				startActivity(intent);
+			} else {
+				Toast.makeText(context, "Server is down", Toast.LENGTH_SHORT).show();
+			}
 		}
 		else {
 			// Alert the user that there is no internet access
@@ -273,6 +279,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 
 	}
 	
+	/**
+	 * Button that allows user to set their home location on click
+	 */
 	public void onGoogleMapBtnClicked() {
 		Intent intent = new Intent(ClaimantClaimsListActivity.this, HomeGeoLocationActivity.class);
 		intent.putExtra("latitude", userController.getHomeLatitude());
@@ -283,7 +292,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	
 	
 
-
+	/**
+	 * Receives the result from the home location activity
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		 if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {
@@ -301,8 +312,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 		super.onResume();
+		// Setting up the adapter again to get rid of any filtering that may have occurred
 		setUpAdapter();
 	}
 
