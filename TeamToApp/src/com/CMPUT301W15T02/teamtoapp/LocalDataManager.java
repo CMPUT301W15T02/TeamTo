@@ -56,9 +56,6 @@ public class LocalDataManager {
 	
 	
 	
-	public void setClaims(ArrayList<Claim> claims) {
-		ClaimList.getInstance().setClaims(claims);
-	}
 	
 	
 	public static void loadUser() {
