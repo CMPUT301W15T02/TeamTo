@@ -26,22 +26,21 @@ public class UserTest extends TestCase {
 
 	public void testAddTag() {
 		User user = User.getInstance();
-		assertTrue("Tag list not empty", user.getTags().size() == 4);
 		
 		String tag1Name = "tag1";
 		Tag tag1 = new Tag(tag1Name);
 		user.addTag(tag1);
-		assertTrue("Tag1 not added", user.getTags().size() == 5);
+		assertTrue("Tag1 not added", user.getTags().contains(tag1));
 		
 		String tag2Name = "tag2";
 		Tag tag2 = new Tag(tag2Name);
 		user.addTag(tag2);
-		assertTrue("Tag2 not added", user.getTags().size() == 6);
+		assertTrue("Tag2 not added", user.getTags().contains(tag2));
 		
 		String tag3Name = "Shopping";
 		Tag tag3 = new Tag(tag3Name);
 		user.addTag(tag3);
-		assertEquals("Tag3 was added and it was already in the list", 7, user.getTags().size());
+		assertTrue("Tag3 not added", user.getTags().contains(tag3));
 	}
 	
 	public void testRemoveTag() {
