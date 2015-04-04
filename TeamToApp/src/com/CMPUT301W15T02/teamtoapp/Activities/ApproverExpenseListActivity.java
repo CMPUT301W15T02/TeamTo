@@ -36,6 +36,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * Activity to allow the approver to look at the different expenses of a submitted claim
  *
+ * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * 
  */
 
 public class ApproverExpenseListActivity extends Activity {
@@ -52,6 +54,7 @@ public class ApproverExpenseListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.approver_expense_list);
 		
+		// Set up all IDs, model objects, listeners, and approver expense list adapter
 		findViewsByIds();
 		getModelObjects();
 		setListeners();

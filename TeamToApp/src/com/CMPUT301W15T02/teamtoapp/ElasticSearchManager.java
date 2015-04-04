@@ -52,7 +52,7 @@ import com.google.gson.reflect.TypeToken;
  *
  * @see https://github.com/joshua2ua/AndroidElasticSearch
  * 
- * @author Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
 

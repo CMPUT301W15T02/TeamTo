@@ -35,7 +35,9 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 
 /**
  * 
- * This adapter will provide a list of submitted claims for the approver. In progress.
+ * This adapter will provide a list of submitted claims for the approver. -In progress
+ * 
+ * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
  *
  */
 
@@ -55,12 +57,19 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		this.approverClaimList  = items;
 	}
 
+	/**
+	 * ViewHolder class that contains TextViews
+	 * for the custom list view
+	 * 
+	 * @author rkdhatt
+	 *
+	 */
 	private class ViewHolder {
 		
 		TextView claimantNameTextView;
 		TextView startDateTextView;
 		TextView destinationsTextView;
-		TextView statusTextView; // Should show submitted only
+		TextView statusTextView; 
 		TextView totalCurrencyView;
 		TextView approverNameTextView;
 		
