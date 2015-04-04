@@ -50,6 +50,13 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	private DecimalFormat df = new DecimalFormat("#0.00");
 
+	/**
+	 * ApproverClaimListAdapter constructor
+	 * 
+	 * @param context - context of application
+	 * @param textViewResourceId - ID of textview resource
+	 * @param items - list of submitted claims where approver name != claimant name
+	 */
 	public ApproverClaimListAdapter(Context context, int textViewResourceId,
 			ArrayList<Claim> items) {
 		super(context, textViewResourceId, items);
@@ -76,6 +83,9 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 	
 	/**
 	 * This method updates the list view of the approver with submitted claims only
+	 * @param position - row of list view (claim)
+	 * @param convertView - row to be converted
+	 * @param parent - parent of View
 	 */
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
@@ -94,15 +104,19 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			holder.statusTextView = (TextView) row.findViewById(R.id.approverStatusTextView);
 			holder.totalCurrencyView = (TextView) row.findViewById(R.id.approverTotalCurrencyTextView);
 			holder.approverNameTextView = (TextView) row.findViewById(R.id.approverNameTextView);
-
+			
+			// Set Tag for holder
 			row.setTag(holder);
+			
 		} else {
 			holder = (ViewHolder) row.getTag();
 		}
 		
+		// Set text for claimant name
 		Claim claim = approverClaimList.get(position);
-		// TODO: Need to fix claimant name
 		holder.claimantNameTextView.setText(claim.getUserName());
+		
+		// Set text for start date
 		holder.startDateTextView.setText(formatter.format(claim.getStartDate().getTime()));
 		
 		// Format destinations
@@ -117,7 +131,10 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 			allDest += destStringTuple.get(i).destination;
 		}
 		
+		// Set text for destinations
 		holder.destinationsTextView.setText(allDest);
+		
+		// Set text for status (Submitted only)
 		holder.statusTextView.setText(claim.getStatus().toString());
 		
 		// Format currencies
@@ -132,11 +149,17 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		if (totalCurrencyOuput.length() > 3) {
 			totalCurrencyOuput = totalCurrencyOuput.substring(0, totalCurrencyOuput.length()-2);
 		}
+		
+		// Set text for total currencies of expenses
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
 		ApproverController approverController = new ApproverController();
 		String approverName = approverController.getApproverName();
+		
+		// Set text for approver name
 		holder.approverNameTextView.setText("Approver: "+ approverName);
+		
+		// Return claim row output
 		return row;
 	}
 	
