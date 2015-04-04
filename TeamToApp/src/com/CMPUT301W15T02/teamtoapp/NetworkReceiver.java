@@ -27,8 +27,6 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-
     	boolean isConnected = ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
         if (isConnected) {
         	MainManager.initializeContext(context.getApplicationContext());
