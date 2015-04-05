@@ -58,10 +58,6 @@ public class LocalDataManager {
 		applicationContext = context.getApplicationContext();
 	}
 	
-	
-
-	
-	
 	/**
 	 * Load user from local data storage from the USERFILE file
 	 */
