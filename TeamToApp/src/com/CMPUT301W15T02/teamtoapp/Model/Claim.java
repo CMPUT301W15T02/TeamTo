@@ -178,8 +178,9 @@ public class Claim implements Listener {
 		if (this.comment == null) {
 			this.comment = "";
 			this.comment += comment;
+			this.comment += "\n";
 		} else {
-			this.comment = this.comment + "\n" + comment;
+			this.comment = comment + "\n"+ this.comment + "\n";
 		}
 		notifyListeners();
 	}
