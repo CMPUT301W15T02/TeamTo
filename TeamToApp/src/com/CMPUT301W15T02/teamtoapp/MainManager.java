@@ -45,9 +45,7 @@ public class MainManager {
 	public static void initializeContext(Context context) {
 		applicationContext = context;
 		LocalDataManager.initializeContext(context);
-		ElasticSearchManager.initializeContext(context);
 		Cache.initializeContext(context);
-		
 	}
 	
 	

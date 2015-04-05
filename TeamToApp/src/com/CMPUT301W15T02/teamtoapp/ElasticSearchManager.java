@@ -63,16 +63,9 @@ public class ElasticSearchManager {
 	private static final String SEARCH_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/claim/_search";
 	private static final String USER_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t02/user/";
 	private static final String TAG = "ClaimSearch"; // used for logcat.
-	private static Context applicationContext;
 	
 	
-	public ElasticSearchManager() {
-	}
 	
-	
-	public static void initializeContext(Context context) {
-		applicationContext = context.getApplicationContext();
-	}
 	
 
 	/**getClaim() obtains a Claim from RESOURCE_URL if it exists. (Claimant/approver mode)

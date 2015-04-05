@@ -47,12 +47,6 @@ public class LocalDataManager {
 	private static final String CLAIMFILE = "claims.sav";
 	private static final String USERFILE = "user.sav";
 	
-	/**
-	 * Constructor
-	 */
-	public LocalDataManager() {
-		
-	}
 	
 	
 	/**
