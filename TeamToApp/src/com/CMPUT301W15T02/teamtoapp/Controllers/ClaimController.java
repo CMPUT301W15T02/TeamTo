@@ -45,7 +45,7 @@ public class ClaimController {
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
 	/**
-	 * Cosntructor for claim controller contains current claim being accessed
+	 * Constructor for claim controller contains current claim being accessed
 	 * @param claimID - ID of claim to be controlled
 	 */
 	public ClaimController(String claimID) {
@@ -65,7 +65,7 @@ public class ClaimController {
 	}
 	
 	/**
-	 * Add expense to claim
+	 * Add an expense to claim
 	 * @param expense
 	 */
 	public void addExpense(Expense expense) {
@@ -74,7 +74,7 @@ public class ClaimController {
 	}
 	
 	/**
-	 * Remove expense from claim
+	 * Remove an expense from claim
 	 * @param expense
 	 */
 	public void removeExpense(Expense expense) {

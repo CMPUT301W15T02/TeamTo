@@ -46,9 +46,6 @@ public class Tag {
 	}
 	
 	
-	
-	
-
 	public String getTagID() {
 		return tagID;
 	}

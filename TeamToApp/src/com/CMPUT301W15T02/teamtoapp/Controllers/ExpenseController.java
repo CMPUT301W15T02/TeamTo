@@ -89,7 +89,7 @@ public class ExpenseController {
 	}
 	
 	/**
-	 * Checks if expense ifnormation is completely filled out
+	 * Checks if expense information is completely filled out
 	 * @return boolean from getComplete()
 	 * @see getComplete() method
 	 */

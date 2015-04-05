@@ -28,7 +28,7 @@ public class Destination {
 	public double longitude;
 	
 	/**
-	 * DEstination constructor
+	 * Destination constructor
 	 * @param dest - destination string
 	 * @param reason - reason string
 	 * @param latitude - double latitude value
