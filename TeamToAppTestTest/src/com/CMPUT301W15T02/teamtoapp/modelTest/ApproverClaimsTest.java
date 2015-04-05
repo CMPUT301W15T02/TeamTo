@@ -14,26 +14,34 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
+import junit.framework.TestCase;
+
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-
-import junit.framework.TestCase;
 
 /**
  * Tests the functionality of ApproverClaims.java
  */
 
-//TODO: Need help with testing this
 public class ApproverClaimsTest extends TestCase {
 
 	public void testFindClaimByID() {
+		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
-		
+		String claimID = claim.getClaimId();
+		approverClaims.getClaims().add(claim);
+		assertEquals("Finding claim by ID", claim, approverClaims.findClaimByID(claimID));
 	}
 	
 	public void testFindExpenseByID() {
+		ApproverClaims approverClaims = ApproverClaims.getInstance();
+		Claim claim = new Claim();
 		Expense expense = new Expense();
+		String expenseID = expense.getExpenseId();
+		claim.addExpense(expense);
+		approverClaims.getClaims().add(claim);
+		assertEquals("Finding expense by ID", expense, approverClaims.findExpenseByID(expenseID));
 		
 	}
 	

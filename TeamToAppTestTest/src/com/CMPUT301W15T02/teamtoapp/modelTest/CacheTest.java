@@ -14,10 +14,10 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
+import android.test.AndroidTestCase;
+
 import com.CMPUT301W15T02.teamtoapp.Model.Cache;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-
-import android.test.AndroidTestCase;
 
 /**
  * Tests the functionality of Cache.java

@@ -73,4 +73,8 @@ public class ApproverClaims {
 		return new Expense();
 	}
 	
+	public void tearDownForTesting() {
+		instance = null;
+	}
+	
 }

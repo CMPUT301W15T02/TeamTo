@@ -14,12 +14,12 @@
 
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
-import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
-import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
-
 import junit.framework.TestCase;
+
+import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
+import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
 /**
  * Tests use cases 8.X
@@ -29,22 +29,27 @@ public class UseCase8Test extends TestCase {
 	
 	// UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)
 
-	public void testClaimStatuses() {
+	public void testApproveClaim() {
+		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
-		ClaimList claims = ClaimList.getInstance();
-		claims.addClaim(claim);
-		ClaimController claimController = new ClaimController(claim.getClaimId());
-			
-		// UC 8.0 return claim
-		claimController.submitClaim();
-		claim.setStatus(Status.RETURNED);
-		assertEquals("Claim returned?", Status.RETURNED, claimController.getCurrentClaim().getStatus());
+		approverClaims.getClaims().add(claim);
 		
-		// UC 8.1 approve claim
-		claimController.submitClaim();
-		claim.setStatus(Status.APPROVED);
-		assertEquals("Claim approved?", Status.APPROVED, claimController.getCurrentClaim().getStatus());
-		ClaimList.tearDownForTesting();
+		ApproverController approverController = new ApproverController();
+		approverController.approveClaim(claim, "comment");
+		
+		assertEquals(Status.APPROVED, approverController.getClaim(0).getStatus());
+		approverClaims.tearDownForTesting();
+	}
+	
+	public void testReturnClaim() {
+		ApproverClaims approverClaims = ApproverClaims.getInstance();
+		Claim claim = new Claim();
+		approverClaims.getClaims().add(claim);
+		ApproverController approverController = new ApproverController();
+		approverController.returnClaim(claim, "comment");
+		
+		assertEquals(Status.RETURNED, approverController.getClaim(0).getStatus());
+		approverClaims.tearDownForTesting();
 	}
 
 }

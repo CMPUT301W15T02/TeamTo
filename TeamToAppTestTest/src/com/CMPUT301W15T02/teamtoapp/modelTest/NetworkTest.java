@@ -16,6 +16,8 @@ package com.CMPUT301W15T02.teamtoapp.modelTest;
 
 
 
+import android.test.AndroidTestCase;
+
 import com.CMPUT301W15T02.teamtoapp.ElasticSearchManager;
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
@@ -24,8 +26,6 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
-
-import android.test.AndroidTestCase;
 
 
 public class NetworkTest extends AndroidTestCase{
@@ -81,7 +81,6 @@ public class NetworkTest extends AndroidTestCase{
 		assertEquals(size, ApproverClaims.getInstance().getClaims().size());
 	}
 	
-	//TODO: Keeps giving null...
 	public void testGetClaimFromNetwork() {
 		Claim claim = new Claim();
 		MainManager.initializeContext(mContext);
@@ -93,7 +92,7 @@ public class NetworkTest extends AndroidTestCase{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//assertNotNull(ElasticSearchManager.getClaim(claimID));
+		assertNotNull(ElasticSearchManager.getClaim(claimID));
 		try {
 			Thread.sleep(250);
 		} catch (InterruptedException e) {
@@ -111,7 +110,6 @@ public class NetworkTest extends AndroidTestCase{
 		try {
 			Thread.sleep(250);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		User.getInstance().setName("Joe");
@@ -145,7 +143,6 @@ public class NetworkTest extends AndroidTestCase{
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

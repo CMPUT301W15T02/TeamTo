@@ -19,12 +19,12 @@ import java.util.Calendar;
 import java.util.Currency;
 import java.util.List;
 
+import junit.framework.TestCase;
+
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-
-import junit.framework.TestCase;
 
 /**
  * Tests use cases 4.X
