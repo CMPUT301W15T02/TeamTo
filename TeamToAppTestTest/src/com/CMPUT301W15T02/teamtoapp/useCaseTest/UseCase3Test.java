@@ -2,6 +2,8 @@ package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
 import java.util.ArrayList;
 
+import junit.framework.TestCase;
+
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
@@ -18,10 +20,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import com.CMPUT301W15T02.teamtoapp.Model.User;
-
-import junit.framework.TestCase;
 
 /**
  * Tests use cases 3.X

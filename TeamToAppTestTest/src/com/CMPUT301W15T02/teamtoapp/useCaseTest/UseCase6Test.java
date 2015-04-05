@@ -17,9 +17,9 @@ package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 import java.util.Calendar;
 import java.util.Currency;
 
-import com.CMPUT301W15T02.teamtoapp.Model.Expense;
-
 import junit.framework.TestCase;
+
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 /**
  * Tests use cases 6.X
@@ -43,9 +43,9 @@ public class UseCase6Test extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
-		String photoPath = "sdcard/photos/cats.jpg";
-		expense.addPhoto(photoPath); // Not implemented yet.
-		//assertEquals("Photo added to expense?", photoPath, expense.getPhoto());
+		String photo = "CAT";
+		expense.addPhoto(photo);
+		assertEquals("Photo added to expense?", photo, expense.getPhoto());
 		
 		// UC 6.2 delete photo receipt
 		expense.removePhoto();

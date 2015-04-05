@@ -14,10 +14,10 @@
 
 package com.CMPUT301W15T02.teamtoapp.modelTest;
 
+import junit.framework.TestCase;
+
 import com.CMPUT301W15T02.teamtoapp.Controllers.UserController;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
-
-import junit.framework.TestCase;
 
 /**
  * Tests the functionality of Tag.java

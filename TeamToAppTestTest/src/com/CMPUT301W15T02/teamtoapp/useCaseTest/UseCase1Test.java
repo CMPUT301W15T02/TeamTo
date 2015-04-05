@@ -72,27 +72,22 @@ public class UseCase1Test extends AndroidTestCase {
 		ClaimList.tearDownForTesting();
 	}
 	
-	/*
-	 * public void testEditClaim() {
-		ClaimList claims = ClaimList.getInstance();
+	
+	 public void testEditClaim() {
 		Claim claim = new Claim();
 		
-		claim.setStatus(Claim.Status.IN_PROGRESS);
-		claims.addClaim(claim); // Has default values
 		
 		claim.setClaimName("in progress");
-		assertEquals("Name changed when in progress", "in progress", claims.getClaims().get(claim).getClaimName());
+		assertEquals("Name changed when in progress", "in progress", claim.getClaimName());
 		
-		claim.setStatus(Claim.Status.SUBMITTED);
 		claim.setClaimName("submitted name");
-		assertTrue("Claim name has not changed.", claim.getClaimName().equals("submitted name"));
+		assertEquals("Claim name changed.", "submitted name", claim.getClaimName());
 		
-		claim.setStatus(Claim.Status.RETURNED);
 		claim.setClaimName("returned name");
-		assertEquals("Claim name changed when returned", "returned name", claims.getClaim(claim).getClaimName());
+		assertEquals("Claim name changed when returned", "returned name", claim.getClaimName());
 		ClaimList.tearDownForTesting();
 	}
-	*/
+	
 	
 	// UC 1.2
 	public void testDeleteClaim() {

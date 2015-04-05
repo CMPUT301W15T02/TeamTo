@@ -17,7 +17,6 @@ package com.CMPUT301W15T02.teamtoapp;
 
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.ArrayList;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

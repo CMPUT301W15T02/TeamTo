@@ -2,13 +2,11 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
 
-import android.R.integer;
-
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
-import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 /**
  * Controller for the approver
