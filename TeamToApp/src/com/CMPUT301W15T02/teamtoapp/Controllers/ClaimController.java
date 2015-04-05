@@ -33,6 +33,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
  * 
  * Claim controller is responsible for communicating from any associated views to the model
  * as well as attaching listeners to the model
+ * 
+ * @author Kyle Carlstrom, Raman Dhatt
  *
  */
 
@@ -42,6 +44,10 @@ public class ClaimController {
 	private Claim currentClaim;
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
+	/**
+	 * Cosntructor for claim controller contains current claim being accessed
+	 * @param claimID - ID of claim to be controlled
+	 */
 	public ClaimController(String claimID) {
 		this.currentClaim = ClaimList.getInstance().findClaimByID(claimID);
 	}
@@ -58,11 +64,19 @@ public class ClaimController {
 		currentClaim.setClaimName(name);
 	}
 	
+	/**
+	 * Add expense to claim
+	 * @param expense
+	 */
 	public void addExpense(Expense expense) {
 		currentClaim.addExpense(expense);
 		MainManager.updateClaim(currentClaim);
 	}
 	
+	/**
+	 * Remove expense from claim
+	 * @param expense
+	 */
 	public void removeExpense(Expense expense) {
 		currentClaim.removeExpense(expense);
 		MainManager.updateClaim(currentClaim);
@@ -251,11 +265,19 @@ public class ClaimController {
 		}
 	}
 
+	/**
+	 * add tag based on tagID
+	 * @param tagID
+	 */
 	public void addTag(String tagID) {
 		currentClaim.addTag(tagID);
 		
 	}
 
+	/**
+	 * remove tag based on ID
+	 * @param tagID
+	 */
 	public void removeTag(String tagID) {
 		currentClaim.removeTag(tagID);
 		

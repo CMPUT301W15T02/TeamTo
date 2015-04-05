@@ -10,11 +10,21 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 
+/**
+ * Controller for the approver
+ * 
+ * @author Kyle Carlstrom
+ *
+ */
 public class ApproverController {
 	
 	private ArrayList<Claim> claims;
 	private String approverName;
 	
+	/**
+	 * Constructor for controller contains list of submitted claims
+	 * and approver name from user singleton
+	 */
 	public ApproverController() {
 		claims = ApproverClaims.getInstance().getClaims();
 		approverName = User.getInstance().getName();
@@ -34,6 +44,11 @@ public class ApproverController {
 	}
 	
 	
+	/**
+	 * Method for approving a selected claim by the approver
+	 * @param claim - claim to be approved
+	 * @param comment - non-empty comment added by approver
+	 */
 	public void approveClaim(Claim claim, String comment) {
 		claim.setApproverName(User.getInstance().getName());
 		claim.setComment(comment);
@@ -41,6 +56,12 @@ public class ApproverController {
 		MainManager.ApproveClaim(claim);
 	}
 	
+	
+	/**
+	 * Method for returning a selected claim by the approver
+	 * @param claim - claim to be returned
+	 * @param comment - non-empty comment added by approver
+	 */
 	public void returnClaim(Claim claim, String comment) {
 		claim.setApproverName(User.getInstance().getName());
 		claim.setComment(comment);
