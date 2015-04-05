@@ -43,6 +43,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * Activity where a user can see the overview of their claim including all of their expenses.
  * Claimants can add, delete, and edit the expenses when the claim is editable
+ * 
+ * @authors Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt
  *
  */
 
@@ -66,6 +68,9 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_expense_list);
+		/* Set up all model objects, widgets, field values, 
+		 * listeners, and expense list adapter
+		 */
 		getModelObjects();
 		findViewsByIds();
 		setFieldValues();
@@ -97,7 +102,9 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 			intent.putExtra("claimID", claimID);
 			startActivity(intent);
 			return true;
+			
 		} else if (id == R.id.submitClaimOption) {
+			// Go to submitClaim method
 			submitClaim();
 			invalidateOptionsMenu();
 		}
@@ -109,9 +116,13 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 	 */
 	private void getModelObjects() {
 		Intent intent = getIntent();
+		// Grab claim object from intent via claimID
 		claimID = (String) intent.getSerializableExtra("claimID");
+		// Initialize claimController based on claimID
 		claimController = new ClaimController(claimID);
+		// Get expenses from claim controller
 		expenses = claimController.getExpenses();
+		// Add listener to update changes in claim via claim controller
 		claimController.addListenerToClaim(this);
 	}
 	
@@ -135,7 +146,7 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 		claimNameTextView.setText(claimController.getClaimName());
 		claimStartDateTextView.setText(claimController.getStartDateFormatted());
 		claimEndDateTextView.setText(claimController.getEndDateFormatted());
-		// If no comment was added then hide the approver comment view
+		// If no comment was added, then hide the approver comment view
 		if (claimController.getApproverComment() == null) {
 			approverInfoLinearLayout.setVisibility(LinearLayout.GONE);
 		} else {
@@ -205,7 +216,7 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 					}).create().show();
 					// Toasts the user if it is not editable
 				} else {
-					Toast.makeText(context, "Cannot currently delete expenses", Toast.LENGTH_SHORT).show();
+					Toast.makeText(context, "Cannot currently delete expense", Toast.LENGTH_SHORT).show();
 				}
 				return true;
 			}

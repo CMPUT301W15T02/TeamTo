@@ -38,7 +38,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
  * 
  * This adapter will provide a list of submitted claims for the approver. 
  * 
- * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @authors Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *
  */
 

@@ -55,6 +55,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
  * 
  * Activity for both editing and adding a claim
  *
+ * @authors Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt
  */
 
 public class ClaimEditActivity extends Activity implements Listener {
@@ -85,6 +86,9 @@ public class ClaimEditActivity extends Activity implements Listener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claimant_edit_delete_claim);
+		/* Set up all model objects, widgets, field values, 
+		 * and listeners
+		 */
 		getModelObjects();
 		findViewsByIds();
         setListeners();
@@ -102,9 +106,10 @@ public class ClaimEditActivity extends Activity implements Listener {
 	/**
 	 * Saves the current claim, mostly replicates functionality of onBackPressed
 	 * because we are saving in place
-	 * @param menu
+	 * @param menu - Save button on action bar
 	 */
 	public void onSaveButtonClick(MenuItem menu) {
+		// Changes (if any) automatically saved
 		onBackPressed();
 		
 	}
@@ -128,6 +133,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	 */
 	private void addDestination() {
 		Intent intent = new Intent(ClaimEditActivity.this, DestinationGeoLocationActivity.class);
+		// Geolocation request code passed to ensure destination and corresponding geolocation is returned
 		startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
 	}
 	
@@ -375,6 +381,11 @@ public class ClaimEditActivity extends Activity implements Listener {
 		claimController.removeListenerFromClaim(this);
 	}
 
+	/**
+	 * When coming back from DestinationGeoLocationActivity,
+	 * if result is OK, obtain all values and add the destination information
+	 * into the claim via claim controller
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {

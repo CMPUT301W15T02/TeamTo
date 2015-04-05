@@ -64,6 +64,8 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 /**
  * 
  * Activity for editing an expense
+ * 
+ * @author Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt
  *
  */
 
@@ -98,6 +100,9 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.expense_edit_activity);
+		/* Set up all model objects, widgets, field values, 
+		 * and listeners
+		 */
 		getModelObjects();
 		findViewsByIds();
 		setUpAdapters();
@@ -126,8 +131,11 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	private void getModelObjects() {
 		hasChanged = false;
 		Intent intent = getIntent();
+		// Obtain espense ID and claim ID from intent
 		expenseID = (String) intent.getSerializableExtra("expenseID");
 		claimID = (String) intent.getSerializableExtra("claimID");
+		
+		// Create expense controller based on expense ID
 		expenseController = new ExpenseController(expenseID);
 		expenseController.addListenerToExpense(this);
 		
@@ -186,11 +194,15 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		dateTextView.setText(formatter.format(expenseController.getDate().getTime()));
 		currencySpinner.setSelection(currencyAdapter.getPosition(expenseController.getCurrency().toString()));
 		categorySpinner.setSelection(categoriesAdapter.getPosition(expenseController.getCategory()));
+		
+		// If expense is complete, set the checkbox to be true
 		if (expenseController.isComplete()) {
 			completedCheckBox.setChecked(true);
 		} else {
 			completedCheckBox.setChecked(false);
 		}
+		
+		// If expense has photo, set the receipt image button text to "View reciept"
 		if (expenseController.getPhoto() == null) {
 			receiptImageButton.setText("Attach Receipt");
 		} else {
@@ -206,15 +218,17 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	}
 	
 	
-	
+	/**
+	 * Checks to see if the expense is new or is being updated
+	 */
 	@Override
 	public void onBackPressed() {
-		// TODO move this to controller
-		// Should only update if something has changed
 		ClaimController claimController = new ClaimController(claimID);
+		// If expense doesn't exist, add to claim via claim controller
 		if (!claimController.getExpenses().contains(expenseController.getExpense())) {
 			claimController.addExpense(expenseController.getExpense());
 		}
+		// If existing expense has changed, update the server and/or local storage via MainManager
 		if (hasChanged) {
 			MainManager.updateClaim(claimController.getCurrentClaim());
 		}
@@ -353,11 +367,13 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			}
 		});
 		
+		// Go to HomeGeoLocationActivity to allow user to select location for their expense
 		expenseGeolocationButton.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(ExpenseEditActivity.this, HomeGeoLocationActivity.class);
+				// Pass latitude and longitude values that will be changed to intent
 				intent.putExtra("latitude", expenseController.getLatitude());
 				intent.putExtra("longitude", expenseController.getLongitude());
 				startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
@@ -366,13 +382,19 @@ public class ExpenseEditActivity extends Activity implements Listener {
 		});
 	}
 
+	/**
+	 * Show the user a dialog to select whether they want to re-take/delete 
+	 * an existing photo
+	 */
 	public void showImage() {
 	    LayoutInflater inflater = LayoutInflater.from(getBaseContext());
 		View viewPhotoLayout = inflater.inflate(R.layout.photo_display_dialog, null);
 	    final ImageView imageView = (ImageView) viewPhotoLayout.findViewById(R.id.dialogPhotoImageView);
 		if (expenseController.getPhoto() != null) {
+			// If photo exists, decode its string format
 			byte[] decodedString = Base64.decode(expenseController.getPhoto(), Base64.DEFAULT);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+			// Create and set image drawable for image bitmap
 			Drawable d = new BitmapDrawable(getResources(),bitmap);
 	    	imageView.setImageDrawable(d);
 			
@@ -383,6 +405,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				// Go to takeAPhoto method to retake photo
 				takeAPhoto();
 				
 			}
@@ -391,6 +414,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				// Delete photo
 				expenseController.removePhoto();
 				
 			}
@@ -407,7 +431,9 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	
 	
 	
-	
+	/**
+	 * Allows user to take a new photo/ re-take a photo
+	 */
 	public void takeAPhoto() {
 
 		// Create a folder to store pictures
@@ -430,7 +456,14 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	}
 
 	
-	
+	/**
+	 * If image recieved and the result code is OK, grab photo and
+	 * add it to expense via expense controller
+	 * 
+	 * If geolocation for expense is recieved an the result code is OK,
+	 * grab geolocation and add it to expense via expense controller
+	 * (via modifying latitude and longitude)
+	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 	    if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {

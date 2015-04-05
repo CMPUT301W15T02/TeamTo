@@ -33,7 +33,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
  * MainManager will send requests to LocalDataManager and/or ElasticSearchDataManager
  * depending on whether offline/online state.
  * 
- *  @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ *  @authors Kyle Carlstrom, Raman Dhatt
  *
  */
 

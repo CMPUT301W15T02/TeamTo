@@ -25,16 +25,22 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+/**
+ * 
+ * Records the geolocation, destination of the geolocation, and reason for travel
+ * @author Kyle Carlstrom
+ *
+ */
 public class DestinationGeoLocationActivity extends Activity {
 
 	private GoogleMap googleMap;
 	private Location location = null;
-	private Marker marker = null;
+	private Marker marker = null; // marks location selected by user on googleMap 
 	private Context context = this;
 	
 	private EditText destinationEditText;
 	private EditText reasonEditText;
-	private LatLng addressLatLng;
+	private LatLng addressLatLng; // latitude and longitude saved from googleMap
 	
 	
 	@Override
@@ -42,10 +48,9 @@ public class DestinationGeoLocationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_destination_geo_location);
 		
+		// Initialize destination and reason EditTexts
 		destinationEditText = (EditText) findViewById(R.id.destinationSelectEditText);
 		reasonEditText = (EditText) findViewById(R.id.reasonDestinationEditText);
-		
-		
 		
 		// Check status of Google play services
 		int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
@@ -70,7 +75,7 @@ public class DestinationGeoLocationActivity extends Activity {
 						findFragmentById(R.id.destinationMap)).getMap();
 			}     
 
-			// Place dot on current location and add visible features
+			// Place marker/dot on current location and add visible features
 			googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 			googleMap.setMyLocationEnabled(true);
 			googleMap.setBuildingsEnabled(true);
@@ -89,7 +94,7 @@ public class DestinationGeoLocationActivity extends Activity {
 			e.printStackTrace();
 		}
 
-
+		// Add/move existing marker to the position of the map long-clicked
 		googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 
 			@Override
@@ -103,6 +108,7 @@ public class DestinationGeoLocationActivity extends Activity {
 			}
 		});
 
+		// Zoom into location if it exists 
 		googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
 
 			@Override
@@ -119,10 +125,15 @@ public class DestinationGeoLocationActivity extends Activity {
 		
 	}
 	
-	
+	/**
+	 * Save destination entered as long as a geolocation is specified
+	 */
 	private void saveDestination() {
+		// Obtain destination and reason texts
 		String destination = destinationEditText.getText().toString();
 		String reason = reasonEditText.getText().toString();
+		
+		// If no destination entered, toast user to enter a destination
 		if (destination.length() == 0) {
 			Toast.makeText(context, "Please enter a destination.", Toast.LENGTH_SHORT).show();
 		} else if (marker == null) {
@@ -131,13 +142,18 @@ public class DestinationGeoLocationActivity extends Activity {
 			if (reason == null) {
 				reason = "";
 			}
+			// Obtain latitude and longitude from marker
 			double latitude = marker.getPosition().latitude;
     		double longitude = marker.getPosition().longitude;
     		Intent returnIntent = new Intent();
+    		
+    		// Add latitude, longitude, reason, and destination to intent
     		returnIntent.putExtra("latitude", latitude);
         	returnIntent.putExtra("longitude", longitude);
         	returnIntent.putExtra("reason", reason);
         	returnIntent.putExtra("destination", destination);
+        	
+        	// Return intent with items attached
             setResult(RESULT_OK, returnIntent);
     		finish();
 		}

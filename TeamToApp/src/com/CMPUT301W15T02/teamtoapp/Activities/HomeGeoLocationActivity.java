@@ -57,6 +57,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
 // @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
  * @see http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location 2015-03-29
+ * 
+ * @authors Kyle Carlstrom, Raman Dhatt
  * */
 
 public class HomeGeoLocationActivity extends Activity {

@@ -46,7 +46,7 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
  * Activity that allows a user to look at all the different submitted claims
  * Not finished
  * 
- * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @authors Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *
  */
 

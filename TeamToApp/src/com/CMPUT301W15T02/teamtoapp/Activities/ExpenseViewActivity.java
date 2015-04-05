@@ -49,6 +49,7 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
  * 
  * Non-editable activity for viewing the expense, will have the ability to preview picture when photos are added
  *
+ * @author Kyle Carlstrom 
  */
 
 public class ExpenseViewActivity extends Activity {
@@ -71,6 +72,9 @@ public class ExpenseViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_expense_view);
+		/* Set up all model objects, widgets, field values, 
+		 * and listeners
+		 */
 		getModelObjects();
 		findViewsByIds();
 		setUpAdapters();
@@ -99,6 +103,7 @@ public class ExpenseViewActivity extends Activity {
 	 */
 	private void getModelObjects() {
 		Intent intent = getIntent();
+		// Obtain expenseID from intent and save in expense controller
 		expenseID = (String) intent.getSerializableExtra("expenseID");
 		expenseController = new ExpenseController(expenseID);
 		
@@ -120,6 +125,7 @@ public class ExpenseViewActivity extends Activity {
 	 * Sets up the adapters
 	 */
 	private void setUpAdapters() {
+		// Set up currency and category adapters
 		currencyAdapter = ArrayAdapter.createFromResource(this, R.array.currency_string,
 				android.R.layout.simple_spinner_dropdown_item);
 		currencySpinner.setAdapter(currencyAdapter);
@@ -143,9 +149,14 @@ public class ExpenseViewActivity extends Activity {
 		}
 	}
 	
+	/**
+	 * If reciept image button clicked, go to showImage() method
+	 * to show avaibale image to user
+	 * 
+	 * @see // http://stackoverflow.com/questions/7693633/android-image-dialog-popup
+	 */
 	private void setListeners() {
 		receiptImageButton.setOnClickListener(new View.OnClickListener() {
-			// http://stackoverflow.com/questions/7693633/android-image-dialog-popup
 			@Override
 			public void onClick(View v) {
 				if (expenseController.getPhoto() != null) {
@@ -157,6 +168,10 @@ public class ExpenseViewActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * This method will show an existing image of a photo receipt saved
+	 * by the user.
+	 */
 	public void showImage() {
 	    Dialog builder = new Dialog(this);
 	    builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -170,14 +185,18 @@ public class ExpenseViewActivity extends Activity {
 	    });
 	    ImageView imageView = new ImageView(this);
 	    if (expenseController.getPhoto() != null) {
+	    	// If photo exists, decode its string format
 			byte[] decodedString = Base64.decode(expenseController.getPhoto(), Base64.DEFAULT);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+			// Create and set image drawable for image bitmap
 			Drawable drawable = new BitmapDrawable(getResources(),bitmap);
 			imageView.setImageDrawable(drawable);
-		builder.addContentView(imageView, new RelativeLayout.LayoutParams(
-	            ViewGroup.LayoutParams.MATCH_PARENT, 
-	            ViewGroup.LayoutParams.MATCH_PARENT));
-	    builder.show();
+			
+			// add the content view to builder and show image
+			builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT, 
+					ViewGroup.LayoutParams.MATCH_PARENT));
+			builder.show();
 	    }
 	}
 	

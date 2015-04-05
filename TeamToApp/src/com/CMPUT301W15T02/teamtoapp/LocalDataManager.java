@@ -36,7 +36,7 @@ import com.google.gson.reflect.TypeToken;
  * Controls link between local storage and elastic search server.
  * LocalDataManager checks whether there is connectivity before manipulating data via server/local storage.
  * 
- * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @authors Michael Stensby, Kyle Carlstrom,Raman Dhatt
  */
 
 public class LocalDataManager {

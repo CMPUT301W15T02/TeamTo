@@ -31,6 +31,14 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
+/**
+ * 
+ * Activity to allow the approver to look at more information of a specific expense
+ *
+ * @author Kyle Carlstrom
+ * 
+ */
+
 public class ApproverExpenseViewActivity extends Activity {
 
 	private Expense expense;
@@ -52,6 +60,9 @@ public class ApproverExpenseViewActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_approver_expense_view);
+		
+		/* Set up all IDs, model objects, listeners, 
+		and approver expense list adapter */
 		getModelObjects();
 		findViewsByIds();
 		setUpAdapters();
@@ -61,16 +72,12 @@ public class ApproverExpenseViewActivity extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.approver_expense_view, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -85,13 +92,16 @@ public class ApproverExpenseViewActivity extends Activity {
 	 */
 	private void getModelObjects() {
 		Intent intent = getIntent();
+		// Obtain expense ID from intent
 		expenseID = (String) intent.getSerializableExtra("expenseID");
+		
+		// Obtain expense based on expense ID from list of approved claims
 		expense = ApproverClaims.getInstance().findExpenseByID(expenseID);
 		
 	}
 	
 	/**
-	 * Finds all of the associated views
+	 * Finds all of the associated views and assign them
 	 */
 	private void findViewsByIds() {
 		dateTextView = (TextView) findViewById(R.id.ApproverExpenseDateTextView);
@@ -103,7 +113,7 @@ public class ApproverExpenseViewActivity extends Activity {
 	}
 	
 	/**
-	 * Sets up the adapters
+	 * Sets up the adapters for currency and category spinners
 	 */
 	private void setUpAdapters() {
 		currencyAdapter = ArrayAdapter.createFromResource(this, R.array.currency_string,
@@ -124,14 +134,20 @@ public class ApproverExpenseViewActivity extends Activity {
 		categorySpinner.setSelection(categoriesAdapter.getPosition(expense.getCategory()));
 		amountEditText.setText(df.format(expense.getAmount()));
 		descriptionEditText.setText(expense.getDescription());
+		
+		// If no photo exists, do not show receiptImageButton
 		if (expense.getPhoto() == null) {
 			receiptImageButton.setVisibility(View.GONE);
 		}
 	}
 	
+	/**
+	 * Sets listener when reciept button pressed
+	 * @see // http://stackoverflow.com/questions/7693633/android-image-dialog-popup
+	 */
 	private void setListeners() {
 		receiptImageButton.setOnClickListener(new View.OnClickListener() {
-			// http://stackoverflow.com/questions/7693633/android-image-dialog-popup
+			
 			@Override
 			public void onClick(View v) {
 				if (expense.getPhoto() != null) {
@@ -143,6 +159,10 @@ public class ApproverExpenseViewActivity extends Activity {
 		});
 	}
 	
+	/**
+	 * This method is called when the receipt button is clicked and a photo exists.
+	 * It allows a photo to be viewed by the user.
+	 */
 	public void showImage() {
 	    Dialog builder = new Dialog(this);
 	    builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -154,16 +174,23 @@ public class ApproverExpenseViewActivity extends Activity {
 	            //nothing;
 	        }
 	    });
+	    // Create ImageView
 	    ImageView imageView = new ImageView(this);
+	    
 	    if (expense.getPhoto() != null) {
+	    	// If photo exists, decode from string format
 			byte[] decodedString = Base64.decode(expense.getPhoto(), Base64.DEFAULT);
 			Bitmap bitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+			
+			// Create and set image drawable for bitmap
 			Drawable drawable = new BitmapDrawable(getResources(),bitmap);
 			imageView.setImageDrawable(drawable);
-		builder.addContentView(imageView, new RelativeLayout.LayoutParams(
-	            ViewGroup.LayoutParams.MATCH_PARENT, 
-	            ViewGroup.LayoutParams.MATCH_PARENT));
-	    builder.show();
+			
+			// Add image view to the dialog builder and show image
+			builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT, 
+					ViewGroup.LayoutParams.MATCH_PARENT));
+			builder.show();
 	    }
 	}
 }

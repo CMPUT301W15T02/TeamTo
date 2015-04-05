@@ -36,7 +36,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * Activity to allow the approver to look at the different expenses of a submitted claim
  *
- * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @author Kyle Carlstrom
  * 
  */
 
@@ -115,7 +115,7 @@ public class ApproverExpenseListActivity extends Activity {
 	
 	/**
 	 * Set up the approver expense list adapter using
-	 * custom adapter.
+	 * a custom adapter.
 	 */
 	private void setUpAdapter() {
 		adapter = new ApproverExpenseListAdapter(context, R.layout.approver_expense_list_rows, expenses);

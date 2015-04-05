@@ -46,6 +46,8 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
  * The activity that the claimant will come to if they have already logged in.
  * Contains a list of their claims and has the ability to add new claims, manage tags,
  * and switch to approver mode
+ * 
+ * @authors Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt
  */
 
 public class ClaimantClaimsListActivity extends Activity implements Listener {
@@ -62,6 +64,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/* Set up all model objects, widgets, field values, 
+		 * listeners, and claim list adapter
+		 */
 		setContentView(R.layout.claimant_claims_list);
 		getModelObjects();
 		findViewsByIds();
@@ -295,14 +300,18 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		 if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {
-		    	double latitude = data.getDoubleExtra("latitude", 0.0);
-		    	double longitude = data.getDoubleExtra("longitude", 0.0);
-		    	Log.i("LATITUDE", String.valueOf(latitude));
-		    	Log.i("LONGITUDE", String.valueOf(longitude));
-		    	userController.setHomeLatitude(latitude);
-		    	userController.setHomeLongitude(longitude);
-		    	MainManager.saveUser();
-		    }
+			 
+			 // Save longitude and latitude in user model via user controller
+			 double latitude = data.getDoubleExtra("latitude", 0.0);
+			 double longitude = data.getDoubleExtra("longitude", 0.0);
+			 Log.i("LATITUDE", String.valueOf(latitude));
+			 Log.i("LONGITUDE", String.valueOf(longitude));
+			 userController.setHomeLatitude(latitude);
+			 userController.setHomeLongitude(longitude);
+			 
+			 // Save changes of the user location
+			 MainManager.saveUser();
+		 }
 	}
 
 
@@ -310,7 +319,9 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// Setting up the adapter again to get rid of any filtering that may have occurred
+		/* Setting up the adapter again to get rid of 
+		 * any filtering that may have occurred
+		 */
 		setUpAdapter();
 	}
 
@@ -333,6 +344,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	@Override
 	public void update() {
 		adapter.notifyDataSetChanged();
+		// Sort list view by start date
 		adapter.sort(new ClaimComparatorNewestFirst());
 	}
 	
