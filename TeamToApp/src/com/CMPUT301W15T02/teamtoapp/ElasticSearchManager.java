@@ -462,7 +462,7 @@ public class ElasticSearchManager {
 		// Create response object to load list of claims
 		HttpPost searchRequest = new HttpPost(SEARCH_URL);
 
-		if (searchString==null || searchString=="") {
+		if (searchString.equals(null) || searchString.equals("")) {
 			// Default search: search all claims
 			searchString = "*";
 		}
