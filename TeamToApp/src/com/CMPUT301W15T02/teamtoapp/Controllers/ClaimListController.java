@@ -17,7 +17,6 @@ package com.CMPUT301W15T02.teamtoapp.Controllers;
 
 import java.util.ArrayList;
 
-import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;

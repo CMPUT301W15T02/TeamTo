@@ -133,7 +133,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	 */
 	private void addDestination() {
 		Intent intent = new Intent(ClaimEditActivity.this, DestinationGeoLocationActivity.class);
-		// Geolocation request code passed to ensure destination and corresponding geolocation is returned
+		// Geo-location request code passed to ensure destination and corresponding geolocation is returned
 		startActivityForResult(intent, GET_GEOLOCATION_REQUEST_CODE);
 	}
 	

@@ -142,7 +142,7 @@ public class ApproverExpenseViewActivity extends Activity {
 	}
 	
 	/**
-	 * Sets listener when reciept button pressed
+	 * Sets listener when receipt button pressed
 	 * @see // http://stackoverflow.com/questions/7693633/android-image-dialog-popup
 	 */
 	private void setListeners() {
