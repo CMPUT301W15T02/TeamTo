@@ -153,11 +153,14 @@ public class ApproverClaimListAdapter extends ArrayAdapter<Claim>{
 		// Set text for total currencies of expenses
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
-		ApproverController approverController = new ApproverController();
-		String approverName = approverController.getApproverName();
+		String approverName = claim.getApproverName();
 		
-		// Set text for approver name
-		holder.approverNameTextView.setText("Approver: "+ approverName);
+		if (approverName != "") {
+			// Set text for approver name
+			holder.approverNameTextView.setText("Approver: "+ approverName);
+		} else {
+			holder.approverNameTextView.setText("Approver: N/A");
+		}
 		
 		// Return claim row output
 		return row;
