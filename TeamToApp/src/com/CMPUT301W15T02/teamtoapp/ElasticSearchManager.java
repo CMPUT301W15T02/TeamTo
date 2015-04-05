@@ -31,7 +31,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
