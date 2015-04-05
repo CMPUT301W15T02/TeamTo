@@ -405,7 +405,7 @@ public class ExpenseEditActivity extends Activity implements Listener {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				// Go to takeAPhoto method to retake photo
+				// Go to takeAPhoto method to re-take photo
 				takeAPhoto();
 				
 			}
@@ -457,11 +457,11 @@ public class ExpenseEditActivity extends Activity implements Listener {
 
 	
 	/**
-	 * If image recieved and the result code is OK, grab photo and
+	 * If image received and the result code is OK, grab photo and
 	 * add it to expense via expense controller
 	 * 
-	 * If geolocation for expense is recieved an the result code is OK,
-	 * grab geolocation and add it to expense via expense controller
+	 * If geo-location for expense is received an the result code is OK,
+	 * grab geo-location and add it to expense via expense controller
 	 * (via modifying latitude and longitude)
 	 */
 	@Override

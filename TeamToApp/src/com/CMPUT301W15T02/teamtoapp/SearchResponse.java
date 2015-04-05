@@ -68,7 +68,10 @@ public class SearchResponse<T> {
 }
 
 	
+//TODO: Might be needed as shard isn't really self-explanatory 
+// Link for description:  https://en.wikipedia.org/wiki/Shard_%28database_architecture%29
 
+//This class allows for the partitioning of our data from the database
 class Shard {
 	
 	private int total;

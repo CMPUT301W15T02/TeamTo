@@ -150,8 +150,8 @@ public class ExpenseViewActivity extends Activity {
 	}
 	
 	/**
-	 * If reciept image button clicked, go to showImage() method
-	 * to show avaibale image to user
+	 * If receipt image button clicked, go to showImage() method
+	 * to show available image to user
 	 * 
 	 * @see // http://stackoverflow.com/questions/7693633/android-image-dialog-popup
 	 */
