@@ -40,6 +40,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 /**
  * Activity that user will see upon first starting app,
  * prompts for login and saves username for next session
+ * 
+ * @authors Michael Stensby, Kyle Carlstrom, Raman Dhatt
  */
 
 public class LoginActivity extends Activity {
@@ -52,17 +54,23 @@ public class LoginActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		// Obtain SharedPreferences object, and set default values for hasLoggedIn
 		SharedPreferences settings = getSharedPreferences(LoginActivity.PREFS_NAME, 0);
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
+		
+		// Obtain username
 		final String usernameString = settings.getString("username", null);
 		MainManager.initializeContext(getApplicationContext());
 		
-		
+		// Create Handler 
 		handler = new Handler(Looper.getMainLooper()) {
 
 			@Override
 			public void handleMessage(Message msg) {
+				// Obtain user name from user singleton
 				User.getInstance().setName(usernameString);
+				
+				// Create intent and start activity
 				Intent intent = new Intent();
 				intent.setClass(LoginActivity.this, ClaimantClaimsListActivity.class);
 				startActivity(intent);
@@ -88,7 +96,17 @@ public class LoginActivity extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-	// Comment
+	
+	
+	/**
+	 * This method makes sure user has entered a username,
+	 * and that the username is saved in the MainManager.
+	 * 
+	 * If username already exists, MainManager will load user 
+	 * and claim information.
+	 * 
+	 * @param view 
+	 */
 	public void onLoginButtonClicked(View view) {
 		EditText name = (EditText) findViewById(R.id.username);
 		final String usernameString = name.getText().toString();
@@ -107,6 +125,7 @@ public class LoginActivity extends Activity {
 			editor.putString("username", usernameString);
 			editor.commit();
 			
+			// Load existing user and claim information
 			MainManager.loadUserAndClaims(usernameString, handler);
 		}
 	}

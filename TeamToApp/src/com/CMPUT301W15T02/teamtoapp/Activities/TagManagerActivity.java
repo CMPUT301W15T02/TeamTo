@@ -41,6 +41,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
  * 
  * Activity where a user can view a list of their tags and also edit, delete, or add new tags
  *
+ * @author Kyle Carlstrom
  */
 
 public class TagManagerActivity extends Activity implements Listener {
@@ -54,6 +55,9 @@ public class TagManagerActivity extends Activity implements Listener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tag_manager);
+		/* Set up all model objects, widgets, field values, 
+		 * and listeners
+		 */
 		getModelObjects();
 		findViewsByIds();
 		setUpAdapter();
@@ -121,7 +125,7 @@ public class TagManagerActivity extends Activity implements Listener {
 				builder.setPositiveButton("Save", new DialogInterface.OnClickListener () {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// Saves the current tag
+						// Saves the current tag into user via user controller
 						String tagName = tagNameEditText.getText().toString().trim();
 						Tag currentTag = userController.getTag(position);
 						userController.renameTag(currentTag, tagName);
@@ -130,7 +134,7 @@ public class TagManagerActivity extends Activity implements Listener {
 				.setNeutralButton("Delete", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						// Removes the current tag
+						// Removes the current tag from user
 						userController.removeTag(position);
 						
 					}

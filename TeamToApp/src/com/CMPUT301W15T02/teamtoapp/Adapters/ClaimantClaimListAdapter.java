@@ -181,17 +181,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		
 		// Obtain total currencies and display currencies with amount > 0.
 		claim.setTotalCurrencies();
-		SortedMap<String, Double> map = Collections.synchronizedSortedMap(claim.getTotalCurrencies());
-		
-		String totalCurrencyOuput = "";
-		
-		for (String key : map.keySet()) {
-			totalCurrencyOuput += df.format(map.get(key)) + " " + key.toString() + ", ";
-		}
-		if (totalCurrencyOuput.length() > 3) {
-			totalCurrencyOuput = totalCurrencyOuput.substring(0, totalCurrencyOuput.length()-2);
-		}
-		
+		String totalCurrencyOuput = totalCurrencyOuput(claim);
 		// Set text of total currencies
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
@@ -217,6 +207,28 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		}
 		
 		return row;
+	}
+
+	/**
+	 * This method returns the total currencies of all expense of a claim,
+	 * which will be part of the holder for the adapter.
+	 * 
+	 * @param claim - claim that has currencies in each of its expenses
+	 * @return totalCurrencyOutput - string of total currencies
+	 */
+	private String totalCurrencyOuput(Claim claim) {
+		SortedMap<String, Double> map = Collections.synchronizedSortedMap(claim
+				.getTotalCurrencies());
+		String totalCurrencyOuput = "";
+		for (String key : map.keySet()) {
+			totalCurrencyOuput += df.format(map.get(key)) + " "
+					+ key.toString() + ", ";
+		}
+		if (totalCurrencyOuput.length() > 3) {
+			totalCurrencyOuput = totalCurrencyOuput.substring(0,
+					totalCurrencyOuput.length() - 2);
+		}
+		return totalCurrencyOuput;
 	}
 	
 	

@@ -55,7 +55,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
  * 
  * Sources:
  * @see http://www.newthinktank.com/2015/01/make-android-apps-23/ 2015-03-27
-// @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
+ * @see http://www.newthinktank.com/2015/01/make-android-apps-24/ 2015-03-27
  * @see http://stackoverflow.com/questions/16005223/android-google-map-api-v2-current-location 2015-03-29
  * 
  * @authors Kyle Carlstrom, Raman Dhatt
@@ -68,7 +68,6 @@ public class HomeGeoLocationActivity extends Activity {
 	private GoogleMap googleMap;
 	private EditText addressEditText; // Address/marker entered by user
 	private Marker marker = null; // Displays user location
-	private Context context = this;
 	Location location = null;
 
 	
@@ -76,10 +75,8 @@ public class HomeGeoLocationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_google_map);
-		// TODO get extra from intent
-		// have it be one of homelocation, expenselocation, or destinationlocation
-		// or something like that
 		
+		// Initialize addressEditText
 		addressEditText = (EditText) findViewById(R.id.addressEditText);
 		
 		// Check status of Google play services
@@ -128,11 +125,17 @@ public class HomeGeoLocationActivity extends Activity {
         Intent intent = getIntent();
         double latitude = intent.getDoubleExtra("latitude", 0.0);
         double longitude = intent.getDoubleExtra("longitude", 0.0);
+        
+        // If latitude and longitude is available, add marker
         if (latitude != 0.0 || longitude != 0.0) {
         	LatLng passedLocation = new LatLng(latitude, longitude);
         	marker = googleMap.addMarker(new MarkerOptions().position(passedLocation));
         }
         
+        /**
+         * On long click, if marker does not exist, 
+         * add a new marker, otherwise set new position of marker
+         */
         googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 			
 			@Override
@@ -146,6 +149,9 @@ public class HomeGeoLocationActivity extends Activity {
 			}
 		});
         
+        /**
+         * If location exists, zoom into location on google map
+         */
         googleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
 			
 			@Override
@@ -305,16 +311,15 @@ public class HomeGeoLocationActivity extends Activity {
     }
     
     /**
-     * When user clicks save on action bar, current location/ default location will be saved.
+     * When user clicks save on action bar, current location/ default location will be saved
+     * by saving the latitude and longitude into a GeoLocation object, which is then saved into the user
+     * class.
      * */
     public void onSaveUserLocation() {
     	Intent returnIntent = new Intent();
+    	// If marker exists, obtain it's latitude and longitude,
+    	// and return them via intent to be saved in ClaimantClaimsListActivity
     	if (marker != null) {
-            /**Save the latitude and longitude from here into geoLocation object
-             * which will then be saved in the user.
-             * 
-             * TODO: Need to make sure GeoLocation is saved properly.
-            */
     		double latitude = marker.getPosition().latitude;
     		double longitude = marker.getPosition().longitude;
     		returnIntent.putExtra("latitude", latitude);
@@ -346,6 +351,9 @@ public class HomeGeoLocationActivity extends Activity {
 	}
 
 
+	/**
+	 * Save current user location automatically
+	 */
 	@Override
 	public void onBackPressed() {
 		onSaveUserLocation();

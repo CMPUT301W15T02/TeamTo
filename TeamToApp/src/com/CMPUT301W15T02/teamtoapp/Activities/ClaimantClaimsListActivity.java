@@ -294,7 +294,8 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 	
 
 	/**
-	 * Receives the result from the home location activity
+	 * Receives the resulting latitude and longtitude 
+	 * values from the HomeGeoLocation activity
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
