@@ -17,7 +17,7 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 /**
  * 
  * Simple tuple that holds two strings to aid in the functionality of Claim.java
- *
+ * @author Kyle Carlstrom, Raman Dhatt
  */
 
 public class Destination {
@@ -27,7 +27,13 @@ public class Destination {
 	public double latitude;
 	public double longitude;
 	
-	
+	/**
+	 * DEstination constructor
+	 * @param dest - destination string
+	 * @param reason - reason string
+	 * @param latitude - double latitude value
+	 * @param longitude - double longitude value
+	 */
 	public Destination(String dest, String reason, double latitude, double longitude) {
 		this.destination = dest;
 		this.reason = reason;
@@ -51,6 +57,11 @@ public class Destination {
 		this.reason = newReason;
 	}
 	
+	/**
+	 * ADd a geolocation based on longitude and latitude
+	 * @param latitude
+	 * @param longitude
+	 */
 	public void addGeolocation(double latitude, double longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;

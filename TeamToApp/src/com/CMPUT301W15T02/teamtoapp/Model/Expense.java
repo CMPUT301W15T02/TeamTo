@@ -24,6 +24,7 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 /**
  * 
  * Contains all of the information necessary to record an expense
+ * @author Kyle Carlstrom, Raman Dhatt
  *
  */
 
@@ -41,6 +42,9 @@ public class Expense {
 	private double longitude;
 	protected transient ArrayList<Listener> listeners = null;
 	
+	/**
+	 * Expense constructor
+	 */
 	public Expense() {
 		date = Calendar.getInstance();
 		currency = Currency.getInstance("CAD");
@@ -162,19 +166,27 @@ public class Expense {
 		
 	}
 	
-	
+	/**
+	 * Notify listeners for any changes to the expenses
+	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
 		}
 	}
 	
-	
+	/**
+	 * Add listener
+	 * @param listener
+	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
-	
+	/**
+	 * Remove listener
+	 * @param listener
+	 */
 	public void removeListener(Listener listener) {
 		if (listeners.contains(listener)) {
 			listeners.remove(listener);

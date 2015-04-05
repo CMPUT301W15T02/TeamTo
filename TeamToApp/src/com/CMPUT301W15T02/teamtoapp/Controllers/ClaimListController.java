@@ -29,6 +29,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 /**
  * 
  * Controller for editing/adding/removing claims from the list of claims
+ * 
+ * @author Kyle Carlstrom, Raman Dhatt
  *
  */
 
@@ -42,19 +44,26 @@ public class ClaimListController {
 		userName = User.getInstance().getName();
 	}
 	
-	// for testing purposes - UseCase1Test.java
+	
 	public String getUserName() {
 		return userName;
 	}
 	
-	// TODO clean this up
+	/**
+	 * Save new claim into local storage/ online server
+	 * @param claim - new claim to be added and saved
+	 */
 	public void addClaim(Claim claim) {
 		claim.setUserName(userName);
-		Log.i("CLAIMID", claim.getClaimId());
 		claims.addClaim(claim);
 		MainManager.addClaim(claim);
 	}
 	
+	
+	/**
+	 * Remove claim from local storage/ online server
+	 * @param claim - existing claim to be removed
+	 */
 	public void removeClaim(Claim claim) {
 		claims.removeClaim(claim);
 		MainManager.removeClaim(claim);
@@ -73,22 +82,36 @@ public class ClaimListController {
 	}
 	
 	
+	/**
+	 * Adds a listener to the claim list
+	 * @param listener - listener object to be added
+	 */
 	public void addListenerToClaimList(Listener listener) {
 		claims.addListener(listener);
 	}
 	
+	
+	/**
+	 * Removes listener to the claim list
+	 * @param listener - listener object to be removed
+	 */
 	public void removeListenerFromClaimList(Listener listener) {
 		claims.removeListener(listener);
 	}
 	
 
-	
+	/**
+	 * If back button pressed from ClaimEditActivity.java
+	 * Make sure to add the claim if name and/or destination is entered
+	 * to the local storage/server
+	 * @param claim - new/old claim to be checked to see if's been changed
+	 */
 	public void claimEditBackPressed(Claim claim) {
 		if (claim.getClaimName().equals("") && claim.getDestinations().size() == 0) {
 			// do nothing
 		} else if (!getClaims().contains(claim)) {
+			// If claim doesn't exist, add claim
 			addClaim(claim);
-			Log.i("CLAIMID",claim.getClaimId());
 			MainManager.addClaim(claim);
 		} else {
 			MainManager.updateClaim(claim);
@@ -96,10 +119,19 @@ public class ClaimListController {
 		return;
 	}
 	
+	
+	/**
+	 * Grabs filtered claims based on tags selected by user
+	 * 
+	 * @param filterTags - tags chosen by user to filter claims
+	 * @return newClaims - filtered claims
+	 */
 	public ArrayList<Claim> getFilteredClaims(ArrayList<String> filterTags) {
 		ArrayList<Claim> newClaims = new ArrayList<Claim>();
 		for (Claim claim: ClaimList.getInstance().getClaims()) {
 			for (Tag tag : claim.getTags()) {
+				// If filterTags list has the same tag as the claim
+				// ad that claim into the new claim list to be returned
 				if (filterTags.contains(tag.getTagName())) {
 					newClaims.add(claim);
 					break;

@@ -31,6 +31,8 @@ import com.google.gson.reflect.TypeToken;
 
 /**
  *  Handles updating and removal of claims when an internet connection is established
+ *  
+ *  @author Kyle Carlstrom
  */
 
 public class Cache {
@@ -44,16 +46,26 @@ public class Cache {
  	private ArrayList<Claim> claimsToUpdate;
  	private ArrayList<Claim> claimsToRemove; 
 
- 	
+ 	/**
+ 	 * Private constructor for Cache() - singleton
+ 	 */
  	private Cache() {
 		claimsToUpdate = new ArrayList<Claim>();
 		claimsToRemove = new ArrayList<Claim>(); 
  	}
  	
+ 	/**
+ 	 * Initialize context
+ 	 * @param appcontext - context of application
+ 	 */
  	public static void initializeContext(Context appcontext) {
  		context = appcontext;
  	}
 	
+ 	/** 
+ 	 * Checks if singleton is instantiated
+ 	 * @return instantiated instance
+ 	 */
  	public static Cache getInstance() {
 		if (instance == null) {
 			instance = new Cache();

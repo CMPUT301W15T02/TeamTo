@@ -19,7 +19,7 @@ import java.util.UUID;
 /**
  * 
  * Stores a name and a tag ID 
- *
+ * @author Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  */
 
 public class Tag {

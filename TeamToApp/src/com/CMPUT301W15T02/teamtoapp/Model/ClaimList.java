@@ -22,6 +22,7 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * Holds the current list of claims.
+ * @author Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *
  */
 
@@ -32,13 +33,18 @@ public class ClaimList implements Listener {
 	protected transient ArrayList<Listener> listeners = null;
 	private static ClaimList instance = null;
 	
-	
+	/**
+	 * ClaimList private constructor -singleton
+	 */
 	private ClaimList() {
 		claims = new ArrayList<Claim>();
 		listeners = new ArrayList<Listener>();
 	}
 	
-	
+	/**
+	 * Ensures singleton is initialized
+	 * @return instance
+	 */
 	public static ClaimList getInstance() {
 		if (instance == null) {
 			instance = new ClaimList();
@@ -47,8 +53,10 @@ public class ClaimList implements Listener {
 	}
 	
 	
-	// To prevent issues from serialization make sure all listeners are initialized
-	// so that all changes are saved to the disk except the listeners themselves
+	/**To prevent issues from serialization make sure all listeners are initialized so that 
+	 * all changes are saved to the disk except the listeners themselves
+	 * @return array list of listeners
+	 */
 	private ArrayList<Listener> getListeners() {
 		if (listeners == null) {
 			listeners = new ArrayList<Listener>();
@@ -56,19 +64,28 @@ public class ClaimList implements Listener {
 		return listeners;
 	}
 	
-	// This will be called inside activities when changes occur.
+	/** 
+	 * This will be called inside activities when changes occur.
+	 */
 	protected void notifyListeners() {
 		for (Listener listener: getListeners()) {
 			listener.update();
 		}	
 	}
 	
-	
+	/**
+	 * Adds listener
+	 * @param listener
+	 */
 	public void addListener(Listener listener) {
 		getListeners().add(listener);
 	}
 	
 	
+	/**
+	 * Removes listener
+	 * @param listener
+	 */
 	public void removeListener(Listener listener) {
 		getListeners().remove(listener);
 	}
@@ -96,7 +113,10 @@ public class ClaimList implements Listener {
 	}
 	
 	
-	
+	/**
+	 * Add a new claim and notify listeners about the new claim
+	 * @param claim - claim to be added
+	 */
 	public void addClaim(Claim claim) {
 		claim.addListener(this);
 		claims.add(claim);
@@ -106,6 +126,10 @@ public class ClaimList implements Listener {
 	}
 	
 	
+	/**
+	 * Removes an existing claim and notify listeners about the removed claim
+	 * @param claim - claim to be removed
+	 */
 	public void removeClaim(Claim claim) {
 		claim.removeListener(this);
 		claims.remove(claim);

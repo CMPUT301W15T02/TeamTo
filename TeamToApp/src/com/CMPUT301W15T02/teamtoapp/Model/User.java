@@ -22,6 +22,7 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
  * 
  * User class consists of the name of the user, the type of user (claimant or approver), and a personal list of tags.
  *
+ *@authors Kyle Carlstrom, Raman Dhatt
  */
 
 public class User {
@@ -45,7 +46,7 @@ public class User {
 		name = "";
 		tags = new ArrayList<Tag>();
 		type = true;
-		// Default tags for now
+		// Default tags 
 		Tag tag1 = new Tag("Shopping");
 		tag1.setTagID("shopping");
 		tags.add(tag1);
@@ -61,7 +62,10 @@ public class User {
 		listeners = new ArrayList<Listener>();
 	}
 	
-	
+	/**
+	 * Ensure singleton is initialized
+	 * @return instance
+	 */
 	public static User getInstance() {
 		if (instance == null) {
 			instance = new User();
@@ -187,6 +191,9 @@ public class User {
 	}
 
 
+	/**
+	 * Notify listeners when need to update any changes made to user
+	 */
 	public void notifyListeners() {
 		for (Listener listener : listeners) {
 			listener.update();
@@ -194,11 +201,19 @@ public class User {
 	}
 	
 	
+	/**
+	 * Add listener
+	 * @param listener
+	 */
 	public void addListener(Listener listener) {
 		listeners.add(listener);
 	}
 	
 	
+	/**
+	 * Remove listener
+	 * @param listener
+	 */
 	public void removeListener(Listener listener) {
 		if (listeners.contains(listener)) {
 			listeners.remove(listener);

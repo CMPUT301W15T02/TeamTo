@@ -37,7 +37,7 @@ public class UserController {
 	
 	/**
 	 * Adds a tag to the current user
-	 * @param tag
+	 * @param tag - tag object to be added
 	 */
 	public void addTag(Tag tag) {
 		user.addTag(tag);
@@ -45,7 +45,7 @@ public class UserController {
 	
 	/**
 	 * Removes a tag from the current user and updates all associated claims
-	 * @param tag	the tag to be removed
+	 * @param tag - the tag to be removed
 	 */
 	public void removeTag(Tag tag) {
 		user.removeTag(tag);
@@ -53,7 +53,7 @@ public class UserController {
 	
 	/**
 	 * Removes a tag from the current user and updates all associated claims
-	 * @param tag	the position of the tag to be removed
+	 * @param tag - the position of the tag to be removed
 	 */
 	public void removeTag(int position) {
 		user.removeTag(user.getTags().get(position));

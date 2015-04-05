@@ -14,7 +14,13 @@
 */
 
 package com.CMPUT301W15T02.teamtoapp.Interfaces;
-
+/**
+ * Interface required for listening to all model objects to see
+ * if any of them have changed
+ * 
+ * @see https://github.com/abramhindle/student-picker/blob/master/src/ca/softwareprocess/studentpicker/Listener.java
+ *
+ */
 public interface Listener {
 	public void update();
 }

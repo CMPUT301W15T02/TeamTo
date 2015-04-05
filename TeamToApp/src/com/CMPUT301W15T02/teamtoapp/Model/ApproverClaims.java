@@ -20,6 +20,8 @@ import android.util.Log;
 
 /**
  * Singleton of claims for the approver mode.
+ * 
+ * @author Kyle Carlstrom
  */
 
 public class ApproverClaims {
@@ -28,10 +30,19 @@ public class ApproverClaims {
 	private static ApproverClaims instance = null;
 	
 	
+	/**
+	 * Private constructor for list of submitted claims
+	 * - singleton
+	 */
 	private ApproverClaims() {
 		claims = new ArrayList<Claim>();
 	}
 	
+	
+	/**
+	 * Checks if singleton is instantiated
+	 * @return instance of ApproveClaims
+	 */
 	public static ApproverClaims getInstance() {
 		if (instance == null) {
 			instance = new ApproverClaims();
@@ -73,6 +84,9 @@ public class ApproverClaims {
 		return new Expense();
 	}
 	
+	/**
+	 * Used for testing
+	 */
 	public void tearDownForTesting() {
 		instance = null;
 	}

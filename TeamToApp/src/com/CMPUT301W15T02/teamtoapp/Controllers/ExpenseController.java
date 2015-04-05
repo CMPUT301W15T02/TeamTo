@@ -26,6 +26,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * Responsible for communicating between any view which wishes to access an expense object
  *
+ * @authors Kyle Carlstrom, Raman Dhatt
  */
 
 public class ExpenseController {
@@ -53,7 +54,6 @@ public class ExpenseController {
 	}
 	
 	public void setDescription(String description) {
-		// Automatically sets the expense completed, not sure if this should go in the model
 		if (!currentExpense.getAmount().equals(0.0) && !description.equals("")) {
 			currentExpense.setComplete(true);
 		}
@@ -88,6 +88,11 @@ public class ExpenseController {
 		currentExpense.setComplete(is_complete);
 	}
 	
+	/**
+	 * Checks if expense ifnormation is completely filled out
+	 * @return boolean from getComplete()
+	 * @see getComplete() method
+	 */
 	public boolean isComplete() {
 		return currentExpense.getComplete();
 	}

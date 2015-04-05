@@ -20,6 +20,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 /**
  * 
  * Comparator class used to sort claims in order of start date with the most recent dates first
+ * 
+ * @author Kyle Carlstrom
  *
  */
 

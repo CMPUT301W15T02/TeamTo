@@ -25,6 +25,8 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 /**
  * Stores all of the data related to a claim including any associated expenses.
  * Claim watches its expenses and must be updated when an expense updates
+ * 
+ * @author Kyle Carlstrom, Raman Dhatt
  */
 
 public class Claim implements Listener {
@@ -36,6 +38,10 @@ public class Claim implements Listener {
 	
 		private final String name;
 	
+		/**
+		 * Name for each status type
+		 * @param s
+		 */
 		private Status(String s) {
 			name = s;
 		}
@@ -188,10 +194,12 @@ public class Claim implements Listener {
 	public ArrayList<Tag> getTags() {
 		ArrayList<Tag> newTags = new ArrayList<Tag>();
 		for (String tagID : tags) {
+			// make sure tag still exists in user, otherwise remove old tag
 			Tag tag = User.getInstance().getTagByID(tagID);
 			if (tag == null) {
 				tags.remove(tag);
 			} else {
+				// if tag exists, then add it into newTags
 				newTags.add(tag);
 			}
 		}
@@ -254,6 +262,10 @@ public class Claim implements Listener {
 		}
 	}
 
+	/** 
+	 * Uses Listener interface to notify listeners
+	 * @see Listener.java
+	 */
 	@Override
 	public void update() {
 		notifyListeners();
