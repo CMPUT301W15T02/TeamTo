@@ -35,7 +35,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * A customized adapter for the claimant's list of expenses. 
  * 
- * @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ * @authors Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *
  */
 
