@@ -141,6 +141,7 @@ public class ClaimEditActivity extends Activity implements Listener {
 	 * Gets all of the model objects, initializes the controllers, adds the activity as an observer to the current claim
 	 */
 	private void getModelObjects() {
+		claimName = "";
 		Intent intent = getIntent();
 		claimID = (String) intent.getSerializableExtra("claimID");
 		// Make new controller from the claimID that was passed in
