@@ -38,6 +38,7 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 /**
  * 
@@ -186,7 +187,8 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		// Set text of total currencies
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
-		
+		userLocation.setLatitude(User.getInstance().getHomeLatitude());
+		userLocation.setLongitude(User.getInstance().getHomeLongitude());
 		if (claim.getDestinations().size() > 0) {
 			// If destinations exist, obtain the latitidue and longitude for the first destination
 			double lat = claim.getDestinations().get(0).latitude;
@@ -197,7 +199,7 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 			
 			// Obtain the distance between home location and destination location
 			double distanceBetween = userLocation.distanceTo(destLocation);
-			if (distanceBetween > 5000000) {
+			if (distanceBetween > 100000) {
 				// display distant row colour
 				row.setBackgroundResource(R.drawable.listview_selector_distant);
 			} else {
