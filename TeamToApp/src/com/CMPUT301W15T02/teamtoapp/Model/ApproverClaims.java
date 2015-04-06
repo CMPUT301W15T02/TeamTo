@@ -19,7 +19,8 @@ import java.util.ArrayList;
 import android.util.Log;
 
 /**
- * Singleton of claims for the approver mode.
+ * Singleton of claims for the approver mode. Responsible
+ * for only dealing with submitted claims from the Elastic Search network.
  * 
  * @author Kyle Carlstrom
  */

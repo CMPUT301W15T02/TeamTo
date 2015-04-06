@@ -30,7 +30,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 /**
- *  Handles updating and removal of claims when an internet connection is established
+ *  Handles updating and removal of claims when an internet connection is established.
  *  
  *  @author Kyle Carlstrom
  */

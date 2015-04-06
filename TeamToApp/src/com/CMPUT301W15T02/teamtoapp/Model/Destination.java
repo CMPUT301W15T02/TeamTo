@@ -16,7 +16,10 @@ package com.CMPUT301W15T02.teamtoapp.Model;
 
 /**
  * 
- * Simple tuple that holds two strings to aid in the functionality of Claim.java
+ * Simple tuple that holds two strings to aid in the functionality of Claim.java.
+ * It also has latitude and longitude to record location of destination. The latitude and
+ * longitude values are obtained from DestinationGeoLocationActivity.java.
+ * 
  * @author Kyle Carlstrom, Raman Dhatt
  */
 

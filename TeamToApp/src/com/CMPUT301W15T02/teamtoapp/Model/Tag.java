@@ -58,7 +58,11 @@ public class Tag {
 
 
 
-	// Converts the tag into a string representation to make user of simple list adapters
+	/**
+	 * Converts the tag into a string representation 
+	 * for simple list adapters.
+	 * 
+	 */
 	@Override
 	public String toString() {
 		return tagName;
@@ -66,7 +70,7 @@ public class Tag {
 	
 	
 	/**
-	 * Compares two tags by checking if they have the same name
+	 * Compares two tags by checking if they have the same tag ID
 	 */
 	@Override
 	public boolean equals(Object o) {

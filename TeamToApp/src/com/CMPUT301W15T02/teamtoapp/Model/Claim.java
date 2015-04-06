@@ -24,7 +24,7 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * Stores all of the data related to a claim including any associated expenses.
- * Claim watches its expenses and must be updated when an expense updates
+ * Claim watches its expenses and must be updated when an expense updates.
  * 
  * @author Kyle Carlstrom, Raman Dhatt
  */

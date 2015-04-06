@@ -147,6 +147,10 @@ public class Expense {
 	
 	
 
+	/**
+	 * Add photo receipt taken by the user
+	 * @param photo
+	 */
 	public void addPhoto(String photo) {
 		this.photo = photo;
 		notifyListeners();
@@ -159,7 +163,11 @@ public class Expense {
 	}
 	
 	
-
+	
+	/**
+	 * Delete photo receipt
+	 * @return
+	 */
 	public void removePhoto() {
 		this.photo = null;
 		notifyListeners();

@@ -35,6 +35,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * A customized adapter for the claimant's list of expenses. 
  * 
+ * @see ClaimantExpenseListActivity.java
  * @authors Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *
  */

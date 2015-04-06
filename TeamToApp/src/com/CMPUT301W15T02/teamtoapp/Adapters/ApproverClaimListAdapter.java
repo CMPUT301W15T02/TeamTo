@@ -36,6 +36,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
 /**
  * 
  * This adapter will provide a list of submitted claims for the approver. 
+ * @see ApproverClaimsListActivity.java
  * 
  * @authors Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *

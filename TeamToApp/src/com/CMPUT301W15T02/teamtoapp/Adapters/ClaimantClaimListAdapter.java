@@ -43,6 +43,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
  * 
  * A customized adapter for the claimant's list of claims.
  * 
+ * @see ClaimantClaimsListActivity.java
  * @see http://stackoverflow.com/questions/24769257/custom-listview-adapter-with-filter-android 2015-03-23 
  * @see http://stackoverflow.com/questions/5936912/how-to-find-the-distance-between-two-geopoints 2015-04-02
  * 

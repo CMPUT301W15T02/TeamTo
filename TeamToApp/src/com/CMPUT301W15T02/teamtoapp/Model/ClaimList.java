@@ -21,7 +21,7 @@ import android.util.Log;
 import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
- * Holds the current list of claims.
+ * Holds the current list of claims for claimant.
  * @author Christine Shaffer, Kyle Carlstrom, Raman Dhatt
  *
  */

@@ -20,7 +20,8 @@ import com.CMPUT301W15T02.teamtoapp.Interfaces.Listener;
 
 /**
  * 
- * User class consists of the name of the user, the type of user (claimant or approver), and a personal list of tags.
+ * User class consists of the name of the user, the type of user
+ * (claimant or approver), and a personal list of tags.
  *
  *@authors Kyle Carlstrom, Raman Dhatt
  */
@@ -117,6 +118,7 @@ public class User {
 	
 	public Tag getTagByID(String tagID) {
 		for (Tag tag : tags) {
+			// If matching tag found by ID, return it
 			if (tag.getTagID().equals(tagID)) {
 				return tag;
 			}

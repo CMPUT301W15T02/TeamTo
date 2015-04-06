@@ -34,7 +34,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 /**
  * 
  * A customized adapter for the approver's list of expenses. 
- * 
+ *  @see ApproverExpenseListActivity.java
  *  @authors Kyle Carlstrom, Raman Dhatt
  *
  */
