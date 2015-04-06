@@ -195,7 +195,7 @@ public class HomeGeoLocationActivity extends Activity {
 	
 	
 	/** 
-	 * ChangeMarker class: 
+	 * ChangePosition class: 
 	 * 
 	 * Grabs new address along with 
 	 * latitude and longitude (via getLatLong method).

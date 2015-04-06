@@ -67,7 +67,12 @@ public class Claim implements Listener {
 	
 	private transient ArrayList<Listener> listeners = null;
 	
-	
+	/**
+	 * Claim constructor contains all
+	 * private attributes, including listeners that check
+	 * whether or not claim object has changed
+	 * 
+	 */
 	public Claim() {
 		claimName="";
 		startDate = new GregorianCalendar();
@@ -180,6 +185,13 @@ public class Claim implements Listener {
 		return comment;
 	}
 	
+	/**
+	 * Adds new comment as a string with other 
+	 * comments (if any). Organized from newest
+	 * to oldest comment.
+	 * 
+	 * @param comment - comment from approver
+	 */
 	public void setComment(String comment) {
 		if (this.comment == null) {
 			this.comment = "";
@@ -206,7 +218,6 @@ public class Claim implements Listener {
 		return newTags;
 	}
 	
-	// Required for approver claim list
 	public String getUserName() {
 		return userName;
 	}
