@@ -22,13 +22,13 @@ public class GeolocationTests extends TestCase {
 		Destination destination = new Destination("Bahamas", "personal", 3.74, -12.94);
 		Claim claim = new Claim();
 		claim.addDestination(destination);
-		assertEquals("Destination added", 1, claim.getDestinations().size());
+		assertEquals("Destination not added", 1, claim.getDestinations().size());
 		
-		assertEquals("Destination added", destination, claim.getDestinations().get(0));
+		assertEquals("Destination don't match up", destination, claim.getDestinations().get(0));
 		
 		claim.removeDestination(destination);
-		assertEquals("Destination removed", 0, claim.getDestinations().size());
-		assertFalse("Destination removed", claim.getDestinations().contains(destination));
+		assertEquals("Destination not removed", 0, claim.getDestinations().size());
+		assertFalse("Destination is still there", claim.getDestinations().contains(destination));
 		
 	}
 	
