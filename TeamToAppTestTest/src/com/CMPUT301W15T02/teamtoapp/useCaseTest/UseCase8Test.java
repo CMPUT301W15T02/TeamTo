@@ -40,7 +40,9 @@ public class UseCase8Test extends AndroidTestCase {
 		ApproverController approverController = new ApproverController();
 		approverController.approveClaim(claim, "comment");
 		
-		assertEquals(Status.APPROVED, approverController.getClaim(0).getStatus());
+		// Save current index of claim added
+		int index = approverController.getClaims().indexOf(claim);
+		assertEquals(Status.APPROVED, approverController.getClaim(index).getStatus());
 		approverClaims.tearDownForTesting();
 	}
 	
@@ -52,7 +54,9 @@ public class UseCase8Test extends AndroidTestCase {
 		ApproverController approverController = new ApproverController();
 		approverController.returnClaim(claim, "comment");
 		
-		assertEquals(Status.RETURNED, approverController.getClaim(0).getStatus());
+		// Save current index of claim added
+		int index = approverController.getClaims().indexOf(claim);
+		assertEquals(Status.RETURNED, approverController.getClaim(index).getStatus());
 		approverClaims.tearDownForTesting();
 	}
 

@@ -34,11 +34,11 @@ public class GeolocationTests extends TestCase {
 	
 	public void testHomeLocation() {
 		User user = User.getInstance();
-		user.setHomeLatitude(43);
-		user.setHomeLongitude(87);
+		user.setHomeLatitude(43.0);
+		user.setHomeLongitude(87.0);
 		
-		assertEquals("Latitude correct", user.getHomeLatitude());
-		assertEquals("Longitude correct", user.getHomeLongitude());
+		assertEquals("Latitude correct", 43.0, user.getHomeLatitude());
+		assertEquals("Longitude correct", 87.0, user.getHomeLongitude());
 	}
 
 }
