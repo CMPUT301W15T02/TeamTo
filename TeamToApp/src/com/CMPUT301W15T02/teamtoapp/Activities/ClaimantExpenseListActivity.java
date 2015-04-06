@@ -82,8 +82,10 @@ public class ClaimantExpenseListActivity extends Activity implements Listener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.claimant_expense_list_menu, menu);
 		MenuItem addButton = menu.findItem(R.id.addExpenseMenuButton);
+		MenuItem submitButton = menu.findItem(R.id.submitClaimOption);
 		if (!claimController.isEditable()) {
 			addButton.setVisible(false);
+			submitButton.setVisible(false);
 		}
 		return true;
 	}
