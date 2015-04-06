@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Currency;
 import java.util.GregorianCalendar;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -54,6 +55,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.R;
@@ -470,10 +472,12 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    	// Convert photo to Base64 String
 	    	Drawable photo = Drawable.createFromPath(imageFileUri.getPath());
 	    	Bitmap bitmap = ((BitmapDrawable) photo).getBitmap();
-	    	ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();  
-	    	bitmap.compress(Bitmap.CompressFormat.JPEG, 10, byteArrayOutputStream);
-	    	byte[] byteArray = byteArrayOutputStream.toByteArray();
-	    	expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));
+	    	byte[] byteArray = compressPhoto(bitmap);
+	    	if (byteArray.length > 65536) {
+	    		Toast.makeText(getBaseContext(), "Photo too large", Toast.LENGTH_SHORT).show();
+	    	} else {
+	    		expenseController.addPhoto(Base64.encodeToString(byteArray, Base64.DEFAULT));
+	    	}
 	    }
 	    if (requestCode == GET_GEOLOCATION_REQUEST_CODE && resultCode == RESULT_OK) {
 	    	double latitude = data.getDoubleExtra("latitude", 0.0);
@@ -483,6 +487,25 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	    	expenseController.setLatitude(latitude);
 	    	expenseController.setLongitude(longitude);
 	    }
+	}
+	
+	/**
+	 * Compresses a photo and makes sure it's size is less than 65536
+	 * @param bitmap the photo being compressed
+	 * @return the byte array
+	 */
+	private byte[] compressPhoto(Bitmap bitmap) {
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+		byte[] byteArray = byteArrayOutputStream.toByteArray();
+		int quality = 50;
+		while (byteArray.length >= 65536 && quality >= 0) {
+			byteArrayOutputStream.reset();
+			bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
+			byteArray = byteArrayOutputStream.toByteArray();
+			quality -= 25;
+		}
+		return byteArray;
 	}
 
 	
