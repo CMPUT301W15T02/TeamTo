@@ -244,14 +244,7 @@ public class ClaimantClaimsListActivity extends Activity implements Listener {
 			// Go to ClaimEditActivity to add new claim.
 			Intent intent = new Intent(getBaseContext(), ClaimEditActivity.class);
 			intent.putExtra("claimID", "");
-			startActivity(intent);	
-		} else if (id == R.id.refreshClaims) {
-			if (MainManager.isNetworkAvailable(getApplicationContext())) {
-				// Cache.getInstance().updateAndClear();
-				Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
-			} else {
-				Toast.makeText(context, "No network access", Toast.LENGTH_SHORT).show();
-			}
+			startActivity(intent);
 		} else if (id == R.id.filterByTags) {
 			filterByTags();
 		} else if (id == R.id.setHomeLocation) {
