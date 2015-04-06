@@ -90,14 +90,7 @@ public class ClaimController {
 	 */
 	public void submitClaim() {
 		currentClaim.setStatus(Status.SUBMITTED);
-		new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				MainManager.updateClaim(currentClaim);
-				
-			}
-		}).start();
+		MainManager.updateClaim(currentClaim);
 	}
 	
 	

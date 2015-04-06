@@ -15,7 +15,9 @@
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
 import junit.framework.TestCase;
+import android.test.AndroidTestCase;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
@@ -25,11 +27,12 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
  * Tests use cases 8.X
  */
 
-public class UseCase8Test extends TestCase {
+public class UseCase8Test extends AndroidTestCase {
 	
 	// UC 8.0, UC 8.1 (UC 8.2 - UC 8.4 are simply viewing the screen)
 
 	public void testApproveClaim() {
+		MainManager.initializeContext(mContext);
 		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
 		approverClaims.getClaims().add(claim);
@@ -42,6 +45,7 @@ public class UseCase8Test extends TestCase {
 	}
 	
 	public void testReturnClaim() {
+		MainManager.initializeContext(mContext);
 		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
 		approverClaims.getClaims().add(claim);

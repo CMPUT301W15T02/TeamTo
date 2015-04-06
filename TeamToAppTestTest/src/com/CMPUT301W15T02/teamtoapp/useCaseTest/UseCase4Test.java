@@ -20,7 +20,9 @@ import java.util.Currency;
 import java.util.List;
 
 import junit.framework.TestCase;
+import android.test.AndroidTestCase;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
@@ -30,13 +32,14 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * Tests use cases 4.X
  */
 
-public class UseCase4Test extends TestCase {
+public class UseCase4Test extends AndroidTestCase {
 	private static final Currency CAD = Currency.getInstance("CAD");
 	private static final Currency USD = Currency.getInstance("USD");
 	private static final Currency EUR = Currency.getInstance("EUR");
 	private static final Currency GBP = Currency.getInstance("GBP");
 	private static final Currency JPY = Currency.getInstance("JPY");
 	private static final Currency CNY = Currency.getInstance("CNY");
+	
 
 	// US 4.01 (UC 4.1 & 4.3)
 	public void testMakeExpense() {	
@@ -85,6 +88,7 @@ public class UseCase4Test extends TestCase {
 
 	// Add Expense (UC 4.1)
 	public void testAddExpense() {
+		MainManager.initializeContext(mContext);
 		Claim claim = new Claim();
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
@@ -105,6 +109,7 @@ public class UseCase4Test extends TestCase {
 	}
 
 	public void testControllerAddExpense() {
+		MainManager.initializeContext(mContext);
 		ClaimList claimList = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claimList.addClaim(claim);
@@ -119,6 +124,7 @@ public class UseCase4Test extends TestCase {
 	
 	// US 04.04 (UC 4.1.2)
 	public void testCheckCompleteFlag() {
+		MainManager.initializeContext(mContext);
 		ClaimList claimList = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claimList.addClaim(claim);
@@ -142,6 +148,7 @@ public class UseCase4Test extends TestCase {
 	
 	// US 4.07 (UC 4.2)
 	public void testDeleteExpense() {
+		MainManager.initializeContext(mContext);
 		
 		Claim claim = new Claim();
 		Expense expense = new Expense();
@@ -166,6 +173,7 @@ public class UseCase4Test extends TestCase {
 	
 	// UC 4.1 - UC 4.3
 	public void testAddExpenseOrdering() {
+		MainManager.initializeContext(mContext);
 		Claim claim = new Claim();
 		Expense expense1 = new Expense();
 		Expense expense2 = new Expense();

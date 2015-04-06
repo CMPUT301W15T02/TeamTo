@@ -3,7 +3,9 @@ package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
+import android.test.AndroidTestCase;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Tag;
@@ -26,9 +28,9 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
  * Tests use cases 3.X
  */
 
-public class UseCase3Test extends TestCase {
+public class UseCase3Test extends AndroidTestCase {
 
-
+	// UC 3.0
 	public void testAddTags() {
 		User user = User.getInstance();
 		Tag testTag = new Tag("test");
@@ -37,16 +39,6 @@ public class UseCase3Test extends TestCase {
 		User.tearDownForTesting();
 	}
 	
-	// UC 3.1
-	public void testRemoveTags() {
-		User user = User.getInstance();
-		Tag testTag = new Tag("test");
-		user.addTag(testTag);
-		int initialSize = user.getTags().size();
-		user.removeTag(testTag);
-		assertEquals("Removed tag?", initialSize-1, user.getTags().size());
-		User.tearDownForTesting();
-	}
 	
 	// UC 3.0
 	public void testEditTags() {
@@ -70,11 +62,12 @@ public class UseCase3Test extends TestCase {
 		User.getInstance().addTag(tag);
 		claim.addTag(tag.getTagID());
 		assertTrue("Tag added to claims", claim.getTags().contains(tag));
+		User.tearDownForTesting();
 	}
 	
 	public void testRemoveTagFromClaim() {
 		Claim claim = new Claim();
-		Tag tag = new Tag("Tag name");
+		Tag tag = new Tag("Some tag");
 		claim.addTag(tag.getTagID());
 		claim.removeTag(tag.getTagID());
 		assertEquals("Tag actually removed?", 0, claim.getTags().size());
@@ -82,14 +75,19 @@ public class UseCase3Test extends TestCase {
 	}
 	
 	public void testFilterClaimsByTags() {
+		MainManager.initializeContext(mContext);
 		ClaimListController claimListController = new ClaimListController();
 		Claim claim1 = new Claim();
 		Claim claim2 = new Claim();
 		claimListController.addClaim(claim1);
 		claimListController.addClaim(claim2);
-		ArrayList<String> tags = new ArrayList<String>();
-		tags.add("FAKETAG");
-		assertEquals(0, claimListController.getFilteredClaims(tags).size());
+		ArrayList<Tag> userTags = User.getInstance().getTags();
+		Tag tag = userTags.get(0);
+		ArrayList<String> filterTags = new ArrayList<String>();
+		filterTags.add(tag.getTagName());
+		claim1.addTag(tag.getTagID());
+		
+		assertEquals(1, claimListController.getFilteredClaims(filterTags).size());
 	}
 	
 

@@ -14,8 +14,9 @@
 
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
-import junit.framework.TestCase;
+import android.test.AndroidTestCase;
 
+import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
@@ -25,10 +26,11 @@ import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
  * Tests use cases 7.X
  */
 
-public class UseCase7Test extends TestCase {
+public class UseCase7Test extends AndroidTestCase {
 	
 
 	public void testClaimStatuses() {
+		MainManager.initializeContext(mContext);
 		Claim claim = new Claim();
 		ClaimList claims = ClaimList.getInstance();
 		claims.addClaim(claim);

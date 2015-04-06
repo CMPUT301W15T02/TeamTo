@@ -38,8 +38,8 @@ public class UseCase10Test extends TestCase {
 		user.setHomeLatitude(43);
 		user.setHomeLongitude(87);
 		
-		assertEquals("Latitude correct", 43, user.getHomeLatitude());
-		assertEquals("Longitude correct", 87, user.getHomeLongitude());
+		assertEquals("Latitude correct", 43.0, user.getHomeLatitude());
+		assertEquals("Longitude correct", 87.0, user.getHomeLongitude());
 	}
 	
 }

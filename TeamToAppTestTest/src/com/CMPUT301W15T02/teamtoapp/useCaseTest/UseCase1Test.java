@@ -72,7 +72,7 @@ public class UseCase1Test extends AndroidTestCase {
 		ClaimList.tearDownForTesting();
 	}
 	
-	
+	// UC 1.1
 	 public void testEditClaim() {
 		Claim claim = new Claim();
 		
@@ -100,6 +100,8 @@ public class UseCase1Test extends AndroidTestCase {
 		ClaimList.tearDownForTesting();
 		
 	}
+	
+	
 	public void testClaimsSorted() {
 		ArrayList<Claim> claims = new ArrayList<Claim>();
 		Claim claim1 = new Claim();
