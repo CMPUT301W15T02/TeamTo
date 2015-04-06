@@ -496,9 +496,9 @@ public class ExpenseEditActivity extends Activity implements Listener {
 	 */
 	private byte[] compressPhoto(Bitmap bitmap) {
 		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-		bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+		bitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
 		byte[] byteArray = byteArrayOutputStream.toByteArray();
-		int quality = 50;
+		int quality = 25;
 		while (byteArray.length >= 65536 && quality >= 0) {
 			byteArrayOutputStream.reset();
 			bitmap.compress(Bitmap.CompressFormat.JPEG, quality, byteArrayOutputStream);
