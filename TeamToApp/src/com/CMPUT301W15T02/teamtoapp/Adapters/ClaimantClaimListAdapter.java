@@ -187,10 +187,12 @@ public class ClaimantClaimListAdapter extends ArrayAdapter<Claim>{
 		// Set text of total currencies
 		holder.totalCurrencyView.setText(totalCurrencyOuput);
 		
+		// Ensure user location is initialized
 		userLocation.setLatitude(User.getInstance().getHomeLatitude());
 		userLocation.setLongitude(User.getInstance().getHomeLongitude());
+		
 		if (claim.getDestinations().size() > 0) {
-			// If destinations exist, obtain the latitidue and longitude for the first destination
+			// If destinations exist, obtain the latitude and longitude for the first destination
 			double lat = claim.getDestinations().get(0).latitude;
 			double lon = claim.getDestinations().get(0).longitude;
 			
