@@ -35,7 +35,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
  * 
  * A customized adapter for the approver's list of expenses. 
  * 
- *  @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ *  @authors Kyle Carlstrom, Raman Dhatt
  *
  */
 

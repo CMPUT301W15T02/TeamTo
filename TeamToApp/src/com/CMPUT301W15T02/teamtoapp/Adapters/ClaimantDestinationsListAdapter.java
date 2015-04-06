@@ -33,7 +33,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Destination;
  * A customized adapter for the claimant's destination list view
  * for the Create/Edit Claim interface (ClaimEditActivity.java)
  * 
- *  @authors Michael Stensby, Christine Shaffer, Kyle Carlstrom, Mitchell Messerschmidt, Raman Dhatt, Adam Rankin
+ *  @authors Kyle Carlstrom, Raman Dhatt
  *
  */
 
