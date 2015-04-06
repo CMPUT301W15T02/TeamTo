@@ -37,8 +37,8 @@ public class GeolocationTests extends TestCase {
 		user.setHomeLatitude(43.0);
 		user.setHomeLongitude(87.0);
 		
-		assertEquals("Latitude correct", 43.0, user.getHomeLatitude());
-		assertEquals("Longitude correct", 87.0, user.getHomeLongitude());
+		assertEquals("Latitude incorrect", 43.0, user.getHomeLatitude());
+		assertEquals("Longitude incorrect", 87.0, user.getHomeLongitude());
 	}
 
 }
