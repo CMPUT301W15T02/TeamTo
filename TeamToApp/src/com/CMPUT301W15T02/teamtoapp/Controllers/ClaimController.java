@@ -241,18 +241,15 @@ public class ClaimController {
 		
 		int numExpensesIncomplete = checkExpensesComplete();
 		
-		if (currentClaim.getStatus() == Status.IN_PROGRESS) {
+		if (currentClaim.getStatus() == Status.IN_PROGRESS || currentClaim.getStatus() == Status.RETURNED) {
 			if (numExpensesIncomplete > 0) {
 				return String.valueOf(numExpensesIncomplete)+" expense(s) incomplete.";
 			} else {
 				submitClaim();
 				return "Claim successfully submitted";
 			}
-			
 		} else if (currentClaim.getStatus() == Status.APPROVED) {
 			return "Claim was already approved.";
-		} else if (currentClaim.getStatus() == Status.RETURNED) {
-			return null;
 		} else  {
 			return "Claim already submitted.";
 		}
