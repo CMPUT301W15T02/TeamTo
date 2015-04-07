@@ -229,13 +229,13 @@ public class ElasticSearchManager {
 			ArrayList<Claim> submittedClaimsResult) {
 		
 		// Filter out claims where claimant name == approver name
+		ArrayList<Claim> newClaims = new ArrayList<Claim>();
 		for (int i=0; i < submittedClaimsResult.size(); i++) {
-			if (submittedClaimsResult.get(i).getUserName().equals(User.getInstance().getName())) {
-				Log.i("UNWANTED USER",submittedClaimsResult.get(i).getUserName());
-				submittedClaimsResult.remove(i);
+			if (!submittedClaimsResult.get(i).getUserName().equals(User.getInstance().getName())) {
+				newClaims.add(submittedClaimsResult.get(i));
 			}
 		}
-		ApproverClaims.getInstance().setClaims(submittedClaimsResult);
+		ApproverClaims.getInstance().setClaims(newClaims);
 	}
 
 

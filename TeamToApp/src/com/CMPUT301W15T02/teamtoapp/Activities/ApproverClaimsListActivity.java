@@ -39,6 +39,7 @@ import com.CMPUT301W15T02.teamtoapp.R;
 import com.CMPUT301W15T02.teamtoapp.Adapters.ApproverClaimListAdapter;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ApproverController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
+import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 
 /**
