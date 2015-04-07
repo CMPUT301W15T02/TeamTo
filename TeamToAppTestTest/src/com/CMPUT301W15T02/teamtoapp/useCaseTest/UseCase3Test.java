@@ -2,7 +2,7 @@ package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
+import android.R.integer;
 import android.test.AndroidTestCase;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
@@ -30,7 +30,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 public class UseCase3Test extends AndroidTestCase {
 
-	// UC 3.0
+	// UC 3.2
 	public void testAddTags() {
 		User user = User.getInstance();
 		Tag testTag = new Tag("test");
@@ -51,29 +51,18 @@ public class UseCase3Test extends AndroidTestCase {
 		User.tearDownForTesting();
 	}
 	
-	// UC 3.3
-	//As a claimant, I want to filter the list of expense claims by tags, 
-	//to show only those claims that have at least one tag matching any of a given set of one or more filter tags.
-	
-	public void testAddTagToClaim() {
-		// User will add a new tag, then claim will be assigned the new tag 
-		Claim claim = new Claim();
-		Tag tag = new Tag("Tag name");
-		User.getInstance().addTag(tag);
-		claim.addTag(tag.getTagID());
-		assertTrue("Tag added to claims", claim.getTags().contains(tag));
-		User.tearDownForTesting();
+	// UC 3.1
+	public void testRemoveTags() {
+		User user = User.getInstance();
+		int count = user.getTags().size();
+		Tag tag = new Tag("New tag");
+		user.addTag(tag);
+		user.removeTag(tag);
+		assertEquals("Tag deleted", count, user.getTags().size());
 	}
 	
-	public void testRemoveTagFromClaim() {
-		Claim claim = new Claim();
-		Tag tag = new Tag("Some tag");
-		claim.addTag(tag.getTagID());
-		claim.removeTag(tag.getTagID());
-		assertEquals("Tag actually removed?", 0, claim.getTags().size());
-		assertFalse("Tag not there", claim.getTags().contains(tag));
-	}
 	
+	// UC 3.4
 	public void testFilterClaimsByTags() {
 		MainManager.initializeContext(mContext);
 		ClaimListController claimListController = new ClaimListController();

@@ -29,6 +29,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 public class UseCase7Test extends AndroidTestCase {
 	
 
+	// UC 7.0
 	public void testClaimStatuses() {
 		MainManager.initializeContext(mContext);
 		Claim claim = new Claim();

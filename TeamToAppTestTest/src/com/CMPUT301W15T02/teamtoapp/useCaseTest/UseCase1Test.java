@@ -25,6 +25,8 @@ import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimListController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Destination;
+import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 import com.CMPUT301W15T02.teamtoapp.Model.User;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorNewestFirst;
 import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
@@ -71,6 +73,26 @@ public class UseCase1Test extends AndroidTestCase {
 		assertTrue("Destination and reason were not added.", controller.getDestinations().size() == 1);
 		ClaimList.tearDownForTesting();
 	}
+	// UC 1.0.2
+	public void testAddTagToClaim() {
+		// User will add a new tag, then claim will be assigned the new tag 
+		Claim claim = new Claim();
+		Tag tag = new Tag("Tag name");
+		User.getInstance().addTag(tag);
+		claim.addTag(tag.getTagID());
+		assertTrue("Tag added to claims", claim.getTags().contains(tag));
+		User.tearDownForTesting();
+	}
+	
+	
+	public void testRemoveTagFromClaim() {
+		Claim claim = new Claim();
+		Tag tag = new Tag("Some tag");
+		claim.addTag(tag.getTagID());
+		claim.removeTag(tag.getTagID());
+		assertEquals("Tag actually removed?", 0, claim.getTags().size());
+		assertFalse("Tag not there", claim.getTags().contains(tag));
+	}
 	
 	// UC 1.1
 	 public void testEditClaim() {
@@ -101,7 +123,7 @@ public class UseCase1Test extends AndroidTestCase {
 		
 	}
 	
-	
+	// UC 2.0
 	public void testClaimsSorted() {
 		ArrayList<Claim> claims = new ArrayList<Claim>();
 		Claim claim1 = new Claim();
@@ -119,6 +141,21 @@ public class UseCase1Test extends AndroidTestCase {
 		Collections.sort(claims, new ClaimComparatorOldestFirst());
 		assertEquals("Sorting by oldest first?", claim2, claims.get(0));
 		ClaimList.tearDownForTesting();
+	}
+	
+	// UC 1.3
+	public void testDestinationLocation() {
+		Destination destination = new Destination("Bahamas", "personal", 3.74, -12.94);
+		Claim claim = new Claim();
+		claim.addDestination(destination);
+		assertEquals("Destination added", 1, claim.getDestinations().size());
+
+		assertEquals("Destination added", destination, claim.getDestinations().get(0));
+
+		claim.removeDestination(destination);
+		assertEquals("Destination removed", 0, claim.getDestinations().size());
+		assertFalse("Destination removed", claim.getDestinations().contains(destination));
+
 	}
 	
 }

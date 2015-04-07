@@ -23,7 +23,7 @@ import junit.framework.TestCase;
 
 public class UseCase9Test extends TestCase {
 	
-	// UC 9.0
+	// UC 9.0 and UC 1.0.1
 	// Tested extensively in NetworkTest
 	
 }

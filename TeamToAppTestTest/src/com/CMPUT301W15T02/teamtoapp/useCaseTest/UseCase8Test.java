@@ -14,7 +14,6 @@
 
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
-import junit.framework.TestCase;
 import android.test.AndroidTestCase;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;

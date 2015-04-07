@@ -63,7 +63,7 @@ public class UseCase4Test extends AndroidTestCase {
 		assertNotNull(expense.getCurrency());		
 	}
 	
-	// US 4.02 (UC 4.1.1 & 4.3)
+	// US 4.02 (UC 4.1.1 & 4.2)
 	public void testCategory() {
 		Expense expense = new Expense();
 		// We can use spinners, but using List here for testing purposes.
@@ -77,7 +77,7 @@ public class UseCase4Test extends AndroidTestCase {
 		assertEquals(categories.get(0), expense.getCategory());
 	}
 	
-	// US 4.03 (UC 4.1.1 & 4.3)
+	// US 4.03 (UC 4.1.1 & 4.2)
 	public void testCurrency() {
 		Expense expense = new Expense();
 		List<Currency> currenciesList = Arrays.asList(CAD, USD, EUR, GBP, JPY, CNY);
@@ -108,6 +108,7 @@ public class UseCase4Test extends AndroidTestCase {
 		assertTrue("Expense is not added.", claim.getExpenses().contains(expense));
 	}
 
+	// UC 4.1
 	public void testControllerAddExpense() {
 		MainManager.initializeContext(mContext);
 		ClaimList claimList = ClaimList.getInstance();
@@ -135,7 +136,7 @@ public class UseCase4Test extends AndroidTestCase {
 		assertTrue("Claim complete after description and destination entered", claimController.checkClaimInfoComplete());
 		ClaimList.tearDownForTesting();
 	}
-	// US 4.06 (UC 4.3)
+	// US 4.06 (UC 4.4)
 	public void testEditExpense() {
 		
 		Expense expense = new Expense();
@@ -146,7 +147,7 @@ public class UseCase4Test extends AndroidTestCase {
 				info, expense.getDescription());
 	}
 	
-	// US 4.07 (UC 4.2)
+	// US 4.07 (UC 4.3)
 	public void testDeleteExpense() {
 		MainManager.initializeContext(mContext);
 		
@@ -182,5 +183,15 @@ public class UseCase4Test extends AndroidTestCase {
 		claim.addExpense(expense2);
 		assertEquals("Expenses in right order?", expense1, claim.getExpenses().get(0));
 		assertEquals("Expenses added in right order?", expense2, claim.getExpenses().get(1));
+	}
+	
+	// UC 4.5
+	public void testExpenseLocation() {
+		Expense expense = new Expense();
+		expense.setLatitude(95.2);
+		expense.setLongitude(34.6);
+
+		assertEquals(95.2, expense.getLatitude());
+		assertEquals(34.6, expense.getLongitude());
 	}
 }

@@ -43,6 +43,7 @@ public class UseCase6Test extends TestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
+		// Storing photo as Base64 string
 		String photo = "CAT";
 		expense.addPhoto(photo);
 		assertEquals("Photo added to expense?", photo, expense.getPhoto());
