@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
 		boolean hasLoggedIn = settings.getBoolean("hasLoggedIn", false);
 		
 		// Obtain username
-		final String usernameString = settings.getString("username", null);
+		String usernameString = settings.getString("username", null);
 		MainManager.initializeContext(getApplicationContext());
 		
 		// Create Handler 
@@ -67,8 +67,6 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void handleMessage(Message msg) {
-				// Obtain user name from user singleton
-				User.getInstance().setName(usernameString);
 				
 				// Create intent and start activity
 				Intent intent = new Intent();
@@ -81,6 +79,7 @@ public class LoginActivity extends Activity {
 		
 		if (hasLoggedIn)  //Go directly to main activity
 		{
+			User.getInstance().setName(usernameString);
 	        MainManager.loadUserAndClaims(usernameString, handler);
 			
 		} else {
@@ -126,6 +125,7 @@ public class LoginActivity extends Activity {
 			editor.commit();
 			
 			// Load existing user and claim information
+			User.getInstance().setName(usernameString);
 			MainManager.loadUserAndClaims(usernameString, handler);
 		}
 	}

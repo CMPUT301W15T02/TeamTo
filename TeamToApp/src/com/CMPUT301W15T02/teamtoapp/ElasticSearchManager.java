@@ -32,6 +32,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.CMPUT301W15T02.teamtoapp.Model.ApproverClaims;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
@@ -196,7 +197,9 @@ public class ElasticSearchManager {
 					for (int i = 0; i < hits.getHits().size(); i++) {
 						SearchHit<Claim> searchHit = hits.getHits().get(i);
 						Claim claim = searchHit.getSource();
-						submittedClaimsResult.add(claim);
+						if (!claim.getUserName().equals(User.getInstance().getName())) {
+							submittedClaimsResult.add(claim);
+						}
 					}
 				}
 			}
@@ -215,28 +218,11 @@ public class ElasticSearchManager {
 			
 		}
 		
-		/* Call filterSubmittedClaims method to remove claims
-		where claimant name == approver name */
-		filterSubmittedClaims(submittedClaimsResult);
+		ApproverClaims.getInstance().setClaims(submittedClaimsResult);
+		
 		
 	}
 	
-	/**
-	 * Filters out any claims where the claimant name == approver name.
-	 * @param submittedClaimsResult - the list of submitted claims to be filtered.
-	*/
-	private static  void filterSubmittedClaims(
-			ArrayList<Claim> submittedClaimsResult) {
-		
-		// Filter out claims where claimant name == approver name
-		ArrayList<Claim> newClaims = new ArrayList<Claim>();
-		for (int i=0; i < submittedClaimsResult.size(); i++) {
-			if (!submittedClaimsResult.get(i).getUserName().equals(User.getInstance().getName())) {
-				newClaims.add(submittedClaimsResult.get(i));
-			}
-		}
-		ApproverClaims.getInstance().setClaims(newClaims);
-	}
 
 
 	/**
