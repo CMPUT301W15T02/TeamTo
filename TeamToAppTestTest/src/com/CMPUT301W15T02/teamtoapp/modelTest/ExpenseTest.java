@@ -25,18 +25,19 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 public class ExpenseTest extends AndroidTestCase {
 
-	// TODO: Needs to be edited as addPhoto() functionality added (Nothing in it yet therefore not passing yet).
+	// Tests addPhoto() functionality
 	public void testAddPhoto() {
 		MainManager.initializeContext(mContext);
 		Expense expense = new Expense();
-		String photoPath = "";
+		String photoPath = ""; // photoPath is saved as a string (see ApproverExpenseViewActivity / ExpenseEditActivity)
 		expense.addPhoto(photoPath);
 		assertNotNull("Photo wasn't added", expense.getPhoto());
 	}
 	
-	// TODO: Needs to be edited as removePhoto() functionality added
+	// Tests removePhoto() functionality
 	public void testRemovePhoto() {
 		Expense expense = new Expense();
+		expense.addPhoto("string");
 		expense.removePhoto();
 		assertNull("Photo wasn't removed", expense.getPhoto());
 	}

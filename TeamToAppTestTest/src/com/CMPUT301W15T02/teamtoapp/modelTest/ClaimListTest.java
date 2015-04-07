@@ -26,6 +26,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
 
 public class ClaimListTest extends AndroidTestCase {
 
+	// Tests whether claims with saved information can be added
 	public void testAddClaim() {
 		MainManager.initializeContext(mContext); // only need to initialize once.
 		ClaimList claims = ClaimList.getInstance();
@@ -43,6 +44,7 @@ public class ClaimListTest extends AndroidTestCase {
 		assertTrue("Claim not added properly", claims.getClaims().size() == 2);
 	}
 	
+	// Test ability to grab a desired claim
 	public void testGetClaim() {
 		ClaimList claims = ClaimList.getInstance();
 		Claim claim1 = new Claim();
@@ -59,6 +61,7 @@ public class ClaimListTest extends AndroidTestCase {
 		assertTrue("Didn't get right claim", claims.getClaims().contains(claim2));
 	}
 	
+	// Test to remove existing claim from claim list
 	public void testRemoveClaim() {
 		ClaimList claims = ClaimList.getInstance();
 		Claim claim1 = new Claim();
@@ -76,6 +79,7 @@ public class ClaimListTest extends AndroidTestCase {
 		assertFalse("Did not remove claim1", claims.getClaims().contains(claim1));
 	}
 	
+	// Test for finding a desired claim by it's ID
 	public void testFindClaimByID() {
 		ClaimList claims = ClaimList.getInstance();
 		Claim claim1 = new Claim();

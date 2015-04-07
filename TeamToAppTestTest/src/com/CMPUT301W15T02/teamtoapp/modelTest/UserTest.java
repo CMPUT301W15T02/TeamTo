@@ -25,6 +25,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 
 public class UserTest extends TestCase {
 
+	// Test whether user object can save tags
 	public void testAddTag() {
 		User user = User.getInstance();
 		
@@ -44,6 +45,7 @@ public class UserTest extends TestCase {
 		assertTrue("Tag3 not added", user.getTags().contains(tag3));
 	}
 	
+	// Test ability to remove tags from user object
 	public void testRemoveTag() {
 		User user = User.getInstance();
 		String tag1Name = "tag1";
@@ -51,7 +53,7 @@ public class UserTest extends TestCase {
 		user.addTag(tag1);
 		assertTrue("Tag not added", user.getTags().contains(tag1));
 		
-		// Test remove default tag (made in constructor)
+		// Test remove default tag
 		user.removeTag(tag1);
 		assertFalse("tag1 wasn't removed", user.getTags().contains(tag1));
 		
@@ -60,6 +62,7 @@ public class UserTest extends TestCase {
 		assertTrue("Default tag not removed", user.getTags().size() == sizeBefore-1);
 	}
 	
+	// Test ability to rename an existing tag
 	public void testRenameTag() {
 		User user = User.getInstance();
 		String tag1Name = "tag1";

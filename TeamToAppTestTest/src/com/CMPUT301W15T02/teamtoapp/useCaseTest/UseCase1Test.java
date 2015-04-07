@@ -38,9 +38,7 @@ import com.CMPUT301W15T02.teamtoapp.Utilities.ClaimComparatorOldestFirst;
 public class UseCase1Test extends AndroidTestCase {
 
 	// UC 1.0
-	/**
-	 * Tests adding a claim (i.e. though session controller)
-	 */
+	// Tests adding a claim (i.e. through  claim list controller)
 	public void testAddClaim () {
 		MainManager.initializeContext(mContext);
 		// Need to set username first before dealing with any claims.
@@ -62,6 +60,7 @@ public class UseCase1Test extends AndroidTestCase {
 		controller.setStartDate(start_date);
 		controller.setEndDate(end_date);
 		
+		// Check if attributes are saved
 		assertEquals("Name is not equal", controller.getClaimName(), claimName);
 		assertEquals("Start date is not equal", controller.getStartDate(), start_date);
 		assertEquals("End date is not equal", controller.getEndDate(), end_date);
@@ -70,6 +69,7 @@ public class UseCase1Test extends AndroidTestCase {
 		String reason = "some reason";
 		controller.addDestination(dest, reason, 53.0, -113.0);
 		
+		// Check if destination is saved
 		assertTrue("Destination and reason were not added.", controller.getDestinations().size() == 1);
 		ClaimList.tearDownForTesting();
 	}
@@ -85,6 +85,8 @@ public class UseCase1Test extends AndroidTestCase {
 	}
 	
 	
+	// uc 3.1
+	// Test if user can remove an existing tag
 	public void testRemoveTagFromClaim() {
 		Claim claim = new Claim();
 		Tag tag = new Tag("Some tag");
@@ -96,6 +98,7 @@ public class UseCase1Test extends AndroidTestCase {
 	
 	// UC 1.1
 	 public void testEditClaim() {
+		// Check whether claims can be edited and saved depending on claim status
 		Claim claim = new Claim();
 		
 		
@@ -113,6 +116,7 @@ public class UseCase1Test extends AndroidTestCase {
 	
 	// UC 1.2
 	public void testDeleteClaim() {
+		// Test whether claim can be deleted
 		ClaimList claims = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claims.addClaim(claim);
@@ -124,6 +128,7 @@ public class UseCase1Test extends AndroidTestCase {
 	}
 	
 	// UC 2.0
+	// Tests whether claims can be sorted by start date
 	public void testClaimsSorted() {
 		ArrayList<Claim> claims = new ArrayList<Claim>();
 		Claim claim1 = new Claim();
@@ -144,6 +149,7 @@ public class UseCase1Test extends AndroidTestCase {
 	}
 	
 	// UC 1.3
+	// Test ability to add/remove destination 
 	public void testDestinationLocation() {
 		Destination destination = new Destination("Bahamas", "personal", 3.74, -12.94);
 		Claim claim = new Claim();

@@ -27,6 +27,8 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 public class ApproverClaimsTest extends TestCase {
 
 	public void testFindClaimByID() {
+		// Grab approver claims, add a claim to the list, then check if it's possible
+		// find that claim by ID
 		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
 		String claimID = claim.getClaimId();
@@ -35,6 +37,8 @@ public class ApproverClaimsTest extends TestCase {
 	}
 	
 	public void testFindExpenseByID() {
+		// Grab approver claims, add a claim with an expense to the list, then check if it's possible
+		// find that expense of the claim by expense ID
 		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
 		Expense expense = new Expense();

@@ -30,6 +30,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 public class ClaimTest extends AndroidTestCase {
 
+	// Test ability to add claim to claim list
 	public void testAddClaim() {
 		MainManager.initializeContext(mContext);
 		String defaultClaimName = "";
@@ -45,6 +46,8 @@ public class ClaimTest extends AndroidTestCase {
 		assertTrue("Claim name not updated", claim.getClaimName().equals(aSecondClaimName));
 	}
 	
+	// Test ability to obtain start and end dates for claim
+	// and test updated dates being saved
 	public void testClaimDates() {
 		Claim claim = new Claim();
 		GregorianCalendar startDate = new GregorianCalendar(2015, 1, 22);
@@ -62,38 +65,8 @@ public class ClaimTest extends AndroidTestCase {
 		assertTrue("End date not updated", claim.getEndDate().equals(futureDate2));
 	}
 
-/*	
-	public void testGetDestinations() {
-		// Test with empty list
-		ArrayList<Destination> destinationsList = new ArrayList<Destination>();
-		Claim claim = new Claim();
-		assertTrue("List of destinations not equal", claim.getDestinations().equals(destinationsList));
-		
-		// Test adding one destination
-		String destination = "Hawaii";
-		String reason = "business";
-		Destination newDestination = new Destination(destination, reason);
-		claim.addDestination(newDestination);
-		assertTrue("StringTuples not equal", claim.getDestinations().get(0).equals(newDestination));
-		
-		// Test replacing entire destination list
-		Destination dest1 = new Destination("SanFran", "Business1");
-		Destination dest2 = new Destination("Chicago", "Business2");
-		ArrayList<Destination> newDestinationsList = new ArrayList<Destination>();
-		newDestinationsList.add(dest1);
-		newDestinationsList.add(dest2);
-		claim.setDestinations(newDestinationsList);
-		assertTrue("Destinations lists aren't equal", claim.getDestinations().equals(newDestinationsList));
-		
-		// Test membership & remove
-		assertTrue("Destinations list isn't saying it contains item it does", claim.getDestinations().contains(dest1));
-		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(newDestination));
-		claim.removeDestination(dest1);
-		assertFalse("Destinations list is saying it contains item it does not", claim.getDestinations().contains(dest1));
-	}
-*/
-
-	public void testTotalExpenses() {
+	// Test whether total currencies are calculated correctly
+	public void testTotalCurrencies() {
 		Claim claim = new Claim();
 		
 		Expense expense1 = new Expense();
@@ -122,6 +95,7 @@ public class ClaimTest extends AndroidTestCase {
 		expense2.setAmount(amt2);
 		expense2.setCurrency(curr2);
 		
+		// Add expense 1 and 2 to claim and check total currencies add up properly
 		claim.addExpense(expense1);
 		claim.addExpense(expense2);
 		
@@ -129,8 +103,6 @@ public class ClaimTest extends AndroidTestCase {
 		assertTrue("expenses not adding up correctly", claim.getTotalCurrencies().get("CAD")==100.00);
 	}
 	
-	// Same tests for tags, expenses, etc. but didn't implement because didn't see the point because the methods are identical?
-
 }
 
 

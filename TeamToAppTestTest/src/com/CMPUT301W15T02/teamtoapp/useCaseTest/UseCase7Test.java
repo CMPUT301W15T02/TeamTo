@@ -14,13 +14,18 @@
 
 package com.CMPUT301W15T02.teamtoapp.useCaseTest;
 
+import java.util.Currency;
+import java.util.GregorianCalendar;
+
 import android.test.AndroidTestCase;
 
 import com.CMPUT301W15T02.teamtoapp.MainManager;
 import com.CMPUT301W15T02.teamtoapp.Controllers.ClaimController;
+import com.CMPUT301W15T02.teamtoapp.Controllers.ExpenseController;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 import com.CMPUT301W15T02.teamtoapp.Model.Claim.Status;
 import com.CMPUT301W15T02.teamtoapp.Model.ClaimList;
+import com.CMPUT301W15T02.teamtoapp.Model.Expense;
 
 /**
  * Tests use cases 7.X
@@ -42,5 +47,20 @@ public class UseCase7Test extends AndroidTestCase {
 		claimController.submitClaim();
 		assertEquals("Claim status submitted?", Status.SUBMITTED, claimController.getCurrentClaim().getStatus());
 		ClaimList.tearDownForTesting();
+	}
+	
+	// UC 7.1
+	public void testIncompletenessIndicator() {
+		MainManager.initializeContext(mContext);
+		Expense expense = new Expense();
+		GregorianCalendar date = new GregorianCalendar();
+		ExpenseController controller = new ExpenseController(expense.getExpenseId());
+		controller.setDescription("random");
+		controller.setDate(date);
+		controller.setAmount(55.0);
+		controller.setCategory("category");
+		controller.setCurrency(Currency.getInstance("CAD"));
+		controller.setComplete(true);
+		assertTrue("expense not complete", controller.isComplete());
 	}
 }

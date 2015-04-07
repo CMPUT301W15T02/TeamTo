@@ -43,6 +43,7 @@ public class UseCase4Test extends AndroidTestCase {
 
 	// US 4.01 (UC 4.1 & 4.3)
 	public void testMakeExpense() {	
+		// Test ability to create an expense and save details of expense
 		Expense expense = new Expense();
 		Calendar date = Calendar.getInstance();
 		String cat = "some category from a category spinner";
@@ -56,6 +57,7 @@ public class UseCase4Test extends AndroidTestCase {
 		expense.setAmount(amt);
 		expense.setCurrency(curr);
 		
+		// Assert attributes of expense are saved
 		assertNotNull(expense.getDate());
 		assertNotNull(expense.getCategory());
 		assertNotNull(expense.getDescription());
@@ -83,6 +85,8 @@ public class UseCase4Test extends AndroidTestCase {
 		List<Currency> currenciesList = Arrays.asList(CAD, USD, EUR, GBP, JPY, CNY);
 		Currency currString = currenciesList.get(3);
 		expense.setCurrency(currString);
+		
+		// Check if currency has been saved
 		assertEquals(GBP, expense.getCurrency());
 	}
 
@@ -97,6 +101,7 @@ public class UseCase4Test extends AndroidTestCase {
 		Double amt = 50.00;
 		Currency curr = Currency.getInstance("USD");
 		
+		// Set expense attributes
 		expense.setDate(date);
 		expense.setCategory(cat);
 		expense.setDescription(info);
@@ -116,23 +121,31 @@ public class UseCase4Test extends AndroidTestCase {
 		claimList.addClaim(claim);
 		ClaimController claimController = new ClaimController(claim.getClaimId());
 		
+		// Create new expense and add to claim controller
 		Expense expense = new Expense();
 		expense.setDescription("Some cool descriptuon");
 		claimController.addExpense(expense);
+		
+		// Assert claim controller has the new expense added
 		assertTrue("Controller adding expense", claimController.getExpenses().contains(expense));
 		ClaimList.tearDownForTesting();
 	}
 	
 	// US 04.04 (UC 4.1.2)
 	public void testCheckCompleteFlag() {
+		// Checks whether the claim is complete
 		MainManager.initializeContext(mContext);
 		ClaimList claimList = ClaimList.getInstance();
 		Claim claim = new Claim();
 		claimList.addClaim(claim);
 		ClaimController claimController = new ClaimController(claim.getClaimId());
+		
+		// Nothing saved in claim, return false
 		assertFalse("Claim intially incomplete", claimController.checkClaimInfoComplete());
 		claimController.setClaimName("Some name");
 		claimController.addDestination("some destination", "some reason", 52.0, -113.0);
+		
+		// Should now be true
 		assertTrue("Claim complete after description and destination entered", claimController.checkClaimInfoComplete());
 		ClaimList.tearDownForTesting();
 	}
@@ -167,13 +180,14 @@ public class UseCase4Test extends AndroidTestCase {
 		
 		claim.addExpense(expense);
 		assertTrue("Claim contains expense", claim.getExpenses().contains(expense));
-		// deleting expense
+		// Deleting expense here, check if returns false
 		claim.removeExpense(expense);
 		assertFalse("Expense is still there!", claim.getExpenses().contains(expense));
 	}
 	
 	// UC 4.1 - UC 4.3
 	public void testAddExpenseOrdering() {
+		// Check if expenses are added in correct order
 		MainManager.initializeContext(mContext);
 		Claim claim = new Claim();
 		Expense expense1 = new Expense();
@@ -187,6 +201,8 @@ public class UseCase4Test extends AndroidTestCase {
 	
 	// UC 4.5
 	public void testExpenseLocation() {
+		// Check ability to set geolocation of an expense
+		// via setting latitude and longitude
 		Expense expense = new Expense();
 		expense.setLatitude(95.2);
 		expense.setLongitude(34.6);

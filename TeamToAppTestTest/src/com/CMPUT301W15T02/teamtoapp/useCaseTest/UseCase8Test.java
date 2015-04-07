@@ -32,11 +32,15 @@ public class UseCase8Test extends AndroidTestCase {
 
 	public void testApproveClaim() {
 		MainManager.initializeContext(mContext);
+		
+		// Grab list of submitted claims and add a new claim
 		ApproverClaims approverClaims = ApproverClaims.getInstance();
 		Claim claim = new Claim();
 		approverClaims.getClaims().add(claim);
 		
 		ApproverController approverController = new ApproverController();
+		
+		// Approve claim with a comment
 		approverController.approveClaim(claim, "comment");
 		
 		// Save current index of claim added
@@ -51,6 +55,8 @@ public class UseCase8Test extends AndroidTestCase {
 		Claim claim = new Claim();
 		approverClaims.getClaims().add(claim);
 		ApproverController approverController = new ApproverController();
+		
+		// Return claim with a comment
 		approverController.returnClaim(claim, "comment");
 		
 		// Save current index of claim added

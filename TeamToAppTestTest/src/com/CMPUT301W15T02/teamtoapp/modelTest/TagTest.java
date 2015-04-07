@@ -25,12 +25,14 @@ import com.CMPUT301W15T02.teamtoapp.Model.Tag;
 
 public class TagTest extends TestCase {
 
+	// Test tag name saved as string
 	public void testToString() {
 		String tagName = "tag1";
 		Tag tag = new Tag(tagName);
 		assertTrue("", tag.toString().equals(tagName));
 	}
 	
+	// Test whether tag has been added to user
 	public void testAddTag() {
 		UserController userController = new UserController();
 		int previous = userController.getTags().size();

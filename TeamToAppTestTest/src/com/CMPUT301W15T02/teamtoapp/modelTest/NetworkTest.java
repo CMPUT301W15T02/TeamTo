@@ -88,13 +88,13 @@ public class NetworkTest extends AndroidTestCase{
 		
 		MainManager.addClaim(claim);
 		try {
-			Thread.sleep(250);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		assertNotNull(ElasticSearchManager.getClaim(claimID));
 		try {
-			Thread.sleep(250);
+			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -31,6 +31,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.User;
 public class UseCase3Test extends AndroidTestCase {
 
 	// UC 3.2
+	// Test adding tags in user object 
 	public void testAddTags() {
 		User user = User.getInstance();
 		Tag testTag = new Tag("test");
@@ -41,6 +42,7 @@ public class UseCase3Test extends AndroidTestCase {
 	
 	
 	// UC 3.0
+	// Test editing tags in user object
 	public void testEditTags() {
 		User user = User.getInstance();
 		Tag tag = new Tag("Tag name");
@@ -52,6 +54,7 @@ public class UseCase3Test extends AndroidTestCase {
 	}
 	
 	// UC 3.1
+	// Test deleting tags in user object
 	public void testRemoveTags() {
 		User user = User.getInstance();
 		int count = user.getTags().size();
@@ -63,6 +66,7 @@ public class UseCase3Test extends AndroidTestCase {
 	
 	
 	// UC 3.4
+	// Test ability to filter claims by tags made by user
 	public void testFilterClaimsByTags() {
 		MainManager.initializeContext(mContext);
 		ClaimListController claimListController = new ClaimListController();
@@ -70,8 +74,12 @@ public class UseCase3Test extends AndroidTestCase {
 		Claim claim2 = new Claim();
 		claimListController.addClaim(claim1);
 		claimListController.addClaim(claim2);
+		
+		// Grab tags from user
 		ArrayList<Tag> userTags = User.getInstance().getTags();
 		Tag tag = userTags.get(0);
+		
+		// Create list of filtered tags to be saved
 		ArrayList<String> filterTags = new ArrayList<String>();
 		filterTags.add(tag.getTagName());
 		claim1.addTag(tag.getTagID());

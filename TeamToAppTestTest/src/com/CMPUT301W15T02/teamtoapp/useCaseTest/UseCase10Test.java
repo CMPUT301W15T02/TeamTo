@@ -12,6 +12,7 @@ public class UseCase10Test extends TestCase {
 	
 	// UC 10.2
 	public void testHomeLocation() {
+		// Grab User object and set longitude and latitude values
 		User user = User.getInstance();
 		user.setHomeLatitude(43);
 		user.setHomeLongitude(87);

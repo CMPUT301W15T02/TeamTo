@@ -25,6 +25,7 @@ import com.CMPUT301W15T02.teamtoapp.Model.Claim;
 
 public class CacheTest extends AndroidTestCase {
 	
+	// Tests if claim is added correctly for later updating to cache
 	public void testAddUpdateToCache() {
 		Cache.initializeContext(mContext);
 		Claim claim = new Claim();
@@ -33,6 +34,7 @@ public class CacheTest extends AndroidTestCase {
 		Cache.tearDownForTesting();
 	}
 	
+	// Tests if claim is added correctly for later removal to cache
 	public void testAddRemovalToCache() {
 		Cache.initializeContext(mContext);
 		Claim claim = new Claim();
@@ -70,6 +72,7 @@ public class CacheTest extends AndroidTestCase {
 		Cache.tearDownForTesting();
 	}
 	
+	// Test if the cache can be cleared after updating and removing claims
 	public void testClearCache() {
 		Cache.initializeContext(mContext);
 		Claim claim = new Claim();
