@@ -198,7 +198,7 @@ public class Claim implements Listener {
 			this.comment += comment;
 			this.comment += "\n";
 		} else {
-			this.comment = comment + "\n"+ this.comment + "\n";
+			this.comment = comment + "\n"+ this.comment;
 		}
 		notifyListeners();
 	}
